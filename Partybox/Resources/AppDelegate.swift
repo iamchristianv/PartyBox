@@ -7,6 +7,8 @@
 //
 
 import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 import UIKit
 
 @UIApplicationMain
@@ -14,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    // MARK: - Application
+    // MARK: - Application Lifecycle
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         configureFirebase()
-        showMenu()
+        showMenuController()
+        
         return true
     }
 
@@ -48,17 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func configureFirebase() {
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+        Auth.auth().signInAnonymously(completion: nil)
     }
     
     // MARK: - Navigation
     
-    func showMenu() {
+    func showMenuController() {
+        let rootNavigationController = self.window?.rootViewController as! UINavigationController
+        
         let className = String(describing: MenuViewController.self)
         let storyboard = UIStoryboard(name: className, bundle: nil)
         let menuViewController = storyboard.instantiateViewController(withIdentifier: className)
         
-        self.window?.rootViewController = menuViewController
-        self.window?.makeKeyAndVisible()
+        rootNavigationController.show(menuViewController, sender: nil)
     }
 
 }
