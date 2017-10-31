@@ -9,6 +9,7 @@
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import SnapKit
 import UIKit
 
 @UIApplicationMain
@@ -19,8 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application Lifecycle
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        configureFirebase()
-        showMenuController()
+        self.configureFirebase()
+
+        let menuViewController = MenuViewController()
+        
+        let navigationController = UINavigationController(rootViewController: menuViewController)
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = .white
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
         
         return true
     }
@@ -53,18 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         Auth.auth().signInAnonymously(completion: nil)
-    }
-    
-    // MARK: - Navigation
-    
-    func showMenuController() {
-        let rootNavigationController = self.window?.rootViewController as! UINavigationController
-        
-        let className = String(describing: MenuViewController.self)
-        let storyboard = UIStoryboard(name: className, bundle: nil)
-        let menuViewController = storyboard.instantiateViewController(withIdentifier: className)
-        
-        rootNavigationController.show(menuViewController, sender: nil)
     }
 
 }

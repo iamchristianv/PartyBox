@@ -10,19 +10,19 @@ import Foundation
 
 enum PersonKey: String {
     
-    case name = "name"
+    case name
     
-    case isHost = "isHost"
+    case isHost
     
-    case points = "points"
+    case points
     
-    case emoji = "emoji"
+    case emoji
     
 }
 
 class Person {
     
-    // MARK: - Properties
+    // MARK: - Instance Properties
     
     var name: String
     
@@ -32,7 +32,7 @@ class Person {
     
     var emoji: String
     
-    // MARK: - Initialization
+    // MARK: - Initialization Methods
     
     init(name: String, isHost: Bool) {
         self.name = name
@@ -41,7 +41,7 @@ class Person {
         self.emoji = Person.randomEmoji()
     }
     
-    // MARK: - Utility
+    // MARK: - Utility Methods
     
     static func randomEmoji() -> String {
         let emojis = ["😊"]

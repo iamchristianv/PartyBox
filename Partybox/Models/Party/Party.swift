@@ -11,19 +11,21 @@ import Foundation
 
 enum PartyKey: String {
     
-    case inviteCode = "inviteCode"
+    case inviteCode
     
-    case name = "name"
+    case name
     
 }
 
 class Party {
     
-    // MARK: - Database
+    // MARK: - Class Properties
     
-    static let database: DatabaseReference = Database.database().reference().child(String(describing: Party.self))
+    static let name: String = String(describing: Party.self)
     
-    // MARK: - Properties
+    static let database: DatabaseReference = Database.database().reference().child(Party.name)
+    
+    // MARK: - Instance Properties
     
     var inviteCode: String
     
@@ -31,25 +33,33 @@ class Party {
     
     var people: People
     
-    var game: Game?
+    var game: Game
     
-    // MARK: - Initialization
+    // MARK: - Initialization Methods
     
-    init(inviteCode: String, name: String) {
+    init(inviteCode: String, partyName: String, personName: String, isHost: Bool) {
         self.inviteCode = inviteCode
-        self.name = name
-        self.people = People()
+        self.name = partyName
+        
+        let me = Person(name: personName, isHost: isHost)
+        self.people = People(me: me)
+        
+        self.game = Game(name: "Spyfall")
     }
     
-    init(inviteCode: String, JSON: [String: Any]) {
+    init(inviteCode: String, JSON: [String: Any], personName: String, isHost: Bool) {
         self.inviteCode = inviteCode
         self.name = JSON[PartyKey.name.rawValue] as? String ?? ""
-        self.people = People()
+        
+        let me = Person(name: personName, isHost: isHost)
+        self.people = People(me: me)
+        
+        self.game = Game(name: "Spyfall")
     }
     
-    // MARK: - Database
+    // MARK: - Party Methods
     
-    static func start(partyName: String, personName: String, callback: @escaping (Party?, Person?, String?) -> Void) {
+    static func start(partyName: String, personName: String, callback: @escaping (Party?, String?) -> Void) {
         let inviteCode = Party.randomInviteCode()
         
         Party.database.child(inviteCode).observeSingleEvent(of: .value, with: {
@@ -58,60 +68,51 @@ class Party {
             let inviteCodeUsed = partySnapshot.exists()
             
             if inviteCodeUsed {
-                callback(nil, nil, "We encountered an error while starting your party\n\nPlease try again")
+                callback(nil, "We ran into a problem while starting your party\n\nPlease try again")
                 return
             }
             
-            let person = Person(name: personName, isHost: true)
-            let party = Party(inviteCode: inviteCode, name: partyName)
-            
-            party.people.add(person)
+            let party = Party(inviteCode: inviteCode, partyName: partyName, personName: personName, isHost: true)
             
             let partyValue = [
-                party.inviteCode: [
-                    PartyKey.name.rawValue: party.name
-                ]
+                PartyKey.name.rawValue: party.name
             ] as [String: Any]
             
-            Party.database.updateChildValues(partyValue)
+            Party.database.child(party.inviteCode).updateChildValues(partyValue)
             
             let peopleValue = [
-                party.inviteCode: [
-                    person.name: [
-                        PersonKey.isHost.rawValue: person.isHost,
-                        PersonKey.points.rawValue: person.points,
-                        PersonKey.emoji.rawValue:  person.emoji
-                    ]
+                party.people.me.name: [
+                    PersonKey.isHost.rawValue: party.people.me.isHost,
+                    PersonKey.points.rawValue: party.people.me.points,
+                    PersonKey.emoji.rawValue:  party.people.me.emoji
                 ]
             ] as [String: Any]
             
-            People.database.updateChildValues(peopleValue)
+            People.database.child(party.inviteCode).updateChildValues(peopleValue)
             
             let gameValue = [
-                party.inviteCode: [
-                    GameKey.name.rawValue: "Spyfall"
-                ]
-            ]
+                GameKey.name.rawValue: party.game.name
+            ] as [String: Any]
             
-            Game.database.updateChildValues(gameValue)
+            Game.database.child(party.inviteCode).updateChildValues(gameValue)
             
-            callback(party, person, nil)
+            callback(party, nil)
         })
     }
     
-    static func join(inviteCode: String, personName: String, callback: @escaping (Party?, Person?, String?) -> Void) {
+    static func join(inviteCode: String, personName: String, callback: @escaping (Party?, String?) -> Void) {
         Party.database.child(inviteCode).observeSingleEvent(of: .value, with: {
             (partySnapshot) in
             
-            let inviteCodeNotUsed = !partySnapshot.exists()
+            let inviteCodeUsed = partySnapshot.exists()
             
-            if inviteCodeNotUsed {
-                callback(nil, nil, "We were unable to find a party with your invite code\n\nPlease try again")
+            if !inviteCodeUsed {
+                callback(nil, "We couldn't find a party with your invite code\n\nPlease try again")
                 return
             }
             
-            guard let JSON = partySnapshot.value as? [String: Any] else {
-                callback(nil, nil, "We encountered an error while joining your party\n\nPlease try again")
+            guard let partyJSON = partySnapshot.value as? [String: Any] else {
+                callback(nil, "We ran into a problem while joining your party\n\nPlease try again")
                 return
             }
             
@@ -121,34 +122,39 @@ class Party {
                 let personNameUsed = peopleSnapshot.exists()
                 
                 if personNameUsed {
-                    callback(nil, nil, "Someone at the party already has your name\n\nPlease try again")
+                    callback(nil, "Someone at the party already has your name\n\nPlease try again")
                     return
                 }
                 
-                let person = Person(name: personName, isHost: false)
-                let party = Party(inviteCode: inviteCode, JSON: JSON)
+                guard let peopleJSON = peopleSnapshot.value as? [String: Any] else {
+                    callback(nil, "We ran into a problem while joining your party\n\nPlease try again")
+                    return
+                }
                 
-                party.people.add(person)
+                let party = Party(inviteCode: inviteCode, JSON: JSON, personName: personName, isHost: false)
                 
-                let personValue = [
-                    PersonKey.isHost.rawValue: person.isHost,
-                    PersonKey.points.rawValue: person.points,
-                    PersonKey.emoji.rawValue:  person.emoji
-                ] as [String : Any]
+                let peopleValue = [
+                    party.people.me.name: [
+                        PersonKey.isHost.rawValue: party.people.me.isHost,
+                        PersonKey.points.rawValue: party.people.me.points,
+                        PersonKey.emoji.rawValue:  party.people.me.emoji
+                    ]
+                ] as [String: Any]
                 
-                People.database.child(party.inviteCode).child(person.name).setValue(personValue)
-                
-                callback(party, person, nil)
+                People.database.child(party.inviteCode).updateChildValues(peopleValue)
+
+                callback(party, nil)
             })
         })
     }
     
-    func end() {
-        People.database.child(self.inviteCode).removeValue()
-        Party.database.child(self.inviteCode).removeValue()
+    static func end(inviteCode: String) {
+        Party.database.child(inviteCode).removeValue()
+        People.database.child(inviteCode).removeValue()
+        Game.database.child(inviteCode).removeValue()
     }
     
-    // MARK: - Utility
+    // MARK: - Utility Methods
     
     static func randomInviteCode() -> String {
         var inviteCode = ""
@@ -159,6 +165,7 @@ class Party {
         
         for _ in 1...4 {
             let randomIndex = Int(arc4random())
+            
             let randomLetter = letters[randomIndex % letters.count]
             let randomNumber = String(numbers[randomIndex % numbers.count])
             

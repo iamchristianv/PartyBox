@@ -11,21 +11,23 @@ import Foundation
 
 enum GameKey: String {
     
-    case name = "name"
+    case name
     
 }
 
 class Game {
     
-    // MARK: - Database Reference
+    // MARK: - Class Properties
     
-    static let database: DatabaseReference = Database.database().reference().child(String(describing: Game.self))
+    static let name: String = String(describing: Game.self)
     
-    // MARK: - Properties
+    static let database: DatabaseReference = Database.database().reference().child(Game.name)
     
-    var name: String?
+    // MARK: - Instance Properties
     
-    // MARK: - Initialization
+    var name: String
+    
+    // MARK: - Initialization Methods
     
     init(name: String) {
         self.name = name
