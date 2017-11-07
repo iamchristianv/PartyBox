@@ -21,11 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.configureFirebase()
-
+        
         let menuViewController = MenuViewController()
-        
         let navigationController = UINavigationController(rootViewController: menuViewController)
-        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = .white
         self.window?.rootViewController = navigationController

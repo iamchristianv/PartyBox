@@ -6,8 +6,9 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
-import FirebaseDatabase
+import Firebase
 import Foundation
+import SwiftyJSON
 
 enum GameKey: String {
     
@@ -21,8 +22,6 @@ class Game {
     
     static let name: String = String(describing: Game.self)
     
-    static let database: DatabaseReference = Database.database().reference().child(Game.name)
-    
     // MARK: - Instance Properties
     
     var name: String
@@ -30,7 +29,23 @@ class Game {
     // MARK: - Initialization Methods
     
     init(name: String) {
+        // for client use
         self.name = name
+    }
+    
+    init(JSON: JSON) {
+        // for server use
+        self.name = JSON[GameKey.name.rawValue].stringValue
+    }
+    
+    func toJSON() -> [String: Any] {
+        let JSON = [
+            Game.name: [
+                GameKey.name.rawValue: self.name
+            ]
+        ]
+        
+        return JSON
     }
     
 }

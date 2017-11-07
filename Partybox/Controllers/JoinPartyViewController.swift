@@ -14,16 +14,12 @@ class JoinPartyViewController: BaseViewController {
     
     var contentView: JoinPartyView! {
         didSet {
+            self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
             self.contentView.joinButton.addTarget(self, action: #selector(joinButtonPressed), for: .touchUpInside)
         }
     }
     
     // MARK: - View Controller Methods
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,22 +50,20 @@ class JoinPartyViewController: BaseViewController {
             return
         }
         
-        Party.join(inviteCode: inviteCode, personName: personName, callback: {
-            (party, error) in
+        Session.join(inviteCode: inviteCode, personName: personName, callback: {
+            (error) in
             
             if let error = error {
                 print(error)
+                return
             }
-            else if let party = party {
-                let partyViewController = PartyViewController(party: party)
-                let navigationController = UINavigationController(rootViewController: partyViewController)
-                self.present(navigationController)
-            }
+            
+            self.presentPartyViewController()
         })
     }
     
     @objc func backButtonPressed() {
-        self.pop()
+        self.popViewController()
     }
     
     // MARK: - Action Methods

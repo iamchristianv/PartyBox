@@ -40,13 +40,11 @@ class MenuViewController: BaseViewController {
     // MARK: - Navigation Methods
     
     @objc func startPartyButtonPressed() {
-        let startyPartyViewController = StartPartyViewController()
-        self.show(startyPartyViewController)
+        self.showStartPartyViewController()
     }
     
     @objc func joinPartyButtonPressed() {
-        let joinPartyViewController = JoinPartyViewController()
-        self.show(joinPartyViewController)
+        self.showJoinPartyViewController()
     }
 
 }

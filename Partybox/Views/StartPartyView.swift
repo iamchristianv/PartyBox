@@ -16,7 +16,7 @@ class StartPartyView: UIView {
         let partyNameLabel = UILabel()
         partyNameLabel.text = "Party Name"
         partyNameLabel.textColor = .black
-        partyNameLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        partyNameLabel.font = Font.avenirNextRegular(size: 24)
         return partyNameLabel
     }()
     
@@ -31,7 +31,7 @@ class StartPartyView: UIView {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
         yourNameLabel.textColor = .black
-        yourNameLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        yourNameLabel.font = Font.avenirNextRegular(size: 24)
         return yourNameLabel
     }()
     
@@ -46,7 +46,7 @@ class StartPartyView: UIView {
         let startButton = UIButton()
         startButton.setTitle("Start", for: .normal)
         startButton.setTitleColor(.black, for: .normal)
-        startButton.setTitleFont("AvenirNext-Regular", size: 24)
+        startButton.setTitleFont(Font.avenirNextRegularName, size: 24)
         return startButton
     }()
     
@@ -65,6 +65,11 @@ class StartPartyView: UIView {
     
     func configureSubviews() {
         self.addSubview(self.partyNameLabel)
+        self.addSubview(self.partyNameTextField)
+        self.addSubview(self.yourNameLabel)
+        self.addSubview(self.yourNameTextField)
+        self.addSubview(self.startButton)
+
         self.partyNameLabel.snp.remakeConstraints({
             (make) in
             
@@ -75,7 +80,6 @@ class StartPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.partyNameTextField)
         self.partyNameTextField.snp.remakeConstraints({
             (make) in
             
@@ -85,7 +89,6 @@ class StartPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.yourNameLabel)
         self.yourNameLabel.snp.remakeConstraints({
             (make) in
             
@@ -94,7 +97,6 @@ class StartPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.yourNameTextField)
         self.yourNameTextField.snp.remakeConstraints({
             (make) in
             
@@ -104,7 +106,6 @@ class StartPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.startButton)
         self.startButton.snp.remakeConstraints({
             (make) in
             

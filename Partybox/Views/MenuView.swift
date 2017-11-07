@@ -16,7 +16,7 @@ class MenuView: UIView {
         let startPartyButton = UIButton()
         startPartyButton.setTitle("Start Party", for: .normal)
         startPartyButton.setTitleColor(.black, for: .normal)
-        startPartyButton.setTitleFont("AvenirNext-Regular", size: 24)
+        startPartyButton.setTitleFont(Font.avenirNextRegularName, size: 24)
         return startPartyButton
     }()
     
@@ -24,7 +24,7 @@ class MenuView: UIView {
         let joinPartyButton = UIButton()
         joinPartyButton.setTitle("Join Party", for: .normal)
         joinPartyButton.setTitleColor(.black, for: .normal)
-        joinPartyButton.setTitleFont("AvenirNext-Regular", size: 24)
+        joinPartyButton.setTitleFont(Font.avenirNextRegularName, size: 24)
         return joinPartyButton
     }()
     
@@ -43,6 +43,8 @@ class MenuView: UIView {
     
     func configureSubviews() {
         self.addSubview(self.startPartyButton)
+        self.addSubview(self.joinPartyButton)
+        
         self.startPartyButton.snp.remakeConstraints({
             (make) in
             
@@ -51,7 +53,6 @@ class MenuView: UIView {
             make.center.equalTo(self.snp.center)
         })
         
-        self.addSubview(self.joinPartyButton)
         self.joinPartyButton.snp.remakeConstraints({
             (make) in
             

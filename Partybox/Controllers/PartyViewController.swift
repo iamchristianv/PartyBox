@@ -14,19 +14,6 @@ class PartyViewController: BaseViewController {
     
     var contentView: PartyView!
     
-    var party: Party
-    
-    // MARK: - Initialization Methods
-    
-    init(party: Party) {
-        self.party = party
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - View Controller Methods
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +23,6 @@ class PartyViewController: BaseViewController {
     
     override func loadView() {
         self.contentView = PartyView()
-        self.contentView.configure(party: self.party)
         self.view = self.contentView
     }
     
@@ -44,7 +30,7 @@ class PartyViewController: BaseViewController {
     
     func configureNavigationBar() {
         self.showNavigationBar()
-        self.setNavigationBarTitle(self.party.name)
+        self.setNavigationBarTitle(Session.current.party.name)
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
         self.setNavigationBarRightButton(title: "decorate", target: self, action: #selector(decorateButtonPressed))
     }
@@ -52,7 +38,8 @@ class PartyViewController: BaseViewController {
     // MARK: - Navigation Methods
     
     @objc func leaveButtonPressed() {
-        self.dimiss()
+        Session.leave()
+        self.dismissViewController()
     }
     
     @objc func decorateButtonPressed() {

@@ -14,16 +14,12 @@ class StartPartyViewController: BaseViewController {
     
     var contentView: StartPartyView! {
         didSet {
+            self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
             self.contentView.startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
         }
     }
     
     // MARK: - View Controller Methods
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,22 +50,20 @@ class StartPartyViewController: BaseViewController {
             return
         }
         
-        Party.start(partyName: partyName, personName: personName, callback: {
-            (party, error) in
+        Session.start(partyName: partyName, personName: personName, callback: {
+            (error) in
             
             if let error = error {
                 print(error)
+                return
             }
-            else if let party = party {
-                let partyViewController = PartyViewController(party: party)
-                let navigationController = UINavigationController(rootViewController: partyViewController)
-                self.present(navigationController)
-            }
+            
+            self.presentPartyViewController()
         })
     }
     
     @objc func backButtonPressed() {
-        self.pop()
+        self.popViewController()
     }
     
     // MARK: - Action Methods

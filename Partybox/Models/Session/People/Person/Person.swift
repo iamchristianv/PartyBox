@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 enum PersonKey: String {
     
@@ -28,17 +29,38 @@ class Person {
     
     var isHost: Bool
     
-    var points: Int
+    var points: Int 
     
     var emoji: String
     
     // MARK: - Initialization Methods
     
     init(name: String, isHost: Bool) {
+        // for client use
         self.name = name
         self.isHost = isHost
         self.points = 0
         self.emoji = Person.randomEmoji()
+    }
+    
+    init(name: String, JSON: JSON) {
+        // for server use
+        self.name = name
+        self.isHost = JSON[PersonKey.isHost.rawValue].boolValue
+        self.points = JSON[PersonKey.points.rawValue].intValue
+        self.emoji = JSON[PersonKey.emoji.rawValue].stringValue
+    }
+    
+    func toJSON() -> [String: Any] {
+        let JSON = [
+            self.name: [
+                PersonKey.isHost.rawValue: self.isHost,
+                PersonKey.points.rawValue: self.points,
+                PersonKey.emoji.rawValue: self.emoji
+            ]
+        ]
+        
+        return JSON
     }
     
     // MARK: - Utility Methods

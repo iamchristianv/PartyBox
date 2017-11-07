@@ -11,10 +11,15 @@
 		AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D152E1FA571C9009E31BF /* MenuViewController.swift */; };
 		AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */; };
 		AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */; };
+		AA47EB8A1FAAA41400619A61 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47EB891FAAA41400619A61 /* Session.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
 		AA6706C51F89DB1D000BF5F5 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C41F89DB1D000BF5F5 /* Game.swift */; };
 		AA6706C71F89DB23000BF5F5 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C61F89DB23000BF5F5 /* Person.swift */; };
 		AA6706C91F89DB28000BF5F5 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C81F89DB28000BF5F5 /* People.swift */; };
+		AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */; };
+		AADB81361FB15468003AD1D9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81351FB15468003AD1D9 /* Font.swift */; };
+		AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */; };
+		AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
 		AAE75B4E1F809FA9001D4E13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */; };
 		AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */; };
@@ -35,10 +40,15 @@
 		AA0D152E1FA571C9009E31BF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyViewController.swift; sourceTree = "<group>"; };
 		AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
+		AA47EB891FAAA41400619A61 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		AA6706C41F89DB1D000BF5F5 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		AA6706C61F89DB23000BF5F5 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AA6706C81F89DB28000BF5F5 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
+		AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
+		AADB81351FB15468003AD1D9 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE75B461F809FA9001D4E13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +85,17 @@
 				D393AE5C1BCD6658F642EBEE /* Pods-Partybox.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA47EB881FAAA3F400619A61 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				AA47EB891FAAA41400619A61 /* Session.swift */,
+				AA7708071F90636C007517DF /* Party */,
+				AA7708081F906372007517DF /* People */,
+				AA77080A1F906394007517DF /* Game */,
+			);
+			path = Session;
 			sourceTree = "<group>";
 		};
 		AA7708071F90636C007517DF /* Party */ = {
@@ -145,6 +166,7 @@
 				AAE75B461F809FA9001D4E13 /* AppDelegate.swift */,
 				AAE75B521F809FA9001D4E13 /* Info.plist */,
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
+				AADB81351FB15468003AD1D9 /* Font.swift */,
 				AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */,
 				AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */,
 			);
@@ -178,9 +200,7 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA7708071F90636C007517DF /* Party */,
-				AA7708081F906372007517DF /* People */,
-				AA77080A1F906394007517DF /* Game */,
+				AA47EB881FAAA3F400619A61 /* Session */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,6 +217,9 @@
 			isa = PBXGroup;
 			children = (
 				AAF73B111FA6D3A500D8A17B /* BaseTableView.swift */,
+				AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */,
+				AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */,
+				AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */,
 				AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */,
 			);
 			path = Resources;
@@ -240,7 +263,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Christian Villa";
 				TargetAttributes = {
 					AAE75B421F809FA9001D4E13 = {
@@ -334,8 +357,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
+				AA47EB8A1FAAA41400619A61 /* Session.swift in Sources */,
 				AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */,
 				AA6706C51F89DB1D000BF5F5 /* Game.swift in Sources */,
+				AADB81361FB15468003AD1D9 /* Font.swift in Sources */,
 				AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */,
 				AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */,
 				AAF73B1A1FA809C200D8A17B /* PartyView.swift in Sources */,
@@ -345,7 +370,10 @@
 				AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */,
 				AAF73B0C1FA6C97900D8A17B /* BaseViewController.swift in Sources */,
 				AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */,
+				AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */,
+				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
 				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
+				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,
 				AA6706C91F89DB28000BF5F5 /* People.swift in Sources */,
 				AA6706C71F89DB23000BF5F5 /* Person.swift in Sources */,
 				AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */,
@@ -477,6 +505,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 05CC40299A0BDBF35F2F54B1 /* Pods-Partybox.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52NMKETQZ4;
@@ -494,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D393AE5C1BCD6658F642EBEE /* Pods-Partybox.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52NMKETQZ4;

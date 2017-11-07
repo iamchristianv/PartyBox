@@ -16,7 +16,7 @@ class JoinPartyView: UIView {
         let inviteCodeLabel = UILabel()
         inviteCodeLabel.text = "Invite Code"
         inviteCodeLabel.textColor = .black
-        inviteCodeLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        inviteCodeLabel.font = Font.avenirNextRegular(size: 24)
         return inviteCodeLabel
     }()
     
@@ -31,7 +31,7 @@ class JoinPartyView: UIView {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
         yourNameLabel.textColor = .black
-        yourNameLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        yourNameLabel.font = Font.avenirNextRegular(size: 24)
         return yourNameLabel
     }()
     
@@ -46,7 +46,7 @@ class JoinPartyView: UIView {
         let joinButton = UIButton()
         joinButton.setTitle("Join", for: .normal)
         joinButton.setTitleColor(.black, for: .normal)
-        joinButton.setTitleFont("AvenirNext-Regular", size: 24)
+        joinButton.setTitleFont(Font.avenirNextRegularName, size: 24)
         return joinButton
     }()
     
@@ -65,6 +65,11 @@ class JoinPartyView: UIView {
     
     func configureSubviews() {
         self.addSubview(self.inviteCodeLabel)
+        self.addSubview(self.inviteCodeTextField)
+        self.addSubview(self.yourNameLabel)
+        self.addSubview(self.yourNameTextField)
+        self.addSubview(self.joinButton)
+        
         self.inviteCodeLabel.snp.remakeConstraints({
             (make) in
             
@@ -75,7 +80,6 @@ class JoinPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.inviteCodeTextField)
         self.inviteCodeTextField.snp.remakeConstraints({
             (make) in
             
@@ -85,7 +89,6 @@ class JoinPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.yourNameLabel)
         self.yourNameLabel.snp.remakeConstraints({
             (make) in
             
@@ -94,7 +97,6 @@ class JoinPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.yourNameTextField)
         self.yourNameTextField.snp.remakeConstraints({
             (make) in
             
@@ -104,7 +106,6 @@ class JoinPartyView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-30)
         })
         
-        self.addSubview(self.joinButton)
         self.joinButton.snp.remakeConstraints({
             (make) in
             

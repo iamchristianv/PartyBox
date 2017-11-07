@@ -6,8 +6,9 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
-import FirebaseDatabase
+import Firebase
 import Foundation
+import SwiftyJSON
 
 class People {
     
@@ -15,25 +16,51 @@ class People {
     
     static let name: String = String(describing: People.self)
     
-    static let database: DatabaseReference = Database.database().reference().child(People.name)
-    
     // MARK: - Instance Properties
     
-    var me: Person
+    var count: Int 
     
-    private var indexesToNames: [String] = []
+    private var indexesToNames: [String]
     
-    private var namesToPersons: [String: Person] = [:]
-    
-    var count: Int {
-        return self.indexesToNames.count
-    }
+    private var namesToPersons: [String: Person]
     
     // MARK: - Initialization Methods
     
-    init(me: Person) {
-        self.me = me
-        self.add(me)
+    init(persons: [Person]) {
+        // for client use
+        self.count = 0
+        self.indexesToNames = []
+        self.namesToPersons = [:]
+        
+        for person in persons {
+            self.add(person)
+        }
+    }
+    
+    init(JSON: JSON) {
+        // for server use
+        self.count = 0
+        self.indexesToNames = []
+        self.namesToPersons = [:]
+        
+        for (name, values) in JSON {
+            let person = Person(name: name, JSON: values)
+            self.add(person)
+        }
+    }
+    
+    func toJSON() -> [String: Any] {
+        var JSON = [
+            People.name: [:]
+        ]
+        
+        for person in self.namesToPersons.values {
+            for (name, values) in person.toJSON() {
+                JSON[People.name]![name] = values
+            }
+        }
+        
+        return JSON
     }
     
     // MARK: - People Methods
@@ -43,6 +70,8 @@ class People {
         
         self.indexesToNames.append(name)
         self.namesToPersons[name] = person
+        
+        self.count += 1
     }
     
     func person(index: Int) -> Person? {
@@ -72,6 +101,8 @@ class People {
         self.indexesToNames.remove(at: index)
         self.namesToPersons.removeValue(forKey: person.name)
         
+        self.count -= 1
+        
         return person
     }
     
@@ -79,6 +110,8 @@ class People {
         guard let person = self.namesToPersons[name] else {
             return nil
         }
+        
+        self.count -= 1
         
         return person
     }

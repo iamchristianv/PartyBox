@@ -41,20 +41,28 @@ class BaseViewController: UIViewController {
         self.navigationItem.setRightBarButton(rightButton, animated: true)
     }
     
-    func show(_ viewController: UIViewController) {
-        self.show(viewController, sender: nil)
-    }
-    
-    func pop() {
+    func popViewController() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func present(_ viewController: UIViewController) {
-        self.present(viewController, animated: true, completion: nil)
+    func dismissViewController() {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func dimiss() {
-        self.dismiss(animated: true, completion: nil)
+    func showStartPartyViewController() {
+        let startyPartyViewController = StartPartyViewController()
+        self.show(startyPartyViewController, sender: nil)
+    }
+    
+    func showJoinPartyViewController() {
+        let joinPartyViewController = JoinPartyViewController()
+        self.show(joinPartyViewController, sender: nil)
+    }
+    
+    func presentPartyViewController() {
+        let partyViewController = PartyViewController()
+        let navigationController = UINavigationController(rootViewController: partyViewController)
+        self.present(navigationController, animated: true, completion: nil)
     }
 
 }

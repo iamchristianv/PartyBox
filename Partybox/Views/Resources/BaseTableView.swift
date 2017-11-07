@@ -15,10 +15,14 @@ class BaseTableView: UITableView {
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         
+        //self.separatorStyle = .none
+        
         self.rowHeight = UITableViewAutomaticDimension
         self.estimatedRowHeight = 50
         
-        //self.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
+        self.register(PromptTableViewCell.self, forCellReuseIdentifier: PromptTableViewCell.name)
+        self.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.name)
+        self.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.name)
         
         self.tableFooterView = UIView(frame: .zero)
     }
