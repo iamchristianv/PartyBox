@@ -58,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func configureFirebase() {
         FirebaseApp.configure()
-        Database.database().isPersistenceEnabled = true
         Auth.auth().signInAnonymously(completion: nil)
     }
 

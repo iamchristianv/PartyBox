@@ -10,58 +10,47 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
+enum SessionKey: String {
+    
+    case party
+    
+    case game
+    
+}
+
+enum SessionNotification: String {
+    
+    case partyChanged
+    
+    case gameChanged
+    
+}
+
 class Session {
-    
-    // MARK: - Shared Instance
-    
-    static var current: Session! = nil
     
     // MARK: - Class Properties
     
-    static let name: String = String(describing: Session.self)
+    static let database: DatabaseReference = Database.database().reference()
     
-    static let database: DatabaseReference = Database.database().reference().child(Session.name)
+    static var name: String = ""
     
-    // MARK: - Instance Properties
+    static var host: Bool = false
     
-    var personName: String
+    static var code: String = ""
     
-    var inviteCode: String
+    static var party: Party = Party(JSON: JSON(""))
     
-    var party: Party
+    static var game: Spyfall = Spyfall(JSON: JSON(""))
     
-    var people: People
+    // MARK: - JSON Methods
     
-    var game: Game
-    
-    // MARK: - Initialization Methods
-    
-    init(personName: String, inviteCode: String, party: Party, people: People, game: Game) {
-        // for client use
-        self.personName = personName
-        self.inviteCode = inviteCode
-        self.party = party
-        self.people = people
-        self.game = game
-    }
-    
-    init(personName: String, inviteCode: String, JSON: JSON) {
-        // for server use
-        self.personName = personName
-        self.inviteCode = inviteCode
-        self.party = Party(JSON: JSON[Party.name])
-        self.people = People(JSON: JSON[People.name])
-        self.game = Game(JSON: JSON[Game.name])
-    }
-    
-    func toJSON() -> [String: Any] {
+    static func toJSON() -> [String: Any] {
         let JSON = [
-            self.inviteCode: [
-                Party.name: self.party.toJSON(),
-                People.name: self.people.toJSON(),
-                Game.name: self.game.toJSON()
+            Session.code: [
+                SessionKey.party.rawValue: Session.party.toJSON(),
+                SessionKey.game.rawValue: Session.game.toJSON()
             ]
-        ]
+        ] as [String: Any]
         
         return JSON
     }
@@ -69,52 +58,52 @@ class Session {
     // MARK: - Database Methods
     
     static func start(partyName: String, personName: String, callback: @escaping (String?) -> Void) {
-        let inviteCode = Session.randomInviteCode()
+        let code = Session.randomCode()
         
-        Session.database.child(inviteCode).observeSingleEvent(of: .value, with: {
+        Session.database.child("sessions/\(code)").observeSingleEvent(of: .value, with: {
             (snapshot) in
             
-            let inviteCodeUsed = snapshot.exists()
+            let codeUsed = snapshot.exists()
             
-            if inviteCodeUsed {
+            if codeUsed {
                 callback("We ran into a problem while starting your party\n\nPlease try again")
                 return
             }
             
-            let party = Party(name: partyName)
-            Session.database.child(inviteCode).updateChildValues(party.toJSON())
+            Session.name = personName
+            Session.host = true
+            Session.code = code
+            Session.party = Party(details: PartyDetails(name: partyName), people: PartyPeople())
+            Session.game = Spyfall(details: SpyfallDetails(), pack: SpyfallPack(), people: SpyfallPeople())
             
-            let person = Person(name: personName, isHost: true)
-            let people = People(persons: [person])
-            Session.database.child(inviteCode).updateChildValues(people.toJSON())
+            let person = PartyPerson(name: personName, host: true)
+            Session.party.people.add(person)
             
-            let game = Game(name: "Spyfall")
-            Session.database.child(inviteCode).updateChildValues(game.toJSON())
-            
-            Session.current = Session(personName: personName, inviteCode: inviteCode, party: party, people: people, game: game)
+            Session.database.child("sessions").updateChildValues(Session.toJSON())
             
             callback(nil)
         })
     }
     
     static func end() {
-        Session.database.child(Session.current.inviteCode).removeValue()
-
-        Session.current = nil
+        Session.database.child("sessions/\(Session.code)").removeValue()
+        Session.code = ""
+        Session.party = Party(JSON: JSON(""))
+        Session.game = Spyfall(JSON: JSON(""))
     }
     
-    static func join(inviteCode: String, personName: String, callback: @escaping (String?) -> Void) {
-        Session.database.child(inviteCode).observeSingleEvent(of: .value, with: {
+    static func join(code: String, personName: String, callback: @escaping (String?) -> Void) {
+        Session.database.child("sessions/\(code)").observeSingleEvent(of: .value, with: {
             (snapshot) in
             
-            let inviteCodeUsed = snapshot.exists()
+            let codeUsed = snapshot.exists()
             
-            if !inviteCodeUsed {
-                callback("We ran into a problem while joining your party\n\nPlease try again")
+            if !codeUsed {
+                callback("We couldn't find a party with your invite code\n\nPlease try again")
                 return
             }
             
-            let personNameUsed = snapshot.hasChild("\(People.name)/\(personName)")
+            let personNameUsed = snapshot.hasChild("\(SessionKey.party.rawValue)/\(PartyKey.people.rawValue)/\(personName)")
             
             if personNameUsed {
                 callback("Someone at the party already has your name\n\nPlease try again")
@@ -127,27 +116,90 @@ class Session {
             }
             
             let sessionJSON = JSON(snapshotJSON)
-            Session.current = Session(personName: personName, inviteCode: inviteCode, JSON: sessionJSON)
             
-            let person = Person(name: personName, isHost: false)
-            Session.current.people.add(person)
+            Session.name = personName
+            Session.host = false
+            Session.code = code
+            Session.party = Party(JSON: sessionJSON[SessionKey.party.rawValue])
+            Session.game = Spyfall(JSON: sessionJSON[SessionKey.game.rawValue])
             
-            Session.database.child(inviteCode).child(People.name).updateChildValues(person.toJSON())
+            let person = PartyPerson(name: personName, host: false)
+            Session.party.people.add(person)
             
+            Session.database.child("sessions").updateChildValues(Session.toJSON())
+
             callback(nil)
         })
     }
     
     static func leave() {
-        Session.database.child(Session.current.inviteCode).child(People.name).child(Session.current.personName).removeValue()
-
-        Session.current = nil
+        let path = "sessions/\(Session.code)/\(SessionKey.party.rawValue)/\(PartyKey.people.rawValue)/\(Session.name)"
+        self.database.child(path).removeValue()
+        Session.code = ""
+        Session.party = Party(JSON: JSON(""))
+        Session.game = Spyfall(JSON: JSON(""))
+    }
+    
+    static func startObservingNotification(_ notification: SessionNotification) {
+        if notification == .partyChanged {
+            Session.startObservingPartyChangedNotification()
+        }
+        else if notification == .gameChanged {
+            Session.startObservingGameChangedNotification()
+        }
+    }
+    
+    static func stopObservingNotification(_ notification: SessionNotification) {
+        if notification == .partyChanged {
+            Session.stopObservingPartyChangedNotification()
+        }
+        else if notification == .gameChanged {
+            Session.stopObservingGameChangedNotification()
+        }
+    }
+    
+    static func startObservingPartyChangedNotification() {
+        Session.database.child("sessions/\(Session.code)/\(SessionKey.party.rawValue)").observe(.value, with: {
+            (snapshot) in
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else {
+                return
+            }
+            
+            let sessionJSON = JSON(snapshotJSON)
+            Session.party = Party(JSON: sessionJSON)
+            
+            NotificationCenter.default.post(name: Notification.Name(SessionNotification.partyChanged.rawValue), object: nil)
+        })
+    }
+    
+    static func stopObservingPartyChangedNotification() {
+        self.database.child("sessions/\(Session.code)/\(SessionKey.party.rawValue)").removeAllObservers()
+    }
+    
+    static func startObservingGameChangedNotification() {
+        self.database.child("sessions/\(Session.code)/\(SessionKey.game.rawValue)").observe(.value, with: {
+            (snapshot) in
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else {
+                return
+            }
+            
+            let sessionJSON = JSON(snapshotJSON)
+            Session.game = Spyfall(JSON: sessionJSON)
+            
+            NotificationCenter.default.post(name: Notification.Name(SessionNotification.gameChanged.rawValue), object: nil)
+        })
+    }
+    
+    static func stopObservingGameChangedNotification() {
+        Session.database.child("sessions/\(Session.code)/\(SessionKey.game.rawValue)").removeAllObservers()
     }
     
     // MARK: - Utility Methods
     
-    static func randomInviteCode() -> String {
-        var inviteCode = ""
+    static func randomCode() -> String {
+        var randomCode = ""
         
         let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
                        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -159,10 +211,10 @@ class Session {
             let randomLetter = letters[randomIndex % letters.count]
             let randomNumber = String(numbers[randomIndex % numbers.count])
             
-            inviteCode += (randomIndex % 2 == 0 ? randomLetter : randomNumber)
+            randomCode += (randomIndex % 2 == 0 ? randomLetter : randomNumber)
         }
         
-        return inviteCode
+        return randomCode
     }
     
 }
