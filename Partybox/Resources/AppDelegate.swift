@@ -7,59 +7,74 @@
 //
 
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
 import SnapKit
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder {
+    
+    // MARK: - Instance Properties
 
     var window: UIWindow?
     
-    // MARK: - Application Lifecycle
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.configureFirebase()
-        
-        let menuViewController = MenuViewController()
-        let navigationController = UINavigationController(rootViewController: menuViewController)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.backgroundColor = .white
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
-        
-        return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    // MARK: - Configuration
+    // MARK: - Configuration Methods
     
     func configureFirebase() {
         FirebaseApp.configure()
+    }
+    
+    func configureAuthentication() {
+        self.showMenuViewController()
         Auth.auth().signInAnonymously(completion: nil)
+        
+//        do {
+//            try Auth.auth().signOut()
+//        }
+//        catch {
+//
+//        }
+    }
+    
+    // MARK: - Navigation Methods
+    
+    func showMenuViewController() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = UINavigationController(rootViewController: MenuViewController())
+        self.window?.makeKeyAndVisible()
     }
 
 }
 
+extension AppDelegate: UIApplicationDelegate {
+    
+    // MARK: - Application Delegate Methods
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.configureFirebase()
+        self.configureAuthentication()
+        return true
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+}

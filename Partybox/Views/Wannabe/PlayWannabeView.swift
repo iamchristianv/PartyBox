@@ -1,5 +1,5 @@
 //
-//  PlaySpyfallView.swift
+//  PlayWannabeView.swift
 //  Partybox
 //
 //  Created by Christian Villa on 12/11/17.
@@ -8,33 +8,33 @@
 
 import UIKit
 
-protocol PlaySpyfallViewDelegate {
+protocol PlayWannabeViewDelegate {
     
-    func playSpyfallView(_ playSpyfallView: PlaySpyfallView, countdownEnded minutes: Int)
+    func playWannabeView(_ playWannabeView: PlayWannabeView, countdownEnded minutes: Int)
     
 }
 
-class PlaySpyfallView: BaseView {
+class PlayWannabeView: UIView {
     
     // MARK: - Class Properties
     
-    static let staticTableViewCellCount: Int = 5
+    static let staticTableViewCellCount: Int = 2
 
     // MARK: - Instance Properties
     
-    lazy var tableView: BaseTableView = {
-        let tableView = BaseTableView()
-        tableView.delegate = self
+    lazy var tableView: PlayWannabeTableView = {
+        let tableView = PlayWannabeTableView()
         tableView.dataSource = self
         return tableView
     }()
     
-    var delegate: PlaySpyfallViewDelegate!
+    var delegate: PlayWannabeViewDelegate!
     
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -59,11 +59,7 @@ class PlaySpyfallView: BaseView {
 
 }
 
-extension PlaySpyfallView: UITableViewDelegate {
-    
-}
-
-extension PlaySpyfallView: UITableViewDataSource {
+extension PlayWannabeView: UITableViewDataSource {
     
     // MARK: - Table View Data Source Methods
     
@@ -72,32 +68,16 @@ extension PlaySpyfallView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PlaySpyfallView.staticTableViewCellCount
+        return PlayWannabeView.staticTableViewCellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            return self.tableView.spyfallCountdownCell(delegate: self)
+            return self.tableView.countdownCell(delegate: self)
         }
         
         if indexPath.row == 1 {
-            return UITableViewCell()
-        }
-        
-        if indexPath.row == 2 {
-            return UITableViewCell()
-        }
-        
-        if indexPath.row == 3 {
-            return UITableViewCell()
-        }
-        
-        if indexPath.row == 4 {
-            return UITableViewCell()
-        }
-        
-        if indexPath.row > 4 {
-            return UITableViewCell()
+            return self.tableView.actionCell()
         }
         
         return UITableViewCell()
@@ -105,12 +85,12 @@ extension PlaySpyfallView: UITableViewDataSource {
     
 }
 
-extension PlaySpyfallView: GameCountdownTableViewCellDelegate {
+extension PlayWannabeView: GameCountdownTableViewCellDelegate {
     
     // MARK: - Game Countdown Table View Cell Delegate Methods
     
     func gameCountdownTableViewCell(_ gameCountdownTableViewCell: GameCountdownTableViewCell, countdownEnded minutes: Int) {
-        self.delegate.playSpyfallView(self, countdownEnded: minutes)
+        self.delegate.playWannabeView(self, countdownEnded: minutes)
     }
     
 }

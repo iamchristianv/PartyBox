@@ -8,32 +8,27 @@
 
 import UIKit
 
-class AlertViewController: BaseViewController {
+class AlertViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: AlertView! {
-        didSet {
-            self.contentView.backgroundButton.addTarget(self, action: #selector(backgroundButtonPressed), for: .touchUpInside)
-            self.contentView.actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
-        }
-    }
+    var contentView: AlertView!
     
-    var alert: String
+    var subject: String
     
     var message: String
     
     var action: String
     
-    var actionBlock: (() -> ())?
+    var block: (() -> ())?
     
     // MARK: - Initialization Methods
     
-    init(alert: String, message: String, action: String, actionBlock: (() -> ())?) {
-        self.alert = alert
+    init(subject: String, message: String, action: String, block: (() -> ())?) {
+        self.subject = subject
         self.message = message
         self.action = action
-        self.actionBlock = actionBlock
+        self.block = block
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,14 +38,18 @@ class AlertViewController: BaseViewController {
     
     // MARK: - View Controller Methods
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.edgesForExtendedLayout = []
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.configureNavigationBar()
     }
     
     override func loadView() {
-        self.contentView = AlertView(alert: self.alert, message: self.message, action: self.action)
-        self.view = self.contentView
+        self.configureContentView()
     }
     
     // MARK: - Configuration Methods
@@ -59,18 +58,25 @@ class AlertViewController: BaseViewController {
         self.hideNavigationBar()
     }
     
-    // MARK: - Action Methods
-    
-    @objc func actionButtonPressed() {
-        self.dismiss(animated: false, completion: {
-            if let actionBlock = self.actionBlock {
-                actionBlock()
-            }
-        })
+    func configureContentView() {
+        self.contentView = AlertView(subject: self.subject, message: self.message, action: self.action)
+        self.contentView.backgroundButton.addTarget(self, action: #selector(backgroundButtonPressed), for: .touchUpInside)
+        self.contentView.actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+        self.view = self.contentView
     }
+    
+    // MARK: - Action Methods
     
     @objc func backgroundButtonPressed() {
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    @objc func actionButtonPressed() {
+        self.dismiss(animated: false, completion: {
+            if let block = self.block {
+                block()
+            }
+        })
     }
 
 }

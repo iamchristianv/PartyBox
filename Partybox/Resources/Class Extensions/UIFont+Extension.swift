@@ -12,8 +12,20 @@ extension UIFont {
     
     static let avenirNextRegularName: String = "AvenirNext-Regular"
     
+    static let avenirNextMediumName: String = "AvenirNext-Medium"
+    
+    static let avenirNextBoldName: String = "AvenirNext-Bold"
+    
+    static func avenirNextMedium(size: CGFloat) -> UIFont {
+        return UIFont(name: UIFont.avenirNextMediumName, size: size)!
+    }
+    
     static func avenirNextRegular(size: CGFloat) -> UIFont {
         return UIFont(name: UIFont.avenirNextRegularName, size: size)!
+    }
+    
+    static func avenirNextBold(size: CGFloat) -> UIFont {
+        return UIFont(name: UIFont.avenirNextBoldName, size: size)!
     }
     
 }

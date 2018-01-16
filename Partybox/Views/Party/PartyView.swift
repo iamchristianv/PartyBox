@@ -16,7 +16,7 @@ protocol PartyViewDelegate {
 
 }
 
-class PartyView: BaseView {
+class PartyView: UIView {
     
     // MARK: - Class Properties
     
@@ -24,10 +24,23 @@ class PartyView: BaseView {
 
     // MARK: - Instance Properties
     
-    lazy var tableView: BaseTableView = {
-        let tableView = BaseTableView()
-        tableView.delegate = self
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
         tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.register(PromptTableViewCell.self, forCellReuseIdentifier: PromptTableViewCell.identifier)
+        tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
+        tableView.register(WaitingTableViewCell.self, forCellReuseIdentifier: WaitingTableViewCell.identifier)
+        tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: ButtonTableViewCell.identifier)
+        tableView.register(DoubleButtonTableViewCell.self, forCellReuseIdentifier: DoubleButtonTableViewCell.identifier)
+        tableView.register(PartyGameTableViewCell.self, forCellReuseIdentifier: PartyGameTableViewCell.identifier)
+        tableView.register(PartyPersonTableViewCell.self, forCellReuseIdentifier: PartyPersonTableViewCell.identifier)
+        tableView.register(GameInstructionsTableViewCell.self, forCellReuseIdentifier: GameInstructionsTableViewCell.identifier)
+        tableView.register(GameCountdownTableViewCell.self, forCellReuseIdentifier: GameCountdownTableViewCell.identifier)
+        tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
     
@@ -37,6 +50,7 @@ class PartyView: BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -59,9 +73,64 @@ class PartyView: BaseView {
         })
     }
     
-}
-
-extension PartyView: UITableViewDelegate {
+    // MARK: - Table View Cell Methods
+    
+    func inviteCodeCell() -> PromptTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
+        let promptCell = tableViewCell as! PromptTableViewCell
+        promptCell.setPrompt("Invite Code: " + Party.inviteCode)
+        return promptCell
+    }
+    
+    func partyGameHeaderCell() -> HeaderTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
+        let headerCell = tableViewCell as! HeaderTableViewCell
+        headerCell.setBackgroundColor(UIColor.Partybox.green)
+        headerCell.setHeader("GAME")
+        headerCell.setEmoji("🎉")
+        return headerCell
+    }
+    
+    func partyGameCell() -> PartyGameTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
+        let partyGameCell = tableViewCell as! PartyGameTableViewCell
+        return partyGameCell
+    }
+    
+    func waitingForHostToStartGameCell() -> WaitingTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: WaitingTableViewCell.identifier)
+        let waitingCell = tableViewCell as! WaitingTableViewCell
+        waitingCell.setPrompt("Waiting for Host to Start Game")
+        return waitingCell
+    }
+    
+    func startGameChangeGameButtonsCell(delegate: DoubleButtonTableViewCellDelegate) -> DoubleButtonTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: DoubleButtonTableViewCell.identifier)
+        let doubleButtonCell = tableViewCell as! DoubleButtonTableViewCell
+        doubleButtonCell.setTopButtonTitle("Start Game")
+        doubleButtonCell.setBottomButtonTitle("Change Game")
+        doubleButtonCell.delegate = delegate
+        return doubleButtonCell
+    }
+    
+    func partyPeopleHeaderCell() -> HeaderTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
+        let headerCell = tableViewCell as! HeaderTableViewCell
+        headerCell.setBackgroundColor(UIColor.Partybox.green)
+        headerCell.setHeader("PEOPLE")
+        headerCell.setEmoji("🎉")
+        return headerCell
+    }
+    
+    func partyPersonCell(partyPerson: PartyPerson) -> PartyPersonTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyPersonTableViewCell.identifier)
+        let partyPersonCell = tableViewCell as! PartyPersonTableViewCell
+        partyPersonCell.setName(partyPerson.name)
+        partyPersonCell.setFlair(partyPerson.name)
+        partyPersonCell.setEmoji(partyPerson.emoji)
+        partyPersonCell.setPoints(partyPerson.points)
+        return partyPersonCell
+    }
     
 }
 
@@ -74,43 +143,41 @@ extension PartyView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyView.staticTableViewCellCount + Session.party.people.count
+        return PartyView.staticTableViewCellCount + Party.people.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            return self.tableView.inviteCodeCell()
+            return self.inviteCodeCell()
         }
         
         if indexPath.row == 1 {
-            return self.tableView.partyGameHeaderCell()
+            return self.partyGameHeaderCell()
         }
         
         if indexPath.row == 2 {
-            return self.tableView.partyGameCell()
+            return self.partyGameCell()
         }
         
         if indexPath.row == 3 {
-            if Session.host {
-                return self.tableView.startGameChangeGameButtonsCell(delegate: self)
+            if Party.userHost {
+                return self.startGameChangeGameButtonsCell(delegate: self)
             }
             else {
-                return self.tableView.waitingForHostToStartGameCell()
+                return self.waitingForHostToStartGameCell()
             }
         }
         
         if indexPath.row == 4 {
-            return self.tableView.partyPeopleHeaderCell()
+            return self.partyPeopleHeaderCell()
         }
             
         if indexPath.row > 4 {
             let index = indexPath.row - PartyView.staticTableViewCellCount
             
-            guard let partyPerson = Session.party.people.person(index: index) else {
-                return UITableViewCell()
-            }
+            let partyPerson = Party.people.person(index: index)
             
-            return self.tableView.partyPersonCell(partyPerson: partyPerson)
+            return self.partyPersonCell(partyPerson: partyPerson)
         }
         
         return UITableViewCell()

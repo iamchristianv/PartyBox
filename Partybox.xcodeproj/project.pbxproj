@@ -11,47 +11,57 @@
 		AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D152E1FA571C9009E31BF /* MenuViewController.swift */; };
 		AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */; };
 		AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */; };
-		AA47EB8A1FAAA41400619A61 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47EB891FAAA41400619A61 /* Session.swift */; };
-		AA590FFA1FC26FBB008988E9 /* Spyfall.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Spyfall.swift */; };
-		AA5910041FCA71B0008988E9 /* SetupSpyfallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910031FCA71B0008988E9 /* SetupSpyfallView.swift */; };
-		AA5910061FCA71C2008988E9 /* SetupSpyfallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910051FCA71C2008988E9 /* SetupSpyfallViewController.swift */; };
-		AA5910091FCBA7C3008988E9 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910081FCBA7C3008988E9 /* BaseView.swift */; };
+		AA590FFA1FC26FBB008988E9 /* WannabeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* WannabeGame.swift */; };
+		AA5910041FCA71B0008988E9 /* SetupWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910031FCA71B0008988E9 /* SetupWannabeView.swift */; };
+		AA5910061FCA71C2008988E9 /* SetupWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910051FCA71C2008988E9 /* SetupWannabeViewController.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
-		AACD97241FDF5DDE000275CB /* SpyfallPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97231FDF5DDE000275CB /* SpyfallPeople.swift */; };
-		AACD97261FDF70FD000275CB /* StartSpyfallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97251FDF70FD000275CB /* StartSpyfallViewController.swift */; };
-		AACD97281FDF7203000275CB /* StartSpyfallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97271FDF7203000275CB /* StartSpyfallView.swift */; };
-		AACD972A1FDF73E9000275CB /* PlaySpyfallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97291FDF73E9000275CB /* PlaySpyfallViewController.swift */; };
-		AACD972C1FDF73FA000275CB /* PlaySpyfallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD972B1FDF73FA000275CB /* PlaySpyfallView.swift */; };
-		AACD97301FE4E6E6000275CB /* EndSpyfallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD972F1FE4E6E6000275CB /* EndSpyfallViewController.swift */; };
-		AACD97321FE4E7AC000275CB /* EndSpyfallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97311FE4E7AC000275CB /* EndSpyfallView.swift */; };
+		AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A42002E1CF00180209 /* ActivityButton.swift */; };
+		AAB053A92002EBBB00180209 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A82002EBBB00180209 /* UIColor+Extension.swift */; };
+		AAB053AD200D5F2400180209 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053AC200D5F2400180209 /* SquareView.swift */; };
+		AAB053AF200D633C00180209 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053AE200D633C00180209 /* TriangleView.swift */; };
+		AAB053B4200D667A00180209 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053B3200D667A00180209 /* ShapeView.swift */; };
+		AAB053B6200D697B00180209 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053B5200D697B00180209 /* CircleView.swift */; };
+		AACD97241FDF5DDE000275CB /* WannabePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97231FDF5DDE000275CB /* WannabePeople.swift */; };
+		AACD97261FDF70FD000275CB /* StartWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97251FDF70FD000275CB /* StartWannabeViewController.swift */; };
+		AACD97281FDF7203000275CB /* StartWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97271FDF7203000275CB /* StartWannabeView.swift */; };
+		AACD972A1FDF73E9000275CB /* PlayWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97291FDF73E9000275CB /* PlayWannabeViewController.swift */; };
+		AACD972C1FDF73FA000275CB /* PlayWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD972B1FDF73FA000275CB /* PlayWannabeView.swift */; };
+		AACD97301FE4E6E6000275CB /* EndWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD972F1FE4E6E6000275CB /* EndWannabeViewController.swift */; };
+		AACD97321FE4E7AC000275CB /* EndWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97311FE4E7AC000275CB /* EndWannabeView.swift */; };
 		AACD97381FE5D9C9000275CB /* DoubleButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97371FE5D9C9000275CB /* DoubleButtonTableViewCell.swift */; };
 		AACD973A1FE5E0E4000275CB /* GameInstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */; };
-		AACD973E1FE62D78000275CB /* VoteSpyfallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973D1FE62D78000275CB /* VoteSpyfallViewController.swift */; };
+		AACD973E1FE62D78000275CB /* VoteWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973D1FE62D78000275CB /* VoteWannabeViewController.swift */; };
 		AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */; };
-		AACD97431FE6F782000275CB /* SpyfallPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97421FE6F782000275CB /* SpyfallPack.swift */; };
-		AACD97451FE6F8D1000275CB /* SpyfallCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* SpyfallCard.swift */; };
+		AACD97431FE6F782000275CB /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97421FE6F782000275CB /* WannabePack.swift */; };
+		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
+		AACD974A1FEA04E4000275CB /* VoteWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97491FEA04E4000275CB /* VoteWannabeView.swift */; };
+		AACD974C1FEB4533000275CB /* PartyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974B1FEB4533000275CB /* PartyGame.swift */; };
+		AACD974E1FF4960E000275CB /* SetupWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */; };
+		AACD97501FF49623000275CB /* StartWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974F1FF49623000275CB /* StartWannabeTableView.swift */; };
+		AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97511FF49631000275CB /* PlayWannabeTableView.swift */; };
+		AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */; };
 		AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */; };
 		AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */; };
 		AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */; };
 		AADB813A1FB16E00003AD1D9 /* PartyGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81391FB16E00003AD1D9 /* PartyGameTableViewCell.swift */; };
 		AADB813C1FB29BD9003AD1D9 /* PartyPersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813B1FB29BD9003AD1D9 /* PartyPersonTableViewCell.swift */; };
 		AADB813E1FB2B155003AD1D9 /* WaitingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* WaitingTableViewCell.swift */; };
-		AADB81401FB3E36B003AD1D9 /* SingleButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* SingleButtonTableViewCell.swift */; };
+		AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */; };
 		AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81411FB40401003AD1D9 /* AlertViewController.swift */; };
 		AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81431FB4046B003AD1D9 /* AlertView.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
 		AAE75B4E1F809FA9001D4E13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */; };
 		AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */; };
 		AAE75B631F80ACCB001D4E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */; };
+		AAEDA0DD1FF86AB20076B163 /* EndWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */; };
 		AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */; };
-		AAF6D7F91FDC907600014CA0 /* SpyfallPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F81FDC907600014CA0 /* SpyfallPerson.swift */; };
+		AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */; };
 		AAF6D7FB1FDC955900014CA0 /* PartyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */; };
 		AAF6D8051FDC99DB00014CA0 /* PartyPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */; };
-		AAF6D8071FDCD7E700014CA0 /* SpyfallDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D8061FDCD7E700014CA0 /* SpyfallDetails.swift */; };
+		AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */; };
 		AAF73B0A1FA6C57900D8A17B /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B091FA6C57900D8A17B /* PartyViewController.swift */; };
-		AAF73B0C1FA6C97900D8A17B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B0B1FA6C97900D8A17B /* BaseViewController.swift */; };
+		AAF73B0C1FA6C97900D8A17B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */; };
 		AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */; };
-		AAF73B121FA6D3A500D8A17B /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B111FA6D3A500D8A17B /* BaseTableView.swift */; };
 		AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B131FA7FF6700D8A17B /* MenuView.swift */; };
 		AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B151FA804EA00D8A17B /* StartPartyView.swift */; };
 		AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */; };
@@ -64,32 +74,42 @@
 		AA0D152E1FA571C9009E31BF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyViewController.swift; sourceTree = "<group>"; };
 		AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
-		AA47EB891FAAA41400619A61 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		AA590FF91FC26FBB008988E9 /* Spyfall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spyfall.swift; sourceTree = "<group>"; };
-		AA5910031FCA71B0008988E9 /* SetupSpyfallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSpyfallView.swift; sourceTree = "<group>"; };
-		AA5910051FCA71C2008988E9 /* SetupSpyfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupSpyfallViewController.swift; sourceTree = "<group>"; };
-		AA5910081FCBA7C3008988E9 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		AA590FF91FC26FBB008988E9 /* WannabeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeGame.swift; sourceTree = "<group>"; };
+		AA5910031FCA71B0008988E9 /* SetupWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeView.swift; sourceTree = "<group>"; };
+		AA5910051FCA71C2008988E9 /* SetupWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeViewController.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
-		AACD97231FDF5DDE000275CB /* SpyfallPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyfallPeople.swift; sourceTree = "<group>"; };
-		AACD97251FDF70FD000275CB /* StartSpyfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSpyfallViewController.swift; sourceTree = "<group>"; };
-		AACD97271FDF7203000275CB /* StartSpyfallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSpyfallView.swift; sourceTree = "<group>"; };
-		AACD97291FDF73E9000275CB /* PlaySpyfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySpyfallViewController.swift; sourceTree = "<group>"; };
-		AACD972B1FDF73FA000275CB /* PlaySpyfallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySpyfallView.swift; sourceTree = "<group>"; };
-		AACD972F1FE4E6E6000275CB /* EndSpyfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndSpyfallViewController.swift; sourceTree = "<group>"; };
-		AACD97311FE4E7AC000275CB /* EndSpyfallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndSpyfallView.swift; sourceTree = "<group>"; };
+		AAB053A42002E1CF00180209 /* ActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
+		AAB053A82002EBBB00180209 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		AAB053AC200D5F2400180209 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
+		AAB053AE200D633C00180209 /* TriangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
+		AAB053B3200D667A00180209 /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
+		AAB053B5200D697B00180209 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		AACD97231FDF5DDE000275CB /* WannabePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeople.swift; sourceTree = "<group>"; };
+		AACD97251FDF70FD000275CB /* StartWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeViewController.swift; sourceTree = "<group>"; };
+		AACD97271FDF7203000275CB /* StartWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeView.swift; sourceTree = "<group>"; };
+		AACD97291FDF73E9000275CB /* PlayWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeViewController.swift; sourceTree = "<group>"; };
+		AACD972B1FDF73FA000275CB /* PlayWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeView.swift; sourceTree = "<group>"; };
+		AACD972F1FE4E6E6000275CB /* EndWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWannabeViewController.swift; sourceTree = "<group>"; };
+		AACD97311FE4E7AC000275CB /* EndWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWannabeView.swift; sourceTree = "<group>"; };
 		AACD97371FE5D9C9000275CB /* DoubleButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsTableViewCell.swift; sourceTree = "<group>"; };
-		AACD973D1FE62D78000275CB /* VoteSpyfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSpyfallViewController.swift; sourceTree = "<group>"; };
+		AACD973D1FE62D78000275CB /* VoteWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeViewController.swift; sourceTree = "<group>"; };
 		AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCountdownTableViewCell.swift; sourceTree = "<group>"; };
-		AACD97421FE6F782000275CB /* SpyfallPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyfallPack.swift; sourceTree = "<group>"; };
-		AACD97441FE6F8D1000275CB /* SpyfallCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyfallCard.swift; sourceTree = "<group>"; };
+		AACD97421FE6F782000275CB /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
+		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
+		AACD97491FEA04E4000275CB /* VoteWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeView.swift; sourceTree = "<group>"; };
+		AACD974B1FEB4533000275CB /* PartyGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyGame.swift; sourceTree = "<group>"; };
+		AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeTableView.swift; sourceTree = "<group>"; };
+		AACD974F1FF49623000275CB /* StartWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeTableView.swift; sourceTree = "<group>"; };
+		AACD97511FF49631000275CB /* PlayWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeTableView.swift; sourceTree = "<group>"; };
+		AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeTableView.swift; sourceTree = "<group>"; };
 		AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81391FB16E00003AD1D9 /* PartyGameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyGameTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813B1FB29BD9003AD1D9 /* PartyPersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPersonTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813D1FB2B155003AD1D9 /* WaitingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingTableViewCell.swift; sourceTree = "<group>"; };
-		AADB813F1FB3E36B003AD1D9 /* SingleButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleButtonTableViewCell.swift; sourceTree = "<group>"; };
+		AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81411FB40401003AD1D9 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		AADB81431FB4046B003AD1D9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,15 +118,15 @@
 		AAE75B501F809FA9001D4E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		AAE75B521F809FA9001D4E13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWannabeTableView.swift; sourceTree = "<group>"; };
 		AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPerson.swift; sourceTree = "<group>"; };
-		AAF6D7F81FDC907600014CA0 /* SpyfallPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyfallPerson.swift; sourceTree = "<group>"; };
+		AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePerson.swift; sourceTree = "<group>"; };
 		AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDetails.swift; sourceTree = "<group>"; };
 		AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeople.swift; sourceTree = "<group>"; };
-		AAF6D8061FDCD7E700014CA0 /* SpyfallDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyfallDetails.swift; sourceTree = "<group>"; };
+		AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetails.swift; sourceTree = "<group>"; };
 		AAF73B091FA6C57900D8A17B /* PartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
-		AAF73B0B1FA6C97900D8A17B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
-		AAF73B111FA6D3A500D8A17B /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		AAF73B131FA7FF6700D8A17B /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AAF73B151FA804EA00D8A17B /* StartPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyView.swift; sourceTree = "<group>"; };
 		AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyView.swift; sourceTree = "<group>"; };
@@ -139,6 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				AADB81431FB4046B003AD1D9 /* AlertView.swift */,
+				AAB053A42002E1CF00180209 /* ActivityButton.swift */,
+				AAB053B0200D65D000180209 /* Shapes */,
+				AAB053A32002E17100180209 /* Table Views */,
 				AAF73B101FA6CABB00D8A17B /* Table View Cells */,
 			);
 			path = Resources;
@@ -152,27 +175,51 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		AACD97331FE4E7C1000275CB /* Spyfall */ = {
+		AAB053A32002E17100180209 /* Table Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA5910031FCA71B0008988E9 /* SetupSpyfallView.swift */,
-				AACD97271FDF7203000275CB /* StartSpyfallView.swift */,
-				AACD972B1FDF73FA000275CB /* PlaySpyfallView.swift */,
-				AACD97311FE4E7AC000275CB /* EndSpyfallView.swift */,
+				AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */,
+				AACD974F1FF49623000275CB /* StartWannabeTableView.swift */,
+				AACD97511FF49631000275CB /* PlayWannabeTableView.swift */,
+				AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */,
+				AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */,
 			);
-			path = Spyfall;
+			path = "Table Views";
 			sourceTree = "<group>";
 		};
-		AACD97341FE4E7D3000275CB /* Spyfall */ = {
+		AAB053B0200D65D000180209 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				AA5910051FCA71C2008988E9 /* SetupSpyfallViewController.swift */,
-				AACD97251FDF70FD000275CB /* StartSpyfallViewController.swift */,
-				AACD97291FDF73E9000275CB /* PlaySpyfallViewController.swift */,
-				AACD973D1FE62D78000275CB /* VoteSpyfallViewController.swift */,
-				AACD972F1FE4E6E6000275CB /* EndSpyfallViewController.swift */,
+				AAB053B3200D667A00180209 /* ShapeView.swift */,
+				AAB053AC200D5F2400180209 /* SquareView.swift */,
+				AAB053AE200D633C00180209 /* TriangleView.swift */,
+				AAB053B5200D697B00180209 /* CircleView.swift */,
 			);
-			path = Spyfall;
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		AACD97331FE4E7C1000275CB /* Wannabe */ = {
+			isa = PBXGroup;
+			children = (
+				AA5910031FCA71B0008988E9 /* SetupWannabeView.swift */,
+				AACD97271FDF7203000275CB /* StartWannabeView.swift */,
+				AACD972B1FDF73FA000275CB /* PlayWannabeView.swift */,
+				AACD97491FEA04E4000275CB /* VoteWannabeView.swift */,
+				AACD97311FE4E7AC000275CB /* EndWannabeView.swift */,
+			);
+			path = Wannabe;
+			sourceTree = "<group>";
+		};
+		AACD97341FE4E7D3000275CB /* Wannabe */ = {
+			isa = PBXGroup;
+			children = (
+				AA5910051FCA71C2008988E9 /* SetupWannabeViewController.swift */,
+				AACD97251FDF70FD000275CB /* StartWannabeViewController.swift */,
+				AACD97291FDF73E9000275CB /* PlayWannabeViewController.swift */,
+				AACD973D1FE62D78000275CB /* VoteWannabeViewController.swift */,
+				AACD972F1FE4E6E6000275CB /* EndWannabeViewController.swift */,
+			);
+			path = Wannabe;
 			sourceTree = "<group>";
 		};
 		AACD97351FE4E7F6000275CB /* Party */ = {
@@ -200,8 +247,8 @@
 		AACD97411FE6F760000275CB /* Pack */ = {
 			isa = PBXGroup;
 			children = (
-				AACD97421FE6F782000275CB /* SpyfallPack.swift */,
-				AACD97441FE6F8D1000275CB /* SpyfallCard.swift */,
+				AACD97421FE6F782000275CB /* WannabePack.swift */,
+				AACD97441FE6F8D1000275CB /* WannabeCard.swift */,
 			);
 			path = Pack;
 			sourceTree = "<group>";
@@ -243,7 +290,6 @@
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
 				AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */,
 				AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */,
-				AAFC53EC1FC2651C0039F539 /* Base Classes */,
 				AAFC53EB1FC22F9E0039F539 /* Class Extensions */,
 			);
 			path = Resources;
@@ -253,7 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				AACD97361FE4E801000275CB /* Party */,
-				AACD97341FE4E7D3000275CB /* Spyfall */,
+				AACD97341FE4E7D3000275CB /* Wannabe */,
 				AA590FFE1FCA618B008988E9 /* Resources */,
 			);
 			path = Controllers;
@@ -263,7 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				AACD97351FE4E7F6000275CB /* Party */,
-				AACD97331FE4E7C1000275CB /* Spyfall */,
+				AACD97331FE4E7C1000275CB /* Wannabe */,
 				AA590FFD1FCA6179008988E9 /* Resources */,
 			);
 			path = Views;
@@ -272,7 +318,6 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAF6D7FE1FDC964C00014CA0 /* Session */,
 				AAF6D7FF1FDC965900014CA0 /* Party */,
 				AAF6D8001FDC966300014CA0 /* Game */,
 				AAF6D8031FDC969700014CA0 /* Details */,
@@ -280,14 +325,6 @@
 				AAF6D8021FDC968400014CA0 /* People */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		AAF6D7FE1FDC964C00014CA0 /* Session */ = {
-			isa = PBXGroup;
-			children = (
-				AA47EB891FAAA41400619A61 /* Session.swift */,
-			);
-			path = Session;
 			sourceTree = "<group>";
 		};
 		AAF6D7FF1FDC965900014CA0 /* Party */ = {
@@ -301,7 +338,8 @@
 		AAF6D8001FDC966300014CA0 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				AA590FF91FC26FBB008988E9 /* Spyfall.swift */,
+				AACD974B1FEB4533000275CB /* PartyGame.swift */,
+				AA590FF91FC26FBB008988E9 /* WannabeGame.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -311,8 +349,8 @@
 			children = (
 				AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */,
 				AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */,
-				AACD97231FDF5DDE000275CB /* SpyfallPeople.swift */,
-				AAF6D7F81FDC907600014CA0 /* SpyfallPerson.swift */,
+				AACD97231FDF5DDE000275CB /* WannabePeople.swift */,
+				AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -321,7 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */,
-				AAF6D8061FDCD7E700014CA0 /* SpyfallDetails.swift */,
+				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -332,7 +370,7 @@
 				AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */,
 				AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */,
 				AADB813D1FB2B155003AD1D9 /* WaitingTableViewCell.swift */,
-				AADB813F1FB3E36B003AD1D9 /* SingleButtonTableViewCell.swift */,
+				AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */,
 				AACD97371FE5D9C9000275CB /* DoubleButtonTableViewCell.swift */,
 				AADB81391FB16E00003AD1D9 /* PartyGameTableViewCell.swift */,
 				AADB813B1FB29BD9003AD1D9 /* PartyPersonTableViewCell.swift */,
@@ -346,19 +384,11 @@
 			isa = PBXGroup;
 			children = (
 				AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */,
+				AAB053A82002EBBB00180209 /* UIColor+Extension.swift */,
 				AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */,
+				AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */,
 			);
 			path = "Class Extensions";
-			sourceTree = "<group>";
-		};
-		AAFC53EC1FC2651C0039F539 /* Base Classes */ = {
-			isa = PBXGroup;
-			children = (
-				AA5910081FCBA7C3008988E9 /* BaseView.swift */,
-				AAF73B0B1FA6C97900D8A17B /* BaseViewController.swift */,
-				AAF73B111FA6D3A500D8A17B /* BaseTableView.swift */,
-			);
-			path = "Base Classes";
 			sourceTree = "<group>";
 		};
 		F9634DE61855F2D1DBAD42A8 /* Frameworks */ = {
@@ -492,51 +522,61 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAF6D7F91FDC907600014CA0 /* SpyfallPerson.swift in Sources */,
+				AAEDA0DD1FF86AB20076B163 /* EndWannabeTableView.swift in Sources */,
+				AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */,
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
-				AACD97431FE6F782000275CB /* SpyfallPack.swift in Sources */,
-				AA47EB8A1FAAA41400619A61 /* Session.swift in Sources */,
+				AACD97431FE6F782000275CB /* WannabePack.swift in Sources */,
+				AACD97501FF49623000275CB /* StartWannabeTableView.swift in Sources */,
 				AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */,
-				AADB81401FB3E36B003AD1D9 /* SingleButtonTableViewCell.swift in Sources */,
+				AAB053B6200D697B00180209 /* CircleView.swift in Sources */,
+				AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */,
 				AAF6D7FB1FDC955900014CA0 /* PartyDetails.swift in Sources */,
+				AAB053AF200D633C00180209 /* TriangleView.swift in Sources */,
 				AADB813C1FB29BD9003AD1D9 /* PartyPersonTableViewCell.swift in Sources */,
-				AACD972C1FDF73FA000275CB /* PlaySpyfallView.swift in Sources */,
-				AACD97241FDF5DDE000275CB /* SpyfallPeople.swift in Sources */,
+				AACD972C1FDF73FA000275CB /* PlayWannabeView.swift in Sources */,
+				AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */,
+				AACD97241FDF5DDE000275CB /* WannabePeople.swift in Sources */,
 				AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */,
 				AACD973A1FE5E0E4000275CB /* GameInstructionsTableViewCell.swift in Sources */,
 				AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */,
 				AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */,
+				AACD974E1FF4960E000275CB /* SetupWannabeTableView.swift in Sources */,
 				AACD97381FE5D9C9000275CB /* DoubleButtonTableViewCell.swift in Sources */,
 				AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */,
+				AACD974A1FEA04E4000275CB /* VoteWannabeView.swift in Sources */,
 				AAF73B1A1FA809C200D8A17B /* PartyView.swift in Sources */,
-				AAF73B121FA6D3A500D8A17B /* BaseTableView.swift in Sources */,
-				AACD97451FE6F8D1000275CB /* SpyfallCard.swift in Sources */,
+				AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */,
 				AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */,
+				AAB053A92002EBBB00180209 /* UIColor+Extension.swift in Sources */,
 				AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */,
 				AAF73B0A1FA6C57900D8A17B /* PartyViewController.swift in Sources */,
-				AAF6D8071FDCD7E700014CA0 /* SpyfallDetails.swift in Sources */,
-				AACD972A1FDF73E9000275CB /* PlaySpyfallViewController.swift in Sources */,
+				AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */,
+				AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */,
+				AACD974C1FEB4533000275CB /* PartyGame.swift in Sources */,
+				AACD972A1FDF73E9000275CB /* PlayWannabeViewController.swift in Sources */,
 				AAF6D8051FDC99DB00014CA0 /* PartyPeople.swift in Sources */,
 				AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */,
-				AAF73B0C1FA6C97900D8A17B /* BaseViewController.swift in Sources */,
+				AAF73B0C1FA6C97900D8A17B /* UIViewController+Extension.swift in Sources */,
 				AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */,
-				AA5910041FCA71B0008988E9 /* SetupSpyfallView.swift in Sources */,
+				AA5910041FCA71B0008988E9 /* SetupWannabeView.swift in Sources */,
 				AADB813A1FB16E00003AD1D9 /* PartyGameTableViewCell.swift in Sources */,
-				AACD97321FE4E7AC000275CB /* EndSpyfallView.swift in Sources */,
+				AACD97321FE4E7AC000275CB /* EndWannabeView.swift in Sources */,
 				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
 				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
 				AADB813E1FB2B155003AD1D9 /* WaitingTableViewCell.swift in Sources */,
-				AACD97301FE4E6E6000275CB /* EndSpyfallViewController.swift in Sources */,
-				AACD97281FDF7203000275CB /* StartSpyfallView.swift in Sources */,
+				AACD97301FE4E6E6000275CB /* EndWannabeViewController.swift in Sources */,
+				AACD97281FDF7203000275CB /* StartWannabeView.swift in Sources */,
 				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,
 				AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */,
-				AACD97261FDF70FD000275CB /* StartSpyfallViewController.swift in Sources */,
+				AACD97261FDF70FD000275CB /* StartWannabeViewController.swift in Sources */,
 				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,
-				AA590FFA1FC26FBB008988E9 /* Spyfall.swift in Sources */,
-				AACD973E1FE62D78000275CB /* VoteSpyfallViewController.swift in Sources */,
-				AA5910091FCBA7C3008988E9 /* BaseView.swift in Sources */,
+				AA590FFA1FC26FBB008988E9 /* WannabeGame.swift in Sources */,
+				AACD973E1FE62D78000275CB /* VoteWannabeViewController.swift in Sources */,
+				AAB053B4200D667A00180209 /* ShapeView.swift in Sources */,
+				AAB053AD200D5F2400180209 /* SquareView.swift in Sources */,
 				AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */,
-				AA5910061FCA71C2008988E9 /* SetupSpyfallViewController.swift in Sources */,
+				AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */,
+				AA5910061FCA71C2008988E9 /* SetupWannabeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +707,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52NMKETQZ4;
 				INFOPLIST_FILE = "$(SRCROOT)/Partybox/Resources/Info.plist";
@@ -674,6 +715,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iamchristianv.Partybox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -685,6 +727,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 52NMKETQZ4;
 				INFOPLIST_FILE = "$(SRCROOT)/Partybox/Resources/Info.plist";
@@ -692,6 +735,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iamchristianv.Partybox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

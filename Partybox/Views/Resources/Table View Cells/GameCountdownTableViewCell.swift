@@ -38,12 +38,6 @@ class GameCountdownTableViewCell: UITableViewCell {
         return countdownLabel
     }()
     
-    var timer: Timer!
-    
-    var minutes: Int = 0
-    
-    var seconds: Int = 0
-    
     var delegate: GameCountdownTableViewCellDelegate!
     
     // MARK: - Initialization Methods
@@ -53,10 +47,21 @@ class GameCountdownTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         self.setBackgroundColor(.white)
         self.configureSubviews()
+        self.updateCountdownLabel()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(timerChangedNotificationObserved),
+                                               name: Notification.Name(PartyNotification.timerChanged.rawValue),
+                                               object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name(PartyNotification.timerChanged.rawValue),
+                                                  object: nil)
     }
     
     // MARK: - Configuration Methods
@@ -86,29 +91,19 @@ class GameCountdownTableViewCell: UITableViewCell {
     
     // MARK: - Action Methods
     
-    func startCountdown() {
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                          target: self,
-                                          selector: #selector(updateCountdown),
-                                          userInfo: nil,
-                                          repeats: true)
-    }
-    
-    @objc func updateCountdown() {
-        self.seconds -= 1
+    @objc func timerChangedNotificationObserved() {
+        self.updateCountdownLabel()
         
-        let minutesRemaining = self.seconds / 60
-        let secondsRemaining = self.seconds % 60
-        self.countdownLabel.text = String(format: "%02d", minutesRemaining) + ":" + String(format: "%02d", secondsRemaining)
-        
-        if self.seconds == 0 {
-            self.endCountdown()
+        if Party.secondsRemaining == 0 {
+            self.delegate.gameCountdownTableViewCell(self, countdownEnded: 0)
         }
     }
     
-    func endCountdown() {
-        self.timer.invalidate()
-        self.delegate.gameCountdownTableViewCell(self, countdownEnded: self.minutes)
+    func updateCountdownLabel() {
+        let minutesRemaining = Party.secondsRemaining / 60
+        let secondsRemaining = Party.secondsRemaining % 60
+        
+        self.countdownLabel.text = String(format: "%02d", minutesRemaining) + ":" + String(format: "%02d", secondsRemaining)
     }
     
     // MARK: - Setter Methods
@@ -119,15 +114,6 @@ class GameCountdownTableViewCell: UITableViewCell {
     
     func setPrompt(_ prompt: String) {
         self.promptLabel.text = prompt
-    }
-    
-    func setMinutes(_ minutes: Int) {
-        self.minutes = minutes
-        self.seconds = minutes * 60
-        
-        self.countdownLabel.text = String(format: "%02d", minutes) + ":00"
-        
-        self.startCountdown()
     }
 
 }

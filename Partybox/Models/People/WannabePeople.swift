@@ -1,5 +1,5 @@
 //
-//  SpyfallPeople.swift
+//  WannabePeople.swift
 //  Partybox
 //
 //  Created by Christian Villa on 12/11/17.
@@ -9,31 +9,21 @@
 import Foundation
 import SwiftyJSON
 
-class SpyfallPeople {
+class WannabePeople {
     
     // MARK: - Instance Properties
     
-    var indexesToNames: [String]
+    var indexesToNames: [String] = []
     
-    var namesToPersons: [String: SpyfallPerson]
+    var namesToPersons: [String: WannabePerson] = [:]
     
-    var count: Int
+    var count: Int = 0
     
     // MARK: - Initialization Methods
     
-    init() {
-        self.indexesToNames = []
-        self.namesToPersons = [:]
-        self.count = 0
-    }
-    
     init(JSON: JSON) {
-        self.indexesToNames = []
-        self.namesToPersons = [:]
-        self.count = 0
-        
         for (name, values) in JSON {
-            self.add(SpyfallPerson(name: name, JSON: values))
+            self.add(WannabePerson(name: name, JSON: values))
         }
     }
     
@@ -53,7 +43,7 @@ class SpyfallPeople {
     
     // MARK: - People Methods
     
-    func add(_ person: SpyfallPerson) {
+    func add(_ person: WannabePerson) {
         let name = person.name
         
         self.indexesToNames.append(name)
@@ -62,29 +52,21 @@ class SpyfallPeople {
         self.count += 1
     }
     
-    func person(index: Int) -> SpyfallPerson? {
-        if index >= self.indexesToNames.count {
-            return nil
-        }
-        
+    func person(index: Int) -> WannabePerson {
         let name = self.indexesToNames[index]
         let person = self.namesToPersons[name]
         
-        return person
+        return person!
     }
     
-    func person(name: String) -> SpyfallPerson? {
-        guard let person = self.namesToPersons[name] else {
-            return nil
-        }
+    func person(name: String) -> WannabePerson {
+        let person = self.namesToPersons[name]
         
-        return person
+        return person!
     }
     
-    func remove(index: Int) -> SpyfallPerson? {
-        guard let person = self.person(index: index) else {
-            return nil
-        }
+    func remove(index: Int) -> WannabePerson {
+        let person = self.person(index: index)
         
         self.indexesToNames.remove(at: index)
         self.namesToPersons.removeValue(forKey: person.name)
@@ -94,14 +76,12 @@ class SpyfallPeople {
         return person
     }
     
-    func remove(name: String) -> SpyfallPerson? {
-        guard let person = self.namesToPersons[name] else {
-            return nil
-        }
+    func remove(name: String) -> WannabePerson {
+        let person = self.namesToPersons[name]
         
         self.count -= 1
         
-        return person
+        return person!
     }
     
 }

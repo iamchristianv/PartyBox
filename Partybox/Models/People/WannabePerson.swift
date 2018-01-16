@@ -1,5 +1,5 @@
 //
-//  SpyfallPerson.swift
+//  WannabePerson.swift
 //  Partybox
 //
 //  Created by Christian Villa on 12/9/17.
@@ -9,38 +9,38 @@
 import Foundation
 import SwiftyJSON
 
-enum SpyfallPersonKey: String {
+enum WannabePersonKey: String {
     
     case name
     
-    case spy
+    case points
     
     case vote
     
 }
 
-class SpyfallPerson {
+class WannabePerson {
     
     // MARK: - Instance Properties
     
     var name: String
     
-    var spy: Bool
+    var points: Int
     
     var vote: String
     
     // MARK: - Initialization Methods
     
-    init(name: String, spy: Bool) {
+    init(name: String) {
         self.name = name
-        self.spy = spy
+        self.points = 0
         self.vote = ""
     }
     
-    required init(name: String, JSON: JSON) {
+    init(name: String, JSON: JSON) {
         self.name = name
-        self.spy = JSON[SpyfallPersonKey.spy.rawValue].boolValue
-        self.vote = JSON[SpyfallPersonKey.vote.rawValue].stringValue
+        self.points = JSON[WannabePersonKey.points.rawValue].intValue
+        self.vote = JSON[WannabePersonKey.vote.rawValue].stringValue
     }
     
     // MARK: - JSON Methods
@@ -48,10 +48,10 @@ class SpyfallPerson {
     func toJSON() -> [String : Any] {
         let JSON = [
             self.name: [
-                SpyfallPersonKey.spy.rawValue: self.spy,
-                SpyfallPersonKey.vote.rawValue: self.vote
+                WannabePersonKey.points.rawValue: self.points,
+                WannabePersonKey.vote.rawValue: self.vote
             ]
-        ] 
+        ] as [String: Any]
         
         return JSON
     }

@@ -18,30 +18,35 @@ class PartyPersonTableViewCell: UITableViewCell {
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.textColor = .black
+        nameLabel.textColor = UIColor.Partybox.black
         nameLabel.font = UIFont.avenirNextRegular(size: 16)
         return nameLabel
     }()
     
     var flairLabel: UILabel = {
         let flairLabel = UILabel()
-        flairLabel.textColor = .black
-        flairLabel.font = UIFont.avenirNextRegular(size: 14)
+        flairLabel.textColor = UIColor.Partybox.black
+        flairLabel.font = UIFont.avenirNextMedium(size: 12)
         return flairLabel
     }()
     
     var emojiLabel: UILabel = {
         let emojiLabel = UILabel()
-        emojiLabel.textColor = .black
         emojiLabel.font = UIFont.avenirNextRegular(size: 16)
         return emojiLabel
     }()
     
     var pointsLabel: UILabel = {
         let pointsLabel = UILabel()
-        pointsLabel.textColor = .black
+        pointsLabel.textColor = UIColor.Partybox.black
         pointsLabel.font = UIFont.avenirNextRegular(size: 16)
         return pointsLabel
+    }()
+    
+    var underlineLabel: UILabel = {
+        let underlineLabel = UILabel()
+        underlineLabel.backgroundColor = UIColor.lightGray
+        return underlineLabel
     }()
     
     // MARK: - Initialization Methods
@@ -49,7 +54,7 @@ class PartyPersonTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.setBackgroundColor(.white)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -69,13 +74,14 @@ class PartyPersonTableViewCell: UITableViewCell {
         self.addSubview(self.flairLabel)
         self.addSubview(self.emojiLabel)
         self.addSubview(self.pointsLabel)
+        self.addSubview(self.underlineLabel)
         
         self.nameLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.top.equalTo(self.snp.top).offset(16)
             make.trailing.equalTo(self.flairLabel.snp.leading).offset(-8)
+            make.top.equalTo(self.snp.top).offset(16)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
         
@@ -90,8 +96,8 @@ class PartyPersonTableViewCell: UITableViewCell {
         self.emojiLabel.snp.remakeConstraints({
             (make) in
             
-            make.top.equalTo(self.snp.top).offset(16)
             make.trailing.equalTo(self.pointsLabel.snp.leading).offset(-8)
+            make.top.equalTo(self.snp.top).offset(16)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
         
@@ -99,30 +105,35 @@ class PartyPersonTableViewCell: UITableViewCell {
             (make) in
             
             make.leading.equalTo(self.emojiLabel.snp.trailing).offset(8)
-            make.top.equalTo(self.snp.top).offset(16)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.top.equalTo(self.snp.top).offset(16)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
+        })
+        
+        self.underlineLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.height.equalTo(0.5)
+            make.leading.equalTo(self.snp.leading).offset(16)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom)
         })
     }
     
     // MARK: - Setter Methods
     
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
-    }
-    
     func setName(_ name: String) {
         self.nameLabel.text = name
     }
     
-    func setFlair(isMe: Bool, isHost: Bool) {
-        if isMe && isHost {
+    func setFlair(_ name: String) {
+        if name == Party.userName && name == Party.details.host {
             self.flairLabel.text = "ME / HOST"
         }
-        else if isMe {
+        else if name == Party.userName {
             self.flairLabel.text = "ME"
         }
-        else if isHost {
+        else if name == Party.details.host {
             self.flairLabel.text = "HOST"
         }
     }

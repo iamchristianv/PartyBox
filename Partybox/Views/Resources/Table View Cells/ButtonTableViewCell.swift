@@ -1,5 +1,5 @@
 //
-//  SingleButtonTableViewCell.swift
+//  ButtonTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 11/8/17.
@@ -8,28 +8,27 @@
 
 import UIKit
 
-protocol SingleButtonTableViewCellDelegate {
+protocol ButtonTableViewCellDelegate {
 
-    func singleButtonTableViewCell(_ singleButtonTableViewCell: SingleButtonTableViewCell, buttonPressed button: UIButton)
+    func buttonTableViewCell(_ buttonTableViewCell: ButtonTableViewCell, buttonPressed button: UIButton)
     
 }
 
-class SingleButtonTableViewCell: UITableViewCell {
+class ButtonTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: SingleButtonTableViewCell.self)
+    static let identifier: String = String(describing: ButtonTableViewCell.self)
     
     // MARK: - Instance Properties
     
-    var button: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
+    var button: ActivityButton = {
+        let button = ActivityButton()
         button.setTitleFont(UIFont.avenirNextRegularName, size: 18)
         return button
     }()
     
-    var delegate: SingleButtonTableViewCellDelegate!
+    var delegate: ButtonTableViewCellDelegate!
     
     // MARK: - Initialization Methods
     
@@ -65,7 +64,17 @@ class SingleButtonTableViewCell: UITableViewCell {
     // MARK: - Action Methods
     
     @objc func buttonPressed() {
-        self.delegate.singleButtonTableViewCell(self, buttonPressed: self.button)
+        self.delegate.buttonTableViewCell(self, buttonPressed: self.button)
+    }
+    
+    // MARK: - Animationg Methods
+    
+    func startAnimatingButton() {
+        self.button.startAnimating()
+    }
+    
+    func stopAnimatingButton() {
+        self.button.stopAnimating()
     }
     
     // MARK: - Setter Methods
@@ -76,6 +85,10 @@ class SingleButtonTableViewCell: UITableViewCell {
     
     func setButtonTitle(_ title: String) {
         self.button.setTitle(title, for: .normal)
+    }
+    
+    func setButtonBackgroundColor(_ color: UIColor) {
+        self.button.setBackgroundColor(color)
     }
 
 }

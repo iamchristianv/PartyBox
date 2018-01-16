@@ -7,6 +7,5 @@ target 'Partybox' do
   pod 'Firebase/Database'
   pod 'SnapKit'  
   pod 'SwiftyJSON' 
-  pod 'Timepiece'
 
 end

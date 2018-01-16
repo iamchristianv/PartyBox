@@ -21,41 +21,41 @@ class AlertView: UIView {
         let containerView = UIView()
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 15.0
-        containerView.addSubview(self.alertLabel)
+        containerView.addSubview(self.subjectLabel)
         containerView.addSubview(self.messageLabel)
         containerView.addSubview(self.actionButton)
         return containerView
     }()
     
-    lazy var alertLabel: UILabel = {
-        let alertLabel = UILabel()
-        alertLabel.text = self.alert
-        alertLabel.textColor = .black
-        alertLabel.font = UIFont.avenirNextRegular(size: 24)
-        alertLabel.numberOfLines = 0
-        alertLabel.textAlignment = .center
-        return alertLabel
+    lazy var subjectLabel: UILabel = {
+        let subjectLabel = UILabel()
+        subjectLabel.text = self.subject
+        subjectLabel.font = UIFont.avenirNextMedium(size: 20)
+        subjectLabel.textColor = .black
+        subjectLabel.numberOfLines = 0
+        subjectLabel.textAlignment = .center
+        return subjectLabel
     }()
     
     lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.text = self.message
-        messageLabel.textColor = .black
         messageLabel.font = UIFont.avenirNextRegular(size: 18)
+        messageLabel.textColor = .black
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         return messageLabel
     }()
     
-    lazy var actionButton: UIButton = {
-        let actionButton = UIButton()
+    lazy var actionButton: ActivityButton = {
+        let actionButton = ActivityButton()
         actionButton.setTitle(self.action, for: .normal)
-        actionButton.setTitleColor(.black, for: .normal)
-        actionButton.setTitleFont(UIFont.avenirNextRegularName, size: 18)
+        actionButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
+        actionButton.setBackgroundColor(UIColor.Partybox.red)
         return actionButton
     }()
     
-    var alert: String
+    var subject: String
     
     var message: String
     
@@ -63,13 +63,13 @@ class AlertView: UIView {
     
     // MARK: - Initialization Methods
     
-    init(alert: String, message: String, action: String) {
-        self.alert = alert
+    init(subject: String, message: String, action: String) {
+        self.subject = subject
         self.message = message
         self.action = action
         super.init(frame: .zero)
         
-        self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.25)
+        self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
         self.configureSubviews()
     }
     
@@ -87,8 +87,8 @@ class AlertView: UIView {
             (make) in
             
             make.leading.equalTo(self.snp.leading)
-            make.top.equalTo(self.snp.top)
             make.trailing.equalTo(self.snp.trailing)
+            make.top.equalTo(self.snp.top)
             make.bottom.equalTo(self.snp.bottom)
         })
         
@@ -99,37 +99,31 @@ class AlertView: UIView {
             make.center.equalTo(self.snp.center)
         })
         
-        self.alertLabel.snp.remakeConstraints({
+        self.subjectLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.containerView.snp.leading).offset(24)
-            make.top.equalTo(self.containerView.snp.top).offset(24)
             make.trailing.equalTo(self.containerView.snp.trailing).offset(-24)
-            make.bottom.equalTo(self.messageLabel.snp.top).offset(-8)
+            make.top.equalTo(self.containerView.snp.top).offset(24)
         })
         
         self.messageLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.containerView.snp.leading).offset(24)
-            make.top.equalTo(self.alertLabel.snp.bottom).offset(8)
             make.trailing.equalTo(self.containerView.snp.trailing).offset(-24)
-            make.bottom.equalTo(self.actionButton.snp.top).offset(-24)
+            make.top.equalTo(self.subjectLabel.snp.bottom).offset(16)
         })
         
         self.actionButton.snp.remakeConstraints({
             (make) in
             
+            make.width.equalTo(200)
+            make.height.equalTo(50)
             make.centerX.equalTo(self.containerView.snp.centerX)
             make.top.equalTo(self.messageLabel.snp.bottom).offset(24)
             make.bottom.equalTo(self.containerView.snp.bottom).offset(-24)
         })
-    }
-    
-    // MARK: - Setter Methods
-    
-    func setBackgroundColor(color: UIColor) {
-        
     }
     
 }

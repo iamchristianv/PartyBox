@@ -18,9 +18,10 @@ class PromptTableViewCell: UITableViewCell {
     
     var promptLabel: UILabel = {
         let promptLabel = UILabel()
-        promptLabel.textColor = .black
+        promptLabel.textColor = UIColor.Partybox.black
         promptLabel.font = UIFont.avenirNextRegular(size: 16)
         promptLabel.textAlignment = .center
+        promptLabel.numberOfLines = 0
         return promptLabel
     }()
 
@@ -29,7 +30,7 @@ class PromptTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.isUserInteractionEnabled = false
-        self.setBackgroundColor(.white)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -53,10 +54,6 @@ class PromptTableViewCell: UITableViewCell {
     }
     
     // MARK: - Setter Methods
-    
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
-    }
     
     func setPrompt(_ prompt: String) {
         self.promptLabel.text = prompt

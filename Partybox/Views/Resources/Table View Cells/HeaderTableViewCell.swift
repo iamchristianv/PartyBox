@@ -18,15 +18,13 @@ class HeaderTableViewCell: UITableViewCell {
     
     var headerLabel: UILabel = {
         let headerLabel = UILabel()
-        headerLabel.textColor = .black
-        headerLabel.font = UIFont.avenirNextRegular(size: 12)
+        headerLabel.font = UIFont.avenirNextMedium(size: 14)
         return headerLabel
     }()
     
     var emojiLabel: UILabel = {
         let emojiLabel = UILabel()
-        emojiLabel.textColor = .black
-        emojiLabel.font = UIFont.avenirNextRegular(size: 14)
+        emojiLabel.font = UIFont.avenirNextMedium(size: 14)
         return emojiLabel
     }()
     
@@ -35,7 +33,6 @@ class HeaderTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.isUserInteractionEnabled = false
-        self.setBackgroundColor(.white)
         self.configureSubviews()
     }
     
@@ -53,16 +50,16 @@ class HeaderTableViewCell: UITableViewCell {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.top.equalTo(self.snp.top).offset(16)
-            make.bottom.equalTo(self.snp.bottom).offset(-16)
+            make.top.equalTo(self.snp.top).offset(12)
+            make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
         
         self.emojiLabel.snp.remakeConstraints({
             (make) in
             
-            make.top.equalTo(self.snp.top).offset(16)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
-            make.bottom.equalTo(self.snp.bottom).offset(-16)
+            make.top.equalTo(self.snp.top).offset(12)
+            make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
     }
     
@@ -70,6 +67,7 @@ class HeaderTableViewCell: UITableViewCell {
     
     func setBackgroundColor(_ color: UIColor) {
         self.backgroundColor = color
+        self.headerLabel.textColor = color.contrastColor()
     }
     
     func setHeader(_ header: String) {

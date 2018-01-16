@@ -18,7 +18,7 @@ class GameInstructionsTableViewCell: UITableViewCell {
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = Session.game.details.name
+        nameLabel.text = Party.game.details.name
         nameLabel.textColor = .black
         nameLabel.font = UIFont.avenirNextRegular(size: 32)
         nameLabel.textAlignment = .center
@@ -27,7 +27,7 @@ class GameInstructionsTableViewCell: UITableViewCell {
     
     var instructionsLabel: UILabel = {
         let instructionsLabel = UILabel()
-        instructionsLabel.text = Session.game.details.instructions
+        instructionsLabel.text = Party.game.details.instructions
         instructionsLabel.textColor = .black
         instructionsLabel.font = UIFont.avenirNextRegular(size: 18)
         instructionsLabel.numberOfLines = 0

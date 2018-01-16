@@ -18,17 +18,18 @@ class PartyGameTableViewCell: UITableViewCell {
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = Session.game.details.name
-        nameLabel.textColor = .black
+        nameLabel.text = Party.game.details.name
         nameLabel.font = UIFont.avenirNextRegular(size: 24)
+        nameLabel.textColor = UIColor.Partybox.black
+        nameLabel.numberOfLines = 0
         return nameLabel
     }()
     
     var summaryLabel: UILabel = {
         let summaryLabel = UILabel()
-        summaryLabel.text = Session.game.details.summary
-        summaryLabel.textColor = .black
+        summaryLabel.text = Party.game.details.summary
         summaryLabel.font = UIFont.avenirNextRegular(size: 14)
+        summaryLabel.textColor = UIColor.Partybox.black
         summaryLabel.numberOfLines = 0
         return summaryLabel
     }()
@@ -38,7 +39,7 @@ class PartyGameTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.setBackgroundColor(.white)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -69,12 +70,6 @@ class PartyGameTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.snp.trailing).offset(-16)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
-    }
-    
-    // MARK: - Setter Methods
-    
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
     }
 
 }

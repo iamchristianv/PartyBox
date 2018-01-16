@@ -1,5 +1,5 @@
 //
-//  StartSpyfallView.swift
+//  StartWannabeView.swift
 //  Partybox
 //
 //  Created by Christian Villa on 12/11/17.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol StartSpyfallViewDelegate {
+protocol StartWannabeViewDelegate {
     
-    func startSpyfallView(_ startSpyfallView: StartSpyfallView, readyToPlayButtonPressed button: UIButton)
+    func startWannabeView(_ startWannabeView: StartWannabeView, readyToPlayButtonPressed button: UIButton)
     
 }
 
-class StartSpyfallView: BaseView {
+class StartWannabeView: UIView {
     
     // MARK: - Class Properties
     
@@ -22,19 +22,19 @@ class StartSpyfallView: BaseView {
     
     // MARK: - Instance Properties
     
-    lazy var tableView: BaseTableView = {
-        let tableView = BaseTableView()
-        tableView.delegate = self
+    lazy var tableView: StartWannabeTableView = {
+        let tableView = StartWannabeTableView()
         tableView.dataSource = self
         return tableView
     }()
     
-    var delegate: StartSpyfallViewDelegate!
+    var delegate: StartWannabeViewDelegate!
     
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -59,11 +59,7 @@ class StartSpyfallView: BaseView {
 
 }
 
-extension StartSpyfallView: UITableViewDelegate {
-    
-}
-
-extension StartSpyfallView: UITableViewDataSource {
+extension StartWannabeView: UITableViewDataSource {
     
     // MARK: - Table View Data Source Methods
     
@@ -72,24 +68,22 @@ extension StartSpyfallView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return StartSpyfallView.staticTableViewCellCount
+        return StartWannabeView.staticTableViewCellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            return self.tableView.gameInstructionsCell()
+            return self.tableView.instructionsCell()
         }
         
         if indexPath.row == 1 {
-            guard let partyPerson = Session.party.people.person(name: Session.name) else {
-                return UITableViewCell()
-            }
+            let person = Party.people.person(name: Party.userName)
             
-            if partyPerson.ready {
-                return self.tableView.waitingForEveryoneToBeReadyCell()
+            if !person.ready {
+                return self.tableView.readyToPlayButtonCell(delegate: self)
             }
             else {
-                return self.tableView.readyToPlayButtonCell(delegate: self)
+                return self.tableView.waitingForEveryoneToBeReadyCell()
             }
         }
 
@@ -98,12 +92,12 @@ extension StartSpyfallView: UITableViewDataSource {
     
 }
 
-extension StartSpyfallView: SingleButtonTableViewCellDelegate {
+extension StartWannabeView: ButtonTableViewCellDelegate {
     
-    // MARK: - Single Button Table View Cell Delegate Methods
+    // MARK: - Button Table View Cell Delegate Methods
     
-    func singleButtonTableViewCell(_ singleButtonTableViewCell: SingleButtonTableViewCell, buttonPressed button: UIButton) {
-        self.delegate.startSpyfallView(self, readyToPlayButtonPressed: button)
+    func buttonTableViewCell(_ buttonTableViewCell: ButtonTableViewCell, buttonPressed button: UIButton) {
+        self.delegate.startWannabeView(self, readyToPlayButtonPressed: button)
     }
     
 }

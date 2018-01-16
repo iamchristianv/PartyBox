@@ -1,28 +1,40 @@
 //
-//  EndSpyfallView.swift
+//  SetupWannabeView.swift
 //  Partybox
 //
-//  Created by Christian Villa on 12/16/17.
+//  Created by Christian Villa on 11/25/17.
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
 import UIKit
 
-class EndSpyfallView: BaseView {
+protocol SetupWannabeViewDelegate {
+    
+    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playGameButtonPressed button: UIButton)
+    
+}
+
+class SetupWannabeView: UIView {
+    
+    // MARK: - Class Properties
+    
+    static let staticTableViewCellCount: Int = 1
 
     // MARK: - Instance Properties
     
-    lazy var tableView: BaseTableView = {
-        let tableView = BaseTableView()
-        tableView.delegate = self
+    lazy var tableView: SetupWannabeTableView = {
+        let tableView = SetupWannabeTableView()
         tableView.dataSource = self
         return tableView
     }()
+    
+    var delegate: SetupWannabeViewDelegate!
     
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -47,11 +59,7 @@ class EndSpyfallView: BaseView {
 
 }
 
-extension EndSpyfallView: UITableViewDelegate {
-    
-}
-
-extension EndSpyfallView: UITableViewDataSource {
+extension SetupWannabeView: UITableViewDataSource {
     
     // MARK: - Table View Data Source Methods
     
@@ -60,11 +68,25 @@ extension EndSpyfallView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return SetupWannabeView.staticTableViewCellCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            return self.tableView.playGameButtonCell(delegate: self)
+        }
+
         return UITableViewCell()
+    }
+    
+}
+
+extension SetupWannabeView: ButtonTableViewCellDelegate {
+    
+    // MARK: - Button Table View Cell Delegate Methods
+    
+    func buttonTableViewCell(_ buttonTableViewCell: ButtonTableViewCell, buttonPressed button: UIButton) {
+        self.delegate.setupWannabeView(self, playGameButtonPressed: button)
     }
     
 }

@@ -24,18 +24,18 @@ class DoubleButtonTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    var topButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
-        button.setTitleFont(UIFont.avenirNextRegularName, size: 18)
-        return button
+    var topButton: ActivityButton = {
+        let topButton = ActivityButton()
+        topButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
+        topButton.setBackgroundColor(UIColor.Partybox.green)
+        return topButton
     }()
     
-    var bottomButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
-        button.setTitleFont(UIFont.avenirNextRegularName, size: 18)
-        return button
+    var bottomButton: ActivityButton = {
+        let bottomButton = ActivityButton()
+        bottomButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
+        bottomButton.setBackgroundColor(UIColor.Partybox.green)
+        return bottomButton
     }()
     
     var delegate: DoubleButtonTableViewCellDelegate!
@@ -68,8 +68,8 @@ class DoubleButtonTableViewCell: UITableViewCell {
             make.width.equalTo(200)
             make.height.equalTo(50)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.snp.top).offset(16)
-            make.bottom.equalTo(self.bottomButton.snp.top).offset(-16)
+            make.top.equalTo(self.snp.top).offset(24)
+            make.bottom.equalTo(self.bottomButton.snp.top).offset(-24)
         })
         
         self.bottomButton.snp.remakeConstraints({
@@ -78,8 +78,8 @@ class DoubleButtonTableViewCell: UITableViewCell {
             make.width.equalTo(200)
             make.height.equalTo(50)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.topButton.snp.bottom).offset(16)
-            make.bottom.equalTo(self.snp.bottom).offset(-16)
+            make.top.equalTo(self.topButton.snp.bottom).offset(24)
+            make.bottom.equalTo(self.snp.bottom).offset(-24)
         })
     }
     
