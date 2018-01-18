@@ -1,5 +1,5 @@
 //
-//  PartyPersonTableViewCell.swift
+//PersonTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 11/7/17.
@@ -8,38 +8,38 @@
 
 import UIKit
 
-class PartyPersonTableViewCell: UITableViewCell {
+class PersonTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: PartyPersonTableViewCell.self)
+    static let identifier: String = String(describing: PersonTableViewCell.self)
     
     // MARK: - Instance Properties
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textColor = UIColor.Partybox.black
-        nameLabel.font = UIFont.avenirNextRegular(size: 16)
+        nameLabel.font = UIFont.avenirNextRegular(size: 18)
         return nameLabel
     }()
     
     var flairLabel: UILabel = {
         let flairLabel = UILabel()
-        flairLabel.textColor = UIColor.Partybox.black
+        flairLabel.textColor = UIColor.darkGray
         flairLabel.font = UIFont.avenirNextMedium(size: 12)
         return flairLabel
     }()
     
     var emojiLabel: UILabel = {
         let emojiLabel = UILabel()
-        emojiLabel.font = UIFont.avenirNextRegular(size: 16)
+        emojiLabel.font = UIFont.avenirNextRegular(size: 18)
         return emojiLabel
     }()
     
     var pointsLabel: UILabel = {
         let pointsLabel = UILabel()
         pointsLabel.textColor = UIColor.Partybox.black
-        pointsLabel.font = UIFont.avenirNextRegular(size: 16)
+        pointsLabel.font = UIFont.avenirNextRegular(size: 18)
         return pointsLabel
     }()
     
@@ -88,26 +88,23 @@ class PartyPersonTableViewCell: UITableViewCell {
         self.flairLabel.snp.remakeConstraints({
             (make) in
             
-            make.leading.equalTo(self.nameLabel.snp.trailing).offset(8)
-            make.top.equalTo(self.snp.top).offset(16)
-            make.bottom.equalTo(self.snp.bottom).offset(-16)
+            make.lastBaseline.equalTo(self.nameLabel.snp.lastBaseline)
+            make.leading.equalTo(self.nameLabel.snp.trailing).offset(16)
         })
         
         self.emojiLabel.snp.remakeConstraints({
             (make) in
             
+            make.lastBaseline.equalTo(self.nameLabel.snp.lastBaseline)
             make.trailing.equalTo(self.pointsLabel.snp.leading).offset(-8)
-            make.top.equalTo(self.snp.top).offset(16)
-            make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
         
         self.pointsLabel.snp.remakeConstraints({
             (make) in
             
+            make.lastBaseline.equalTo(self.nameLabel.snp.lastBaseline)
             make.leading.equalTo(self.emojiLabel.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
-            make.top.equalTo(self.snp.top).offset(16)
-            make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
         
         self.underlineLabel.snp.remakeConstraints({

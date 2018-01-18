@@ -18,13 +18,16 @@ class MenuViewController: UIViewController {
     
     var authenticationHandle: AuthStateDidChangeListenerHandle!
     
-    var confettiTimer: Timer!
+    var motionManager: CMMotionManager!
+    
+    var confettiPieceTimer: Timer!
     
     // MARK: - View Controller Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
+        self.configureMotionManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,13 +35,15 @@ class MenuViewController: UIViewController {
         self.configureStatusBar()
         self.configureNavigationBar()
         self.startObservingAuthenticationChanges()
-        self.startDroppingConfetti()
+        self.startObservingMotionChanges()
+        self.startDroppingConfettiPieces()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.stopObservingAuthenticationChanges()
-        self.stopDroppingConfetti()
+        self.stopObservingMotionChanges()
+        self.stopDroppingConfettiPieces()
     }
     
     override func loadView() {
@@ -60,6 +65,10 @@ class MenuViewController: UIViewController {
         self.contentView.startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         self.contentView.joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         self.view = self.contentView
+    }
+    
+    func configureMotionManager() {
+        self.motionManager = CMMotionManager()
     }
     
     // MARK: - Action Methods
@@ -103,18 +112,36 @@ class MenuViewController: UIViewController {
         Auth.auth().removeStateDidChangeListener(self.authenticationHandle)
     }
     
+    // MARK: - Motion Methods
+    
+    func startObservingMotionChanges() {
+        self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
+            (motion, _) in
+            
+            guard let motion = motion else {
+                return
+            }
+            
+            self.contentView.updateConfettiPieceGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
+        })
+    }
+    
+    func stopObservingMotionChanges() {
+        self.motionManager.stopDeviceMotionUpdates()
+    }
+    
     // MARK: - Confetti Methods
     
-    func startDroppingConfetti() {
-        self.confettiTimer = Timer.scheduledTimer(timeInterval: 0.25,
+    func startDroppingConfettiPieces() {
+        self.confettiPieceTimer = Timer.scheduledTimer(timeInterval: 0.2,
                                                   target: self,
                                                   selector: #selector(dropConfettiPiece),
                                                   userInfo: nil,
                                                   repeats: true)
     }
     
-    func stopDroppingConfetti() {
-        self.confettiTimer.invalidate()
+    func stopDroppingConfettiPieces() {
+        self.confettiPieceTimer.invalidate()
     }
     
     @objc func dropConfettiPiece() {

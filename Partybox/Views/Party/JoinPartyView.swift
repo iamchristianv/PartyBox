@@ -32,6 +32,7 @@ class JoinPartyView: UIView {
         inviteCodeTextField.tintColor = UIColor.Partybox.blue
         inviteCodeTextField.borderStyle = .none
         inviteCodeTextField.autocapitalizationType = .allCharacters
+        inviteCodeTextField.clearButtonMode = .whileEditing
         return inviteCodeTextField
     }()
     
@@ -65,6 +66,7 @@ class JoinPartyView: UIView {
         yourNameTextField.tintColor = UIColor.Partybox.blue
         yourNameTextField.borderStyle = .none
         yourNameTextField.autocapitalizationType = .words
+        yourNameTextField.clearButtonMode = .whileEditing
         return yourNameTextField
     }()
     

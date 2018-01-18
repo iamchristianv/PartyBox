@@ -65,18 +65,18 @@ class DoubleButtonTableViewCell: UITableViewCell {
         self.topButton.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(200)
-            make.height.equalTo(50)
+            make.width.equalTo(220)
+            make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.snp.top).offset(24)
+            make.top.equalTo(self.snp.top).offset(8)
             make.bottom.equalTo(self.bottomButton.snp.top).offset(-24)
         })
         
         self.bottomButton.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(200)
-            make.height.equalTo(50)
+            make.width.equalTo(220)
+            make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(self.topButton.snp.bottom).offset(24)
             make.bottom.equalTo(self.snp.bottom).offset(-24)

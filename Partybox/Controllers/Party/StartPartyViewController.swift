@@ -66,9 +66,6 @@ class StartPartyViewController: UIViewController {
         if let partyName = self.contentView.partyNameTextField.text?.trimmingCharacters(in: .whitespaces), partyName.isEmpty {
             self.contentView.showPartyNameStatus("Required")
         }
-        else if let partyName = self.contentView.partyNameTextField.text?.trimmingCharacters(in: .alphanumerics), !partyName.isEmpty {
-            self.contentView.showPartyNameStatus("Must only contain letters and numbers")
-        }
         else {
             self.contentView.hidePartyNameStatus()
         }
@@ -77,17 +74,13 @@ class StartPartyViewController: UIViewController {
             self.contentView.showYourNameStatus("Required")
         }
         else if let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .alphanumerics), !personName.isEmpty {
-            self.contentView.showYourNameStatus("Must only contain letters and numbers")
+            self.contentView.showYourNameStatus("No spaces or special characters")
         }
         else {
             self.contentView.hideYourNameStatus()
         }
         
         guard let partyName = self.contentView.partyNameTextField.text?.trimmingCharacters(in: .whitespaces), !partyName.isEmpty else {
-            return
-        }
-        
-        if !partyName.trimmingCharacters(in: .alphanumerics).isEmpty {
             return
         }
         

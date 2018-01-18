@@ -31,13 +31,13 @@ class PartyView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
-        tableView.register(PromptTableViewCell.self, forCellReuseIdentifier: PromptTableViewCell.identifier)
+        tableView.register(InviteCodeTableViewCell.self, forCellReuseIdentifier: InviteCodeTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
         tableView.register(WaitingTableViewCell.self, forCellReuseIdentifier: WaitingTableViewCell.identifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: ButtonTableViewCell.identifier)
         tableView.register(DoubleButtonTableViewCell.self, forCellReuseIdentifier: DoubleButtonTableViewCell.identifier)
-        tableView.register(PartyGameTableViewCell.self, forCellReuseIdentifier: PartyGameTableViewCell.identifier)
-        tableView.register(PartyPersonTableViewCell.self, forCellReuseIdentifier: PartyPersonTableViewCell.identifier)
+        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.identifier)
+        tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: PersonTableViewCell.identifier)
         tableView.register(GameInstructionsTableViewCell.self, forCellReuseIdentifier: GameInstructionsTableViewCell.identifier)
         tableView.register(GameCountdownTableViewCell.self, forCellReuseIdentifier: GameCountdownTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
@@ -75,11 +75,11 @@ class PartyView: UIView {
     
     // MARK: - Table View Cell Methods
     
-    func inviteCodeCell() -> PromptTableViewCell {
-        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
-        let promptCell = tableViewCell as! PromptTableViewCell
-        promptCell.setPrompt("Invite Code: " + Party.inviteCode)
-        return promptCell
+    func inviteCodeCell() -> InviteCodeTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: InviteCodeTableViewCell.identifier)
+        let inviteCodeCell = tableViewCell as! InviteCodeTableViewCell
+        inviteCodeCell.setInviteCode(Party.inviteCode)
+        return inviteCodeCell
     }
     
     func partyGameHeaderCell() -> HeaderTableViewCell {
@@ -91,9 +91,9 @@ class PartyView: UIView {
         return headerCell
     }
     
-    func partyGameCell() -> PartyGameTableViewCell {
-        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
-        let partyGameCell = tableViewCell as! PartyGameTableViewCell
+    func partyGameCell() -> GameTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier)
+        let partyGameCell = tableViewCell as! GameTableViewCell
         return partyGameCell
     }
     
@@ -122,9 +122,9 @@ class PartyView: UIView {
         return headerCell
     }
     
-    func partyPersonCell(partyPerson: PartyPerson) -> PartyPersonTableViewCell {
-        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyPersonTableViewCell.identifier)
-        let partyPersonCell = tableViewCell as! PartyPersonTableViewCell
+    func partyPersonCell(partyPerson: PartyPerson) -> PersonTableViewCell {
+        let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier)
+        let partyPersonCell = tableViewCell as! PersonTableViewCell
         partyPersonCell.setName(partyPerson.name)
         partyPersonCell.setFlair(partyPerson.name)
         partyPersonCell.setEmoji(partyPerson.emoji)

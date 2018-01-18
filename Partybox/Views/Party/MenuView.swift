@@ -31,26 +31,42 @@ class MenuView: UIView {
     lazy var animator: UIDynamicAnimator = {
         let animator = UIDynamicAnimator(referenceView: self)
         animator.addBehavior(self.gravityBehavior)
-        animator.addBehavior(self.confettiBehavior)
+        animator.addBehavior(self.lightConfettiBehavior)
+        animator.addBehavior(self.mediumConfettiBehavior)
+        animator.addBehavior(self.heavyConfettiBehavior)
         return animator
     }()
     
     lazy var gravityBehavior: UIGravityBehavior = {
         let gravityBehavior = UIGravityBehavior()
-        gravityBehavior.magnitude = 0.025
         return gravityBehavior
     }()
     
-    lazy var confettiBehavior: UIDynamicItemBehavior = {
-        let confettiBehavior = UIDynamicItemBehavior()
-        confettiBehavior.allowsRotation = true
-        return confettiBehavior
+    lazy var lightConfettiBehavior: UIDynamicItemBehavior = {
+        let lightConfettiBehavior = UIDynamicItemBehavior()
+        lightConfettiBehavior.allowsRotation = true
+        lightConfettiBehavior.resistance = 5.0
+        return lightConfettiBehavior
+    }()
+    
+    lazy var mediumConfettiBehavior: UIDynamicItemBehavior = {
+        let mediumConfettiBehavior = UIDynamicItemBehavior()
+        mediumConfettiBehavior.allowsRotation = true
+        mediumConfettiBehavior.resistance = 4.25
+        return mediumConfettiBehavior
+    }()
+    
+    lazy var heavyConfettiBehavior: UIDynamicItemBehavior = {
+        let heavyConfettiBehavior = UIDynamicItemBehavior()
+        heavyConfettiBehavior.allowsRotation = true
+        heavyConfettiBehavior.resistance = 3.5
+        return heavyConfettiBehavior
     }()
     
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         self.backgroundColor = .white
         self.configureSubviews()
     }
@@ -71,7 +87,7 @@ class MenuView: UIView {
             make.width.equalTo(250)
             make.height.equalTo(62.5)
             make.centerX.equalTo(self.snp.centerX)
-            make.centerY.equalTo(self.snp.centerY)
+            make.centerY.equalTo(self.snp.centerY).offset(48)
         })
         
         self.joinPartyButton.snp.remakeConstraints({
@@ -105,19 +121,15 @@ class MenuView: UIView {
     // MARK: - Confetti Methods
     
     func dropConfettiPiece() {
-        
-        // TODO: - refactor and optimize
-        
-        let randomX = Int(arc4random()) % Int(self.frame.size.width)
-        let randomFrame = CGRect(x: randomX, y: -15, width: 15, height: 15)
-        
-        let colors = [UIColor.Partybox.red, UIColor.Partybox.blue, UIColor.Partybox.purple, UIColor.Partybox.green]
-        let randomColor = colors[Int(arc4random()) % colors.count]
+        var confettiPiece: ShapeView!
         
         let shapes = [SquareView.self, TriangleView.self, CircleView.self]
         let randomShape = shapes[Int(arc4random()) % shapes.count]
         
-        var confettiPiece: ShapeView!
+        let randomFrame = CGRect(x: Int(arc4random()) % Int(self.frame.size.width), y: -11, width: 11, height: 11)
+        
+        let colors = [UIColor.Partybox.red, UIColor.Partybox.blue, UIColor.Partybox.green, UIColor.Partybox.purple]
+        let randomColor = colors[Int(arc4random()) % colors.count]
         
         if randomShape == SquareView.self {
             confettiPiece = SquareView(frame: randomFrame, color: randomColor)
@@ -131,12 +143,29 @@ class MenuView: UIView {
         
         self.animator.referenceView?.insertSubview(confettiPiece, at: 0)
         self.gravityBehavior.addItem(confettiPiece)
-        self.confettiBehavior.addItem(confettiPiece)
         
-        let randomDirection = Int(arc4random()) % 2
-        let randomVelocity = randomDirection == 0 ? 5.0 : -5.0
+        let randomSpeed = CGFloat(arc4random_uniform(2) + 4)
+        let randomDirection = CGFloat(arc4random_uniform(2))
+        let randomAngularVelocity = randomDirection == 0 ? randomSpeed : -randomSpeed
         
-        self.confettiBehavior.addAngularVelocity(CGFloat(randomVelocity), for: confettiPiece)
+        let randomResistance = arc4random_uniform(3)
+        
+        if randomResistance == 0 {
+            self.lightConfettiBehavior.addItem(confettiPiece)
+            self.lightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+        }
+        else if randomResistance == 1 {
+            self.mediumConfettiBehavior.addItem(confettiPiece)
+            self.mediumConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+        }
+        else if randomResistance == 2 {
+            self.heavyConfettiBehavior.addItem(confettiPiece)
+            self.heavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+        }
+    }
+    
+    func updateConfettiPieceGravityDirection(_ direction: CGVector) {
+        self.gravityBehavior.gravityDirection = direction
     }
     
 }

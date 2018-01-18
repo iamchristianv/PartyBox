@@ -67,7 +67,7 @@ class JoinPartyViewController: UIViewController {
             self.contentView.showInviteCodeStatus("Required")
         }
         else if let inviteCode = self.contentView.inviteCodeTextField.text?.trimmingCharacters(in: .alphanumerics), !inviteCode.isEmpty {
-            self.contentView.showInviteCodeStatus("Must only contains letters and numbers")
+            self.contentView.showInviteCodeStatus("No spaces or special characters")
         }
         else {
             self.contentView.hideInviteCodeStatus()
@@ -77,7 +77,7 @@ class JoinPartyViewController: UIViewController {
             self.contentView.showYourNameStatus("Required")
         }
         else if let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .alphanumerics), !personName.isEmpty {
-            self.contentView.showYourNameStatus("Must only contain letters and numbers")
+            self.contentView.showYourNameStatus("No spaces or special characters")
         }
         else {
             self.contentView.hideYourNameStatus()

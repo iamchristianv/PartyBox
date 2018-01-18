@@ -27,11 +27,13 @@ class StartPartyView: UIView {
     
     lazy var partyNameTextField: UITextField = {
         let partyNameTextField = UITextField()
+        partyNameTextField.delegate = self
         partyNameTextField.font = UIFont.avenirNextRegular(size: 20)
         partyNameTextField.textColor = UIColor.Partybox.black
         partyNameTextField.tintColor = UIColor.Partybox.red
         partyNameTextField.borderStyle = .none
         partyNameTextField.autocapitalizationType = .words
+        partyNameTextField.clearButtonMode = .whileEditing
         return partyNameTextField
     }()
     
@@ -50,6 +52,16 @@ class StartPartyView: UIView {
         return partyNameStatusLabel
     }()
     
+    lazy var partyNameMaxCharacterCount: Int = 24
+    
+    lazy var partyNameCharacterCountLabel: UILabel = {
+        let partyNameCharacterCountLabel = UILabel()
+        partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
+        partyNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 14)
+        partyNameCharacterCountLabel.textColor = UIColor.Partybox.black
+        return partyNameCharacterCountLabel
+    }()
+    
     lazy var yourNameLabel: UILabel = {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
@@ -60,11 +72,13 @@ class StartPartyView: UIView {
     
     lazy var yourNameTextField: UITextField = {
         let yourNameTextField = UITextField()
+        yourNameTextField.delegate = self
         yourNameTextField.font = UIFont.avenirNextRegular(size: 20)
         yourNameTextField.textColor = UIColor.Partybox.black
         yourNameTextField.tintColor = UIColor.Partybox.red
         yourNameTextField.borderStyle = .none
         yourNameTextField.autocapitalizationType = .words
+        yourNameTextField.clearButtonMode = .whileEditing
         return yourNameTextField
     }()
     
@@ -81,6 +95,16 @@ class StartPartyView: UIView {
         yourNameStatusLabel.textColor = UIColor.Partybox.red
         yourNameStatusLabel.isHidden = true
         return yourNameStatusLabel
+    }()
+    
+    lazy var yourNameMaxCharacterCount: Int = 24
+    
+    lazy var yourNameCharacterCountLabel: UILabel = {
+        let yourNameCharacterCountLabel = UILabel()
+        yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
+        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 14)
+        yourNameCharacterCountLabel.textColor = UIColor.Partybox.black
+        return yourNameCharacterCountLabel
     }()
     
     lazy var continueButton: ActivityButton = {
@@ -111,10 +135,12 @@ class StartPartyView: UIView {
         self.addSubview(self.partyNameTextField)
         self.addSubview(self.partyNameUnderlineLabel)
         self.addSubview(self.partyNameStatusLabel)
+        self.addSubview(self.partyNameCharacterCountLabel)
         self.addSubview(self.yourNameLabel)
         self.addSubview(self.yourNameTextField)
         self.addSubview(self.yourNameUnderlineLabel)
         self.addSubview(self.yourNameStatusLabel)
+        self.addSubview(self.yourNameCharacterCountLabel)
         self.addSubview(self.continueButton)
         
         self.backgroundButton.snp.remakeConstraints({
@@ -156,6 +182,14 @@ class StartPartyView: UIView {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(32)
+            make.trailing.equalTo(self.partyNameCharacterCountLabel.snp.leading).offset(-8)
+            make.top.equalTo(self.partyNameUnderlineLabel.snp.bottom).offset(8)
+        })
+        
+        self.partyNameCharacterCountLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.leading.equalTo(self.partyNameStatusLabel.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
             make.top.equalTo(self.partyNameUnderlineLabel.snp.bottom).offset(8)
         })
@@ -190,6 +224,14 @@ class StartPartyView: UIView {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(32)
+            make.trailing.equalTo(self.yourNameCharacterCountLabel.snp.leading).offset(-8)
+            make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
+        })
+        
+        self.yourNameCharacterCountLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.leading.equalTo(self.yourNameStatusLabel.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
             make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
         })
@@ -240,4 +282,26 @@ class StartPartyView: UIView {
         self.continueButton.stopAnimating()
     }
 
+}
+
+extension StartPartyView: UITextFieldDelegate {
+    
+    // MARK: - Text Field Delegate Methods
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let characterCount = (textField.text?.count)! + string.count - range.length
+        
+        if textField == self.partyNameTextField && characterCount <= self.partyNameMaxCharacterCount {
+            self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - characterCount)"
+            return true
+        }
+        
+        if textField == self.yourNameTextField && characterCount <= self.yourNameMaxCharacterCount {
+            self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount - characterCount)"
+            return true
+        }
+        
+        return false
+    }
+    
 }

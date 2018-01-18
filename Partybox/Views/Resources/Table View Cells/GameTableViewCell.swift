@@ -1,5 +1,5 @@
 //
-//  PartyGameTableViewCell.swift
+//  GameTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 11/6/17.
@@ -8,20 +8,19 @@
 
 import UIKit
 
-class PartyGameTableViewCell: UITableViewCell {
+class GameTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: PartyGameTableViewCell.self)
+    static let identifier: String = String(describing: GameTableViewCell.self)
     
     // MARK: - Instance Properties
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = Party.game.details.name
-        nameLabel.font = UIFont.avenirNextRegular(size: 24)
+        nameLabel.font = UIFont.avenirNextRegular(size: 26)
         nameLabel.textColor = UIColor.Partybox.black
-        nameLabel.numberOfLines = 0
         return nameLabel
     }()
     
