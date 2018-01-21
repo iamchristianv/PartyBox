@@ -16,17 +16,18 @@ class InviteCodeTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "INVITE CODE"
-        titleLabel.textColor = UIColor.Partybox.black
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.avenirNextRegular(size: 14)
-        return titleLabel
+    lazy var inviteCodeTitleLabel: UILabel = {
+        let inviteCodeTitleLabel = UILabel()
+        inviteCodeTitleLabel.text = "INVITE CODE"
+        inviteCodeTitleLabel.textColor = UIColor.Partybox.black
+        inviteCodeTitleLabel.textAlignment = .center
+        inviteCodeTitleLabel.font = UIFont.avenirNextRegular(size: 14)
+        return inviteCodeTitleLabel
     }()
     
     lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
+        inviteCodeLabel.text = Party.inviteCode
         inviteCodeLabel.textColor = UIColor.Partybox.black
         inviteCodeLabel.textAlignment = .center
         inviteCodeLabel.font = UIFont.avenirNextRegular(size: 26)
@@ -48,10 +49,10 @@ class InviteCodeTableViewCell: UITableViewCell {
     // MARK: - Configuration Methods
     
     func configureSubviews() {
-        self.addSubview(self.titleLabel)
+        self.addSubview(self.inviteCodeTitleLabel)
         self.addSubview(self.inviteCodeLabel)
         
-        self.titleLabel.snp.remakeConstraints({
+        self.inviteCodeTitleLabel.snp.remakeConstraints({
             (make) in
             
             make.centerX.equalTo(self.snp.centerX)
@@ -62,15 +63,9 @@ class InviteCodeTableViewCell: UITableViewCell {
             (make) in
             
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.titleLabel.snp.bottom)
+            make.top.equalTo(self.inviteCodeTitleLabel.snp.bottom)
             make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
-    }
-    
-    // MARK: - Setter Methods
-    
-    func setInviteCode(_ inviteCode: String) {
-        self.inviteCodeLabel.text = inviteCode
     }
 
 }

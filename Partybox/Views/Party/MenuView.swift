@@ -31,15 +31,24 @@ class MenuView: UIView {
     lazy var animator: UIDynamicAnimator = {
         let animator = UIDynamicAnimator(referenceView: self)
         animator.addBehavior(self.gravityBehavior)
+        animator.addBehavior(self.extraLightConfettiBehavior)
         animator.addBehavior(self.lightConfettiBehavior)
         animator.addBehavior(self.mediumConfettiBehavior)
         animator.addBehavior(self.heavyConfettiBehavior)
+        animator.addBehavior(self.extraHeavyConfettiBehavior)
         return animator
     }()
     
     lazy var gravityBehavior: UIGravityBehavior = {
         let gravityBehavior = UIGravityBehavior()
         return gravityBehavior
+    }()
+    
+    lazy var extraLightConfettiBehavior: UIDynamicItemBehavior = {
+        let extraLightConfettiBehavior = UIDynamicItemBehavior()
+        extraLightConfettiBehavior.allowsRotation = true
+        extraLightConfettiBehavior.resistance = 5.5
+        return extraLightConfettiBehavior
     }()
     
     lazy var lightConfettiBehavior: UIDynamicItemBehavior = {
@@ -52,15 +61,22 @@ class MenuView: UIView {
     lazy var mediumConfettiBehavior: UIDynamicItemBehavior = {
         let mediumConfettiBehavior = UIDynamicItemBehavior()
         mediumConfettiBehavior.allowsRotation = true
-        mediumConfettiBehavior.resistance = 4.25
+        mediumConfettiBehavior.resistance = 4.5
         return mediumConfettiBehavior
     }()
     
     lazy var heavyConfettiBehavior: UIDynamicItemBehavior = {
         let heavyConfettiBehavior = UIDynamicItemBehavior()
         heavyConfettiBehavior.allowsRotation = true
-        heavyConfettiBehavior.resistance = 3.5
+        heavyConfettiBehavior.resistance = 4.0
         return heavyConfettiBehavior
+    }()
+    
+    lazy var extraHeavyConfettiBehavior: UIDynamicItemBehavior = {
+        let extraHeavyConfettiBehavior = UIDynamicItemBehavior()
+        extraHeavyConfettiBehavior.allowsRotation = true
+        extraHeavyConfettiBehavior.resistance = 3.5
+        return extraHeavyConfettiBehavior
     }()
     
     // MARK: - Initialization Methods
@@ -126,7 +142,8 @@ class MenuView: UIView {
         let shapes = [SquareView.self, TriangleView.self, CircleView.self]
         let randomShape = shapes[Int(arc4random()) % shapes.count]
         
-        let randomFrame = CGRect(x: Int(arc4random()) % Int(self.frame.size.width), y: -11, width: 11, height: 11)
+        let randomSize = Int(arc4random_uniform(5) + 10)
+        let randomFrame = CGRect(x: Int(arc4random()) % Int(self.frame.size.width), y: -randomSize, width: randomSize, height: randomSize)
         
         let colors = [UIColor.Partybox.red, UIColor.Partybox.blue, UIColor.Partybox.green, UIColor.Partybox.purple]
         let randomColor = colors[Int(arc4random()) % colors.count]
@@ -144,23 +161,31 @@ class MenuView: UIView {
         self.animator.referenceView?.insertSubview(confettiPiece, at: 0)
         self.gravityBehavior.addItem(confettiPiece)
         
-        let randomSpeed = CGFloat(arc4random_uniform(2) + 4)
+        let randomSpeed = CGFloat(arc4random_uniform(4) + 2)
         let randomDirection = CGFloat(arc4random_uniform(2))
         let randomAngularVelocity = randomDirection == 0 ? randomSpeed : -randomSpeed
         
-        let randomResistance = arc4random_uniform(3)
+        let randomResistance = arc4random_uniform(5)
         
         if randomResistance == 0 {
+            self.extraLightConfettiBehavior.addItem(confettiPiece)
+            self.extraLightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+        }
+        else if randomResistance == 1 {
             self.lightConfettiBehavior.addItem(confettiPiece)
             self.lightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
         }
-        else if randomResistance == 1 {
+        else if randomResistance == 2 {
             self.mediumConfettiBehavior.addItem(confettiPiece)
             self.mediumConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
         }
-        else if randomResistance == 2 {
+        else if randomResistance == 3 {
             self.heavyConfettiBehavior.addItem(confettiPiece)
             self.heavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+        }
+        else if randomResistance == 4 {
+            self.extraHeavyConfettiBehavior.addItem(confettiPiece)
+            self.extraHeavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
         }
     }
     

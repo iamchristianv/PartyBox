@@ -63,32 +63,32 @@ class StartPartyViewController: UIViewController {
     }
     
     @objc func continueButtonPressed() {
-        if let partyName = self.contentView.partyNameTextField.text?.trimmingCharacters(in: .whitespaces), partyName.isEmpty {
+        let partyName = self.contentView.partyNameTextField.text!
+        var partyNameValid = false
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.contentView.showPartyNameStatus("Required")
         }
         else {
+            partyNameValid = true
             self.contentView.hidePartyNameStatus()
         }
         
-        if let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .whitespaces), personName.isEmpty {
+        let personName = self.contentView.yourNameTextField.text!
+        var personNameValid = false
+        
+        if personName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.contentView.showYourNameStatus("Required")
         }
-        else if let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .alphanumerics), !personName.isEmpty {
+        else if !personName.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.contentView.showYourNameStatus("No spaces or special characters")
         }
         else {
+            personNameValid = true
             self.contentView.hideYourNameStatus()
         }
         
-        guard let partyName = self.contentView.partyNameTextField.text?.trimmingCharacters(in: .whitespaces), !partyName.isEmpty else {
-            return
-        }
-        
-        guard let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .whitespaces), !personName.isEmpty else {
-            return
-        }
-        
-        if !personName.trimmingCharacters(in: .alphanumerics).isEmpty {
+        if !partyNameValid || !personNameValid {
             return
         }
         

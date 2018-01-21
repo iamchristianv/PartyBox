@@ -29,7 +29,7 @@
 		AACD972C1FDF73FA000275CB /* PlayWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD972B1FDF73FA000275CB /* PlayWannabeView.swift */; };
 		AACD97301FE4E6E6000275CB /* EndWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD972F1FE4E6E6000275CB /* EndWannabeViewController.swift */; };
 		AACD97321FE4E7AC000275CB /* EndWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97311FE4E7AC000275CB /* EndWannabeView.swift */; };
-		AACD97381FE5D9C9000275CB /* DoubleButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97371FE5D9C9000275CB /* DoubleButtonTableViewCell.swift */; };
+		AACD97381FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */; };
 		AACD973A1FE5E0E4000275CB /* GameInstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */; };
 		AACD973E1FE62D78000275CB /* VoteWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973D1FE62D78000275CB /* VoteWannabeViewController.swift */; };
 		AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */; };
@@ -93,7 +93,7 @@
 		AACD972B1FDF73FA000275CB /* PlayWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeView.swift; sourceTree = "<group>"; };
 		AACD972F1FE4E6E6000275CB /* EndWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWannabeViewController.swift; sourceTree = "<group>"; };
 		AACD97311FE4E7AC000275CB /* EndWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWannabeView.swift; sourceTree = "<group>"; };
-		AACD97371FE5D9C9000275CB /* DoubleButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonTableViewCell.swift; sourceTree = "<group>"; };
+		AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionTableViewCell.swift; sourceTree = "<group>"; };
 		AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsTableViewCell.swift; sourceTree = "<group>"; };
 		AACD973D1FE62D78000275CB /* VoteWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeViewController.swift; sourceTree = "<group>"; };
 		AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCountdownTableViewCell.swift; sourceTree = "<group>"; };
@@ -160,18 +160,10 @@
 		AA590FFD1FCA6179008988E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AAB053B9200EEDB200180209 /* Utility Views */,
+				AAB053A42002E1CF00180209 /* ActivityButton.swift */,
 				AAB053B0200D65D000180209 /* Shapes */,
 				AAB053A32002E17100180209 /* Table Views */,
 				AAF73B101FA6CABB00D8A17B /* Table View Cells */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		AA590FFE1FCA618B008988E9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				AADB81411FB40401003AD1D9 /* AlertViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -199,13 +191,20 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
-		AAB053B9200EEDB200180209 /* Utility Views */ = {
+		AAB053BB2011A3D700180209 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
 				AADB81431FB4046B003AD1D9 /* AlertView.swift */,
-				AAB053A42002E1CF00180209 /* ActivityButton.swift */,
 			);
-			path = "Utility Views";
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AAB053BC2011A3F300180209 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AADB81411FB40401003AD1D9 /* AlertViewController.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		AACD97331FE4E7C1000275CB /* Wannabe */ = {
@@ -308,9 +307,9 @@
 		AAE75B5A1F80A440001D4E13 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AAB053BC2011A3F300180209 /* Alert */,
 				AACD97361FE4E801000275CB /* Party */,
 				AACD97341FE4E7D3000275CB /* Wannabe */,
-				AA590FFE1FCA618B008988E9 /* Resources */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -318,6 +317,7 @@
 		AAE75B5B1F80A447001D4E13 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AAB053BB2011A3D700180209 /* Alert */,
 				AACD97351FE4E7F6000275CB /* Party */,
 				AACD97331FE4E7C1000275CB /* Wannabe */,
 				AA590FFD1FCA6179008988E9 /* Resources */,
@@ -377,8 +377,8 @@
 		AAF73B101FA6CABB00D8A17B /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */,
 				AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */,
-				AACD97371FE5D9C9000275CB /* DoubleButtonTableViewCell.swift */,
 				AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */,
 				AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */,
 				AAB053B7200EDD4D00180209 /* InviteCodeTableViewCell.swift */,
@@ -552,7 +552,7 @@
 				AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */,
 				AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */,
 				AACD974E1FF4960E000275CB /* SetupWannabeTableView.swift in Sources */,
-				AACD97381FE5D9C9000275CB /* DoubleButtonTableViewCell.swift in Sources */,
+				AACD97381FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift in Sources */,
 				AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */,
 				AACD974A1FEA04E4000275CB /* VoteWannabeView.swift in Sources */,
 				AAF73B1A1FA809C200D8A17B /* PartyView.swift in Sources */,

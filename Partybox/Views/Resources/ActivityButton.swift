@@ -19,8 +19,8 @@ class ActivityButton: UIButton {
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
-        self.activityInidicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        super.init(frame: frame)
+        self.configureActivityIndicator()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,6 +38,10 @@ class ActivityButton: UIButton {
         self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         self.layer.shadowRadius = 2.0
         self.layer.shadowOpacity = 1.0
+    }
+    
+    func configureActivityIndicator() {
+        self.activityInidicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     }
     
     // MARK: - Layout Methods

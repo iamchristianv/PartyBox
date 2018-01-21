@@ -30,8 +30,8 @@ class AlertView: UIView {
     lazy var subjectLabel: UILabel = {
         let subjectLabel = UILabel()
         subjectLabel.text = self.subject
+        subjectLabel.textColor = UIColor.Partybox.black
         subjectLabel.font = UIFont.avenirNextMedium(size: 20)
-        subjectLabel.textColor = .black
         subjectLabel.numberOfLines = 0
         subjectLabel.textAlignment = .center
         return subjectLabel
@@ -40,8 +40,8 @@ class AlertView: UIView {
     lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.text = self.message
+        messageLabel.textColor = UIColor.Partybox.black
         messageLabel.font = UIFont.avenirNextRegular(size: 18)
-        messageLabel.textColor = .black
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         return messageLabel
@@ -69,7 +69,7 @@ class AlertView: UIView {
         self.action = action
         super.init(frame: .zero)
         
-        self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+        self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.4)
         self.configureSubviews()
     }
     

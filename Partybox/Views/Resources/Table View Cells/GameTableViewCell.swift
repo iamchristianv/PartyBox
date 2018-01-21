@@ -27,7 +27,7 @@ class GameTableViewCell: UITableViewCell {
     var summaryLabel: UILabel = {
         let summaryLabel = UILabel()
         summaryLabel.text = Party.game.details.summary
-        summaryLabel.font = UIFont.avenirNextRegular(size: 14)
+        summaryLabel.font = UIFont.avenirNextRegular(size: 16)
         summaryLabel.textColor = UIColor.Partybox.black
         summaryLabel.numberOfLines = 0
         return summaryLabel

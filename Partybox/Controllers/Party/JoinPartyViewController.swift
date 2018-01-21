@@ -63,39 +63,35 @@ class JoinPartyViewController: UIViewController {
     }
     
     @objc func continueButtonPressed() {
-        if let inviteCode = self.contentView.inviteCodeTextField.text?.trimmingCharacters(in: .whitespaces), inviteCode.isEmpty {
+        let inviteCode = self.contentView.inviteCodeTextField.text!
+        var inviteCodeValid = false
+        
+        if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
             self.contentView.showInviteCodeStatus("Required")
         }
-        else if let inviteCode = self.contentView.inviteCodeTextField.text?.trimmingCharacters(in: .alphanumerics), !inviteCode.isEmpty {
+        else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.contentView.showInviteCodeStatus("No spaces or special characters")
         }
         else {
+            inviteCodeValid = true
             self.contentView.hideInviteCodeStatus()
         }
         
-        if let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .whitespaces), personName.isEmpty {
+        let personName = self.contentView.yourNameTextField.text!
+        var personNameValid = false
+        
+        if personName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.contentView.showYourNameStatus("Required")
         }
-        else if let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .alphanumerics), !personName.isEmpty {
+        else if !personName.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.contentView.showYourNameStatus("No spaces or special characters")
         }
         else {
+            personNameValid = true
             self.contentView.hideYourNameStatus()
         }
         
-        guard let inviteCode = self.contentView.inviteCodeTextField.text?.trimmingCharacters(in: .whitespaces), !inviteCode.isEmpty else {
-            return
-        }
-        
-        if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
-            return
-        }
-        
-        guard let personName = self.contentView.yourNameTextField.text?.trimmingCharacters(in: .whitespaces), !personName.isEmpty else {
-            return
-        }
-        
-        if !personName.trimmingCharacters(in: .alphanumerics).isEmpty {
+        if !inviteCodeValid || !personNameValid {
             return
         }
         

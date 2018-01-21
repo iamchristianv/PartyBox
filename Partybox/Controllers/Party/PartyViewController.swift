@@ -48,6 +48,11 @@ class PartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle(Party.details.name)
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
+        
+        if Party.userHost {
+            self.setNavigationBarRightButton(title: "manage", target: self, action: #selector(manageButtonPressed))
+        }
+        
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
     
@@ -73,6 +78,10 @@ class PartyViewController: UIViewController {
         })
     }
     
+    @objc func manageButtonPressed() {
+        
+    }
+    
     // MARK: - Navigation Methods
     
     func showSetupWannabeViewController() {
@@ -83,11 +92,15 @@ class PartyViewController: UIViewController {
         self.present(UINavigationController(rootViewController: StartWannabeViewController()), animated: true, completion: nil)
     }
     
+    func showChangeGameViewController() {
+        
+    }
+    
     // MARK: - Notification Methods
         
     @objc func partyDetailsChangedNotificationObserved() {
         self.contentView.tableView.reloadData()
-        self.setNavigationBarTitle(Party.details.name)
+        self.configureNavigationBar()
     }
     
     @objc func partyPeopleChangedNotificationObserved() {
@@ -116,8 +129,8 @@ extension PartyViewController: PartyViewDelegate {
         self.showSetupWannabeViewController()
     }
     
-    func partyView(_ partyView: PartyView, changeGameButtonPressed startGameButton: UIButton) {
-        
+    func partyView(_ partyView: PartyView, changeGameButtonPressed changeGameButton: UIButton) {
+        self.showChangeGameViewController()
     }
     
 }

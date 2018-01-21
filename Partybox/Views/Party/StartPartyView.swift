@@ -52,13 +52,13 @@ class StartPartyView: UIView {
         return partyNameStatusLabel
     }()
     
-    lazy var partyNameMaxCharacterCount: Int = 24
+    lazy var partyNameMaxCharacterCount: Int = 20
     
     lazy var partyNameCharacterCountLabel: UILabel = {
         let partyNameCharacterCountLabel = UILabel()
         partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
-        partyNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 14)
-        partyNameCharacterCountLabel.textColor = UIColor.Partybox.black
+        partyNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 15)
+        partyNameCharacterCountLabel.textColor = UIColor.lightGray
         return partyNameCharacterCountLabel
     }()
     
@@ -97,13 +97,13 @@ class StartPartyView: UIView {
         return yourNameStatusLabel
     }()
     
-    lazy var yourNameMaxCharacterCount: Int = 24
+    lazy var yourNameMaxCharacterCount: Int = 20
     
     lazy var yourNameCharacterCountLabel: UILabel = {
         let yourNameCharacterCountLabel = UILabel()
         yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
-        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 14)
-        yourNameCharacterCountLabel.textColor = UIColor.Partybox.black
+        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 15)
+        yourNameCharacterCountLabel.textColor = UIColor.lightGray
         return yourNameCharacterCountLabel
     }()
     
@@ -118,7 +118,7 @@ class StartPartyView: UIView {
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         self.backgroundColor = .white
         self.configureSubviews()
     }
@@ -133,14 +133,14 @@ class StartPartyView: UIView {
         self.addSubview(self.backgroundButton)
         self.addSubview(self.partyNameLabel)
         self.addSubview(self.partyNameTextField)
+        self.addSubview(self.partyNameCharacterCountLabel)
         self.addSubview(self.partyNameUnderlineLabel)
         self.addSubview(self.partyNameStatusLabel)
-        self.addSubview(self.partyNameCharacterCountLabel)
         self.addSubview(self.yourNameLabel)
         self.addSubview(self.yourNameTextField)
+        self.addSubview(self.yourNameCharacterCountLabel)
         self.addSubview(self.yourNameUnderlineLabel)
         self.addSubview(self.yourNameStatusLabel)
-        self.addSubview(self.yourNameCharacterCountLabel)
         self.addSubview(self.continueButton)
         
         self.backgroundButton.snp.remakeConstraints({
@@ -165,8 +165,17 @@ class StartPartyView: UIView {
             
             make.height.equalTo(50)
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.trailing.equalTo(self.partyNameCharacterCountLabel.snp.leading).offset(-4)
             make.top.equalTo(self.partyNameLabel.snp.bottom)
+        })
+        
+        self.partyNameCharacterCountLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.width.lessThanOrEqualTo(20)
+            make.leading.equalTo(self.partyNameTextField.snp.trailing).offset(4)
+            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.centerY.equalTo(self.partyNameTextField.snp.centerY)
         })
         
         self.partyNameUnderlineLabel.snp.remakeConstraints({
@@ -182,14 +191,6 @@ class StartPartyView: UIView {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.partyNameCharacterCountLabel.snp.leading).offset(-8)
-            make.top.equalTo(self.partyNameUnderlineLabel.snp.bottom).offset(8)
-        })
-        
-        self.partyNameCharacterCountLabel.snp.remakeConstraints({
-            (make) in
-            
-            make.leading.equalTo(self.partyNameStatusLabel.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
             make.top.equalTo(self.partyNameUnderlineLabel.snp.bottom).offset(8)
         })
@@ -199,7 +200,7 @@ class StartPartyView: UIView {
             
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.partyNameStatusLabel.snp.bottom).offset(56)
+            make.top.equalTo(self.partyNameStatusLabel.snp.bottom).offset(48)
         })
         
         self.yourNameTextField.snp.remakeConstraints({
@@ -207,8 +208,17 @@ class StartPartyView: UIView {
             
             make.height.equalTo(50)
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.trailing.equalTo(self.yourNameCharacterCountLabel.snp.leading).offset(-4)
             make.top.equalTo(self.yourNameLabel.snp.bottom)
+        })
+        
+        self.yourNameCharacterCountLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.width.lessThanOrEqualTo(20)
+            make.leading.equalTo(self.yourNameTextField.snp.trailing).offset(4)
+            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.centerY.equalTo(self.yourNameTextField.snp.centerY)
         })
         
         self.yourNameUnderlineLabel.snp.remakeConstraints({
@@ -224,14 +234,6 @@ class StartPartyView: UIView {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.yourNameCharacterCountLabel.snp.leading).offset(-8)
-            make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
-        })
-        
-        self.yourNameCharacterCountLabel.snp.remakeConstraints({
-            (make) in
-            
-            make.leading.equalTo(self.yourNameStatusLabel.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
             make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
         })
@@ -289,7 +291,7 @@ extension StartPartyView: UITextFieldDelegate {
     // MARK: - Text Field Delegate Methods
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let characterCount = (textField.text?.count)! + string.count - range.length
+        let characterCount = textField.text!.count + string.count - range.length
         
         if textField == self.partyNameTextField && characterCount <= self.partyNameMaxCharacterCount {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - characterCount)"
@@ -302,6 +304,18 @@ extension StartPartyView: UITextFieldDelegate {
         }
         
         return false
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if textField == self.partyNameTextField {
+            self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
+        }
+        
+        if textField == self.yourNameTextField {
+            self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
+        }
+        
+        return true
     }
     
 }

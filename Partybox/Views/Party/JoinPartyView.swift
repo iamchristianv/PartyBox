@@ -27,6 +27,7 @@ class JoinPartyView: UIView {
     
     lazy var inviteCodeTextField: UITextField = {
         let inviteCodeTextField = UITextField()
+        inviteCodeTextField.delegate = self
         inviteCodeTextField.font = UIFont.avenirNextRegular(size: 20)
         inviteCodeTextField.textColor = UIColor.Partybox.black
         inviteCodeTextField.tintColor = UIColor.Partybox.blue
@@ -51,6 +52,16 @@ class JoinPartyView: UIView {
         return inviteCodeStatusLabel
     }()
     
+    lazy var inviteCodeMaxCharacterCount: Int = 4
+    
+    lazy var inviteCodeCharacterCountLabel: UILabel = {
+        let inviteCodeCharacterCountLabel = UILabel()
+        inviteCodeCharacterCountLabel.text = "\(self.inviteCodeMaxCharacterCount)"
+        inviteCodeCharacterCountLabel.font = UIFont.avenirNextRegular(size: 15)
+        inviteCodeCharacterCountLabel.textColor = UIColor.lightGray
+        return inviteCodeCharacterCountLabel
+    }()
+    
     lazy var yourNameLabel: UILabel = {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
@@ -61,6 +72,7 @@ class JoinPartyView: UIView {
     
     lazy var yourNameTextField: UITextField = {
         let yourNameTextField = UITextField()
+        yourNameTextField.delegate = self
         yourNameTextField.font = UIFont.avenirNextRegular(size: 20)
         yourNameTextField.textColor = UIColor.Partybox.black
         yourNameTextField.tintColor = UIColor.Partybox.blue
@@ -85,6 +97,16 @@ class JoinPartyView: UIView {
         return yourNameStatusLabel
     }()
     
+    lazy var yourNameMaxCharacterCount: Int = 20
+    
+    lazy var yourNameCharacterCountLabel: UILabel = {
+        let yourNameCharacterCountLabel = UILabel()
+        yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
+        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 15)
+        yourNameCharacterCountLabel.textColor = UIColor.lightGray
+        return yourNameCharacterCountLabel
+    }()
+    
     lazy var continueButton: ActivityButton = {
         let continueButton = ActivityButton()
         continueButton.setTitle("Continue", for: .normal)
@@ -96,7 +118,7 @@ class JoinPartyView: UIView {
     // MARK: - Initialization Methods
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         self.backgroundColor = .white
         self.configureSubviews()
     }
@@ -111,10 +133,12 @@ class JoinPartyView: UIView {
         self.addSubview(self.backgroundButton)
         self.addSubview(self.inviteCodeLabel)
         self.addSubview(self.inviteCodeTextField)
+        self.addSubview(self.inviteCodeCharacterCountLabel)
         self.addSubview(self.inviteCodeUnderlineLabel)
         self.addSubview(self.inviteCodeStatusLabel)
         self.addSubview(self.yourNameLabel)
         self.addSubview(self.yourNameTextField)
+        self.addSubview(self.yourNameCharacterCountLabel)
         self.addSubview(self.yourNameUnderlineLabel)
         self.addSubview(self.yourNameStatusLabel)
         self.addSubview(self.continueButton)
@@ -141,8 +165,17 @@ class JoinPartyView: UIView {
             
             make.height.equalTo(50)
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.trailing.equalTo(self.inviteCodeCharacterCountLabel.snp.leading).offset(-4)
             make.top.equalTo(self.inviteCodeLabel.snp.bottom)
+        })
+        
+        self.inviteCodeCharacterCountLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.width.lessThanOrEqualTo(20)
+            make.leading.equalTo(self.inviteCodeTextField.snp.trailing).offset(4)
+            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.centerY.equalTo(self.inviteCodeTextField.snp.centerY)
         })
         
         self.inviteCodeUnderlineLabel.snp.remakeConstraints({
@@ -167,7 +200,7 @@ class JoinPartyView: UIView {
             
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.inviteCodeStatusLabel.snp.bottom).offset(56)
+            make.top.equalTo(self.inviteCodeStatusLabel.snp.bottom).offset(48)
         })
         
         self.yourNameTextField.snp.remakeConstraints({
@@ -175,8 +208,17 @@ class JoinPartyView: UIView {
             
             make.height.equalTo(50)
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.trailing.equalTo(self.yourNameCharacterCountLabel.snp.leading).offset(-4)
             make.top.equalTo(self.yourNameLabel.snp.bottom)
+        })
+        
+        self.yourNameCharacterCountLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.width.lessThanOrEqualTo(20)
+            make.leading.equalTo(self.yourNameTextField.snp.trailing).offset(4)
+            make.trailing.equalTo(self.snp.trailing).offset(-32)
+            make.centerY.equalTo(self.yourNameTextField.snp.centerY)
         })
         
         self.yourNameUnderlineLabel.snp.remakeConstraints({
@@ -238,6 +280,40 @@ class JoinPartyView: UIView {
     
     func stopAnimatingContinueButton() {
         self.continueButton.stopAnimating()
+    }
+    
+}
+
+extension JoinPartyView: UITextFieldDelegate {
+    
+    // MARK: - Text Field Delegate Methods
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let characterCount = textField.text!.count + string.count - range.length
+        
+        if textField == self.inviteCodeTextField && characterCount <= self.inviteCodeMaxCharacterCount {
+            self.inviteCodeCharacterCountLabel.text = "\(self.inviteCodeMaxCharacterCount - characterCount)"
+            return true
+        }
+        
+        if textField == self.yourNameTextField && characterCount <= self.yourNameMaxCharacterCount {
+            self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount - characterCount)"
+            return true
+        }
+        
+        return false
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        if textField == self.inviteCodeTextField {
+            self.inviteCodeCharacterCountLabel.text = "\(self.inviteCodeMaxCharacterCount)"
+        }
+        
+        if textField == self.yourNameTextField {
+            self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
+        }
+        
+        return true
     }
     
 }
