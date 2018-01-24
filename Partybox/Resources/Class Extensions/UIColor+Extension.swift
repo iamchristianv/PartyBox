@@ -22,7 +22,11 @@ extension UIColor {
         
         static var green: UIColor = UIColor(red: 30.0/255.0, green: 190.0/255.0, blue: 155.0/255.0, alpha: 1.0)
         
-        static var black: UIColor = UIColor(red: 45.0/255.0, green: 50.0/255.0, blue: 55.0/255.0, alpha: 1.0)
+        static var black: UIColor = UIColor(red: 70.0/255.0, green: 75.0/255.0, blue: 80.0/255.0, alpha: 1.0)
+        
+        static var lightGray: UIColor = UIColor.lightGray
+        
+        static var darkGray: UIColor = UIColor.darkGray
         
     }
     

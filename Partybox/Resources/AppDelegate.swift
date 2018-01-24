@@ -17,7 +17,7 @@ class AppDelegate: UIResponder {
 
     var window: UIWindow?
     
-    // MARK: - Configuration Methods
+    // MARK: - Configuration Functions
     
     func configureFirebase() {
         FirebaseApp.configure()
@@ -26,16 +26,9 @@ class AppDelegate: UIResponder {
     func configureAuthentication() {
         self.showMenuViewController()
         Auth.auth().signInAnonymously(completion: nil)
-        
-//        do {
-//            try Auth.auth().signOut()
-//        }
-//        catch {
-//
-//        }
     }
     
-    // MARK: - Navigation Methods
+    // MARK: - Navigation Functions
     
     func showMenuViewController() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -47,7 +40,7 @@ class AppDelegate: UIResponder {
 
 extension AppDelegate: UIApplicationDelegate {
     
-    // MARK: - Application Delegate Methods
+    // MARK: - Application Delegate Functions
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.configureFirebase()

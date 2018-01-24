@@ -23,7 +23,7 @@ class StartWannabeTableView: UITableView {
         
         self.register(GameInstructionsTableViewCell.self, forCellReuseIdentifier: GameInstructionsTableViewCell.identifier)
         self.register(ButtonTableViewCell.self, forCellReuseIdentifier: ButtonTableViewCell.identifier)
-        self.register(WaitingTableViewCell.self, forCellReuseIdentifier: WaitingTableViewCell.identifier)
+        self.register(ActivityTableViewCell.self, forCellReuseIdentifier: ActivityTableViewCell.identifier)
         
         self.tableFooterView = UIView(frame: .zero)
     }
@@ -48,11 +48,11 @@ class StartWannabeTableView: UITableView {
         return buttonCell
     }
     
-    func waitingForEveryoneToBeReadyCell() -> WaitingTableViewCell {
-        let tableViewCell = self.dequeueReusableCell(withIdentifier: WaitingTableViewCell.identifier)
-        let waitingCell = tableViewCell as! WaitingTableViewCell
-        waitingCell.setPrompt("Waiting for Everyone to be Ready")
-        return waitingCell
+    func waitingForEveryoneToBeReadyCell() -> ActivityTableViewCell {
+        let tableViewCell = self.dequeueReusableCell(withIdentifier: ActivityTableViewCell.identifier)
+        let activityCell = tableViewCell as! ActivityTableViewCell
+        activityCell.setPrompt("Waiting for Everyone to be Ready")
+        return activityCell
     }
 
 }

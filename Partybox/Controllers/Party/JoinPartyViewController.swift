@@ -14,7 +14,7 @@ class JoinPartyViewController: UIViewController {
     
     var contentView: JoinPartyView!
     
-    // MARK: - View Controller Methods
+    // MARK: - View Controller Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,35 +23,35 @@ class JoinPartyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.configureStatusBar()
-        self.configureNavigationBar()
+        self.setupStatusBar()
+        self.setupNavigationBar()
     }
     
     override func loadView() {
-        self.configureContentView()
+        self.setupContentView()
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Setup Functions
     
-    func configureStatusBar() {
+    func setupStatusBar() {
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
-    func configureNavigationBar() {
+    func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle("Join Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
         self.setNavigationBarBackgroundColor(UIColor.Partybox.blue)
     }
     
-    func configureContentView() {
+    func setupContentView() {
         self.contentView = JoinPartyView()
         self.contentView.backgroundButton.addTarget(self, action: #selector(backgroundButtonPressed), for: .touchUpInside)
         self.contentView.continueButton.addTarget(self, action: #selector(continueButtonPressed), for: .touchUpInside)
         self.view = self.contentView
     }
     
-    // MARK: - Action Methods
+    // MARK: - Action Functions
     
     @objc func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
@@ -103,7 +103,7 @@ class JoinPartyViewController: UIViewController {
             self.contentView.stopAnimatingContinueButton()
             
             if let error = error {
-                self.showAlert(subject: "Woah there ✋", message: error, action: "Okay", block: nil)
+                self.showAlert(subject: "Woah there ✋", message: error, action: "Okay", handler: nil)
                 return
             }
             
@@ -111,7 +111,7 @@ class JoinPartyViewController: UIViewController {
         })
     }
     
-    // MARK: - Navigation Methods
+    // MARK: - Navigation Functions
     
     func showPartyViewController() {
         self.present(UINavigationController(rootViewController: PartyViewController()), animated: true, completion: nil)

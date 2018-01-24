@@ -112,7 +112,7 @@ class Party {
             let codeUsed = snapshot.exists()
             
             if !codeUsed {
-                callback("We were unable to find a party with your invite code\n\nPlease try again")
+                callback("We couldn't find a party with your invite code\n\nPlease try again")
                 return
             }
             

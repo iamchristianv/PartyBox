@@ -23,7 +23,7 @@ class VoteWannabeTableView: UITableView {
         
         self.register(PromptTableViewCell.self, forCellReuseIdentifier: PromptTableViewCell.identifier)
         self.register(ButtonTableViewCell.self, forCellReuseIdentifier: ButtonTableViewCell.identifier)
-        self.register(WaitingTableViewCell.self, forCellReuseIdentifier: WaitingTableViewCell.identifier)
+        self.register(ActivityTableViewCell.self, forCellReuseIdentifier: ActivityTableViewCell.identifier)
         
         self.tableFooterView = UIView(frame: .zero)
     }
@@ -55,11 +55,11 @@ class VoteWannabeTableView: UITableView {
         return buttonCell
     }
     
-    func waitingForEveryoneToVoteCell() -> WaitingTableViewCell {
-        let tableViewCell = self.dequeueReusableCell(withIdentifier: WaitingTableViewCell.identifier)
-        let waitingCell = tableViewCell as! WaitingTableViewCell
-        waitingCell.setPrompt("Waiting for Everyone to Vote")
-        return waitingCell
+    func waitingForEveryoneToVoteCell() -> ActivityTableViewCell {
+        let tableViewCell = self.dequeueReusableCell(withIdentifier: ActivityTableViewCell.identifier)
+        let activityCell = tableViewCell as! ActivityTableViewCell
+        activityCell.setPrompt("Waiting for Everyone to Vote")
+        return activityCell
     }
 
 }

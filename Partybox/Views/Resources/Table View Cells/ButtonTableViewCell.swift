@@ -35,7 +35,6 @@ class ButtonTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.setBackgroundColor(.white)
         self.configureSubviews()
     }
     
@@ -78,10 +77,6 @@ class ButtonTableViewCell: UITableViewCell {
     }
     
     // MARK: - Setter Methods
-    
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
-    }
     
     func setButtonTitle(_ title: String) {
         self.button.setTitle(title, for: .normal)

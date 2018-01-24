@@ -1,5 +1,5 @@
 //
-//PersonTableViewCell.swift
+//  PersonTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 11/7/17.
@@ -16,36 +16,37 @@ class PersonTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.textColor = UIColor.Partybox.black
         nameLabel.font = UIFont.avenirNextRegular(size: 18)
+        nameLabel.textColor = UIColor.Partybox.black
         return nameLabel
     }()
     
-    var flairLabel: UILabel = {
+    lazy var flairLabel: UILabel = {
         let flairLabel = UILabel()
-        flairLabel.textColor = UIColor.darkGray
-        flairLabel.font = UIFont.avenirNextMedium(size: 12)
+        flairLabel.font = UIFont.avenirNextMedium(size: 14)
+        flairLabel.textColor = UIColor.Partybox.black
         return flairLabel
     }()
     
-    var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let emojiLabel = UILabel()
         emojiLabel.font = UIFont.avenirNextRegular(size: 18)
+        emojiLabel.textColor = UIColor.Partybox.black
         return emojiLabel
     }()
     
-    var pointsLabel: UILabel = {
+    lazy var pointsLabel: UILabel = {
         let pointsLabel = UILabel()
-        pointsLabel.textColor = UIColor.Partybox.black
         pointsLabel.font = UIFont.avenirNextRegular(size: 18)
+        pointsLabel.textColor = UIColor.Partybox.black
         return pointsLabel
     }()
     
-    var underlineLabel: UILabel = {
+    lazy var underlineLabel: UILabel = {
         let underlineLabel = UILabel()
-        underlineLabel.backgroundColor = UIColor.lightGray
+        underlineLabel.backgroundColor = UIColor.Partybox.lightGray
         return underlineLabel
     }()
     
@@ -54,7 +55,6 @@ class PersonTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -80,7 +80,6 @@ class PersonTableViewCell: UITableViewCell {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.trailing.equalTo(self.flairLabel.snp.leading).offset(-8)
             make.top.equalTo(self.snp.top).offset(16)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
@@ -88,22 +87,21 @@ class PersonTableViewCell: UITableViewCell {
         self.flairLabel.snp.remakeConstraints({
             (make) in
             
-            make.lastBaseline.equalTo(self.nameLabel.snp.lastBaseline)
-            make.leading.equalTo(self.nameLabel.snp.trailing).offset(16)
+            make.centerY.equalTo(self.nameLabel.snp.centerY)
+            make.leading.equalTo(self.nameLabel.snp.trailing).offset(12)
         })
         
         self.emojiLabel.snp.remakeConstraints({
             (make) in
             
-            make.lastBaseline.equalTo(self.nameLabel.snp.lastBaseline)
+            make.centerY.equalTo(self.nameLabel.snp.centerY)
             make.trailing.equalTo(self.pointsLabel.snp.leading).offset(-8)
         })
         
         self.pointsLabel.snp.remakeConstraints({
             (make) in
             
-            make.lastBaseline.equalTo(self.nameLabel.snp.lastBaseline)
-            make.leading.equalTo(self.emojiLabel.snp.trailing).offset(8)
+            make.centerY.equalTo(self.nameLabel.snp.centerY)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
         })
         

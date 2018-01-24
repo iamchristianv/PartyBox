@@ -16,23 +16,18 @@ class HeaderTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    var headerLabel: UILabel = {
+    lazy var headerLabel: UILabel = {
         let headerLabel = UILabel()
         headerLabel.font = UIFont.avenirNextMedium(size: 14)
+        headerLabel.textColor = UIColor.Partybox.black
         return headerLabel
-    }()
-    
-    var emojiLabel: UILabel = {
-        let emojiLabel = UILabel()
-        emojiLabel.font = UIFont.avenirNextMedium(size: 14)
-        return emojiLabel
     }()
     
     // MARK: - Initialization Methods
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.isUserInteractionEnabled = false
+        self.selectionStyle = .none
         self.configureSubviews()
     }
     
@@ -44,20 +39,11 @@ class HeaderTableViewCell: UITableViewCell {
     
     func configureSubviews() {
         self.addSubview(self.headerLabel)
-        self.addSubview(self.emojiLabel)
         
         self.headerLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.top.equalTo(self.snp.top).offset(12)
-            make.bottom.equalTo(self.snp.bottom).offset(-12)
-        })
-        
-        self.emojiLabel.snp.remakeConstraints({
-            (make) in
-            
-            make.trailing.equalTo(self.snp.trailing).offset(-16)
             make.top.equalTo(self.snp.top).offset(12)
             make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
@@ -72,10 +58,6 @@ class HeaderTableViewCell: UITableViewCell {
     
     func setHeader(_ header: String) {
         self.headerLabel.text = header
-    }
-    
-    func setEmoji(_ emoji: String) {
-        self.emojiLabel.text = emoji
     }
 
 }

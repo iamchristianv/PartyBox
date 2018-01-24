@@ -10,6 +10,8 @@ import UIKit
 
 protocol ButtonCollectionTableViewCellDelegate {
     
+    // MARK: - Button Collection Table View Cell Delegate Methods
+    
     func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, leftButtonPressed button: UIButton)
     
     func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, rightButtonPressed button: UIButton)
@@ -24,16 +26,16 @@ class ButtonCollectionTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    var leftButton: ActivityButton = {
+    lazy var leftButton: ActivityButton = {
         let leftButton = ActivityButton()
-        leftButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
+        leftButton.setTitleFont(UIFont.avenirNextMediumName, size: 18)
         leftButton.setBackgroundColor(UIColor.Partybox.green)
         return leftButton
     }()
     
-    var rightButton: ActivityButton = {
+    lazy var rightButton: ActivityButton = {
         let rightButton = ActivityButton()
-        rightButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
+        rightButton.setTitleFont(UIFont.avenirNextMediumName, size: 18)
         rightButton.setBackgroundColor(UIColor.Partybox.green)
         return rightButton
     }()
@@ -45,7 +47,6 @@ class ButtonCollectionTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.setBackgroundColor(.white)
         self.configureSubviews()
     }
     
@@ -56,9 +57,6 @@ class ButtonCollectionTableViewCell: UITableViewCell {
     // MARK: - Configuration Methods
     
     func configureSubviews() {
-        self.leftButton.addTarget(self, action: #selector(leftButtonPressed), for: .touchUpInside)
-        self.rightButton.addTarget(self, action: #selector(rightButtonPressed), for: .touchUpInside)
-        
         self.addSubview(self.leftButton)
         self.addSubview(self.rightButton)
         
@@ -73,6 +71,8 @@ class ButtonCollectionTableViewCell: UITableViewCell {
             make.bottom.equalTo(self.snp.bottom).offset(-24)
         })
         
+        self.leftButton.addTarget(self, action: #selector(leftButtonPressed), for: .touchUpInside)
+        
         self.rightButton.snp.remakeConstraints({
             (make) in
             
@@ -83,6 +83,9 @@ class ButtonCollectionTableViewCell: UITableViewCell {
             make.top.equalTo(self.snp.top).offset(8)
             make.bottom.equalTo(self.snp.bottom).offset(-24)
         })
+        
+        self.rightButton.addTarget(self, action: #selector(rightButtonPressed), for: .touchUpInside)
+
     }
     
     // MARK: - Action Methods
@@ -96,10 +99,6 @@ class ButtonCollectionTableViewCell: UITableViewCell {
     }
     
     // MARK: - Setter Methods
-    
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
-    }
     
     func setLeftButtonTitle(_ title: String) {
         self.leftButton.setTitle(title, for: .normal)

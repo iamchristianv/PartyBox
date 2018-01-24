@@ -46,7 +46,7 @@
 		AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */; };
 		AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */; };
 		AADB813C1FB29BD9003AD1D9 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813B1FB29BD9003AD1D9 /* PersonTableViewCell.swift */; };
-		AADB813E1FB2B155003AD1D9 /* WaitingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* WaitingTableViewCell.swift */; };
+		AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */; };
 		AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */; };
 		AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81411FB40401003AD1D9 /* AlertViewController.swift */; };
 		AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81431FB4046B003AD1D9 /* AlertView.swift */; };
@@ -110,7 +110,7 @@
 		AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813B1FB29BD9003AD1D9 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
-		AADB813D1FB2B155003AD1D9 /* WaitingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingTableViewCell.swift; sourceTree = "<group>"; };
+		AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81411FB40401003AD1D9 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		AADB81431FB4046B003AD1D9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
@@ -377,14 +377,14 @@
 		AAF73B101FA6CABB00D8A17B /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */,
-				AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */,
-				AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */,
-				AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */,
 				AAB053B7200EDD4D00180209 /* InviteCodeTableViewCell.swift */,
+				AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */,
+				AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */,
+				AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */,
+				AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */,
 				AADB813B1FB29BD9003AD1D9 /* PersonTableViewCell.swift */,
+				AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */,
 				AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */,
-				AADB813D1FB2B155003AD1D9 /* WaitingTableViewCell.swift */,
 				AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */,
 				AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */,
 			);
@@ -574,7 +574,7 @@
 				AACD97321FE4E7AC000275CB /* EndWannabeView.swift in Sources */,
 				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
 				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
-				AADB813E1FB2B155003AD1D9 /* WaitingTableViewCell.swift in Sources */,
+				AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */,
 				AACD97301FE4E6E6000275CB /* EndWannabeViewController.swift in Sources */,
 				AACD97281FDF7203000275CB /* StartWannabeView.swift in Sources */,
 				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,

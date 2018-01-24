@@ -45,7 +45,6 @@ class GameCountdownTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.setBackgroundColor(.white)
         self.configureSubviews()
         self.updateCountdownLabel()
         NotificationCenter.default.addObserver(self,
@@ -107,10 +106,6 @@ class GameCountdownTableViewCell: UITableViewCell {
     }
     
     // MARK: - Setter Methods
-    
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
-    }
     
     func setPrompt(_ prompt: String) {
         self.promptLabel.text = prompt

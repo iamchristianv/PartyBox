@@ -18,8 +18,8 @@ class PromptTableViewCell: UITableViewCell {
     
     var promptLabel: UILabel = {
         let promptLabel = UILabel()
-        promptLabel.textColor = UIColor.Partybox.black
         promptLabel.font = UIFont.avenirNextRegular(size: 16)
+        promptLabel.textColor = UIColor.Partybox.black
         promptLabel.textAlignment = .center
         promptLabel.numberOfLines = 0
         return promptLabel
@@ -29,8 +29,7 @@ class PromptTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.isUserInteractionEnabled = false
-        self.backgroundColor = .white
+        self.selectionStyle = .none
         self.configureSubviews()
     }
     

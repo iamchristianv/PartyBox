@@ -19,18 +19,18 @@ class InviteCodeTableViewCell: UITableViewCell {
     lazy var inviteCodeTitleLabel: UILabel = {
         let inviteCodeTitleLabel = UILabel()
         inviteCodeTitleLabel.text = "INVITE CODE"
+        inviteCodeTitleLabel.font = UIFont.avenirNextRegular(size: 14)
         inviteCodeTitleLabel.textColor = UIColor.Partybox.black
         inviteCodeTitleLabel.textAlignment = .center
-        inviteCodeTitleLabel.font = UIFont.avenirNextRegular(size: 14)
         return inviteCodeTitleLabel
     }()
     
     lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
         inviteCodeLabel.text = Party.inviteCode
+        inviteCodeLabel.font = UIFont.avenirNextRegular(size: 24)
         inviteCodeLabel.textColor = UIColor.Partybox.black
         inviteCodeLabel.textAlignment = .center
-        inviteCodeLabel.font = UIFont.avenirNextRegular(size: 26)
         return inviteCodeLabel
     }()
     

@@ -12,10 +12,16 @@ class MenuView: UIView {
     
     // MARK: - Instance Properties
     
+    lazy var partyboxImageView: UIImageView = {
+        let partyboxImageView = UIImageView()
+        partyboxImageView.image = UIImage(named: "Box")
+        return partyboxImageView
+    }()
+    
     lazy var startPartyButton: ActivityButton = {
         let startPartyButton = ActivityButton()
         startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 24)
+        startPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         startPartyButton.setBackgroundColor(UIColor.Partybox.red)
         return startPartyButton
     }()
@@ -23,9 +29,25 @@ class MenuView: UIView {
     lazy var joinPartyButton: ActivityButton = {
         let joinPartyButton = ActivityButton()
         joinPartyButton.setTitle("Join Party", for: .normal)
-        joinPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 24)
+        joinPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
         return joinPartyButton
+    }()
+    
+    lazy var findPartyButton: ActivityButton = {
+        let findPartyButton = ActivityButton()
+        findPartyButton.setTitle("Find Party", for: .normal)
+        findPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
+        findPartyButton.setBackgroundColor(UIColor.Partybox.purple)
+        return findPartyButton
+    }()
+    
+    lazy var visitStoreButton: ActivityButton = {
+        let visitStoreButton = ActivityButton()
+        visitStoreButton.setTitle("Visit Store", for: .normal)
+        visitStoreButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
+        visitStoreButton.setBackgroundColor(UIColor.Partybox.green)
+        return visitStoreButton
     }()
     
     lazy var animator: UIDynamicAnimator = {
@@ -47,76 +69,104 @@ class MenuView: UIView {
     lazy var extraLightConfettiBehavior: UIDynamicItemBehavior = {
         let extraLightConfettiBehavior = UIDynamicItemBehavior()
         extraLightConfettiBehavior.allowsRotation = true
-        extraLightConfettiBehavior.resistance = 5.5
+        extraLightConfettiBehavior.resistance = 6.0
         return extraLightConfettiBehavior
     }()
     
     lazy var lightConfettiBehavior: UIDynamicItemBehavior = {
         let lightConfettiBehavior = UIDynamicItemBehavior()
         lightConfettiBehavior.allowsRotation = true
-        lightConfettiBehavior.resistance = 5.0
+        lightConfettiBehavior.resistance = 5.5
         return lightConfettiBehavior
     }()
     
     lazy var mediumConfettiBehavior: UIDynamicItemBehavior = {
         let mediumConfettiBehavior = UIDynamicItemBehavior()
         mediumConfettiBehavior.allowsRotation = true
-        mediumConfettiBehavior.resistance = 4.5
+        mediumConfettiBehavior.resistance = 5.0
         return mediumConfettiBehavior
     }()
     
     lazy var heavyConfettiBehavior: UIDynamicItemBehavior = {
         let heavyConfettiBehavior = UIDynamicItemBehavior()
         heavyConfettiBehavior.allowsRotation = true
-        heavyConfettiBehavior.resistance = 4.0
+        heavyConfettiBehavior.resistance = 4.5
         return heavyConfettiBehavior
     }()
     
     lazy var extraHeavyConfettiBehavior: UIDynamicItemBehavior = {
         let extraHeavyConfettiBehavior = UIDynamicItemBehavior()
         extraHeavyConfettiBehavior.allowsRotation = true
-        extraHeavyConfettiBehavior.resistance = 3.5
+        extraHeavyConfettiBehavior.resistance = 4.0
         return extraHeavyConfettiBehavior
     }()
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.configureSubviews()
+        self.setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Setup Functions
     
-    func configureSubviews() {
+    func setupSubviews() {
+        self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
+        self.addSubview(self.findPartyButton)
+        self.addSubview(self.visitStoreButton)
+        
+        self.partyboxImageView.snp.remakeConstraints({
+            (make) in
+            
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(self.snp.top).offset(100)
+        })
         
         self.startPartyButton.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(250)
-            make.height.equalTo(62.5)
+            make.width.equalTo(220)
+            make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.centerY.equalTo(self.snp.centerY).offset(48)
+            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(40)
         })
         
         self.joinPartyButton.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(250)
-            make.height.equalTo(62.5)
+            make.width.equalTo(220)
+            make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.startPartyButton.snp.bottom).offset(48)
+            make.top.equalTo(self.startPartyButton.snp.bottom).offset(16)
+        })
+        
+        self.findPartyButton.snp.remakeConstraints({
+            (make) in
+            
+            make.width.equalTo(220)
+            make.height.equalTo(55)
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(self.joinPartyButton.snp.bottom).offset(16)
+        })
+        
+        self.visitStoreButton.snp.remakeConstraints({
+            (make) in
+            
+            make.width.equalTo(220)
+            make.height.equalTo(55)
+            make.centerX.equalTo(self.snp.centerX)
+            make.bottom.equalTo(self.snp.bottom).offset(-40)
         })
     }
     
-    // MARK: - Animation Methods
+    // MARK: - Animation Functions
     
     func startAnimatingStartPartyButton() {
         self.startPartyButton.startAnimating()
@@ -134,10 +184,10 @@ class MenuView: UIView {
         self.joinPartyButton.stopAnimating()
     }
     
-    // MARK: - Confetti Methods
+    // MARK: - Confetti Functions
     
-    func dropConfettiPiece() {
-        var confettiPiece: ShapeView!
+    @objc func dropConfetti() {
+        var confetti: ShapeView!
         
         let shapes = [SquareView.self, TriangleView.self, CircleView.self]
         let randomShape = shapes[Int(arc4random()) % shapes.count]
@@ -149,17 +199,17 @@ class MenuView: UIView {
         let randomColor = colors[Int(arc4random()) % colors.count]
         
         if randomShape == SquareView.self {
-            confettiPiece = SquareView(frame: randomFrame, color: randomColor)
+            confetti = SquareView(frame: randomFrame, color: randomColor)
         }
         else if randomShape == TriangleView.self {
-            confettiPiece = TriangleView(frame: randomFrame, color: randomColor)
+            confetti = TriangleView(frame: randomFrame, color: randomColor)
         }
         else if randomShape == CircleView.self {
-            confettiPiece = CircleView(frame: randomFrame, color: randomColor)
+            confetti = CircleView(frame: randomFrame, color: randomColor)
         }
         
-        self.animator.referenceView?.insertSubview(confettiPiece, at: 0)
-        self.gravityBehavior.addItem(confettiPiece)
+        self.animator.referenceView?.insertSubview(confetti, at: 0)
+        self.gravityBehavior.addItem(confetti)
         
         let randomSpeed = CGFloat(arc4random_uniform(4) + 2)
         let randomDirection = CGFloat(arc4random_uniform(2))
@@ -168,28 +218,28 @@ class MenuView: UIView {
         let randomResistance = arc4random_uniform(5)
         
         if randomResistance == 0 {
-            self.extraLightConfettiBehavior.addItem(confettiPiece)
-            self.extraLightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+            self.extraLightConfettiBehavior.addItem(confetti)
+            self.extraLightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
         else if randomResistance == 1 {
-            self.lightConfettiBehavior.addItem(confettiPiece)
-            self.lightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+            self.lightConfettiBehavior.addItem(confetti)
+            self.lightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
         else if randomResistance == 2 {
-            self.mediumConfettiBehavior.addItem(confettiPiece)
-            self.mediumConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+            self.mediumConfettiBehavior.addItem(confetti)
+            self.mediumConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
         else if randomResistance == 3 {
-            self.heavyConfettiBehavior.addItem(confettiPiece)
-            self.heavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+            self.heavyConfettiBehavior.addItem(confetti)
+            self.heavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
         else if randomResistance == 4 {
-            self.extraHeavyConfettiBehavior.addItem(confettiPiece)
-            self.extraHeavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confettiPiece)
+            self.extraHeavyConfettiBehavior.addItem(confetti)
+            self.extraHeavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
     }
     
-    func updateConfettiPieceGravityDirection(_ direction: CGVector) {
+    func updateConfettiGravityDirection(_ direction: CGVector) {
         self.gravityBehavior.gravityDirection = direction
     }
     

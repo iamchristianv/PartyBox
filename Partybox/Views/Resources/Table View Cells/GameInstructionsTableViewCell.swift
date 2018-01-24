@@ -40,7 +40,6 @@ class GameInstructionsTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.setBackgroundColor(.white)
         self.configureSubviews()
     }
     
@@ -71,12 +70,6 @@ class GameInstructionsTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.snp.trailing).offset(-16)
             make.bottom.equalTo(self.snp.bottom).offset(-32)
         })
-    }
-    
-    // MARK: - Setter Methods
-    
-    func setBackgroundColor(_ color: UIColor) {
-        self.backgroundColor = color
     }
 
 }

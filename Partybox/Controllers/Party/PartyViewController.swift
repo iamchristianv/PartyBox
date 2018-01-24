@@ -52,6 +52,9 @@ class PartyViewController: UIViewController {
         if Party.userHost {
             self.setNavigationBarRightButton(title: "manage", target: self, action: #selector(manageButtonPressed))
         }
+        else {
+            self.setNavigationBarRightButton(title: nil, target: nil, action: nil)
+        }
         
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
@@ -59,13 +62,14 @@ class PartyViewController: UIViewController {
     func configureContentView() {
         self.contentView = PartyView()
         self.contentView.delegate = self
+        self.contentView.tableView.delegate = self
         self.view = self.contentView
     }
     
     // MARK: - Action Methods
     
     @objc func leaveButtonPressed() {
-        self.showAlert(subject: "Hold on ✋", message: "Are you sure you want to leave the party?", action: "Leave", block: {
+        self.showAlert(subject: "Hold on ✋", message: "Are you sure you want to leave the party?", action: "Leave", handler: {
             if Party.people.count == 1 {
                 Party.end()
             }
@@ -131,6 +135,41 @@ extension PartyViewController: PartyViewDelegate {
     
     func partyView(_ partyView: PartyView, changeGameButtonPressed changeGameButton: UIButton) {
         self.showChangeGameViewController()
+    }
+    
+}
+
+extension PartyViewController: UITableViewDelegate {
+    
+    // MARK: - Table View Delegate Methods
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if !Party.userHost {
+            return []
+        }
+        
+        let deleteButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
+            (action, indexPath) in
+            
+            let person = Party.people.person(index: indexPath.row - PartyView.staticTableViewCellCount)
+            
+            if person.name == Party.userName {
+                self.showAlert(subject: "Slow down ✋",
+                               message: "You can't kick yourself from your own party",
+                               action: "Okay",
+                               handler: nil)
+                return
+            }
+            
+            self.showAlert(subject: "Slow down ✋",
+                           message: "Are you sure you want to kick them from your party?",
+                           action: "Kick",
+                           handler: nil)
+        })
+        
+        deleteButton.backgroundColor = UIColor.Partybox.red
+        
+        return [deleteButton]
     }
     
 }

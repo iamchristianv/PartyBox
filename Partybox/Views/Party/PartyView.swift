@@ -35,7 +35,7 @@ class PartyView: UIView {
         tableView.estimatedRowHeight = 50
         tableView.register(InviteCodeTableViewCell.self, forCellReuseIdentifier: InviteCodeTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
-        tableView.register(WaitingTableViewCell.self, forCellReuseIdentifier: WaitingTableViewCell.identifier)
+        tableView.register(ActivityTableViewCell.self, forCellReuseIdentifier: ActivityTableViewCell.identifier)
         tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: ButtonTableViewCell.identifier)
         tableView.register(ButtonCollectionTableViewCell.self, forCellReuseIdentifier: ButtonCollectionTableViewCell.identifier)
         tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.identifier)
@@ -101,7 +101,6 @@ extension PartyView: UITableViewDataSource {
             let headerCell = tableViewCell as! HeaderTableViewCell
             headerCell.setBackgroundColor(UIColor.Partybox.green)
             headerCell.setHeader("GAME")
-            headerCell.setEmoji("🎉")
             return headerCell
         }
         
@@ -115,16 +114,16 @@ extension PartyView: UITableViewDataSource {
             if Party.userHost {
                 let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ButtonCollectionTableViewCell.identifier)
                 let buttonCollectionCell = tableViewCell as! ButtonCollectionTableViewCell
-                buttonCollectionCell.setLeftButtonTitle("Play")
+                buttonCollectionCell.setLeftButtonTitle("Start")
                 buttonCollectionCell.setRightButtonTitle("Change")
                 buttonCollectionCell.delegate = self
                 return buttonCollectionCell
             }
             else {
-                let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: WaitingTableViewCell.identifier)
-                let waitingCell = tableViewCell as! WaitingTableViewCell
-                waitingCell.setPrompt("Waiting for Host to Start Game")
-                return waitingCell
+                let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.identifier)
+                let activityCell = tableViewCell as! ActivityTableViewCell
+                activityCell.setPrompt("Waiting for Host to Start Game")
+                return activityCell
             }
         }
         
@@ -133,7 +132,6 @@ extension PartyView: UITableViewDataSource {
             let headerCell = tableViewCell as! HeaderTableViewCell
             headerCell.setBackgroundColor(UIColor.Partybox.green)
             headerCell.setHeader("PEOPLE")
-            headerCell.setEmoji("🎉")
             return headerCell
         }
             

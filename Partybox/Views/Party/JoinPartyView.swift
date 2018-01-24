@@ -20,7 +20,7 @@ class JoinPartyView: UIView {
     lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
         inviteCodeLabel.text = "Invite Code"
-        inviteCodeLabel.font = UIFont.avenirNextRegular(size: 24)
+        inviteCodeLabel.font = UIFont.avenirNextRegular(size: 20)
         inviteCodeLabel.textColor = UIColor.Partybox.black
         return inviteCodeLabel
     }()
@@ -28,7 +28,7 @@ class JoinPartyView: UIView {
     lazy var inviteCodeTextField: UITextField = {
         let inviteCodeTextField = UITextField()
         inviteCodeTextField.delegate = self
-        inviteCodeTextField.font = UIFont.avenirNextRegular(size: 20)
+        inviteCodeTextField.font = UIFont.avenirNextRegular(size: 28)
         inviteCodeTextField.textColor = UIColor.Partybox.black
         inviteCodeTextField.tintColor = UIColor.Partybox.blue
         inviteCodeTextField.borderStyle = .none
@@ -46,7 +46,7 @@ class JoinPartyView: UIView {
     lazy var inviteCodeStatusLabel: UILabel = {
         let inviteCodeStatusLabel = UILabel()
         inviteCodeStatusLabel.text = " "
-        inviteCodeStatusLabel.font = UIFont.avenirNextRegular(size: 14)
+        inviteCodeStatusLabel.font = UIFont.avenirNextRegular(size: 16)
         inviteCodeStatusLabel.textColor = UIColor.Partybox.red
         inviteCodeStatusLabel.isHidden = true
         return inviteCodeStatusLabel
@@ -57,7 +57,7 @@ class JoinPartyView: UIView {
     lazy var inviteCodeCharacterCountLabel: UILabel = {
         let inviteCodeCharacterCountLabel = UILabel()
         inviteCodeCharacterCountLabel.text = "\(self.inviteCodeMaxCharacterCount)"
-        inviteCodeCharacterCountLabel.font = UIFont.avenirNextRegular(size: 15)
+        inviteCodeCharacterCountLabel.font = UIFont.avenirNextRegular(size: 16)
         inviteCodeCharacterCountLabel.textColor = UIColor.lightGray
         return inviteCodeCharacterCountLabel
     }()
@@ -65,7 +65,7 @@ class JoinPartyView: UIView {
     lazy var yourNameLabel: UILabel = {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
-        yourNameLabel.font = UIFont.avenirNextRegular(size: 24)
+        yourNameLabel.font = UIFont.avenirNextRegular(size: 20)
         yourNameLabel.textColor = UIColor.Partybox.black
         return yourNameLabel
     }()
@@ -73,7 +73,7 @@ class JoinPartyView: UIView {
     lazy var yourNameTextField: UITextField = {
         let yourNameTextField = UITextField()
         yourNameTextField.delegate = self
-        yourNameTextField.font = UIFont.avenirNextRegular(size: 20)
+        yourNameTextField.font = UIFont.avenirNextRegular(size: 28)
         yourNameTextField.textColor = UIColor.Partybox.black
         yourNameTextField.tintColor = UIColor.Partybox.blue
         yourNameTextField.borderStyle = .none
@@ -91,18 +91,18 @@ class JoinPartyView: UIView {
     lazy var yourNameStatusLabel: UILabel = {
         let yourNameStatusLabel = UILabel()
         yourNameStatusLabel.text = " "
-        yourNameStatusLabel.font = UIFont.avenirNextRegular(size: 14)
+        yourNameStatusLabel.font = UIFont.avenirNextRegular(size: 16)
         yourNameStatusLabel.textColor = UIColor.Partybox.red
         yourNameStatusLabel.isHidden = true
         return yourNameStatusLabel
     }()
     
-    lazy var yourNameMaxCharacterCount: Int = 20
+    lazy var yourNameMaxCharacterCount: Int = 15
     
     lazy var yourNameCharacterCountLabel: UILabel = {
         let yourNameCharacterCountLabel = UILabel()
         yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
-        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 15)
+        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 16)
         yourNameCharacterCountLabel.textColor = UIColor.lightGray
         return yourNameCharacterCountLabel
     }()
@@ -110,26 +110,26 @@ class JoinPartyView: UIView {
     lazy var continueButton: ActivityButton = {
         let continueButton = ActivityButton()
         continueButton.setTitle("Continue", for: .normal)
-        continueButton.setTitleFont(UIFont.avenirNextMediumName, size: 24)
+        continueButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         continueButton.setBackgroundColor(UIColor.Partybox.blue)
         return continueButton
     }()
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.configureSubviews()
+        self.setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Setup Functions
     
-    func configureSubviews() {
+    func setupSubviews() {
         self.addSubview(self.backgroundButton)
         self.addSubview(self.inviteCodeLabel)
         self.addSubview(self.inviteCodeTextField)
@@ -200,7 +200,7 @@ class JoinPartyView: UIView {
             
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.inviteCodeStatusLabel.snp.bottom).offset(48)
+            make.top.equalTo(self.inviteCodeStatusLabel.snp.bottom).offset(40)
         })
         
         self.yourNameTextField.snp.remakeConstraints({
@@ -241,14 +241,14 @@ class JoinPartyView: UIView {
         self.continueButton.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(250)
-            make.height.equalTo(62.5)
+            make.width.equalTo(220)
+            make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(self.yourNameStatusLabel.snp.bottom).offset(64)
         })
     }
     
-    // MARK: - Action Methods
+    // MARK: - Action Functions
     
     func showInviteCodeStatus(_ status: String) {
         self.inviteCodeUnderlineLabel.backgroundColor = UIColor.Partybox.red
@@ -286,7 +286,7 @@ class JoinPartyView: UIView {
 
 extension JoinPartyView: UITextFieldDelegate {
     
-    // MARK: - Text Field Delegate Methods
+    // MARK: - Text Field Delegate Functions
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let characterCount = textField.text!.count + string.count - range.length

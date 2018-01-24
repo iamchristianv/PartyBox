@@ -16,15 +16,16 @@ class GameTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = Party.game.details.name
-        nameLabel.font = UIFont.avenirNextRegular(size: 26)
+        nameLabel.font = UIFont.avenirNextRegular(size: 24)
         nameLabel.textColor = UIColor.Partybox.black
+        nameLabel.numberOfLines = 0
         return nameLabel
     }()
     
-    var summaryLabel: UILabel = {
+    lazy var summaryLabel: UILabel = {
         let summaryLabel = UILabel()
         summaryLabel.text = Party.game.details.summary
         summaryLabel.font = UIFont.avenirNextRegular(size: 16)
@@ -38,7 +39,6 @@ class GameTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.backgroundColor = .white
         self.configureSubviews()
     }
     
@@ -56,17 +56,16 @@ class GameTableViewCell: UITableViewCell {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.top.equalTo(self.snp.top).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
-            make.bottom.equalTo(self.summaryLabel.snp.top).offset(-8)
+            make.top.equalTo(self.snp.top).offset(16)
         })
         
         self.summaryLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.top.equalTo(self.nameLabel.snp.bottom)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
         })
     }

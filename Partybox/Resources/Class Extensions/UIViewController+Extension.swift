@@ -64,7 +64,7 @@ extension UIViewController {
         self.navigationItem.title = title
     }
     
-    func setNavigationBarLeftButton(title: String, target: Any, action: Selector) {
+    func setNavigationBarLeftButton(title: String?, target: Any?, action: Selector?) {
         let leftButton = UIBarButtonItem(title: title, style: .plain, target: target, action: action)
         
         let titleTextAttributes = [NSAttributedStringKey.font: UIFont.avenirNextRegular(size: 18),
@@ -75,7 +75,7 @@ extension UIViewController {
         self.navigationItem.setLeftBarButton(leftButton, animated: true)
     }
     
-    func setNavigationBarRightButton(title: String, target: Any, action: Selector) {
+    func setNavigationBarRightButton(title: String?, target: Any?, action: Selector?) {
         let rightButton = UIBarButtonItem(title: title, style: .plain, target: target, action: action)
         
         let titleTextAttributes = [NSAttributedStringKey.font: UIFont.avenirNextRegular(size: 18),
@@ -89,14 +89,14 @@ extension UIViewController {
     func setNavigationBarBackgroundColor(_ color: UIColor) {
         self.navigationController?.navigationBar.barTintColor = color
         
-        let titleTextAttributes = [NSAttributedStringKey.font: UIFont.avenirNextMedium(size: 20),
+        let titleTextAttributes = [NSAttributedStringKey.font: UIFont.avenirNextMedium(size: 18),
                                    NSAttributedStringKey.foregroundColor: color.contrastColor()] as [NSAttributedStringKey : Any]
         
         self.navigationController?.navigationBar.titleTextAttributes = titleTextAttributes
     }
     
-    func showAlert(subject: String, message: String, action: String, block: (() -> ())?) {
-        let alertViewController = AlertViewController(subject: subject, message: message, action: action, block: block)
+    func showAlert(subject: String, message: String, action: String, handler: (() -> ())?) {
+        let alertViewController = AlertViewController(subject: subject, message: message, action: action, handler: handler)
         
         alertViewController.modalPresentationStyle = .overCurrentContext
         

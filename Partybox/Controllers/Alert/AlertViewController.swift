@@ -20,15 +20,15 @@ class AlertViewController: UIViewController {
     
     var action: String
     
-    var block: (() -> ())?
+    var handler: (() -> ())?
     
     // MARK: - Initialization Methods
     
-    init(subject: String, message: String, action: String, block: (() -> ())?) {
+    init(subject: String, message: String, action: String, handler: (() -> ())?) {
         self.subject = subject
         self.message = message
         self.action = action
-        self.block = block
+        self.handler = handler
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -60,21 +60,16 @@ class AlertViewController: UIViewController {
     
     func configureContentView() {
         self.contentView = AlertView(subject: self.subject, message: self.message, action: self.action)
-        self.contentView.backgroundButton.addTarget(self, action: #selector(backgroundButtonPressed), for: .touchUpInside)
         self.contentView.actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         self.view = self.contentView
     }
     
     // MARK: - Action Methods
     
-    @objc func backgroundButtonPressed() {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
     @objc func actionButtonPressed() {
         self.dismiss(animated: false, completion: {
-            if let block = self.block {
-                block()
+            if let handler = self.handler {
+                handler()
             }
         })
     }

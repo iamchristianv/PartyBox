@@ -12,11 +12,6 @@ class AlertView: UIView {
 
     // MARK: - Instance Properties
     
-    lazy var backgroundButton: UIButton = {
-        let backgroundButton = UIButton()
-        return backgroundButton
-    }()
-    
     lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = .white
@@ -80,17 +75,7 @@ class AlertView: UIView {
     // MARK: - Configuration Methods
     
     func configureSubviews() {
-        self.addSubview(self.backgroundButton)
         self.addSubview(self.containerView)
-        
-        self.backgroundButton.snp.remakeConstraints({
-            (make) in
-            
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.top.equalTo(self.snp.top)
-            make.bottom.equalTo(self.snp.bottom)
-        })
         
         self.containerView.snp.remakeConstraints({
             (make) in
