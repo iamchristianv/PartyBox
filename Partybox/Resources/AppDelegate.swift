@@ -10,31 +10,14 @@ import Firebase
 import SnapKit
 import UIKit
 
+let Reference: DatabaseReference = Database.database().reference()
+
 @UIApplicationMain
 class AppDelegate: UIResponder {
     
     // MARK: - Instance Properties
 
     var window: UIWindow?
-    
-    // MARK: - Configuration Functions
-    
-    func configureFirebase() {
-        FirebaseApp.configure()
-    }
-    
-    func configureAuthentication() {
-        self.showMenuViewController()
-        Auth.auth().signInAnonymously(completion: nil)
-    }
-    
-    // MARK: - Navigation Functions
-    
-    func showMenuViewController() {
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = UINavigationController(rootViewController: MenuViewController())
-        self.window?.makeKeyAndVisible()
-    }
 
 }
 
@@ -43,8 +26,12 @@ extension AppDelegate: UIApplicationDelegate {
     // MARK: - Application Delegate Functions
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.configureFirebase()
-        self.configureAuthentication()
+        FirebaseApp.configure()
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = UINavigationController(rootViewController: MenuViewController())
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
     

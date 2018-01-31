@@ -11,7 +11,7 @@
 		AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D152E1FA571C9009E31BF /* MenuViewController.swift */; };
 		AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */; };
 		AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */; };
-		AA590FFA1FC26FBB008988E9 /* WannabeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* WannabeGame.swift */; };
+		AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Wannabe.swift */; };
 		AA5910041FCA71B0008988E9 /* SetupWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910031FCA71B0008988E9 /* SetupWannabeView.swift */; };
 		AA5910061FCA71C2008988E9 /* SetupWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5910051FCA71C2008988E9 /* SetupWannabeViewController.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
@@ -36,11 +36,13 @@
 		AACD97431FE6F782000275CB /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97421FE6F782000275CB /* WannabePack.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
 		AACD974A1FEA04E4000275CB /* VoteWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97491FEA04E4000275CB /* VoteWannabeView.swift */; };
-		AACD974C1FEB4533000275CB /* PartyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974B1FEB4533000275CB /* PartyGame.swift */; };
 		AACD974E1FF4960E000275CB /* SetupWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */; };
 		AACD97501FF49623000275CB /* StartWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974F1FF49623000275CB /* StartWannabeTableView.swift */; };
 		AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97511FF49631000275CB /* PlayWannabeTableView.swift */; };
 		AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */; };
+		AAD45A09201D942700059D0D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD45A08201D942700059D0D /* Session.swift */; };
+		AAD45A0F201ED4A100059D0D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD45A0E201ED4A100059D0D /* Game.swift */; };
+		AAD45A11201ED62700059D0D /* GameDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD45A10201ED62700059D0D /* GameDetails.swift */; };
 		AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */; };
 		AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */; };
 		AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */; };
@@ -75,7 +77,7 @@
 		AA0D152E1FA571C9009E31BF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyViewController.swift; sourceTree = "<group>"; };
 		AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
-		AA590FF91FC26FBB008988E9 /* WannabeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeGame.swift; sourceTree = "<group>"; };
+		AA590FF91FC26FBB008988E9 /* Wannabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wannabe.swift; sourceTree = "<group>"; };
 		AA5910031FCA71B0008988E9 /* SetupWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeView.swift; sourceTree = "<group>"; };
 		AA5910051FCA71C2008988E9 /* SetupWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeViewController.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
@@ -100,11 +102,13 @@
 		AACD97421FE6F782000275CB /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
 		AACD97491FEA04E4000275CB /* VoteWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeView.swift; sourceTree = "<group>"; };
-		AACD974B1FEB4533000275CB /* PartyGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyGame.swift; sourceTree = "<group>"; };
 		AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeTableView.swift; sourceTree = "<group>"; };
 		AACD974F1FF49623000275CB /* StartWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeTableView.swift; sourceTree = "<group>"; };
 		AACD97511FF49631000275CB /* PlayWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeTableView.swift; sourceTree = "<group>"; };
 		AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeTableView.swift; sourceTree = "<group>"; };
+		AAD45A08201D942700059D0D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		AAD45A0E201ED4A100059D0D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		AAD45A10201ED62700059D0D /* GameDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetails.swift; sourceTree = "<group>"; };
 		AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -253,13 +257,21 @@
 			path = Party;
 			sourceTree = "<group>";
 		};
-		AACD97411FE6F760000275CB /* Pack */ = {
+		AAD45A07201D941500059D0D /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				AACD97421FE6F782000275CB /* WannabePack.swift */,
-				AACD97441FE6F8D1000275CB /* WannabeCard.swift */,
+				AAD45A08201D942700059D0D /* Session.swift */,
 			);
-			path = Pack;
+			path = Session;
+			sourceTree = "<group>";
+		};
+		AAD45A0D201ED48900059D0D /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				AAD45A0E201ED4A100059D0D /* Game.swift */,
+				AAD45A10201ED62700059D0D /* GameDetails.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		AAE75B3A1F809FA9001D4E13 = {
@@ -328,11 +340,10 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AAD45A07201D941500059D0D /* Session */,
 				AAF6D7FF1FDC965900014CA0 /* Party */,
-				AAF6D8001FDC966300014CA0 /* Game */,
-				AAF6D8031FDC969700014CA0 /* Details */,
-				AACD97411FE6F760000275CB /* Pack */,
-				AAF6D8021FDC968400014CA0 /* People */,
+				AAD45A0D201ED48900059D0D /* Game */,
+				AAF6D8001FDC966300014CA0 /* Wannabe */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -341,37 +352,24 @@
 			isa = PBXGroup;
 			children = (
 				AA6706C21F89D9F5000BF5F5 /* Party.swift */,
+				AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */,
+				AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */,
+				AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */,
 			);
 			path = Party;
 			sourceTree = "<group>";
 		};
-		AAF6D8001FDC966300014CA0 /* Game */ = {
+		AAF6D8001FDC966300014CA0 /* Wannabe */ = {
 			isa = PBXGroup;
 			children = (
-				AACD974B1FEB4533000275CB /* PartyGame.swift */,
-				AA590FF91FC26FBB008988E9 /* WannabeGame.swift */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
-		AAF6D8021FDC968400014CA0 /* People */ = {
-			isa = PBXGroup;
-			children = (
-				AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */,
-				AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */,
+				AA590FF91FC26FBB008988E9 /* Wannabe.swift */,
+				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
+				AACD97421FE6F782000275CB /* WannabePack.swift */,
+				AACD97441FE6F8D1000275CB /* WannabeCard.swift */,
 				AACD97231FDF5DDE000275CB /* WannabePeople.swift */,
 				AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */,
 			);
-			path = People;
-			sourceTree = "<group>";
-		};
-		AAF6D8031FDC969700014CA0 /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */,
-				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
-			);
-			path = Details;
+			path = Wannabe;
 			sourceTree = "<group>";
 		};
 		AAF73B101FA6CABB00D8A17B /* Table View Cells */ = {
@@ -544,6 +542,7 @@
 				AAF6D7FB1FDC955900014CA0 /* PartyDetails.swift in Sources */,
 				AAB053AF200D633C00180209 /* TriangleView.swift in Sources */,
 				AADB813C1FB29BD9003AD1D9 /* PersonTableViewCell.swift in Sources */,
+				AAD45A09201D942700059D0D /* Session.swift in Sources */,
 				AACD972C1FDF73FA000275CB /* PlayWannabeView.swift in Sources */,
 				AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */,
 				AACD97241FDF5DDE000275CB /* WannabePeople.swift in Sources */,
@@ -563,12 +562,12 @@
 				AAF73B0A1FA6C57900D8A17B /* PartyViewController.swift in Sources */,
 				AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */,
 				AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */,
-				AACD974C1FEB4533000275CB /* PartyGame.swift in Sources */,
 				AACD972A1FDF73E9000275CB /* PlayWannabeViewController.swift in Sources */,
 				AAF6D8051FDC99DB00014CA0 /* PartyPeople.swift in Sources */,
 				AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */,
 				AAF73B0C1FA6C97900D8A17B /* UIViewController+Extension.swift in Sources */,
 				AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */,
+				AAD45A11201ED62700059D0D /* GameDetails.swift in Sources */,
 				AA5910041FCA71B0008988E9 /* SetupWannabeView.swift in Sources */,
 				AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */,
 				AACD97321FE4E7AC000275CB /* EndWannabeView.swift in Sources */,
@@ -581,10 +580,11 @@
 				AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */,
 				AACD97261FDF70FD000275CB /* StartWannabeViewController.swift in Sources */,
 				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,
-				AA590FFA1FC26FBB008988E9 /* WannabeGame.swift in Sources */,
+				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
 				AACD973E1FE62D78000275CB /* VoteWannabeViewController.swift in Sources */,
 				AAB053B4200D667A00180209 /* ShapeView.swift in Sources */,
 				AAB053AD200D5F2400180209 /* SquareView.swift in Sources */,
+				AAD45A0F201ED4A100059D0D /* Game.swift in Sources */,
 				AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */,
 				AAB053B8200EDD4D00180209 /* InviteCodeTableViewCell.swift in Sources */,
 				AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */,

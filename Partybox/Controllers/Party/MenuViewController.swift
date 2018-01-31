@@ -39,6 +39,12 @@ class MenuViewController: UIViewController {
         self.startDroppingConfetti()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        Auth.auth().signInAnonymously(completion: nil)
+        // load Partybox configurations
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.stopObservingAuthenticationChanges()
@@ -127,9 +133,7 @@ class MenuViewController: UIViewController {
     }
     
     func stopObservingAuthenticationChanges() {
-        guard let authenticationHandle = self.authenticationHandle else { return }
-        
-        Auth.auth().removeStateDidChangeListener(authenticationHandle)
+        Auth.auth().removeStateDidChangeListener(self.authenticationHandle)
     }
     
     // MARK: - Motion Functions
@@ -138,16 +142,12 @@ class MenuViewController: UIViewController {
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
             (motion, _) in
             
-            guard let motion = motion else { return }
-            
-            self.contentView.updateConfettiGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
+            self.contentView.updateConfettiGravityDirection(CGVector(dx: motion!.gravity.x, dy: 0.2))
         })
     }
     
     func stopObservingMotionChanges() {
-        guard let motionManager = self.motionManager else { return }
-        
-        motionManager.stopDeviceMotionUpdates()
+        self.motionManager.stopDeviceMotionUpdates()
     }
     
     // MARK: - Confetti Functions
@@ -161,9 +161,7 @@ class MenuViewController: UIViewController {
     }
     
     func stopDroppingConfetti() {
-        guard let confettiTimer = self.confettiTimer else { return }
-        
-        confettiTimer.invalidate()
+        self.confettiTimer.invalidate()
     }
 
 }

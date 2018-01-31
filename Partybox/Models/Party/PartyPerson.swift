@@ -23,15 +23,15 @@ class PartyPerson {
 
     // MARK: - Instance Properties
     
-    var name: String
+    var name: String = ""
     
-    var points: Int
+    var points: Int = 0
     
-    var emoji: String
+    var emoji: String = PartyPerson.randomEmoji()
     
-    var ready: Bool
+    var ready: Bool = false
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     init(name: String) {
         self.name = name
@@ -40,14 +40,14 @@ class PartyPerson {
         self.ready = false
     }
     
-    required init(name: String, JSON: JSON) {
+    init(name: String, JSON: JSON) {
         self.name = name
         self.points = JSON[PartyPersonKey.points.rawValue].intValue
         self.emoji = PartyPerson.randomEmoji()
         self.ready = JSON[PartyPersonKey.ready.rawValue].boolValue
     }
     
-    // MARK: - JSON Methods
+    // MARK: - JSON Functions
     
     func toJSON() -> [String: Any] {
         let JSON = [
@@ -55,12 +55,12 @@ class PartyPerson {
                 PartyPersonKey.points.rawValue: self.points,
                 PartyPersonKey.ready.rawValue: self.ready
             ]
-        ] as [String: Any]
+        ]
         
         return JSON
     }
     
-    // MARK: - Utility Methods
+    // MARK: - Utility Functions
     
     static func randomEmoji() -> String {
         let emojis = ["😊"]

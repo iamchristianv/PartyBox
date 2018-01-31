@@ -94,7 +94,7 @@ class StartPartyViewController: UIViewController {
         
         self.contentView.startAnimatingContinueButton()
         
-        Party.start(partyName: partyName, personName: personName, callback: {
+        Session.start(partyName: partyName, personName: personName, callback: {
             (error) in
             
             self.contentView.stopAnimatingContinueButton()

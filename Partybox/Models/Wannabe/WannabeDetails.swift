@@ -25,7 +25,7 @@ enum WannabeDetailsKey: String {
     
 }
 
-class WannabeDetails {
+class WannabeDetails: GameDetails {
     
     // MARK: - Instance Properties
     

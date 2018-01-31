@@ -89,7 +89,7 @@ extension UIViewController {
     func setNavigationBarBackgroundColor(_ color: UIColor) {
         self.navigationController?.navigationBar.barTintColor = color
         
-        let titleTextAttributes = [NSAttributedStringKey.font: UIFont.avenirNextMedium(size: 18),
+        let titleTextAttributes = [NSAttributedStringKey.font: UIFont.avenirNextMedium(size: 19),
                                    NSAttributedStringKey.foregroundColor: color.contrastColor()] as [NSAttributedStringKey : Any]
         
         self.navigationController?.navigationBar.titleTextAttributes = titleTextAttributes

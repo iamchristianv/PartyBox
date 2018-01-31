@@ -8,6 +8,18 @@
 
 import UIKit
 
+protocol MenuViewDelegate {
+    
+    func menuView(_ menuView: MenuView, startPartyButtonPressed startPartyButton: UIButton)
+    
+    func menuView(_ menuView: MenuView, joinPartyButtonPressed joinPartyButton: UIButton)
+    
+    func menuView(_ menuView: MenuView, findPartyButtonPressed findPartyButton: UIButton)
+    
+    func menuView(_ menuView: MenuView, visitStoreButtonPressed visitStoreButton: UIButton)
+    
+}
+
 class MenuView: UIView {
     
     // MARK: - Instance Properties
@@ -23,6 +35,7 @@ class MenuView: UIView {
         startPartyButton.setTitle("Start Party", for: .normal)
         startPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         startPartyButton.setBackgroundColor(UIColor.Partybox.red)
+        startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         return startPartyButton
     }()
     
@@ -31,6 +44,7 @@ class MenuView: UIView {
         joinPartyButton.setTitle("Join Party", for: .normal)
         joinPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
+        joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
     }()
     
@@ -39,6 +53,7 @@ class MenuView: UIView {
         findPartyButton.setTitle("Find Party", for: .normal)
         findPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         findPartyButton.setBackgroundColor(UIColor.Partybox.purple)
+        findPartyButton.addTarget(self, action: #selector(findPartyButtonPressed), for: .touchUpInside)
         return findPartyButton
     }()
     
@@ -47,6 +62,7 @@ class MenuView: UIView {
         visitStoreButton.setTitle("Visit Store", for: .normal)
         visitStoreButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
         visitStoreButton.setBackgroundColor(UIColor.Partybox.green)
+        visitStoreButton.addTarget(self, action: #selector(visitStoreButtonPressed), for: .touchUpInside)
         return visitStoreButton
     }()
     
@@ -100,6 +116,8 @@ class MenuView: UIView {
         extraHeavyConfettiBehavior.resistance = 4.0
         return extraHeavyConfettiBehavior
     }()
+    
+    var delegate: MenuViewDelegate!
     
     // MARK: - Initialization Functions
     
@@ -164,6 +182,24 @@ class MenuView: UIView {
             make.centerX.equalTo(self.snp.centerX)
             make.bottom.equalTo(self.snp.bottom).offset(-40)
         })
+    }
+    
+    // MARK: - Action Functions
+    
+    @objc func startPartyButtonPressed() {
+        self.delegate.menuView(self, startPartyButtonPressed: self.startPartyButton)
+    }
+    
+    @objc func joinPartyButtonPressed() {
+        self.delegate.menuView(self, joinPartyButtonPressed: self.joinPartyButton)
+    }
+    
+    @objc func findPartyButtonPressed() {
+        self.delegate.menuView(self, findPartyButtonPressed: self.findPartyButton)
+    }
+    
+    @objc func visitStoreButtonPressed() {
+        self.delegate.menuView(self, visitStoreButtonPressed: self.visitStoreButton)
     }
     
     // MARK: - Animation Functions
