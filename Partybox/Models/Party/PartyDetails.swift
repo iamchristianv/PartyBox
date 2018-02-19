@@ -11,15 +11,15 @@ import SwiftyJSON
 
 enum PartyDetailsKey: String {
     
+    // MARK: - Database Keys
+    
+    case id
+    
     case name
     
     case hostName
     
-}
-
-enum PartyDetailsNotification: String {
-    
-    case changed
+    case hasAds
     
 }
 
@@ -27,60 +27,34 @@ class PartyDetails {
     
     // MARK: - Instance Properties
     
+    var id: String = ""
+    
     var name: String = ""
     
     var hostName: String = ""
     
-    var shouldPostNotifications: Bool = false
+    var hasAds: Bool = true
+        
+    // MARK: - Database Properties
     
-    // MARK: - JSON Functions
-    
-    func toJSON() -> [String : Any] {
-        let JSON = [
+    var json: [String: Any] {
+        let json = [
+            PartyDetailsKey.id.rawValue: self.id,
             PartyDetailsKey.name.rawValue: self.name,
-            PartyDetailsKey.hostName.rawValue: self.hostName
-        ] 
+            PartyDetailsKey.hostName.rawValue: self.hostName,
+            PartyDetailsKey.hasAds.rawValue: self.hasAds
+        ] as [String: Any]
         
-        return JSON
+        return json
     }
     
-    // MARK: - Database Functions
+    // MARK: - Initialization Functions
     
-    func startSynchronizing() {
-        let path = "\(Session.id)/\(SessionKey.party.rawValue)/\(PartyKey.details.rawValue)"
-        
-        Reference.child(path).observe(.value, with: {
-            (snapshot) in
-            
-            guard let values = snapshot.value as? [String: Any] else { return }
-            
-            let details = JSON(values)
-            
-            self.name = details[PartyDetailsKey.name.rawValue].stringValue
-            self.hostName = details[PartyDetailsKey.hostName.rawValue].stringValue
-            
-            Session.userIsHost = (Session.userName == self.hostName)
-            
-            if self.shouldPostNotifications {
-                NotificationCenter.default.post(name: Notification.Name(PartyDetailsNotification.changed.rawValue), object: nil)
-            }
-        })
-    }
-    
-    func stopSynchronizing() {
-        let path = "\(Session.id)/\(SessionKey.party.rawValue)/\(PartyKey.details.rawValue)"
-
-        Reference.child(path).removeAllObservers()
-    }
-    
-    // MARK: - Notification Functions
-    
-    func startObservingChanges() {
-        self.shouldPostNotifications = true
-    }
-    
-    func stopObservingChanges() {
-        self.shouldPostNotifications = false
+    init(JSON: JSON) {
+        self.id = JSON[PartyDetailsKey.id.rawValue].stringValue
+        self.name = JSON[PartyDetailsKey.name.rawValue].stringValue
+        self.hostName = JSON[PartyDetailsKey.hostName.rawValue].stringValue
+        self.hasAds = JSON[PartyDetailsKey.hasAds.rawValue].boolValue
     }
     
 }

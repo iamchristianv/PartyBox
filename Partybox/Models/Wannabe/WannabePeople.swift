@@ -12,76 +12,81 @@ import SwiftyJSON
 class WannabePeople {
     
     // MARK: - Instance Properties
+
+    var people: [WannabePerson] = []
     
-    var indexesToNames: [String] = []
-    
-    var namesToPersons: [String: WannabePerson] = [:]
-    
-    var count: Int = 0
-    
-    // MARK: - Initialization Methods
-    
-    init(JSON: JSON) {
-        for (name, values) in JSON {
-            self.add(WannabePerson(name: name, JSON: values))
-        }
+    var count: Int {
+        return self.people.count
     }
     
-    // MARK: - JSON Methods
+    // MARK: - Database Properties
     
-    func toJSON() -> [String: Any] {
-        var JSON = [:] as [String: Any]
+    var json: [String: Any] {
+        var json = [:] as [String: Any]
         
-        for person in self.namesToPersons.values {
-            for (name, values) in person.toJSON() {
-                JSON[name] = values
+        for person in self.people {
+            for (name, values) in person.json {
+                json[name] = values
             }
         }
         
-        return JSON
+        return json
     }
     
-    // MARK: - People Methods
+    var path: String {
+        return "\(DatabaseKey.games.rawValue)/\(Party.details.id)/\(WannabeKey.people.rawValue)"
+    }
+    
+    // MARK: - Initialization Functions
+    
+    init(JSON: JSON) {
+        for (name, personJSON) in JSON {
+            self.add(WannabePerson(name: name, JSON: personJSON))
+        }
+    }
+    
+    // MARK: - People Functions
     
     func add(_ person: WannabePerson) {
-        let name = person.name
-        
-        self.indexesToNames.append(name)
-        self.namesToPersons[name] = person
-        
-        self.count += 1
+        self.people.append(person)
     }
     
-    func person(index: Int) -> WannabePerson {
-        let name = self.indexesToNames[index]
-        let person = self.namesToPersons[name]
+    func person(index: Int) -> WannabePerson? {
+        if index < 0 || index >= self.people.count {
+            return nil
+        }
         
-        return person!
+        return self.people[index]
     }
     
-    func person(name: String) -> WannabePerson {
-        let person = self.namesToPersons[name]
+    func person(name: String) -> WannabePerson? {
+        for person in self.people {
+            if person.name == name {
+                return person
+            }
+        }
         
-        return person!
+        return nil
     }
     
-    func remove(index: Int) -> WannabePerson {
-        let person = self.person(index: index)
+    func remove(index: Int) -> WannabePerson? {
+        if index < 0 || index >= self.people.count {
+            return nil
+        }
         
-        self.indexesToNames.remove(at: index)
-        self.namesToPersons.removeValue(forKey: person.name)
-        
-        self.count -= 1
-        
-        return person
+        return self.people.remove(at: index)
     }
     
-    func remove(name: String) -> WannabePerson {
-        let person = self.namesToPersons[name]
+    func remove(name: String) -> WannabePerson? {
+        for i in 0 ..< self.people.count {
+            let person = self.people[i]
+            
+            if person.name == name {
+                return person
+            }
+        }
         
-        self.count -= 1
-        
-        return person!
+        return nil
     }
     
 }

@@ -11,41 +11,73 @@ import SwiftyJSON
 
 enum WannabeKey: String {
     
+    // MARK: - Database Keys
+    
     case details
     
-    case pack
-            
     case people
+    
+    case pack
     
 }
 
-class Wannabe: Game {
+class Wannabe {
     
     // MARK: - Instance Properties
+        
+    var details: WannabeDetails = WannabeDetails(JSON: JSON(""))
     
-    var details: WannabeDetails
+    var people: WannabePeople = WannabePeople(JSON: JSON(""))
     
-    var pack: WannabePack
+    var pack: WannabePack = WannabePack(JSON: JSON(""))
     
-    var people: WannabePeople
+    // MARK: - JSON Properties
     
-    // MARK: - Initialization Functions
-    
-    required init(JSON: JSON) {
-        self.details = WannabeDetails(JSON: JSON[WannabeKey.details.rawValue])
-        self.pack = WannabePack(JSON: JSON[WannabeKey.pack.rawValue])
-        self.people = WannabePeople(JSON: JSON[WannabeKey.people.rawValue])
+    var json: [String: Any] { 
+        let json = [
+            self.details.id: [
+                WannabeKey.details.rawValue: self.details.json,
+                WannabeKey.people.rawValue: self.people.json,
+                WannabeKey.pack.rawValue: self.pack.json
+            ]
+        ] as [String: Any]
+        
+        return json
     }
     
-    // MARK: - JSON Functions
+    // MARK: - Notification Functions
     
-    func toJSON() -> [String: Any] {
-        let JSON = [
-            WannabeKey.details.rawValue: self.details.toJSON(),
-            WannabeKey.people.rawValue: self.people.toJSON()
-        ]
+    func startObservingChanges() {
+        database.child(self.details.path).observe(.value, with: {
+            (snapshot) in
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
+            
+            let detailsJSON = JSON(snapshotJSON)
+            
+            self.details = WannabeDetails(JSON: detailsJSON)
+            
+            let name = Notification.Name(GameNotification.detailsChanged.rawValue)
+            NotificationCenter.default.post(name: name, object: nil)
+        })
         
-        return JSON
+        database.child(self.people.path).observe(.value, with: {
+            (snapshot) in
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
+            
+            let peopleJSON = JSON(snapshotJSON)
+            
+            self.people = WannabePeople(JSON: peopleJSON)
+            
+            let name = Notification.Name(GameNotification.peopleChanged.rawValue)
+            NotificationCenter.default.post(name: name, object: nil)
+        })
+    }
+    
+    func stopObservingChanges() {
+        database.child(self.details.path).removeAllObservers()
+        database.child(self.people.path).removeAllObservers()
     }
     
 }

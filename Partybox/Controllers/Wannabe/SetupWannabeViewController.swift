@@ -6,7 +6,6 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
-import Firebase
 import SwiftyJSON
 import UIKit
 
@@ -14,92 +13,91 @@ class SetupWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: SetupWannabeView!
+    var contentView: SetupWannabeView = SetupWannabeView()
     
-    // MARK: - View Controller Methods
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        self.configureNavigationBar()
-        self.startObservingSessionNotification(.partyDetailsChanged, selector: #selector(partyDetailsChangedNotificationObserved))
-        self.startObservingSessionNotification(.partyPeopleChanged, selector: #selector(partyPeopleChangedNotificationObserved))
-        self.startObservingSessionNotification(.gameDetailsChanged, selector: #selector(gameDetailsChangedNotificationObserved))
-        self.startObservingSessionNotification(.gamePeopleChanged, selector: #selector(gamePeopleChangedNotificationObserved))
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.stopObservingSessionNotification(.partyDetailsChanged)
-        self.stopObservingSessionNotification(.partyPeopleChanged)
-        self.stopObservingSessionNotification(.gameDetailsChanged)
-        self.stopObservingSessionNotification(.gamePeopleChanged)
-    }
+    // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = SetupWannabeView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
     
-    // MARK: - Configuration Methods
-    
-    func configureNavigationBar() {
-        self.showNavigationBar()
-        self.setNavigationBarTitle("Setup Wannabe")
-        self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.edgesForExtendedLayout = []
     }
     
-    // MARK: - Navigation Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupStatusBar()
+        self.setupNavigationBar()
+        self.startObservingChanges()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.stopObservingChanges()
+    }
+    
+    // MARK: - Setup Functions
+    
+    func setupStatusBar() {
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    func setupNavigationBar() {
+        self.showNavigationBar()
+        self.setNavigationBarTitle("Play Wannabe")
+        self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
+        self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
+    }
+    
+    // MARK: - Action Functions
     
     @objc func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
     
-    func showStartWannabeViewController() {
-        self.navigationController?.pushViewController(StartWannabeViewController(), animated: true)
+    // MARK: - Notification Functions
+    
+    func startObservingChanges() {
+        let name = Notification.Name(GameNotification.detailsChanged.rawValue)
+        let selector = #selector(gameDetailsChanged)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
-    // MARK: - Notification Methods
-    
-    @objc func partyDetailsChangedNotificationObserved() {
-        
+    func stopObservingChanges() {
+        let name = Notification.Name(GameNotification.detailsChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     
-    @objc func partyPeopleChangedNotificationObserved() {
-        
-    }
-    
-    @objc func gameDetailsChangedNotificationObserved() {
-        if Party.game.details.setup {
-            self.showStartWannabeViewController()
+    @objc func gameDetailsChanged() {
+        if Game.wannabe.details.isSetup {
+            self.navigationController?.pushViewController(StartWannabeViewController(), animated: true)
         }
-    }
-    
-    @objc func gamePeopleChangedNotificationObserved() {
-        
     }
 
 }
 
 extension SetupWannabeViewController: SetupWannabeViewDelegate {
     
-    // MARK: - Setup Wannabe View Delegate
+    // MARK: - Setup Wannabe View Delegate Functions
     
-    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playGameButtonPressed button: UIButton) {
-        Database.database().reference().child("packs/\(Party.game.details.id)/default").observeSingleEvent(of: .value, with: {
+    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed playButton: UIButton) {
+        let path = "\(DatabaseKey.packs.rawValue)/\(Game.wannabe.details.id)/default"
+        
+        database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
-            guard let snapshotJSON = snapshot.value as? [[String: Any]] else{
-                return
-            }
+            guard let snapshotJSON = snapshot.value as? [[String: Any]] else{ return }
             
             let packJSON = JSON(snapshotJSON)
+            Game.wannabe.pack = WannabePack(JSON: packJSON)
+            Game.wannabe.details.isSetup = true
+            Game.wannabe.details.rounds = 3
             
-            Party.game.details.rounds = 3
-            Party.game.details.setup = true
-            Party.game.pack = WannabePack(JSON: packJSON)
-            Party.synchronize()
+            let path = "\(DatabaseKey.games.rawValue)"
+            database.child(path).updateChildValues(Game.json)
         })
     }
     

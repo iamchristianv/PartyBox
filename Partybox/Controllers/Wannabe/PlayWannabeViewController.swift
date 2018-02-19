@@ -12,87 +12,86 @@ class PlayWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: PlayWannabeView!
+    var contentView: PlayWannabeView = PlayWannabeView()
     
-    // MARK: - View Controller Methods
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        self.configureNavigationBar()
-        self.startObservingSessionNotification(.partyDetailsChanged, selector: #selector(partyDetailsChangedNotificationObserved))
-        self.startObservingSessionNotification(.partyPeopleChanged, selector: #selector(partyPeopleChangedNotificationObserved))
-        self.startObservingSessionNotification(.gameDetailsChanged, selector: #selector(gameDetailsChangedNotificationObserved))
-        self.startObservingSessionNotification(.gamePeopleChanged, selector: #selector(gamePeopleChangedNotificationObserved))
-        
-        if Party.userHost {
-            Party.game.details.card = Party.game.pack.randomCard()
-            Party.synchronize()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.stopObservingSessionNotification(.partyDetailsChanged)
-        self.stopObservingSessionNotification(.partyPeopleChanged)
-        self.stopObservingSessionNotification(.gameDetailsChanged)
-        self.stopObservingSessionNotification(.gamePeopleChanged)
-    }
+    // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = PlayWannabeView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
     
-    // MARK: - Configuration Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.edgesForExtendedLayout = []
+    }
     
-    func configureNavigationBar() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupStatusBar()
+        self.setupNavigationBar()
+        self.startObservingChanges()
+        
+        if User.name == Party.details.hostName {
+            //Session.game.details.card = Party.game.pack.randomCard()
+            //Session.synchronize()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.stopObservingChanges()
+    }
+    
+    // MARK: - Setup Functions
+    
+    func setupStatusBar() {
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle("Wannabe")
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
+        self.setNavigationBarRightButton(title: "hint", target: self, action: #selector(leaveButtonPressed))
+        self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
     
-    // MARK: - Navigation Methods
+    // MARK: - Action Functions
     
     @objc func leaveButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
     
-    func showVoteWannabeViewController() {
-        self.navigationController?.pushViewController(VoteWannabeViewController(), animated: true)
+    // MARK: - Notification Functions
+    
+    func startObservingChanges() {
+        let name = Notification.Name(GameNotification.detailsChanged.rawValue)
+        let selector = #selector(gameDetailsChanged)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
-    // MARK: - Notification Methods
-    
-    @objc func partyDetailsChangedNotificationObserved() {
-        
+    func stopObservingChanges() {
+        let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     
-    @objc func partyPeopleChangedNotificationObserved() {
-        
-    }
-    
-    @objc func gameDetailsChangedNotificationObserved() {
+    @objc func gameDetailsChanged() {
         self.contentView.tableView.reloadData()
         
-        if !Party.game.details.card.content.isEmpty && !Party.game.details.card.type.isEmpty {
-            Party.startCountdown(seconds: Party.game.details.roundLength)
-        }
-    }
-    
-    @objc func gamePeopleChangedNotificationObserved() {
-        
+//        if !game.wannabe.details.card.content.isEmpty && !game.wannabe.details.card.type.isEmpty {
+//            //Party.startCountdown(seconds: Party.game.details.roundLength)
+//        }
     }
 
 }
 
 extension PlayWannabeViewController: PlayWannabeViewDelegate {
     
-    // MARK: - Play Wannabe View Delegate Methods
+    // MARK: - Play Wannabe View Delegate Functions
     
     func playWannabeView(_ playWannabeView: PlayWannabeView, countdownEnded minutes: Int) {
-        self.showVoteWannabeViewController()
+        self.navigationController?.pushViewController(VoteWannabeViewController(), animated: true)
     }
     
 }

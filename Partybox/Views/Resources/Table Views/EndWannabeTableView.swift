@@ -50,9 +50,9 @@ class EndWannabeTableView: UITableView {
     func pointsWonCell() -> PromptTableViewCell {
         let tableViewCell = self.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
         let promptCell = tableViewCell as! PromptTableViewCell
-        let person = Session.game.people.person(name: Party.userName)
+        guard let person = Game.wannabe.people.person(name: User.name) else { return promptCell }
         promptCell.setPrompt("You earned \(person.points) points from playing!")
-        return promptCell
+        return promptCell 
     }
     
     func backToPartyButtonCell(delegate: ButtonTableViewCellDelegate) -> ButtonTableViewCell {

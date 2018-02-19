@@ -10,11 +10,13 @@ import UIKit
 
 protocol PartyViewDelegate {
     
-    // MARK: - Party View Delegate Methods
+    // MARK: - Party View Delegate Functions
     
-    func partyView(_ partyView: PartyView, startGameButtonPressed startGameButton: UIButton)
+    func partyView(_ partyView: PartyView, playButtonPressed: Bool)
     
-    func partyView(_ partyView: PartyView, changeGameButtonPressed changeGameButton: UIButton)
+    func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
+    
+    func partyView(_ partyView: PartyView, kickButtonPressed selectedPersonIndex: Int)
 
 }
 
@@ -28,6 +30,7 @@ class PartyView: UIView {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -35,34 +38,31 @@ class PartyView: UIView {
         tableView.estimatedRowHeight = 50
         tableView.register(InviteCodeTableViewCell.self, forCellReuseIdentifier: InviteCodeTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
-        tableView.register(ActivityTableViewCell.self, forCellReuseIdentifier: ActivityTableViewCell.identifier)
-        tableView.register(ButtonTableViewCell.self, forCellReuseIdentifier: ButtonTableViewCell.identifier)
-        tableView.register(ButtonCollectionTableViewCell.self, forCellReuseIdentifier: ButtonCollectionTableViewCell.identifier)
         tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.identifier)
+        tableView.register(ActivityTableViewCell.self, forCellReuseIdentifier: ActivityTableViewCell.identifier)
+        tableView.register(ButtonCollectionTableViewCell.self, forCellReuseIdentifier: ButtonCollectionTableViewCell.identifier)
         tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: PersonTableViewCell.identifier)
-        tableView.register(GameInstructionsTableViewCell.self, forCellReuseIdentifier: GameInstructionsTableViewCell.identifier)
-        tableView.register(GameCountdownTableViewCell.self, forCellReuseIdentifier: GameCountdownTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
     
     var delegate: PartyViewDelegate!
         
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.configureSubviews()
+        self.setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Setup Functions
     
-    func configureSubviews() {
+    func setupSubviews() {
         self.addSubview(self.tableView)
         
         self.tableView.snp.remakeConstraints({
@@ -75,11 +75,39 @@ class PartyView: UIView {
         })
     }
     
+    // MARK: - Action Functions
+    
+    func reloadTable() {
+        self.tableView.reloadData()
+    }
+    
+}
+
+extension PartyView: UITableViewDelegate {
+    
+    // MARK: - Table View Delegate Functions
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if User.name != Party.details.hostName {
+            return []
+        }
+        
+        let deleteButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
+            (_, indexPath) in
+            
+            self.delegate.partyView(self, kickButtonPressed: indexPath.row - PartyView.staticTableViewCellCount)
+        })
+        
+        deleteButton.backgroundColor = UIColor.Partybox.red
+        
+        return [deleteButton]
+    }
+    
 }
 
 extension PartyView: UITableViewDataSource {
     
-    // MARK: - Table View Data Source Methods
+    // MARK: - Table View Data Source Functions
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -93,6 +121,7 @@ extension PartyView: UITableViewDataSource {
         if indexPath.row == 0 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: InviteCodeTableViewCell.identifier)
             let inviteCodeCell = tableViewCell as! InviteCodeTableViewCell
+            inviteCodeCell.setInviteCode(Party.details.id)
             return inviteCodeCell
         }
         
@@ -106,16 +135,23 @@ extension PartyView: UITableViewDataSource {
         
         if indexPath.row == 2 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier)
-            let partyGameCell = tableViewCell as! GameTableViewCell
-            return partyGameCell
+            let gameCell = tableViewCell as! GameTableViewCell
+            
+            switch Game.type {
+            case .wannabe:
+                gameCell.setName(Game.wannabe.details.name)
+                gameCell.setSummary(Game.wannabe.details.summary)
+            }
+
+            return gameCell
         }
         
         if indexPath.row == 3 {
-            if Party.userHost {
+            if User.name == Party.details.hostName {
                 let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ButtonCollectionTableViewCell.identifier)
                 let buttonCollectionCell = tableViewCell as! ButtonCollectionTableViewCell
-                buttonCollectionCell.setLeftButtonTitle("Start")
-                buttonCollectionCell.setRightButtonTitle("Change")
+                buttonCollectionCell.setTopButtonTitle("Play")
+                buttonCollectionCell.setBottomButtonTitle("Change")
                 buttonCollectionCell.delegate = self
                 return buttonCollectionCell
             }
@@ -138,13 +174,13 @@ extension PartyView: UITableViewDataSource {
         if indexPath.row > 4 {
             let index = indexPath.row - PartyView.staticTableViewCellCount
             
-            let partyPerson = Party.people.person(index: index)
+            guard let partyPerson = Party.people.person(index: index) else { return UITableViewCell() }
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier)
             let partyPersonCell = tableViewCell as! PersonTableViewCell
             partyPersonCell.setName(partyPerson.name)
             partyPersonCell.setFlair(partyPerson.name)
-            partyPersonCell.setEmoji(partyPerson.emoji)
+            partyPersonCell.setEmoji(PartyPeople.randomEmoji())
             partyPersonCell.setPoints(partyPerson.points)
             return partyPersonCell
         }
@@ -156,14 +192,14 @@ extension PartyView: UITableViewDataSource {
 
 extension PartyView: ButtonCollectionTableViewCellDelegate {
     
-    // MARK: - Button Collection Table View Cell Delegate Methods
+    // MARK: - Button Collection Table View Cell Delegate Functions
     
-    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, leftButtonPressed button: UIButton) {
-        self.delegate.partyView(self, startGameButtonPressed: button)
+    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, topButtonPressed button: UIButton) {
+        self.delegate.partyView(self, playButtonPressed: true)
     }
 
-    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, rightButtonPressed button: UIButton) {
-        self.delegate.partyView(self, changeGameButtonPressed: button)
+    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, bottomButtonPressed button: UIButton) {
+        self.delegate.partyView(self, changeButtonPressed: true)
     }
     
 }

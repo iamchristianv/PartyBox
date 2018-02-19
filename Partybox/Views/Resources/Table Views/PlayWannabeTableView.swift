@@ -45,12 +45,12 @@ class PlayWannabeTableView: UITableView {
         let tableViewCell = self.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
         let promptCell = tableViewCell as! PromptTableViewCell
         
-        if Party.userName == Party.game.details.wannabe {
-            promptCell.setPrompt("You're the wannabe!\n\n" + Party.game.details.card.type)
-        }
-        else {
-            promptCell.setPrompt("You're NOT the wannabe!\n\n" + Party.game.details.card.content)
-        }
+//        if Session.user == Party.game.details.wannabe {
+//            promptCell.setPrompt("You're the wannabe!\n\n" + Session.game.details.card.type)
+//        }
+//        else {
+//            promptCell.setPrompt("You're NOT the wannabe!\n\n" + Session.game.details.card.content)
+//        }
         
         return promptCell
     }

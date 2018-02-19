@@ -10,44 +10,6 @@ import UIKit
 
 extension UIViewController {
     
-    // MARK: - Notification Methods
-    
-    func startObservingSessionNotification(_ notification: PartyNotification, selector: Selector) {
-        let name = Notification.Name(notification.rawValue)
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
-        
-        if notification == .partyDetailsChanged {
-            Party.startObservingPartyDetailsChanged()
-        }
-        else if notification == .partyPeopleChanged {
-            Party.startObservingPartyPeopleChanged()
-        }
-        else if notification == .gameDetailsChanged {
-            Party.startObservingGameDetailsChanged()
-        }
-        else if notification == .gamePeopleChanged {
-            Party.startObservingGamePeopleChanged()
-        }
-    }
-    
-    func stopObservingSessionNotification(_ notification: PartyNotification) {
-        let name = Notification.Name(notification.rawValue)
-        NotificationCenter.default.removeObserver(self, name: name, object: nil)
-        
-        if notification == .partyDetailsChanged {
-            Party.stopObservingPartyDetailsChanged()
-        }
-        else if notification == .partyPeopleChanged {
-            Party.stopObservingPartyPeopleChanged()
-        }
-        else if notification == .gameDetailsChanged {
-            Party.stopObservingGameDetailsChanged()
-        }
-        else if notification == .gamePeopleChanged {
-            Party.stopObservingGamePeopleChanged()
-        }
-    }
-    
     // MARK: - Navigation Bar Methods
         
     func showNavigationBar() {
@@ -103,6 +65,86 @@ extension UIViewController {
         self.present(alertViewController, animated: false, completion: nil)
     }
     
+    // MARK: - Notification Functions
+    
+    func startObservingPartyDetailsChanges(selector: Selector) {
+        let name = Notification.Name(PartyNotification.detailsChanged.rawValue)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
+    }
+    
+    func stopObservingPartyDetailsChanges() {
+        let name = Notification.Name(PartyNotification.detailsChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
+    }
+    
+    func startObservingPartyPeopleChanges(selector: Selector) {
+        let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
+    }
+    
+    func stopObservingPartyPeopleChanges() {
+        let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
+    }
+    
+    // MARK: - View Controller Functions
+    
+    func showStartPartyViewController() {
+        let startPartyViewController = StartPartyViewController()
+        let navigationController = UINavigationController(rootViewController: startPartyViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showJoinPartyViewController() {
+        let joinPartyViewController = JoinPartyViewController()
+        let navigationController = UINavigationController(rootViewController: joinPartyViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showFindPartyViewController() {
+        let findPartyViewController = FindPartyViewController()
+        let navigationController = UINavigationController(rootViewController: findPartyViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showStoreViewController() {
+        let storeViewController = StoreViewController()
+        let navigationController = UINavigationController(rootViewController: storeViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showPartyViewController(delegate: PartyViewControllerDelegate) {
+        let partyViewController = PartyViewController()
+        partyViewController.delegate = delegate
+        let navigationController = UINavigationController(rootViewController: partyViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showChangeHostViewController(delegate: ChangeHostViewControllerDelegate) {
+        let changeHostViewController = ChangeHostViewController()
+        changeHostViewController.delegate = delegate
+        let navigationController = UINavigationController(rootViewController: changeHostViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showManagePartyViewController() {
+        let managePartyViewController = ManagePartyViewController()
+        let navigationController = UINavigationController(rootViewController: managePartyViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showSetupWannabeViewController() {
+        let setupWannabeViewController = SetupWannabeViewController()
+        let navigationController = UINavigationController(rootViewController: setupWannabeViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showChangeGameViewController() {
+        let changeGameViewController = ChangeGameViewController()
+        let navigationController = UINavigationController(rootViewController: changeGameViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+        
     func dismissViewController(animated: Bool, completion: (() -> ())?) {
         self.dismiss(animated: animated, completion: completion)
     }

@@ -24,7 +24,7 @@ extension UIColor {
         
         static var black: UIColor = UIColor(red: 70.0/255.0, green: 75.0/255.0, blue: 80.0/255.0, alpha: 1.0)
         
-        static var lightGray: UIColor = UIColor.lightGray
+        static var lightGray: UIColor = UIColor.lightGray.withAlphaComponent(0.5)
         
         static var darkGray: UIColor = UIColor.darkGray
         

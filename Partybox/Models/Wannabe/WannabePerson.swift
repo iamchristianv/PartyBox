@@ -11,11 +11,13 @@ import SwiftyJSON
 
 enum WannabePersonKey: String {
     
+    // MARK: - Database Keys
+    
     case name
     
     case points
     
-    case vote
+    case voteName
     
 }
 
@@ -23,37 +25,31 @@ class WannabePerson {
     
     // MARK: - Instance Properties
     
-    var name: String
+    var name: String = ""
     
-    var points: Int
+    var points: Int = 0
     
-    var vote: String
+    var voteName: String = ""
+    
+    // MARK: - JSON Properties
+    
+    var json: [String: Any] {
+        let json = [
+            self.name: [
+                WannabePersonKey.points.rawValue: self.points,
+                WannabePersonKey.voteName.rawValue: self.voteName
+            ]
+        ] as [String: Any]
+        
+        return json
+    }
     
     // MARK: - Initialization Methods
-    
-    init(name: String) {
-        self.name = name
-        self.points = 0
-        self.vote = ""
-    }
     
     init(name: String, JSON: JSON) {
         self.name = name
         self.points = JSON[WannabePersonKey.points.rawValue].intValue
-        self.vote = JSON[WannabePersonKey.vote.rawValue].stringValue
-    }
-    
-    // MARK: - JSON Methods
-    
-    func toJSON() -> [String : Any] {
-        let JSON = [
-            self.name: [
-                WannabePersonKey.points.rawValue: self.points,
-                WannabePersonKey.vote.rawValue: self.vote
-            ]
-        ] as [String: Any]
-        
-        return JSON
+        self.voteName = JSON[WannabePersonKey.voteName.rawValue].stringValue
     }
     
 }

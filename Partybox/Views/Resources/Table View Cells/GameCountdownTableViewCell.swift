@@ -47,10 +47,10 @@ class GameCountdownTableViewCell: UITableViewCell {
         self.selectionStyle = .none
         self.configureSubviews()
         self.updateCountdownLabel()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(timerChangedNotificationObserved),
-                                               name: Notification.Name(PartyNotification.timerChanged.rawValue),
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(timerChangedNotificationObserved),
+//                                               name: Notification.Name(PartyNotification.timerChanged.rawValue),
+//                                               object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,9 +58,9 @@ class GameCountdownTableViewCell: UITableViewCell {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: Notification.Name(PartyNotification.timerChanged.rawValue),
-                                                  object: nil)
+//        NotificationCenter.default.removeObserver(self,
+//                                                  name: Notification.Name(PartyNotification.timerChanged.rawValue),
+//                                                  object: nil)
     }
     
     // MARK: - Configuration Methods
@@ -93,16 +93,16 @@ class GameCountdownTableViewCell: UITableViewCell {
     @objc func timerChangedNotificationObserved() {
         self.updateCountdownLabel()
         
-        if Party.secondsRemaining == 0 {
-            self.delegate.gameCountdownTableViewCell(self, countdownEnded: 0)
-        }
+//        if Party.secondsRemaining == 0 {
+//            self.delegate.gameCountdownTableViewCell(self, countdownEnded: 0)
+//        }
     }
     
     func updateCountdownLabel() {
-        let minutesRemaining = Party.secondsRemaining / 60
-        let secondsRemaining = Party.secondsRemaining % 60
+//        let minutesRemaining = Party.secondsRemaining / 60
+//        let secondsRemaining = Party.secondsRemaining % 60
         
-        self.countdownLabel.text = String(format: "%02d", minutesRemaining) + ":" + String(format: "%02d", secondsRemaining)
+//        self.countdownLabel.text = String(format: "%02d", minutesRemaining) + ":" + String(format: "%02d", secondsRemaining)
     }
     
     // MARK: - Setter Methods

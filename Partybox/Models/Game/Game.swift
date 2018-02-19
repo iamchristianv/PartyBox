@@ -7,20 +7,62 @@
 //
 
 import Foundation
-import SwiftyJSON
 
-protocol Game {
+enum GameType {
+    
+    // MARK: - Game Types
+    
+    case wannabe
+    
+    // MARK: - Game Type Functions
+    
+    static var collection: [GameType] {
+        return [.wannabe]
+    }
+    
+}
+
+enum GameNotification: String {
+    
+    // MARK: - Notification Types
+    
+    case detailsChanged = "Game/GameDetails/detailsChanged"
+    
+    case peopleChanged = "Game/GamePeople/peopleChanged"
+    
+}
+
+class Game {
     
     // MARK: - Instance Properties
     
-    var details: GameDetails { get set }
+    static var type: GameType = .wannabe
     
-    // MARK: - Initialization Functions
+    static var wannabe: Wannabe = Wannabe()
     
-    init(JSON: JSON)
+    // MARK: - JSON Properties
     
-    // MARK: - JSON Functions
+    static var json: [String: Any] {
+        switch self.type {
+        case .wannabe:
+            return Game.wannabe.json
+        }
+    }
     
-    func toJSON() -> [String: Any]
+    // MARK: - Notification Functions
+    
+    static func startObservingChanges() {
+        switch Game.type {
+        case .wannabe:
+            Game.wannabe.startObservingChanges()
+        }
+    }
+    
+    static func stopObservingChanges() {
+        switch Game.type {
+        case .wannabe:
+            Game.wannabe.stopObservingChanges()
+        }
+    }
     
 }

@@ -27,14 +27,13 @@ class InviteCodeTableViewCell: UITableViewCell {
     
     lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
-        inviteCodeLabel.text = Party.inviteCode
-        inviteCodeLabel.font = UIFont.avenirNextRegular(size: 24)
+        inviteCodeLabel.font = UIFont.avenirNextMedium(size: 24)
         inviteCodeLabel.textColor = UIColor.Partybox.black
         inviteCodeLabel.textAlignment = .center
         return inviteCodeLabel
     }()
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,7 +45,7 @@ class InviteCodeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Configuration Functions
     
     func configureSubviews() {
         self.addSubview(self.inviteCodeTitleLabel)
@@ -66,6 +65,12 @@ class InviteCodeTableViewCell: UITableViewCell {
             make.top.equalTo(self.inviteCodeTitleLabel.snp.bottom)
             make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
+    }
+    
+    // MARK: - Setter Functions
+    
+    func setInviteCode(_ inviteCode: String) {
+        self.inviteCodeLabel.text = inviteCode
     }
 
 }

@@ -10,7 +10,25 @@ import Firebase
 import SnapKit
 import UIKit
 
-let Reference: DatabaseReference = Database.database().reference()
+let user: User = User()
+
+enum DatabaseKey: String {
+    
+    // MARK: - Database Keys
+    
+    case parties
+    
+    case games
+    
+    case packs
+    
+}
+
+let database: DatabaseReference = Database.database().reference()
+
+let party: Party = Party()
+
+let game: Game = Game()
 
 @UIApplicationMain
 class AppDelegate: UIResponder {

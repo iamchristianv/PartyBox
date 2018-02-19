@@ -18,7 +18,6 @@ class GameInstructionsTableViewCell: UITableViewCell {
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = Party.game.details.name
         nameLabel.textColor = .black
         nameLabel.font = UIFont.avenirNextRegular(size: 32)
         nameLabel.textAlignment = .center
@@ -27,7 +26,6 @@ class GameInstructionsTableViewCell: UITableViewCell {
     
     var instructionsLabel: UILabel = {
         let instructionsLabel = UILabel()
-        instructionsLabel.text = Party.game.details.instructions
         instructionsLabel.textColor = .black
         instructionsLabel.font = UIFont.avenirNextRegular(size: 18)
         instructionsLabel.numberOfLines = 0
@@ -35,7 +33,7 @@ class GameInstructionsTableViewCell: UITableViewCell {
         return instructionsLabel
     }()
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,7 +45,7 @@ class GameInstructionsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Configuration Functions
     
     func configureSubviews() {
         self.addSubview(self.nameLabel)
@@ -70,6 +68,16 @@ class GameInstructionsTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.snp.trailing).offset(-16)
             make.bottom.equalTo(self.snp.bottom).offset(-32)
         })
+    }
+    
+    // MARK: - Setter Functions
+    
+    func setName(_ name: String) {
+        self.nameLabel.text = name
+    }
+    
+    func setInstructions(_ instructions: String) {
+        self.instructionsLabel.text = instructions
     }
 
 }

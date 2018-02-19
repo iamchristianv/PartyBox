@@ -24,7 +24,7 @@ class ButtonTableViewCell: UITableViewCell {
     
     var button: ActivityButton = {
         let button = ActivityButton()
-        button.setTitleFont(UIFont.avenirNextRegularName, size: 18)
+        button.setTitleFont(UIFont.avenirNextMediumName, size: 22)
         return button
     }()
     

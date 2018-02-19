@@ -1,18 +1,18 @@
 //
-//  GameTableViewCell.swift
+//  SelectableGameTableViewCell.swift
 //  Partybox
 //
-//  Created by Christian Villa on 11/6/17.
-//  Copyright © 2017 Christian Villa. All rights reserved.
+//  Created by Christian Villa on 2/18/18.
+//  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
 import UIKit
 
-class GameTableViewCell: UITableViewCell {
+class SelectableGameTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: GameTableViewCell.self)
+    static let identifier: String = String(describing: SelectableGameTableViewCell.self)
     
     // MARK: - Instance Properties
     
@@ -32,29 +32,47 @@ class GameTableViewCell: UITableViewCell {
         return summaryLabel
     }()
     
+    lazy var selectableView: SelectableView = {
+        let selectableOuterView = SelectableView()
+        return selectableOuterView
+    }()
+    
+    lazy var underlineLabel: UILabel = {
+        let underlineLabel = UILabel()
+        underlineLabel.backgroundColor = UIColor.Partybox.lightGray
+        return underlineLabel
+    }()
+    
     // MARK: - Initialization Functions
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
-        self.configureSubviews()
+        self.setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Functions
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.selectableView.setSelected(false)
+    }
     
-    func configureSubviews() {
+    // MARK: - Setup Functions
+    
+    func setupSubviews() {
         self.addSubview(self.nameLabel)
         self.addSubview(self.summaryLabel)
-
+        self.addSubview(self.selectableView)
+        self.addSubview(self.underlineLabel)
+        
         self.nameLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.trailing.equalTo(self.selectableView.snp.leading).offset(-16)
             make.top.equalTo(self.snp.top).offset(16)
         })
         
@@ -62,9 +80,27 @@ class GameTableViewCell: UITableViewCell {
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.trailing.equalTo(self.snp.trailing).offset(-16)
+            make.trailing.equalTo(self.selectableView.snp.leading).offset(-16)
             make.top.equalTo(self.nameLabel.snp.bottom).offset(8)
             make.bottom.equalTo(self.snp.bottom).offset(-16)
+        })
+        
+        self.selectableView.snp.remakeConstraints({
+            (make) in
+            
+            make.width.equalTo(32)
+            make.height.equalTo(32)
+            make.centerY.equalTo(self.snp.centerY)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
+        })
+        
+        self.underlineLabel.snp.remakeConstraints({
+            (make) in
+            
+            make.height.equalTo(0.5)
+            make.leading.equalTo(self.snp.leading).offset(16)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom)
         })
     }
     
@@ -76,6 +112,10 @@ class GameTableViewCell: UITableViewCell {
     
     func setSummary(_ summary: String) {
         self.summaryLabel.text = summary
+    }
+    
+    func setSelected(_ selected: Bool) {
+        self.selectableView.setSelected(selected)
     }
 
 }

@@ -11,21 +11,19 @@ import SwiftyJSON
 
 enum WannabeDetailsKey: String {
     
-    case id
+    // MARK: - Database Keys
     
-    case setup
+    case isSetup
     
-    case ready
+    case isReady
     
     case rounds
     
-    case wannabe
-    
-    case card
-    
+    case wannabeName
+        
 }
 
-class WannabeDetails: GameDetails {
+class WannabeDetails {    
     
     // MARK: - Instance Properties
     
@@ -35,43 +33,40 @@ class WannabeDetails: GameDetails {
     
     var summary: String = "Everyone knows what the secret is, except for one person: the wannabe! Find out who the wannabe is!"
     
-    var instructions: String = "This is how you play Wannabe\n\nYou have to do this\n\nAnd this\n\nAnd this, too"
+    var instructions: String = "Wannabe Instructions"
     
-    var setup: Bool = false // settingsReady or readyToStart
+    var isSetup: Bool = false
     
-    var ready: Bool = false // peopleReady or readyToPlay
+    var isReady: Bool = false
     
     var rounds: Int = 0
     
-    var roundLength: Int = 10
+    var wannabeName: String = ""
     
-    var wannabe: String = ""
+    // MARK: - Database Properties
     
-    var card: WannabeCard = WannabeCard(JSON: JSON(""))
-    
-    // MARK: - Initialization Methods
-    
-    init(JSON: JSON) {
-        self.setup = JSON[WannabeDetailsKey.setup.rawValue].boolValue
-        self.ready = JSON[WannabeDetailsKey.ready.rawValue].boolValue
-        self.rounds = JSON[WannabeDetailsKey.rounds.rawValue].intValue
-        self.wannabe = JSON[WannabeDetailsKey.wannabe.rawValue].stringValue
-        self.card = WannabeCard(JSON: JSON[WannabeDetailsKey.card.rawValue])
-    }
-    
-    // MARK: - JSON Methods
-    
-    func toJSON() -> [String : Any] {
-        let JSON = [
-            WannabeDetailsKey.id.rawValue: self.id,
-            WannabeDetailsKey.setup.rawValue: self.setup,
-            WannabeDetailsKey.ready.rawValue: self.ready,
+    var json: [String : Any] {
+        let json = [
+            WannabeDetailsKey.isSetup.rawValue: self.isSetup,
+            WannabeDetailsKey.isReady.rawValue: self.isReady,
             WannabeDetailsKey.rounds.rawValue: self.rounds,
-            WannabeDetailsKey.wannabe.rawValue: self.wannabe,
-            WannabeDetailsKey.card.rawValue: self.card.toJSON()
+            WannabeDetailsKey.wannabeName.rawValue: self.wannabeName,
         ] as [String : Any]
         
-        return JSON
+        return json
+    }
+    
+    var path: String {
+        return "\(DatabaseKey.games.rawValue)/\(Party.details.id)/\(WannabeKey.details.rawValue)"
+    }
+    
+    // MARK: - Initialization Functions
+    
+    init(JSON: JSON) {
+        self.isSetup = JSON[WannabeDetailsKey.isSetup.rawValue].boolValue
+        self.isReady = JSON[WannabeDetailsKey.isReady.rawValue].boolValue
+        self.rounds = JSON[WannabeDetailsKey.rounds.rawValue].intValue
+        self.wannabeName = JSON[WannabeDetailsKey.wannabeName.rawValue].stringValue
     }
     
 }

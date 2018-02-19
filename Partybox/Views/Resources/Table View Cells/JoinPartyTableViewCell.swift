@@ -1,21 +1,20 @@
 //
-//  JoinPartyView.swift
+//  JoinPartyTableViewCell.swift
 //  Partybox
 //
-//  Created by Christian Villa on 10/30/17.
-//  Copyright © 2017 Christian Villa. All rights reserved.
+//  Created by Christian Villa on 2/18/18.
+//  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
 import UIKit
 
-class JoinPartyView: UIView {
+class JoinPartyTableViewCell: UITableViewCell {
     
+    // MARK: - Class Properties
+    
+    static let identifier: String = String(describing: JoinPartyTableViewCell.self)
+
     // MARK: - Instance Properties
-    
-    lazy var backgroundButton: UIButton = {
-        let backgroundButton = UIButton()
-        return backgroundButton
-    }()
     
     lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
@@ -106,20 +105,12 @@ class JoinPartyView: UIView {
         yourNameCharacterCountLabel.textColor = UIColor.lightGray
         return yourNameCharacterCountLabel
     }()
-    
-    lazy var continueButton: ActivityButton = {
-        let continueButton = ActivityButton()
-        continueButton.setTitle("Continue", for: .normal)
-        continueButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
-        continueButton.setBackgroundColor(UIColor.Partybox.blue)
-        return continueButton
-    }()
-    
+
     // MARK: - Initialization Functions
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.setupSubviews()
     }
     
@@ -130,7 +121,6 @@ class JoinPartyView: UIView {
     // MARK: - Setup Functions
     
     func setupSubviews() {
-        self.addSubview(self.backgroundButton)
         self.addSubview(self.inviteCodeLabel)
         self.addSubview(self.inviteCodeTextField)
         self.addSubview(self.inviteCodeCharacterCountLabel)
@@ -141,16 +131,6 @@ class JoinPartyView: UIView {
         self.addSubview(self.yourNameCharacterCountLabel)
         self.addSubview(self.yourNameUnderlineLabel)
         self.addSubview(self.yourNameStatusLabel)
-        self.addSubview(self.continueButton)
-        
-        self.backgroundButton.snp.remakeConstraints({
-            (make) in
-            
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.top.equalTo(self.snp.top)
-            make.bottom.equalTo(self.snp.bottom)
-        })
         
         self.inviteCodeLabel.snp.remakeConstraints({
             (make) in
@@ -236,23 +216,41 @@ class JoinPartyView: UIView {
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
             make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
-        })
-        
-        self.continueButton.snp.remakeConstraints({
-            (make) in
-            
-            make.width.equalTo(220)
-            make.height.equalTo(55)
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.yourNameStatusLabel.snp.bottom).offset(64)
+            make.bottom.equalTo(self.snp.bottom).offset(-32)
         })
     }
     
     // MARK: - Action Functions
     
-    func showInviteCodeStatus(_ status: String) {
+    func hideKeyboard() {
+        self.inviteCodeTextField.resignFirstResponder()
+        self.yourNameTextField.resignFirstResponder()
+    }
+    
+    func inviteCodeValue() -> String? {
+        let inviteCode = self.inviteCodeTextField.text!
+        
+        if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showInviteCodeRequiredStatus()
+            return nil
+        } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
+            self.showInviteCodeInvalidStatus()
+            return nil
+        } else {
+            self.hideInviteCodeStatus()
+            return inviteCode
+        }
+    }
+    
+    func showInviteCodeRequiredStatus() {
         self.inviteCodeUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.inviteCodeStatusLabel.text = status
+        self.inviteCodeStatusLabel.text = "Required"
+        self.inviteCodeStatusLabel.isHidden = false
+    }
+    
+    func showInviteCodeInvalidStatus() {
+        self.inviteCodeUnderlineLabel.backgroundColor = UIColor.Partybox.red
+        self.inviteCodeStatusLabel.text = "No spaces or special characters"
         self.inviteCodeStatusLabel.isHidden = false
     }
     
@@ -262,9 +260,30 @@ class JoinPartyView: UIView {
         self.inviteCodeStatusLabel.isHidden = true
     }
     
-    func showYourNameStatus(_ status: String) {
+    func yourNameValue() -> String? {
+        let userName = self.yourNameTextField.text!
+        
+        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showYourNameRequiredStatus()
+            return nil
+        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+            self.showYourNameInvalidStatus()
+            return nil
+        } else {
+            self.hideYourNameStatus()
+            return userName
+        }
+    }
+    
+    func showYourNameRequiredStatus() {
         self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.yourNameStatusLabel.text = status
+        self.yourNameStatusLabel.text = "Required"
+        self.yourNameStatusLabel.isHidden = false
+    }
+    
+    func showYourNameInvalidStatus() {
+        self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+        self.yourNameStatusLabel.text = "No spaces or special characters"
         self.yourNameStatusLabel.isHidden = false
     }
     
@@ -273,18 +292,10 @@ class JoinPartyView: UIView {
         self.yourNameStatusLabel.text = " "
         self.yourNameStatusLabel.isHidden = true
     }
-    
-    func startAnimatingContinueButton() {
-        self.continueButton.startAnimating()
-    }
-    
-    func stopAnimatingContinueButton() {
-        self.continueButton.stopAnimating()
-    }
-    
+
 }
 
-extension JoinPartyView: UITextFieldDelegate {
+extension JoinPartyTableViewCell: UITextFieldDelegate {
     
     // MARK: - Text Field Delegate Functions
     

@@ -11,12 +11,12 @@ import SwiftyJSON
 
 enum PartyPersonKey: String {
     
-    case name
+    // MARK: - Database Keys
     
     case points
     
-    case ready
-    
+    case isReady
+            
 }
 
 class PartyPerson {
@@ -27,48 +27,27 @@ class PartyPerson {
     
     var points: Int = 0
     
-    var emoji: String = PartyPerson.randomEmoji()
+    var isReady: Bool = false
     
-    var ready: Bool = false
+    // MARK: - JSON Properties
+    
+    var json: [String: Any] {
+        let json = [
+            self.name: [
+                PartyPersonKey.points.rawValue: self.points,
+                PartyPersonKey.isReady.rawValue: self.isReady
+            ]
+        ] as [String: Any]
+        
+        return json
+    }
     
     // MARK: - Initialization Functions
-    
-    init(name: String) {
-        self.name = name
-        self.points = 0
-        self.emoji = PartyPerson.randomEmoji()
-        self.ready = false
-    }
     
     init(name: String, JSON: JSON) {
         self.name = name
         self.points = JSON[PartyPersonKey.points.rawValue].intValue
-        self.emoji = PartyPerson.randomEmoji()
-        self.ready = JSON[PartyPersonKey.ready.rawValue].boolValue
-    }
-    
-    // MARK: - JSON Functions
-    
-    func toJSON() -> [String: Any] {
-        let JSON = [
-            self.name: [
-                PartyPersonKey.points.rawValue: self.points,
-                PartyPersonKey.ready.rawValue: self.ready
-            ]
-        ]
-        
-        return JSON
-    }
-    
-    // MARK: - Utility Functions
-    
-    static func randomEmoji() -> String {
-        let emojis = ["😊"]
-        
-        let randomIndex = Int(arc4random())
-        let randomEmoji = emojis[randomIndex % emojis.count]
-        
-        return randomEmoji
+        self.isReady = JSON[PartyPersonKey.isReady.rawValue].boolValue
     }
     
 }

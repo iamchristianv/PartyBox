@@ -9,121 +9,91 @@
 import Foundation
 import SwiftyJSON
 
-enum PartyPeopleNotification: String {
-    
-    case changed
-    
-}
-
 class PartyPeople {
     
     // MARK: - Instance Properties
     
-    var indexesToNames: [String] = []
+    var people: [PartyPerson] = []
     
-    var namesToPersons: [String: PartyPerson] = [:]
+    var count: Int {
+        return self.people.count
+    }
     
-    var count: Int = 0
+    // MARK: - Database Properties
     
-    var shouldPostNotifications: Bool = false
-    
-    // MARK: - JSON Functions
-    
-    func toJSON() -> [String: Any] {
-        var JSON = [:] as [String: Any]
+    var json: [String: Any] {
+        var json = [:] as [String: Any]
         
-        for person in self.namesToPersons.values {
-            for (name, values) in person.toJSON() {
-                JSON[name] = values
+        for person in self.people {
+            for (name, values) in person.json {
+                json[name] = values
             }
         }
         
-        return JSON
+        return json
     }
     
-    // MARK: - Database Functions
+    // MARK: - Initialization Functions
     
-    func startSynchronizing() {
-        let path = "\(Session.id)/\(SessionKey.party.rawValue)/\(PartyKey.people.rawValue)"
-        
-        Reference.child(path).observe(.value, with: {
-            (snapshot) in
-            
-            guard let values = snapshot.value as? [String: Any] else { return }
-            
-            let people = JSON(values)
-            
-            for (name, values) in people {
-                self.add(PartyPerson(name: name, JSON: values))
-            }
-            
-            if self.shouldPostNotifications {
-                NotificationCenter.default.post(name: Notification.Name(PartyPeopleNotification.changed.rawValue), object: nil)
-            }
-        })
-    }
-    
-    func stopSynchronizing() {
-        let path = "\(Session.id)/\(SessionKey.party.rawValue)/\(PartyKey.people.rawValue)"
-
-        Reference.child(path).removeAllObservers()
-    }
-    
-    // MARK: - Notification Functions
-    
-    func startObservingChanges() {
-        self.shouldPostNotifications = true
-    }
-    
-    func stopObservingChanges() {
-        self.shouldPostNotifications = false
+    init(JSON: JSON) {
+        for (name, personJSON) in JSON {
+            self.add(PartyPerson(name: name, JSON: personJSON))
+        }
     }
     
     // MARK: - People Functions
     
     func add(_ person: PartyPerson) {
-        let name = person.name
-        
-        self.indexesToNames.append(name)
-        self.namesToPersons[name] = person
-        
-        self.count += 1
+        self.people.append(person)
     }
     
     func person(index: Int) -> PartyPerson? {
-        let name = self.indexesToNames[index]
-        let person = self.namesToPersons[name]
+        if index < 0 || index >= self.people.count {
+            return nil
+        }
         
-        return person
+        return self.people[index]
     }
     
     func person(name: String) -> PartyPerson? {
-        let person = self.namesToPersons[name]
+        for person in self.people {
+            if person.name == name {
+                return person
+            }
+        }
         
-        return person
+        return nil
     }
     
     func remove(index: Int) -> PartyPerson? {
-        guard let person = self.person(index: index) else {
+        if index < 0 || index >= self.people.count {
             return nil
         }
         
-        self.indexesToNames.remove(at: index)
-        self.namesToPersons.removeValue(forKey: person.name)
-        
-        self.count -= 1
-        
-        return person
+        return self.people.remove(at: index)
     }
     
     func remove(name: String) -> PartyPerson? {
-        guard let person = self.namesToPersons[name] else {
-            return nil
+        for i in 0 ..< self.people.count {
+            let person = self.people[i]
+            
+            if person.name == name {
+                return person
+            }
         }
         
-        self.count -= 1
+        return nil
+    }
+    
+    // MARK: - Utility Functions
+    
+    static func randomEmoji() -> String {
+        let emojis = ["😊"]
         
-        return person
+        let randomIndex = Int(arc4random())
+        let randomEmoji = emojis[randomIndex % emojis.count]
+        
+        return randomEmoji
     }
     
 }

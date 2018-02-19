@@ -10,13 +10,15 @@ import UIKit
 
 protocol MenuViewDelegate {
     
-    func menuView(_ menuView: MenuView, startPartyButtonPressed startPartyButton: UIButton)
+    // MARK: - Menu View Delegate Functions
     
-    func menuView(_ menuView: MenuView, joinPartyButtonPressed joinPartyButton: UIButton)
+    func menuView(_ menuView: MenuView, startPartyButtonPressed: Bool)
     
-    func menuView(_ menuView: MenuView, findPartyButtonPressed findPartyButton: UIButton)
+    func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool)
     
-    func menuView(_ menuView: MenuView, visitStoreButtonPressed visitStoreButton: UIButton)
+    func menuView(_ menuView: MenuView, findPartyButtonPressed: Bool)
+    
+    func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool)
     
 }
 
@@ -33,7 +35,7 @@ class MenuView: UIView {
     lazy var startPartyButton: ActivityButton = {
         let startPartyButton = ActivityButton()
         startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
+        startPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
         startPartyButton.setBackgroundColor(UIColor.Partybox.red)
         startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         return startPartyButton
@@ -42,7 +44,7 @@ class MenuView: UIView {
     lazy var joinPartyButton: ActivityButton = {
         let joinPartyButton = ActivityButton()
         joinPartyButton.setTitle("Join Party", for: .normal)
-        joinPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
+        joinPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
         joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
@@ -51,7 +53,7 @@ class MenuView: UIView {
     lazy var findPartyButton: ActivityButton = {
         let findPartyButton = ActivityButton()
         findPartyButton.setTitle("Find Party", for: .normal)
-        findPartyButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
+        findPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
         findPartyButton.setBackgroundColor(UIColor.Partybox.purple)
         findPartyButton.addTarget(self, action: #selector(findPartyButtonPressed), for: .touchUpInside)
         return findPartyButton
@@ -60,7 +62,7 @@ class MenuView: UIView {
     lazy var visitStoreButton: ActivityButton = {
         let visitStoreButton = ActivityButton()
         visitStoreButton.setTitle("Visit Store", for: .normal)
-        visitStoreButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
+        visitStoreButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
         visitStoreButton.setBackgroundColor(UIColor.Partybox.green)
         visitStoreButton.addTarget(self, action: #selector(visitStoreButtonPressed), for: .touchUpInside)
         return visitStoreButton
@@ -187,19 +189,19 @@ class MenuView: UIView {
     // MARK: - Action Functions
     
     @objc func startPartyButtonPressed() {
-        self.delegate.menuView(self, startPartyButtonPressed: self.startPartyButton)
+        self.delegate.menuView(self, startPartyButtonPressed: true)
     }
     
     @objc func joinPartyButtonPressed() {
-        self.delegate.menuView(self, joinPartyButtonPressed: self.joinPartyButton)
+        self.delegate.menuView(self, joinPartyButtonPressed: true)
     }
     
     @objc func findPartyButtonPressed() {
-        self.delegate.menuView(self, findPartyButtonPressed: self.findPartyButton)
+        self.delegate.menuView(self, findPartyButtonPressed: true)
     }
     
     @objc func visitStoreButtonPressed() {
-        self.delegate.menuView(self, visitStoreButtonPressed: self.visitStoreButton)
+        self.delegate.menuView(self, visitStoreButtonPressed: true)
     }
     
     // MARK: - Animation Functions
@@ -218,6 +220,22 @@ class MenuView: UIView {
     
     func stopAnimatingJoinPartyButton() {
         self.joinPartyButton.stopAnimating()
+    }
+    
+    func startAnimatingFindPartyButton() {
+        self.findPartyButton.startAnimating()
+    }
+    
+    func stopAnimatingFindPartyButton() {
+        self.findPartyButton.stopAnimating()
+    }
+    
+    func startAnimatingVisitStoreButton() {
+        self.visitStoreButton.startAnimating()
+    }
+    
+    func stopAnimatingVisitStoreButton() {
+        self.visitStoreButton.stopAnimating()
     }
     
     // MARK: - Confetti Functions

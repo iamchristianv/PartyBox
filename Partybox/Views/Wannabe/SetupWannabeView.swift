@@ -10,7 +10,7 @@ import UIKit
 
 protocol SetupWannabeViewDelegate {
     
-    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playGameButtonPressed button: UIButton)
+    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed playButton: UIButton)
     
 }
 
@@ -86,7 +86,7 @@ extension SetupWannabeView: ButtonTableViewCellDelegate {
     // MARK: - Button Table View Cell Delegate Methods
     
     func buttonTableViewCell(_ buttonTableViewCell: ButtonTableViewCell, buttonPressed button: UIButton) {
-        self.delegate.setupWannabeView(self, playGameButtonPressed: button)
+        self.delegate.setupWannabeView(self, playButtonPressed: button)
     }
     
 }

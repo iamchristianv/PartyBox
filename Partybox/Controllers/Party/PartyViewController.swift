@@ -8,168 +8,145 @@
 
 import UIKit
 
+protocol PartyViewControllerDelegate {
+    
+    // MARK: - Party View Controller Delegate Functions
+    
+    func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool)
+    
+}
+
 class PartyViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: PartyView!
+    var contentView: PartyView = PartyView()
     
-    // MARK: - View Controller Methods
+    var delegate: PartyViewControllerDelegate!
+    
+    // MARK: - View Controller Functions
+    
+    override func loadView() {
+        self.contentView.delegate = self
+        self.view = self.contentView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.configureNavigationBar()
-        self.startObservingSessionNotification(.partyDetailsChanged, selector: #selector(partyDetailsChangedNotificationObserved))
-        self.startObservingSessionNotification(.partyPeopleChanged, selector: #selector(partyPeopleChangedNotificationObserved))
-        self.startObservingSessionNotification(.gameDetailsChanged, selector: #selector(gameDetailsChangedNotificationObserved))
-        self.startObservingSessionNotification(.gamePeopleChanged, selector: #selector(gamePeopleChangedNotificationObserved))
+        self.setupNavigationBar()
+        self.startObservingPartyDetailsChanges(selector: #selector(partyDetailsChanged))
+        self.startObservingPartyPeopleChanges(selector: #selector(partyPeopleChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingSessionNotification(.partyDetailsChanged)
-        self.stopObservingSessionNotification(.partyPeopleChanged)
-        self.stopObservingSessionNotification(.gameDetailsChanged)
-        self.stopObservingSessionNotification(.gamePeopleChanged)
+        self.stopObservingPartyDetailsChanges()
+        self.stopObservingPartyPeopleChanges()
     }
     
-    override func loadView() {
-        self.configureContentView()
-    }
+    // MARK: - Setup Functions
     
-    // MARK: - Configuration Methods
-    
-    func configureNavigationBar() {
+    func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle(Party.details.name)
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
         
-        if Party.userHost {
+        if User.name == Party.details.hostName {
             self.setNavigationBarRightButton(title: "manage", target: self, action: #selector(manageButtonPressed))
-        }
-        else {
+        } else {
             self.setNavigationBarRightButton(title: nil, target: nil, action: nil)
         }
         
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
     
-    func configureContentView() {
-        self.contentView = PartyView()
-        self.contentView.delegate = self
-        self.contentView.tableView.delegate = self
-        self.view = self.contentView
-    }
-    
-    // MARK: - Action Methods
+    // MARK: - Navigation Bar Functions
     
     @objc func leaveButtonPressed() {
-        self.showAlert(subject: "Hold on ✋", message: "Are you sure you want to leave the party?", action: "Leave", handler: {
-            if Party.people.count == 1 {
+        let subject = "Hold on ✋"
+        let message = "Are you sure you want to leave the party?"
+        let action = "Leave"
+        self.showAlert(subject: subject, message: message, action: action, handler: {
+            if User.name == Party.details.hostName && Party.people.count > 1 {
+                self.showChangeHostViewController(delegate: self)
+            } else {
+                self.dismissViewController(animated: true, completion: nil)
                 Party.end()
             }
-            
-            if Party.people.count > 1 {
-                Party.leave()
-            }
-            
-            self.dismissViewController(animated: true, completion: nil)
         })
     }
     
     @objc func manageButtonPressed() {
+        self.showManagePartyViewController()
+    }
+    
+    // MARK: - Notification Functions
         
+    @objc func partyDetailsChanged() {
+        self.contentView.reloadTable()
+        self.setupNavigationBar()
     }
     
-    // MARK: - Navigation Methods
-    
-    func showSetupWannabeViewController() {
-        self.present(UINavigationController(rootViewController: SetupWannabeViewController()), animated: true, completion: nil)
-    }
-    
-    func showStartWannabeViewController() {
-        self.present(UINavigationController(rootViewController: StartWannabeViewController()), animated: true, completion: nil)
-    }
-    
-    func showChangeGameViewController() {
+    @objc func partyPeopleChanged() {
+        self.contentView.reloadTable()
         
-    }
-    
-    // MARK: - Notification Methods
-        
-    @objc func partyDetailsChangedNotificationObserved() {
-        self.contentView.tableView.reloadData()
-        self.configureNavigationBar()
-    }
-    
-    @objc func partyPeopleChangedNotificationObserved() {
-        self.contentView.tableView.reloadData()
-    }
-    
-    @objc func gameDetailsChangedNotificationObserved() {
-        self.contentView.tableView.reloadData()
-        
-        if Party.game.details.setup && !Party.game.details.ready {
-            self.showStartWannabeViewController()
+        if Party.people.person(name: User.name) == nil {
+            self.dismissViewController(animated: true, completion: nil)
+            self.delegate.partyViewController(self, userKicked: true)
         }
-    }
-    
-    @objc func gamePeopleChangedNotificationObserved() {
-        
     }
     
 }
 
 extension PartyViewController: PartyViewDelegate {
     
-    // MARK: - Party View Delegate Methods
+    // MARK: - Party View Delegate Functions
     
-    func partyView(_ partyView: PartyView, startGameButtonPressed startGameButton: UIButton) {
-        self.showSetupWannabeViewController()
+    func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
+        switch Game.type {
+        case .wannabe:
+            self.showSetupWannabeViewController()
+        }
     }
     
-    func partyView(_ partyView: PartyView, changeGameButtonPressed changeGameButton: UIButton) {
+    func partyView(_ partyView: PartyView, changeButtonPressed: Bool) {
         self.showChangeGameViewController()
+    }
+    
+    func partyView(_ partyView: PartyView, kickButtonPressed selectedPersonIndex: Int) {
+        guard let person = Party.people.person(index: selectedPersonIndex) else { return }
+        
+        if person.name == User.name {
+            let subject = "Slow down ✋"
+            let message = "You can't kick yourself from your own party"
+            let action = "Okay"
+            self.showAlert(subject: subject, message: message, action: action, handler: nil)
+        } else {
+            let subject = "Slow down ✋"
+            let message = "Are you sure you want to kick them from your party?"
+            let action = "Kick"
+            self.showAlert(subject: subject, message: message, action: action, handler: {
+                let path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.people.rawValue)/\(person.name)"
+                database.child(path).removeValue()
+            })
+        }
     }
     
 }
 
-extension PartyViewController: UITableViewDelegate {
+extension PartyViewController: ChangeHostViewControllerDelegate {
     
-    // MARK: - Table View Delegate Methods
+    // MARK: - Change Host View Controller Delegate Functions
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if !Party.userHost {
-            return []
-        }
-        
-        let deleteButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
-            (action, indexPath) in
-            
-            let person = Party.people.person(index: indexPath.row - PartyView.staticTableViewCellCount)
-            
-            if person.name == Party.userName {
-                self.showAlert(subject: "Slow down ✋",
-                               message: "You can't kick yourself from your own party",
-                               action: "Okay",
-                               handler: nil)
-                return
-            }
-            
-            self.showAlert(subject: "Slow down ✋",
-                           message: "Are you sure you want to kick them from your party?",
-                           action: "Kick",
-                           handler: nil)
-        })
-        
-        deleteButton.backgroundColor = UIColor.Partybox.red
-        
-        return [deleteButton]
+    func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged: Bool) {
+        self.dismissViewController(animated: true, completion: nil)
+        Party.end()
     }
     
 }

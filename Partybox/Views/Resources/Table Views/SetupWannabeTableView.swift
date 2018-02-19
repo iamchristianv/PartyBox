@@ -35,7 +35,8 @@ class SetupWannabeTableView: UITableView {
     func playGameButtonCell(delegate: ButtonTableViewCellDelegate) -> ButtonTableViewCell {
         let tableViewCell = self.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier)
         let buttonCell = tableViewCell as! ButtonTableViewCell
-        buttonCell.setButtonTitle("Play Game")
+        buttonCell.setButtonTitle("Play")
+        buttonCell.setButtonBackgroundColor(UIColor.Partybox.green)
         buttonCell.delegate = delegate
         return buttonCell
     }

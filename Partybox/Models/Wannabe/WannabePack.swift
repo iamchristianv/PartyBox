@@ -15,27 +15,37 @@ class WannabePack {
     
     var cards: [WannabeCard] = []
     
-    // MARK: - Initialization Methods
+    var count: Int {
+        return self.cards.count
+    }
+    
+    // MARK: - JSON Properties
+    
+    var json: [[String: Any]] {
+        var json = [] as [[String: Any]]
+        
+        for card in self.cards {
+            json.append(card.json)
+        }
+        
+        return json
+    }
+    
+    // MARK: - Initialization Functions
     
     init(JSON: JSON) {
         for (_, cardJSON) in JSON {
-            self.cards.append(WannabeCard(JSON: cardJSON))
+            self.add(WannabeCard(JSON: cardJSON))
         }
     }
     
-    // MARK: - JSON Methods
+    // MARK: - Pack Functions
     
-    func toJSON() -> [[String: Any]] {
-        var JSON = [] as [[String: Any]]
-        
-        for card in self.cards {
-            JSON.append(card.toJSON())
-        }
-        
-        return JSON
+    func add(_ card: WannabeCard) {
+        self.cards.append(card)
     }
     
-    // MARK: - Pack Methods
+    // MARK: - Utility Functions
     
     func randomCard() -> WannabeCard {
         let randomIndex = Int(arc4random()) % self.cards.count

@@ -12,9 +12,9 @@ protocol ButtonCollectionTableViewCellDelegate {
     
     // MARK: - Button Collection Table View Cell Delegate Methods
     
-    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, leftButtonPressed button: UIButton)
+    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, topButtonPressed button: UIButton)
     
-    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, rightButtonPressed button: UIButton)
+    func buttonCollectionTableViewCell(_ buttonCollectionTableViewCell: ButtonCollectionTableViewCell, bottomButtonPressed button: UIButton)
     
 }
 
@@ -26,18 +26,18 @@ class ButtonCollectionTableViewCell: UITableViewCell {
     
     // MARK: - Instance Properties
     
-    lazy var leftButton: ActivityButton = {
-        let leftButton = ActivityButton()
-        leftButton.setTitleFont(UIFont.avenirNextMediumName, size: 18)
-        leftButton.setBackgroundColor(UIColor.Partybox.green)
-        return leftButton
+    lazy var topButton: ActivityButton = {
+        let topButton = ActivityButton()
+        topButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        topButton.setBackgroundColor(UIColor.Partybox.green)
+        return topButton
     }()
     
-    lazy var rightButton: ActivityButton = {
-        let rightButton = ActivityButton()
-        rightButton.setTitleFont(UIFont.avenirNextMediumName, size: 18)
-        rightButton.setBackgroundColor(UIColor.Partybox.green)
-        return rightButton
+    lazy var bottomButton: ActivityButton = {
+        let bottomButton = ActivityButton()
+        bottomButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        bottomButton.setBackgroundColor(UIColor.Partybox.green)
+        return bottomButton
     }()
     
     var delegate: ButtonCollectionTableViewCellDelegate!
@@ -57,55 +57,52 @@ class ButtonCollectionTableViewCell: UITableViewCell {
     // MARK: - Configuration Methods
     
     func configureSubviews() {
-        self.addSubview(self.leftButton)
-        self.addSubview(self.rightButton)
+        self.addSubview(self.topButton)
+        self.addSubview(self.bottomButton)
         
-        self.leftButton.snp.remakeConstraints({
+        self.topButton.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(self.rightButton.snp.width)
-            make.height.equalTo(50)
-            make.leading.equalTo(self.snp.leading).offset(24)
-            make.trailing.equalTo(self.rightButton.snp.leading).offset(-24)
+            make.width.equalTo(220)
+            make.height.equalTo(55)
+            make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(self.snp.top).offset(8)
+        })
+        
+        self.topButton.addTarget(self, action: #selector(topButtonPressed), for: .touchUpInside)
+        
+        self.bottomButton.snp.remakeConstraints({
+            (make) in
+            
+            make.width.equalTo(220)
+            make.height.equalTo(55)
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(self.topButton.snp.bottom).offset(24)
             make.bottom.equalTo(self.snp.bottom).offset(-24)
         })
         
-        self.leftButton.addTarget(self, action: #selector(leftButtonPressed), for: .touchUpInside)
-        
-        self.rightButton.snp.remakeConstraints({
-            (make) in
-            
-            make.width.equalTo(self.leftButton.snp.width)
-            make.height.equalTo(50)
-            make.leading.equalTo(self.leftButton.snp.trailing).offset(24)
-            make.trailing.equalTo(self.snp.trailing).offset(-24)
-            make.top.equalTo(self.snp.top).offset(8)
-            make.bottom.equalTo(self.snp.bottom).offset(-24)
-        })
-        
-        self.rightButton.addTarget(self, action: #selector(rightButtonPressed), for: .touchUpInside)
+        self.bottomButton.addTarget(self, action: #selector(bottomButtonPressed), for: .touchUpInside)
 
     }
     
     // MARK: - Action Methods
     
-    @objc func leftButtonPressed() {
-        self.delegate.buttonCollectionTableViewCell(self, leftButtonPressed: self.leftButton)
+    @objc func topButtonPressed() {
+        self.delegate.buttonCollectionTableViewCell(self, topButtonPressed: self.topButton)
     }
     
-    @objc func rightButtonPressed() {
-        self.delegate.buttonCollectionTableViewCell(self, rightButtonPressed: self.rightButton)
+    @objc func bottomButtonPressed() {
+        self.delegate.buttonCollectionTableViewCell(self, bottomButtonPressed: self.bottomButton)
     }
     
     // MARK: - Setter Methods
     
-    func setLeftButtonTitle(_ title: String) {
-        self.leftButton.setTitle(title, for: .normal)
+    func setTopButtonTitle(_ title: String) {
+        self.topButton.setTitle(title, for: .normal)
     }
     
-    func setRightButtonTitle(_ title: String) {
-        self.rightButton.setTitle(title, for: .normal)
+    func setBottomButtonTitle(_ title: String) {
+        self.bottomButton.setTitle(title, for: .normal)
     }
     
 }

@@ -11,7 +11,11 @@ import SwiftyJSON
 
 enum WannabeCardKey: String {
     
+    // MARK: - Database Keys
+    
     case type
+    
+    case hint
     
     case content
     
@@ -21,26 +25,30 @@ class WannabeCard {
     
     // MARK: - Instance Properties
     
-    var type: String
+    var type: String = ""
     
-    var content: String
+    var hint: String = ""
     
-    // MARK: - Initialization Methods
+    var content: String = ""
     
-    init(JSON: JSON) {
-        self.type = JSON[WannabeCardKey.type.rawValue].stringValue
-        self.content = JSON[WannabeCardKey.content.rawValue].stringValue
-    }
+    // MARK: - JSON Properties
     
-    // MARK: - JSON Methods
-    
-    func toJSON() -> [String: Any] {
-        let JSON = [
+    var json: [String: Any] {
+        let json = [
             WannabeCardKey.type.rawValue: self.type,
+            WannabeCardKey.hint.rawValue: self.hint,
             WannabeCardKey.content.rawValue: self.content
         ] as [String: Any]
         
-        return JSON
+        return json
+    }
+    
+    // MARK: - Initialization Functions
+    
+    init(JSON: JSON) {
+        self.type = JSON[WannabeCardKey.type.rawValue].stringValue
+        self.hint = JSON[WannabeCardKey.hint.rawValue].stringValue
+        self.content = JSON[WannabeCardKey.content.rawValue].stringValue
     }
     
 }

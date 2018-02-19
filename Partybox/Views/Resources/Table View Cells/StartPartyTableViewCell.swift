@@ -1,21 +1,20 @@
 //
-//  StartPartyView.swift
+//  StartPartyTableViewCell.swift
 //  Partybox
 //
-//  Created by Christian Villa on 10/30/17.
-//  Copyright © 2017 Christian Villa. All rights reserved.
+//  Created by Christian Villa on 2/18/18.
+//  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
 import UIKit
 
-class StartPartyView: UIView {
+class StartPartyTableViewCell: UITableViewCell {
+    
+    // MARK: - Class Properties
+    
+    static let identifier: String = String(describing: StartPartyTableViewCell.self)
 
     // MARK: - Instance Properties
-    
-    lazy var backgroundButton: UIButton = {
-        let backgroundButton = UIButton()
-        return backgroundButton
-    }()
     
     lazy var partyNameLabel: UILabel = {
         let partyNameLabel = UILabel()
@@ -107,19 +106,11 @@ class StartPartyView: UIView {
         return yourNameCharacterCountLabel
     }()
     
-    lazy var continueButton: ActivityButton = {
-        let continueButton = ActivityButton()
-        continueButton.setTitle("Continue", for: .normal)
-        continueButton.setTitleFont(UIFont.avenirNextRegularName, size: 22)
-        continueButton.setBackgroundColor(UIColor.Partybox.red)
-        return continueButton
-    }()
-    
     // MARK: - Initialization Functions
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         self.setupSubviews()
     }
     
@@ -130,7 +121,6 @@ class StartPartyView: UIView {
     // MARK: - Setup Functions
     
     func setupSubviews() {
-        self.addSubview(self.backgroundButton)
         self.addSubview(self.partyNameLabel)
         self.addSubview(self.partyNameTextField)
         self.addSubview(self.partyNameCharacterCountLabel)
@@ -141,17 +131,7 @@ class StartPartyView: UIView {
         self.addSubview(self.yourNameCharacterCountLabel)
         self.addSubview(self.yourNameUnderlineLabel)
         self.addSubview(self.yourNameStatusLabel)
-        self.addSubview(self.continueButton)
         
-        self.backgroundButton.snp.remakeConstraints({
-            (make) in
-            
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.top.equalTo(self.snp.top)
-            make.bottom.equalTo(self.snp.bottom)
-        })
-
         self.partyNameLabel.snp.remakeConstraints({
             (make) in
             
@@ -236,23 +216,32 @@ class StartPartyView: UIView {
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
             make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
-        })
-        
-        self.continueButton.snp.remakeConstraints({
-            (make) in
-            
-            make.width.equalTo(220)
-            make.height.equalTo(55)
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.yourNameStatusLabel.snp.bottom).offset(64)
+            make.bottom.equalTo(self.snp.bottom).offset(-32)
         })
     }
+        
+    // MARK: - Action Functions
     
-    // MARK: - Status Functions
+    func hideKeyboard() {
+        self.partyNameTextField.resignFirstResponder()
+        self.yourNameTextField.resignFirstResponder()
+    }
     
-    func showPartyNameStatus(_ status: String) {
+    func partyNameValue() -> String? {
+        let partyName = self.partyNameTextField.text!
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showPartyNameRequiredStatus()
+            return nil
+        } else {
+            self.hidePartyNameStatus()
+            return partyName
+        }
+    }
+    
+    func showPartyNameRequiredStatus() {
         self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.partyNameStatusLabel.text = status
+        self.partyNameStatusLabel.text = "Required"
         self.partyNameStatusLabel.isHidden = false
     }
     
@@ -262,9 +251,30 @@ class StartPartyView: UIView {
         self.partyNameStatusLabel.isHidden = true
     }
     
-    func showYourNameStatus(_ status: String) {
+    func yourNameValue() -> String? {
+        let userName = self.yourNameTextField.text!
+        
+        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showYourNameRequiredStatus()
+            return nil
+        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+            self.showYourNameInvalidStatus()
+            return nil
+        } else {
+            self.hideYourNameStatus()
+            return userName
+        }
+    }
+    
+    func showYourNameRequiredStatus() {
         self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.yourNameStatusLabel.text = status
+        self.yourNameStatusLabel.text = "Required"
+        self.yourNameStatusLabel.isHidden = false
+    }
+    
+    func showYourNameInvalidStatus() {
+        self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+        self.yourNameStatusLabel.text = "No spaces or special characters"
         self.yourNameStatusLabel.isHidden = false
     }
     
@@ -273,20 +283,10 @@ class StartPartyView: UIView {
         self.yourNameStatusLabel.text = " "
         self.yourNameStatusLabel.isHidden = true
     }
-    
-    // MARK: - Animation Functions
-    
-    func startAnimatingContinueButton() {
-        self.continueButton.startAnimating()
-    }
-    
-    func stopAnimatingContinueButton() {
-        self.continueButton.stopAnimating()
-    }
 
 }
 
-extension StartPartyView: UITextFieldDelegate {
+extension StartPartyTableViewCell: UITextFieldDelegate {
     
     // MARK: - Text Field Delegate Functions
     
