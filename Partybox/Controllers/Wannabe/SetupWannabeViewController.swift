@@ -47,7 +47,7 @@ class SetupWannabeViewController: UIViewController {
     
     func setupNavigationBar() {
         self.showNavigationBar()
-        self.setNavigationBarTitle("Play Wannabe")
+        self.setNavigationBarTitle("Play Game")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
@@ -84,9 +84,9 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
     // MARK: - Setup Wannabe View Delegate Functions
     
     func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed playButton: UIButton) {
-        let path = "\(DatabaseKey.packs.rawValue)/\(Game.wannabe.details.id)/default"
+        let path = "\(ReferenceKey.packs.rawValue)/\(Game.wannabe.details.id)/default"
         
-        database.child(path).observeSingleEvent(of: .value, with: {
+        Reference.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [[String: Any]] else{ return }
@@ -96,8 +96,8 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
             Game.wannabe.details.isSetup = true
             Game.wannabe.details.rounds = 3
             
-            let path = "\(DatabaseKey.games.rawValue)"
-            database.child(path).updateChildValues(Game.json)
+            let path = "\(ReferenceKey.games.rawValue)"
+            Reference.child(path).updateChildValues(Game.json)
         })
     }
     

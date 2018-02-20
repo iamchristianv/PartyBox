@@ -8,9 +8,25 @@
 
 import UIKit
 
+protocol AlertViewDelegate {
+    
+    // MARK: - Alert View Delegate Functions
+    
+    func alertView(_ alertView: AlertView, backgroundButtonPressed: Bool)
+    
+    func alertView(_ alertView: AlertView, actionButtonPressed: Bool)
+    
+}
+
 class AlertView: UIView {
 
     // MARK: - Instance Properties
+    
+    lazy var backgroundButton: UIButton = {
+        let backgroundButton = UIButton()
+        backgroundButton.addTarget(self, action: #selector(backgroundButtonPressed), for: .touchUpInside)
+        return backgroundButton
+    }()
     
     lazy var containerView: UIView = {
         let containerView = UIView()
@@ -47,6 +63,7 @@ class AlertView: UIView {
         actionButton.setTitle(self.action, for: .normal)
         actionButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
         actionButton.setBackgroundColor(UIColor.Partybox.red)
+        actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         return actionButton
     }()
     
@@ -56,7 +73,9 @@ class AlertView: UIView {
     
     var action: String
     
-    // MARK: - Initialization Methods
+    var delegate: AlertViewDelegate!
+    
+    // MARK: - Initialization Functions
     
     init(subject: String, message: String, action: String) {
         self.subject = subject
@@ -65,17 +84,27 @@ class AlertView: UIView {
         super.init(frame: .zero)
         
         self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.4)
-        self.configureSubviews()
+        self.setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Methods
+    // MARK: - Setup Functions
     
-    func configureSubviews() {
+    func setupSubviews() {
+        self.addSubview(self.backgroundButton)
         self.addSubview(self.containerView)
+        
+        self.backgroundButton.snp.remakeConstraints({
+            (make) in
+            
+            make.leading.equalTo(self.snp.leading)
+            make.trailing.equalTo(self.snp.trailing)
+            make.top.equalTo(self.snp.top)
+            make.bottom.equalTo(self.snp.bottom)
+        })
         
         self.containerView.snp.remakeConstraints({
             (make) in
@@ -109,6 +138,16 @@ class AlertView: UIView {
             make.top.equalTo(self.messageLabel.snp.bottom).offset(24)
             make.bottom.equalTo(self.containerView.snp.bottom).offset(-24)
         })
+    }
+    
+    // MARK: - Action Functions
+    
+    @objc func backgroundButtonPressed() {
+        self.delegate.alertView(self, backgroundButtonPressed: true)
+    }
+    
+    @objc func actionButtonPressed() {
+        self.delegate.alertView(self, actionButtonPressed: true)
     }
     
 }

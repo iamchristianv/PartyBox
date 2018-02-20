@@ -48,7 +48,7 @@ class Wannabe {
     // MARK: - Notification Functions
     
     func startObservingChanges() {
-        database.child(self.details.path).observe(.value, with: {
+        Reference.child(self.details.path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -61,7 +61,7 @@ class Wannabe {
             NotificationCenter.default.post(name: name, object: nil)
         })
         
-        database.child(self.people.path).observe(.value, with: {
+        Reference.child(self.people.path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -76,8 +76,8 @@ class Wannabe {
     }
     
     func stopObservingChanges() {
-        database.child(self.details.path).removeAllObservers()
-        database.child(self.people.path).removeAllObservers()
+        Reference.child(self.details.path).removeAllObservers()
+        Reference.child(self.people.path).removeAllObservers()
     }
     
 }

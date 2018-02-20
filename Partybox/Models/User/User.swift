@@ -10,12 +10,16 @@ import Foundation
 
 class User {
     
+    // MARK: - Shared Instance
+    
+    static var current: User = User()
+    
     // MARK: - Instance Properties
     
-    static var name: String = ""
+    var name: String = ""
     
-    static var points: Int = 0
+    var points: Int = 0
     
-    static var hints: Int = 5
+    var hints: Int = 5
     
 }

@@ -88,7 +88,7 @@ extension PartyView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if User.name != Party.details.hostName {
+        if User.current.name != Party.current.details.hostName {
             return []
         }
         
@@ -114,14 +114,14 @@ extension PartyView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyView.staticTableViewCellCount + Party.people.count
+        return PartyView.staticTableViewCellCount + Party.current.people.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: InviteCodeTableViewCell.identifier)
             let inviteCodeCell = tableViewCell as! InviteCodeTableViewCell
-            inviteCodeCell.setInviteCode(Party.details.id)
+            inviteCodeCell.setInviteCode(Party.current.details.id)
             return inviteCodeCell
         }
         
@@ -147,7 +147,7 @@ extension PartyView: UITableViewDataSource {
         }
         
         if indexPath.row == 3 {
-            if User.name == Party.details.hostName {
+            if User.current.name == Party.current.details.hostName {
                 let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ButtonCollectionTableViewCell.identifier)
                 let buttonCollectionCell = tableViewCell as! ButtonCollectionTableViewCell
                 buttonCollectionCell.setTopButtonTitle("Play")
@@ -174,7 +174,7 @@ extension PartyView: UITableViewDataSource {
         if indexPath.row > 4 {
             let index = indexPath.row - PartyView.staticTableViewCellCount
             
-            guard let partyPerson = Party.people.person(index: index) else { return UITableViewCell() }
+            guard let partyPerson = Party.current.people.person(index: index) else { return UITableViewCell() }
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier)
             let partyPersonCell = tableViewCell as! PersonTableViewCell

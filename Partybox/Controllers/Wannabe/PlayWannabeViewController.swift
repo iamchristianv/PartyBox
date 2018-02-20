@@ -32,7 +32,7 @@ class PlayWannabeViewController: UIViewController {
         self.setupNavigationBar()
         self.startObservingChanges()
         
-        if User.name == Party.details.hostName {
+        if User.current.name == Party.current.details.hostName {
             //Session.game.details.card = Party.game.pack.randomCard()
             //Session.synchronize()
         }

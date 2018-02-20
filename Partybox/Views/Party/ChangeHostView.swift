@@ -41,6 +41,8 @@ class ChangeHostView: UIView {
         return tableView
     }()
     
+    var selectedCell: SelectablePersonTableViewCell?
+    
     lazy var changeButton: ActivityButton = {
         let changeButton = ActivityButton()
         changeButton.setTitle("Change", for: .normal)
@@ -49,8 +51,6 @@ class ChangeHostView: UIView {
         changeButton.addTarget(self, action: #selector(changeButtonPressed), for: .touchUpInside)
         return changeButton
     }()
-    
-    var selectedCell: SelectablePersonTableViewCell?
     
     var delegate: ChangeHostViewDelegate!
     
@@ -94,12 +94,22 @@ class ChangeHostView: UIView {
     
     // MARK: - Action Functions
     
+    @objc func changeButtonPressed() {
+        self.delegate.changeHostView(self, changeButtonPressed: true)
+    }
+    
+    // MARK: - View Functions
+    
     func reloadTable() {
         self.tableView.reloadData()
     }
     
-    @objc func changeButtonPressed() {
-        self.delegate.changeHostView(self, changeButtonPressed: true)
+    func startAnimatingChangeButton() {
+        self.changeButton.startAnimating()
+    }
+    
+    func stopAnimatingChangeButton() {
+        self.changeButton.stopAnimating()
     }
 
 }
@@ -133,7 +143,7 @@ extension ChangeHostView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangeHostView.staticTableViewCellCount + Party.people.count
+        return ChangeHostView.staticTableViewCellCount + Party.current.people.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,7 +168,7 @@ extension ChangeHostView: UITableViewDataSource {
             
             let index = indexPath.row - 2
             
-            if let person = Party.people.person(index: index) {
+            if let person = Party.current.people.person(index: index) {
                 customCell.setName(person.name)
             }
             

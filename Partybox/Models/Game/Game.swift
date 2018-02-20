@@ -34,6 +34,10 @@ enum GameNotification: String {
 
 class Game {
     
+    // MARK: - Shared Instance
+    
+    static var current: Game = Game()
+    
     // MARK: - Instance Properties
     
     static var type: GameType = .wannabe

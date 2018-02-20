@@ -17,7 +17,7 @@ class ChangeGameViewController: UIViewController {
     // MARK: - View Controller Functions
     
     override func loadView() {
-        //self.contentView.delegate = self
+        self.contentView.delegate = self
         self.view = self.contentView
     }
     
@@ -45,6 +45,16 @@ class ChangeGameViewController: UIViewController {
     
     @objc func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
+    }
+    
+}
+
+extension ChangeGameViewController: ChangeGameViewDelegate {
+    
+    // MARK: - Change Game View Delegate Functions
+    
+    func changeGameView(_ changeGameView: ChangeGameView, changeButtonPressed: Bool) {
+        
     }
     
 }

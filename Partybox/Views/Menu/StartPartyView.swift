@@ -92,8 +92,16 @@ class StartPartyView: UIView {
     
     // MARK: - View Functions
     
+    func checkPartyNameField() {
+        self.contentCell.checkPartyNameField()
+    }
+    
     func partyNameValue() -> String? {
         return self.contentCell.partyNameValue()
+    }
+    
+    func checkYourNameField() {
+        self.contentCell.checkYourNameField()
     }
     
     func yourNameValue() -> String? {

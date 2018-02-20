@@ -77,7 +77,7 @@ extension StartWannabeView: UITableViewDataSource {
         }
         
         if indexPath.row == 1 {
-            guard let person = Party.people.person(name: User.name) else { return UITableViewCell() }
+            guard let person = Party.current.people.person(name: User.current.name) else { return UITableViewCell() }
             
             if !person.isReady {
                 return self.tableView.readyToPlayButtonCell(delegate: self)

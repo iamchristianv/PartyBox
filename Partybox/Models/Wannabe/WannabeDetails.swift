@@ -57,7 +57,7 @@ class WannabeDetails {
     }
     
     var path: String {
-        return "\(DatabaseKey.games.rawValue)/\(Party.details.id)/\(WannabeKey.details.rawValue)"
+        return "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(WannabeKey.details.rawValue)"
     }
     
     // MARK: - Initialization Functions

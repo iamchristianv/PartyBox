@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol ChangeGameViewDelegate {
+    
+    // MARK: - Manage Party View Delegate Functions
+    
+    func changeGameView(_ changeGameView: ChangeGameView, changeButtonPressed: Bool)
+    
+}
+
 class ChangeGameView: UIView {
 
     // MARK: - Class Properties
@@ -31,6 +39,8 @@ class ChangeGameView: UIView {
         return tableView
     }()
     
+    var selectedCell: SelectableGameTableViewCell?
+    
     lazy var changeButton: ActivityButton = {
         let changeButton = ActivityButton()
         changeButton.setTitle("Change", for: .normal)
@@ -40,8 +50,8 @@ class ChangeGameView: UIView {
         return changeButton
     }()
     
-    var selectedCell: SelectableGameTableViewCell?
-    
+    var delegate: ChangeGameViewDelegate!
+
     // MARK: - Initialization Functions
     
     override init(frame: CGRect) {
@@ -82,12 +92,22 @@ class ChangeGameView: UIView {
     
     // MARK: - Action Functions
     
+    @objc func changeButtonPressed() {
+        self.delegate.changeGameView(self, changeButtonPressed: true)
+    }
+    
+    // MARK: - View Functions
+    
     func reloadTable() {
         self.tableView.reloadData()
     }
     
-    @objc func changeButtonPressed() {
-        
+    func startAnimatingChangeButton() {
+        self.changeButton.startAnimating()
+    }
+    
+    func stopAnimatingChangeButton() {
+        self.changeButton.stopAnimating()
     }
 
 }

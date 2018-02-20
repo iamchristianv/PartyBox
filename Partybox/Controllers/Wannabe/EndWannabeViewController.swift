@@ -60,7 +60,7 @@ extension EndWannabeViewController: EndWannabeViewDelegate {
     // MARK: - End Wannabe View Delegate Methods
     
     func endWannabeView(_ endWannabeView: EndWannabeView, backToPartyButtonPressed button: UIButton) {
-        if User.name == Party.details.hostName {
+        if User.current.name == Party.current.details.hostName {
             //Session.game = WannabeGame(JSON: JSON(""))
             //Party.synchronize()
         }

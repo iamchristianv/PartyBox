@@ -92,8 +92,16 @@ class JoinPartyView: UIView {
     
     // MARK: - View Functions
     
+    func checkInviteCodeField() {
+        self.contentCell.checkInviteCodeField()
+    }
+    
     func inviteCodeValue() -> String? {
         return self.contentCell.inviteCodeValue()
+    }
+    
+    func checkYourNameField() {
+        self.contentCell.checkYourNameField()
     }
     
     func yourNameValue() -> String? {

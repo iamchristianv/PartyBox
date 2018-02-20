@@ -131,12 +131,33 @@ class ManagePartyTableViewCell: UITableViewCell {
     
     func setPartyName(_ partyName: String) {
         self.partyNameTextField.text = partyName
+        self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - partyName.count)"
     }
     
     // MARK: - Action Functions
     
     func hideKeyboard() {
         self.partyNameTextField.resignFirstResponder()
+    }
+    
+    func checkPartyNameField() {
+        let partyName = self.partyNameTextField.text!
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showPartyNameRequiredStatus()
+        } else {
+            self.hidePartyNameStatus()
+        }
+    }
+    
+    func partyNameValue() -> String? {
+        let partyName = self.partyNameTextField.text!
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+            return nil
+        } else {
+            return partyName
+        }
     }
     
     func showPartyNameRequiredStatus() {

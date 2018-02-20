@@ -10,9 +10,7 @@ import Firebase
 import SnapKit
 import UIKit
 
-let user: User = User()
-
-enum DatabaseKey: String {
+enum ReferenceKey: String {
     
     // MARK: - Database Keys
     
@@ -24,11 +22,7 @@ enum DatabaseKey: String {
     
 }
 
-let database: DatabaseReference = Database.database().reference()
-
-let party: Party = Party()
-
-let game: Game = Game()
+let Reference: DatabaseReference = Database.database().reference()
 
 @UIApplicationMain
 class AppDelegate: UIResponder {

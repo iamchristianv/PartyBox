@@ -17,18 +17,14 @@ class ManagePartyViewController: UIViewController {
     // MARK: - View Controller Functions
     
     override func loadView() {
-        //self.contentView.delegate = self
+        self.contentView.delegate = self
         self.view = self.contentView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.edgesForExtendedLayout = []
+        UIApplication.shared.statusBarStyle = .lightContent
         self.setupNavigationBar()
     }
     
@@ -47,4 +43,36 @@ class ManagePartyViewController: UIViewController {
         self.dismissViewController(animated: true, completion: nil)
     }
 
+}
+
+extension ManagePartyViewController: ManagePartyViewDelegate {
+    
+    // MARK: - Manage Party View Delegate Functions
+    
+    func managePartyView(_ managePartyView: ManagePartyView, saveButtonPressed: Bool) {
+        self.contentView.checkPartyNameField()
+        
+        guard let partyName = self.contentView.partyNameValue() else { return }
+        
+        self.contentView.startAnimatingSaveButton()
+        
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
+        let value = [PartyDetailsKey.name.rawValue: partyName]
+        
+        Reference.child(path).updateChildValues(value, withCompletionBlock: {
+            (error, _) in
+            
+            self.contentView.stopAnimatingSaveButton()
+            
+            if let _ = error {
+                let subject = "Woah woah!"
+                let message = "We were unable to save your changes\n\nPlease try again"
+                let action = "Okay"
+                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+            } else {
+                self.dismissViewController(animated: true, completion: nil)
+            }
+        })
+    }
+    
 }

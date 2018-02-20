@@ -227,14 +227,22 @@ class StartPartyTableViewCell: UITableViewCell {
         self.yourNameTextField.resignFirstResponder()
     }
     
-    func partyNameValue() -> String? {
+    func checkPartyNameField() {
         let partyName = self.partyNameTextField.text!
         
         if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showPartyNameRequiredStatus()
-            return nil
         } else {
             self.hidePartyNameStatus()
+        }
+    }
+    
+    func partyNameValue() -> String? {
+        let partyName = self.partyNameTextField.text!
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+            return nil
+        } else {
             return partyName
         }
     }
@@ -251,17 +259,26 @@ class StartPartyTableViewCell: UITableViewCell {
         self.partyNameStatusLabel.isHidden = true
     }
     
-    func yourNameValue() -> String? {
+    func checkYourNameField() {
         let userName = self.yourNameTextField.text!
         
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showYourNameRequiredStatus()
-            return nil
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.showYourNameInvalidStatus()
-            return nil
         } else {
             self.hideYourNameStatus()
+        }
+    }
+    
+    func yourNameValue() -> String? {
+        let userName = self.yourNameTextField.text!
+        
+        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+            return nil
+        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+            return nil
+        } else {
             return userName
         }
     }

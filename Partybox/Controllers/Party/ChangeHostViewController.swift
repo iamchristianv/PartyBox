@@ -70,7 +70,9 @@ class ChangeHostViewController: UIViewController {
     @objc func partyPeopleChanged() {
         self.contentView.reloadTable()
         
-        if let selectedPersonName = self.selectedPersonName, Party.people.person(name: selectedPersonName) == nil {
+        guard let selectedPersonName = self.selectedPersonName else { return }
+        
+        if Party.current.people.person(name: selectedPersonName) == nil {
             self.selectedPersonName = nil
         }
     }
@@ -87,13 +89,27 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
     
     func changeHostView(_ changeHostView: ChangeHostView, changeButtonPressed: Bool) {
         if let selectedPersonName = self.selectedPersonName {
-            Party.details.hostName = selectedPersonName
+            self.contentView.startAnimatingChangeButton()
             
-            let path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.details.rawValue)/\(PartyDetailsKey.hostName.rawValue)"
-            database.child(path).setValue(selectedPersonName)
+            let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
+            let value = [PartyDetailsKey.hostName.rawValue: selectedPersonName]
             
-            self.dismissViewController(animated: true, completion: nil)
-            self.delegate.changeHostViewController(self, hostChanged: true)
+            Reference.child(path).updateChildValues(value, withCompletionBlock: {
+                (error, _) in
+                
+                self.contentView.stopAnimatingChangeButton()
+                
+                if let _ = error {
+                    let subject = "Woah woah!"
+                    let message = "We were unable to save your changes\n\nPlease try again"
+                    let action = "Okay"
+                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                } else {
+                    self.dismissViewController(animated: true, completion: {
+                        self.delegate.changeHostViewController(self, hostChanged: true)
+                    })
+                }
+            })
         } else {
             let subject = "Woah there!"
             let message = "Please select someone to be the new host"

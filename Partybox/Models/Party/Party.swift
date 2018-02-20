@@ -31,19 +31,23 @@ enum PartyNotification: String {
 
 class Party {
     
+    // MARK: - Shared Instance
+    
+    static var current: Party = Party()
+    
     // MARK: - Instance Properties
     
-    static var details: PartyDetails = PartyDetails(JSON: JSON(""))
+    var details: PartyDetails = PartyDetails(JSON: JSON(""))
     
-    static var people: PartyPeople = PartyPeople(JSON: JSON(""))
+    var people: PartyPeople = PartyPeople(JSON: JSON(""))
         
     // MARK: - Database Properties
     
-    static var json: [String: Any] {
+    var json: [String: Any] {
         let json = [
-            Party.details.id: [
-                PartyKey.details.rawValue: Party.details.json,
-                PartyKey.people.rawValue: Party.people.json
+            Party.current.details.id: [
+                PartyKey.details.rawValue: Party.current.details.json,
+                PartyKey.people.rawValue: Party.current.people.json
             ]
         ] as [String: Any]
         
@@ -52,11 +56,13 @@ class Party {
     
     // MARK: - Database Functions
     
-    static func start(userName: String, partyName: String, callback: @escaping (String?) -> Void) {
-        let id = Party.randomId()
-        let path = "\(DatabaseKey.parties.rawValue)/\(id)"
+    func start(userName: String, partyName: String, callback: @escaping (String?) -> Void) {
+        Party.current = Party()
         
-        database.child(path).observeSingleEvent(of: .value, with: {
+        let id = Party.current.randomId()
+        let path = "\(ReferenceKey.parties.rawValue)/\(id)"
+        
+        Reference.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             if snapshot.exists() {
@@ -64,26 +70,31 @@ class Party {
                 return
             }
             
-            User.name = userName
+            User.current.name = userName
             
-            Party.details.id = id
-            Party.details.name = partyName
-            Party.details.hostName = userName
-            Party.people.add(PartyPerson(name: userName, JSON: JSON("")))
+            Party.current.details.id = id
+            Party.current.details.name = partyName
+            Party.current.details.hostName = userName
+            Party.current.people.add(PartyPerson(name: userName, JSON: JSON("")))
             
-            let path = "\(DatabaseKey.parties.rawValue)"
-            database.child(path).updateChildValues(Party.json)
+            let path = "\(ReferenceKey.parties.rawValue)"
+            let value = Party.current.json
             
-            self.startObservingChanges()
+            Reference.child(path).updateChildValues(value)
+            
+            Party.current.startObservingChanges()
+            
             callback(nil)
         })
     }
     
-    static func start(userName: String, partyId: String, callback: @escaping (String?) -> Void) {
-        let id = partyId
-        let path = "\(DatabaseKey.parties.rawValue)/\(id)"
+    func start(userName: String, partyId: String, callback: @escaping (String?) -> Void) {
+        Party.current = Party()
         
-        database.child(path).observeSingleEvent(of: .value, with: {
+        let id = partyId
+        let path = "\(ReferenceKey.parties.rawValue)/\(id)"
+        
+        Reference.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             if !snapshot.exists() {
@@ -96,78 +107,89 @@ class Party {
                 return
             }
             
-            User.name = userName
+            User.current.name = userName
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
             
             let partyJSON = JSON(snapshotJSON)
-            Party.details = PartyDetails(JSON: JSON(partyJSON[PartyKey.details.rawValue]))
-            Party.people = PartyPeople(JSON: JSON(partyJSON[PartyKey.people.rawValue]))
+            
+            Party.current.details = PartyDetails(JSON: JSON(partyJSON[PartyKey.details.rawValue]))
+            Party.current.people = PartyPeople(JSON: JSON(partyJSON[PartyKey.people.rawValue]))
+            
             let person = PartyPerson(name: userName, JSON: JSON(""))
-            Party.people.add(person)
             
-            let path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.people.rawValue)"
-            database.child(path).updateChildValues(person.json)
+            Party.current.people.add(person)
             
-            self.startObservingChanges()
+            let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
+            let value = person.json
+            
+            Reference.child(path).updateChildValues(value)
+            
+            Party.current.startObservingChanges()
+            
             callback(nil)
         })
     }
     
-    static func end() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)"
+    func end() {
+        var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)"
         
-        if Party.people.count > 1 {
-            path += "/\(PartyKey.people.rawValue)/\(User.name)"
+        if Party.current.people.count > 1 {
+            path += "/\(PartyKey.people.rawValue)/\(User.current.name)"
         }
         
-        self.stopObservingChanges()
-        database.child(path).removeValue()
+        Party.current.stopObservingChanges()
+        
+        Reference.child(path).removeValue()
+        
+        Party.current = Party()
     }
     
     // MARK: - Notification Functions
     
-    static func startObservingChanges() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.details.rawValue)"
+    func startObservingChanges() {
+        var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
         
-        database.child(path).observe(.value, with: {
+        Reference.child(path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
             
-            self.details = PartyDetails(JSON: JSON(snapshotJSON))
+            Party.current.details = PartyDetails(JSON: JSON(snapshotJSON))
             
             let name = Notification.Name(PartyNotification.detailsChanged.rawValue)
+            
             NotificationCenter.default.post(name: name, object: nil)
         })
         
-        path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.people.rawValue)"
+        path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
         
-        database.child(path).observe(.value, with: {
+        Reference.child(path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
             
-            self.people = PartyPeople(JSON: JSON(snapshotJSON))
+            Party.current.people = PartyPeople(JSON: JSON(snapshotJSON))
             
             let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+            
             NotificationCenter.default.post(name: name, object: nil)
         })
     }
     
-    static func stopObservingChanges() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.details.rawValue)"
+    func stopObservingChanges() {
+        var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
         
-        database.child(path).removeAllObservers()
+        Reference.child(path).removeAllObservers()
         
-        path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.people.rawValue)"
+        path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
         
-        database.child(path).removeAllObservers()
+        Reference.child(path).removeAllObservers()
     }
     
     // MARK: - Utility Functions
     
-    static func randomId() -> String {
+    func randomId() -> String {
         var randomId = ""
         
         let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",

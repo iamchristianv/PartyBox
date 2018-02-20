@@ -99,7 +99,7 @@ extension VoteWannabeView: UITableViewDataSource {
         }
         
         if indexPath.row == Game.wannabe.people.count + 1 {
-            guard let person = Game.wannabe.people.person(name: User.name) else { return UITableViewCell() }
+            guard let person = Game.wannabe.people.person(name: User.current.name) else { return UITableViewCell() }
             
             if person.voteName.isEmpty {
                 return self.tableView.voteButtonCell(delegate: self)

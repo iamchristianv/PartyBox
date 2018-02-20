@@ -79,19 +79,19 @@ class StartWannabeViewController: UIViewController {
     @objc func partyPeopleChanged() {
         self.contentView.tableView.reloadData()
         
-        if User.name == Party.details.hostName {
-            for i in 0 ..< Party.people.count {
-                guard let person = Party.people.person(index: i) else { return }
+        if User.current.name == Party.current.details.hostName {
+            for i in 0 ..< Party.current.people.count {
+                guard let person = Party.current.people.person(index: i) else { return }
                 
                 if !person.isReady {
                     return
                 }
             }
             
-            let randomIndex = Int(arc4random()) % Party.people.count
+            let randomIndex = Int(arc4random()) % Party.current.people.count
             
-            for i in 0 ..< Party.people.count {
-                guard let person = Party.people.person(index: i) else { return }
+            for i in 0 ..< Party.current.people.count {
+                guard let person = Party.current.people.person(index: i) else { return }
                 
                 Game.wannabe.people.add(WannabePerson(name: person.name, JSON: JSON("")))
                 
@@ -102,9 +102,9 @@ class StartWannabeViewController: UIViewController {
             
             Game.wannabe.details.isReady = true
             
-            let path = "\(DatabaseKey.games.rawValue)"
+            let path = "\(ReferenceKey.games.rawValue)"
             
-            database.child(path).updateChildValues(Game.json)
+            Reference.child(path).updateChildValues(Game.json)
         }
     }
     
@@ -121,13 +121,13 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
     // MARK: - Start Wannabe View Delegate Functions
     
     func startWannabeView(_ startWannabeView: StartWannabeView, readyToPlayButtonPressed button: UIButton) {
-        guard let person = Party.people.person(name: User.name) else { return }
+        guard let person = Party.current.people.person(name: User.current.name) else { return }
         
         person.isReady = true
         
-        let path = "\(DatabaseKey.parties.rawValue)/\(Party.details.id)/\(PartyKey.people.rawValue)"
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
             
-        database.child(path).updateChildValues(person.json)
+        Reference.child(path).updateChildValues(person.json)
     }
     
 }

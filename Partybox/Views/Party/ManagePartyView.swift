@@ -33,6 +33,8 @@ class ManagePartyView: UIView {
         return tableView
     }()
     
+    var contentCell: ManagePartyTableViewCell!
+    
     lazy var saveButton: ActivityButton = {
         let saveButton = ActivityButton()
         saveButton.setTitle("Save", for: .normal)
@@ -42,7 +44,7 @@ class ManagePartyView: UIView {
         return saveButton
     }()
     
-    var contentCell: ManagePartyTableViewCell!
+    var delegate: ManagePartyViewDelegate!
     
     // MARK: - Initialization Functions
     
@@ -84,12 +86,30 @@ class ManagePartyView: UIView {
     
     // MARK: - Action Functions
     
+    @objc func saveButtonPressed() {
+        self.delegate.managePartyView(self, saveButtonPressed: true)
+    }
+    
+    // MARK: - View Functions
+    
     func reloadTable() {
         self.tableView.reloadData()
     }
     
-    @objc func saveButtonPressed() {
-        
+    func checkPartyNameField() {
+        self.contentCell.checkPartyNameField()
+    }
+    
+    func partyNameValue() -> String? {
+        return self.contentCell.partyNameValue()
+    }
+    
+    func startAnimatingSaveButton() {
+        self.saveButton.startAnimating()
+    }
+    
+    func stopAnimatingSaveButton() {
+        self.saveButton.stopAnimating()
     }
 
 }
@@ -119,7 +139,7 @@ extension ManagePartyView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ManagePartyTableViewCell.identifier)
         self.contentCell = tableViewCell as! ManagePartyTableViewCell
-        self.contentCell.setPartyName(Party.details.name)
+        self.contentCell.setPartyName(Party.current.details.name)
         return self.contentCell
     }
     

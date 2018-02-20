@@ -227,17 +227,26 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.yourNameTextField.resignFirstResponder()
     }
     
-    func inviteCodeValue() -> String? {
+    func checkInviteCodeField() {
         let inviteCode = self.inviteCodeTextField.text!
         
         if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showInviteCodeRequiredStatus()
-            return nil
         } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.showInviteCodeInvalidStatus()
-            return nil
         } else {
             self.hideInviteCodeStatus()
+        }
+    }
+    
+    func inviteCodeValue() -> String? {
+        let inviteCode = self.inviteCodeTextField.text!
+        
+        if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
+            return nil
+        } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
+            return nil
+        } else {
             return inviteCode
         }
     }
@@ -260,17 +269,26 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.inviteCodeStatusLabel.isHidden = true
     }
     
-    func yourNameValue() -> String? {
+    func checkYourNameField() {
         let userName = self.yourNameTextField.text!
         
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showYourNameRequiredStatus()
-            return nil
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.showYourNameInvalidStatus()
-            return nil
         } else {
             self.hideYourNameStatus()
+        }
+    }
+    
+    func yourNameValue() -> String? {
+        let userName = self.yourNameTextField.text!
+        
+        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+            return nil
+        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+            return nil
+        } else {
             return userName
         }
     }
