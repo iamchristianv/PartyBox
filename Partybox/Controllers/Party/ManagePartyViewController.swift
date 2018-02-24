@@ -23,12 +23,16 @@ class ManagePartyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.setupNavigationBar()
+        self.setupViewController()
     }
     
     // MARK: - Setup Functions
+    
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+    }
     
     func setupNavigationBar() {
         self.showNavigationBar()
@@ -56,17 +60,14 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
         
         self.contentView.startAnimatingSaveButton()
         
-        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
-        let value = [PartyDetailsKey.name.rawValue: partyName]
-        
-        Reference.child(path).updateChildValues(value, withCompletionBlock: {
-            (error, _) in
+        Reference.current.setNameForParty(name: partyName, callback: {
+            (error) in
             
             self.contentView.stopAnimatingSaveButton()
             
-            if let _ = error {
+            if let error = error {
                 let subject = "Woah woah!"
-                let message = "We were unable to save your changes\n\nPlease try again"
+                let message = error
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
             } else {

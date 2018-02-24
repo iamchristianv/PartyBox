@@ -22,4 +22,8 @@ class User {
     
     var hints: Int = 5
     
+    var isMember: Bool = false
+    
+    var hasAds: Bool = true
+    
 }

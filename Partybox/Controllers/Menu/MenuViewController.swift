@@ -31,9 +31,7 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .default
-        self.setupNavigationBar()
+        self.setupViewController()
         self.startObservingAuthenticationChanges()
         self.startObservingMotionChanges()
         self.startDroppingConfetti()
@@ -53,6 +51,12 @@ class MenuViewController: UIViewController {
     
     // MARK: - Setup Functions
     
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .default
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+    }
+    
     func setupNavigationBar() {
         self.hideNavigationBar()
     }
@@ -66,12 +70,10 @@ class MenuViewController: UIViewController {
             if user == nil {
                 self.contentView.startAnimatingStartPartyButton()
                 self.contentView.startAnimatingJoinPartyButton()
-                self.contentView.startAnimatingFindPartyButton()
                 self.contentView.startAnimatingVisitStoreButton()
             } else {
                 self.contentView.stopAnimatingStartPartyButton()
                 self.contentView.stopAnimatingJoinPartyButton()
-                self.contentView.stopAnimatingFindPartyButton()
                 self.contentView.stopAnimatingVisitStoreButton()
             }
         })
@@ -121,10 +123,6 @@ extension MenuViewController: MenuViewDelegate {
     
     func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool) {
         self.showJoinPartyViewController()
-    }
-    
-    func menuView(_ menuView: MenuView, findPartyButtonPressed: Bool) {
-        self.showFindPartyViewController()
     }
     
     func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool) {

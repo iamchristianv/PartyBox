@@ -222,6 +222,11 @@ class StartPartyTableViewCell: UITableViewCell {
         
     // MARK: - Action Functions
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.hideKeyboard()
+    }
+    
     func hideKeyboard() {
         self.partyNameTextField.resignFirstResponder()
         self.yourNameTextField.resignFirstResponder()

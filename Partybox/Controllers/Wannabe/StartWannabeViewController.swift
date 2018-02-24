@@ -104,7 +104,7 @@ class StartWannabeViewController: UIViewController {
             
             let path = "\(ReferenceKey.games.rawValue)"
             
-            Reference.child(path).updateChildValues(Game.json)
+            Reference.current.database.child(path).updateChildValues(Game.json)
         }
     }
     
@@ -127,7 +127,7 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
         
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
             
-        Reference.child(path).updateChildValues(person.json)
+        Reference.current.database.child(path).updateChildValues(person.json)
     }
     
 }

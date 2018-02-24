@@ -23,12 +23,16 @@ class JoinPartyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.setupNavigationBar()
+        self.setupViewController()
     }
     
     // MARK: - Setup Functions
+    
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+    }
     
     func setupNavigationBar() {
         self.showNavigationBar()
@@ -58,7 +62,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
         
         self.contentView.startAnimatingJoinButton()
         
-        Party.current.start(userName: userName, partyId: partyId, callback: {
+        Reference.current.joinParty(userName: userName, partyId: partyId, callback: {
             (error) in
             
             self.contentView.stopAnimatingJoinButton()

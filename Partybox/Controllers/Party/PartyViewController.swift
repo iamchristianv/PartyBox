@@ -33,9 +33,7 @@ class PartyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.setupNavigationBar()
+        self.setupViewController()
         self.startObservingPartyDetailsChanges(selector: #selector(partyDetailsChanged))
         self.startObservingPartyPeopleChanges(selector: #selector(partyPeopleChanged))
     }
@@ -47,6 +45,12 @@ class PartyViewController: UIViewController {
     }
     
     // MARK: - Setup Functions
+    
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+    }
     
     func setupNavigationBar() {
         self.showNavigationBar()
@@ -73,7 +77,7 @@ class PartyViewController: UIViewController {
                 self.showChangeHostViewController(delegate: self)
             } else {
                 self.dismissViewController(animated: true, completion: {
-                    Party.current.end()
+                    Reference.current.endParty()
                 })
             }
         })
@@ -129,7 +133,7 @@ extension PartyViewController: PartyViewDelegate {
                     self.showChangeHostViewController(delegate: self)
                 } else {
                     self.dismissViewController(animated: true, completion: {
-                        Party.current.end()
+                        Reference.current.endParty()
                     })
                 }
             })
@@ -138,8 +142,16 @@ extension PartyViewController: PartyViewDelegate {
             let message = "Are you sure you want to kick them from your party?"
             let action = "Kick"
             self.showAlert(subject: subject, message: message, action: action, handler: {
-                let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)/\(person.name)"
-                Reference.child(path).removeValue()
+                Reference.current.removePersonFromParty(name: person.name, callback: {
+                    (error) in
+                    
+                    if let error = error {
+                        let subject = "Uh oh"
+                        let message = error
+                        let action = "Okay"
+                        self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                    }
+                })
             })
         }
     }
@@ -152,7 +164,7 @@ extension PartyViewController: ChangeHostViewControllerDelegate {
     
     func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged: Bool) {
         self.dismissViewController(animated: true, completion: {
-            Party.current.end()
+            Reference.current.endParty()
         })
     }
     

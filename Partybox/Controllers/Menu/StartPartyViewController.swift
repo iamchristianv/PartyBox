@@ -23,12 +23,16 @@ class StartPartyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.setupNavigationBar()
+        self.setupViewController()
     }
     
     // MARK: - Setup Functions
+    
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+    }
     
     func setupNavigationBar() {
         self.showNavigationBar()
@@ -58,9 +62,9 @@ extension StartPartyViewController: StartPartyViewDelegate {
         
         self.contentView.startAnimatingStartButton()
         
-        Party.current.start(userName: userName, partyName: partyName, callback: {
+        Reference.current.startParty(userName: userName, partyName: partyName, callback: {
             (error) in
-             
+            
             self.contentView.stopAnimatingStartButton()
             
             if let error = error {

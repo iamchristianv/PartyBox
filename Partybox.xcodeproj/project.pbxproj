@@ -74,7 +74,6 @@
 		AAFFBDE32038B17100269AB4 /* ManagePartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */; };
 		AAFFBDE52038B18F00269AB4 /* ChangeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */; };
 		AAFFBDE72038B19F00269AB4 /* ChangeHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */; };
-		AAFFBDEB2038B27800269AB4 /* FindPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDEA2038B27800269AB4 /* FindPartyViewController.swift */; };
 		AAFFBDED2038B27F00269AB4 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */; };
 		AAFFBDEF2038B29000269AB4 /* FindPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDEE2038B29000269AB4 /* FindPartyView.swift */; };
 		AAFFBDF12038B2A400269AB4 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF02038B2A400269AB4 /* StoreView.swift */; };
@@ -84,6 +83,7 @@
 		AAFFBDFD203A6E3B00269AB4 /* ManagePartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */; };
 		AAFFBDFF203A841E00269AB4 /* StartPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */; };
 		AAFFBE01203A8D1F00269AB4 /* JoinPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */; };
+		AAFFBE04203FACC600269AB4 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBE03203FACC600269AB4 /* Reference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,7 +157,6 @@
 		AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyView.swift; sourceTree = "<group>"; };
 		AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewController.swift; sourceTree = "<group>"; };
 		AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostView.swift; sourceTree = "<group>"; };
-		AAFFBDEA2038B27800269AB4 /* FindPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPartyViewController.swift; sourceTree = "<group>"; };
 		AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		AAFFBDEE2038B29000269AB4 /* FindPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPartyView.swift; sourceTree = "<group>"; };
 		AAFFBDF02038B2A400269AB4 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyTableViewCell.swift; sourceTree = "<group>"; };
+		AAFFBE03203FACC600269AB4 /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
 		D393AE5C1BCD6658F642EBEE /* Pods-Partybox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partybox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Partybox/Pods-Partybox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -333,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				AAFFBDDB203898A200269AB4 /* User */,
+				AAFFBE02203FACB100269AB4 /* Reference */,
 				AAF6D7FF1FDC965900014CA0 /* Party */,
 				AAFFBDB1202F583400269AB4 /* Game */,
 				AAF6D8001FDC966300014CA0 /* Wannabe */,
@@ -379,9 +380,9 @@
 				AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */,
 				AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */,
 				AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */,
-				AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */,
 				AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */,
 				AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */,
+				AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -455,10 +456,17 @@
 				AA0D152E1FA571C9009E31BF /* MenuViewController.swift */,
 				AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */,
 				AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */,
-				AAFFBDEA2038B27800269AB4 /* FindPartyViewController.swift */,
 				AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		AAFFBE02203FACB100269AB4 /* Reference */ = {
+			isa = PBXGroup;
+			children = (
+				AAFFBE03203FACC600269AB4 /* Reference.swift */,
+			);
+			path = Reference;
 			sourceTree = "<group>";
 		};
 		F9634DE61855F2D1DBAD42A8 /* Frameworks */ = {
@@ -602,7 +610,6 @@
 				AAFFBDFB203A592000269AB4 /* SelectableGameTableViewCell.swift in Sources */,
 				AACD97431FE6F782000275CB /* WannabePack.swift in Sources */,
 				AACD97501FF49623000275CB /* StartWannabeTableView.swift in Sources */,
-				AAFFBDEB2038B27800269AB4 /* FindPartyViewController.swift in Sources */,
 				AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */,
 				AAB053B6200D697B00180209 /* CircleView.swift in Sources */,
 				AAFFBDC2203008AE00269AB4 /* SetupWannabeView.swift in Sources */,
@@ -653,6 +660,7 @@
 				AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */,
 				AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */,
 				AAFFBDCF203008E500269AB4 /* EndWannabeViewController.swift in Sources */,
+				AAFFBE04203FACC600269AB4 /* Reference.swift in Sources */,
 				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
 				AAFFBDEF2038B29000269AB4 /* FindPartyView.swift in Sources */,

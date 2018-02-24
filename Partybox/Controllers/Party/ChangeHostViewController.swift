@@ -33,15 +33,9 @@ class ChangeHostViewController: UIViewController {
         self.view = self.contentView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupNavigationBar()
+        self.setupViewController()
         self.startObservingPartyPeopleChanges(selector: #selector(partyPeopleChanged))
     }
     
@@ -51,6 +45,12 @@ class ChangeHostViewController: UIViewController {
     }
     
     // MARK: - Setup Functions
+    
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+    }
     
     func setupNavigationBar() {
         self.showNavigationBar()
@@ -91,17 +91,14 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
         if let selectedPersonName = self.selectedPersonName {
             self.contentView.startAnimatingChangeButton()
             
-            let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
-            let value = [PartyDetailsKey.hostName.rawValue: selectedPersonName]
-            
-            Reference.child(path).updateChildValues(value, withCompletionBlock: {
-                (error, _) in
+            Reference.current.setHostForParty(name: selectedPersonName, callback: {
+                (error) in
                 
                 self.contentView.stopAnimatingChangeButton()
                 
-                if let _ = error {
+                if let error = error {
                     let subject = "Woah woah!"
-                    let message = "We were unable to save your changes\n\nPlease try again"
+                    let message = error
                     let action = "Okay"
                     self.showAlert(subject: subject, message: message, action: action, handler: nil)
                 } else {

@@ -86,7 +86,7 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
     func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed playButton: UIButton) {
         let path = "\(ReferenceKey.packs.rawValue)/\(Game.wannabe.details.id)/default"
         
-        Reference.child(path).observeSingleEvent(of: .value, with: {
+        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [[String: Any]] else{ return }
@@ -97,7 +97,7 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
             Game.wannabe.details.rounds = 3
             
             let path = "\(ReferenceKey.games.rawValue)"
-            Reference.child(path).updateChildValues(Game.json)
+            Reference.current.database.child(path).updateChildValues(Game.json)
         })
     }
     

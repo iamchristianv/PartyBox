@@ -16,8 +16,6 @@ protocol MenuViewDelegate {
     
     func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool)
     
-    func menuView(_ menuView: MenuView, findPartyButtonPressed: Bool)
-    
     func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool)
     
 }
@@ -48,15 +46,6 @@ class MenuView: UIView {
         joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
-    }()
-    
-    lazy var findPartyButton: ActivityButton = {
-        let findPartyButton = ActivityButton()
-        findPartyButton.setTitle("Find Party", for: .normal)
-        findPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
-        findPartyButton.setBackgroundColor(UIColor.Partybox.purple)
-        findPartyButton.addTarget(self, action: #selector(findPartyButtonPressed), for: .touchUpInside)
-        return findPartyButton
     }()
     
     lazy var visitStoreButton: ActivityButton = {
@@ -139,7 +128,6 @@ class MenuView: UIView {
         self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
-        self.addSubview(self.findPartyButton)
         self.addSubview(self.visitStoreButton)
         
         self.partyboxImageView.snp.remakeConstraints({
@@ -155,7 +143,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(40)
+            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(50)
         })
         
         self.joinPartyButton.snp.remakeConstraints({
@@ -164,16 +152,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.startPartyButton.snp.bottom).offset(16)
-        })
-        
-        self.findPartyButton.snp.remakeConstraints({
-            (make) in
-            
-            make.width.equalTo(220)
-            make.height.equalTo(55)
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.joinPartyButton.snp.bottom).offset(16)
+            make.top.equalTo(self.startPartyButton.snp.bottom).offset(30)
         })
         
         self.visitStoreButton.snp.remakeConstraints({
@@ -196,10 +175,6 @@ class MenuView: UIView {
         self.delegate.menuView(self, joinPartyButtonPressed: true)
     }
     
-    @objc func findPartyButtonPressed() {
-        self.delegate.menuView(self, findPartyButtonPressed: true)
-    }
-    
     @objc func visitStoreButtonPressed() {
         self.delegate.menuView(self, visitStoreButtonPressed: true)
     }
@@ -220,14 +195,6 @@ class MenuView: UIView {
     
     func stopAnimatingJoinPartyButton() {
         self.joinPartyButton.stopAnimating()
-    }
-    
-    func startAnimatingFindPartyButton() {
-        self.findPartyButton.startAnimating()
-    }
-    
-    func stopAnimatingFindPartyButton() {
-        self.findPartyButton.stopAnimating()
     }
     
     func startAnimatingVisitStoreButton() {
