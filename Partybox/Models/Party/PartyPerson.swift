@@ -23,11 +23,11 @@ class PartyPerson {
 
     // MARK: - Instance Properties
     
-    var name: String = ""
+    var name: String
     
-    var points: Int = 0
+    var points: Int
     
-    var isReady: Bool = false
+    var isReady: Bool
     
     // MARK: - JSON Properties
     
@@ -43,6 +43,12 @@ class PartyPerson {
     }
     
     // MARK: - Initialization Functions
+    
+    init() {
+        self.name = ""
+        self.points = 0
+        self.isReady = false
+    }
     
     init(name: String, JSON: JSON) {
         self.name = name

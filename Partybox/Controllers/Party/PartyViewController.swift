@@ -34,12 +34,14 @@ class PartyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.startObservingPartyHostChanges(selector: #selector(partyHostChanged))
         self.startObservingPartyDetailsChanges(selector: #selector(partyDetailsChanged))
         self.startObservingPartyPeopleChanges(selector: #selector(partyPeopleChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.stopObservingPartyHostChanges()
         self.stopObservingPartyDetailsChanges()
         self.stopObservingPartyPeopleChanges()
     }
@@ -69,10 +71,7 @@ class PartyViewController: UIViewController {
     // MARK: - Navigation Bar Functions
     
     @objc func leaveButtonPressed() {
-        let subject = "Hold on ✋"
-        let message = "Are you sure you want to leave the party?"
-        let action = "Leave"
-        self.showAlert(subject: subject, message: message, action: action, handler: {
+        self.showUserWantsToLeavePartyAlert(handler: {
             if User.current.name == Party.current.details.hostName && Party.current.people.count > 1 {
                 self.showChangeHostViewController(delegate: self)
             } else {
@@ -88,6 +87,14 @@ class PartyViewController: UIViewController {
     }
     
     // MARK: - Notification Functions
+    
+    @objc func partyHostChanged() {
+        self.contentView.reloadTable()
+        
+        if Party.current.details.hostName == User.current.name {
+            self.showUserIsNewPartyHostAlert(handler: nil)
+        }
+    }
         
     @objc func partyDetailsChanged() {
         self.contentView.reloadTable()
@@ -121,14 +128,11 @@ extension PartyViewController: PartyViewDelegate {
         self.showChangeGameViewController()
     }
     
-    func partyView(_ partyView: PartyView, kickButtonPressed selectedPersonIndex: Int) {
-        guard let person = Party.current.people.person(index: selectedPersonIndex) else { return }
+    func partyView(_ partyView: PartyView, kickPersonButtonPressed selectedPersonName: String) {
+        guard let person = Party.current.people.person(name: selectedPersonName) else { return }
         
         if person.name == User.current.name {
-            let subject = "Slow down ✋"
-            let message = "Are you sure you want to leave your own party?"
-            let action = "Leave"
-            self.showAlert(subject: subject, message: message, action: action, handler: {
+            self.showUserWantsToLeavePartyAlert(handler: {
                 if User.current.name == Party.current.details.hostName && Party.current.people.count > 1 {
                     self.showChangeHostViewController(delegate: self)
                 } else {
@@ -138,18 +142,12 @@ extension PartyViewController: PartyViewDelegate {
                 }
             })
         } else {
-            let subject = "Slow down ✋"
-            let message = "Are you sure you want to kick them from your party?"
-            let action = "Kick"
-            self.showAlert(subject: subject, message: message, action: action, handler: {
+            self.showUserWantsToKickPersonFromPartyAlert(handler: {
                 Reference.current.removePersonFromParty(name: person.name, callback: {
                     (error) in
                     
                     if let error = error {
-                        let subject = "Uh oh"
-                        let message = error
-                        let action = "Okay"
-                        self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                        self.showErrorAlert(error: error, handler: nil)
                     }
                 })
             })

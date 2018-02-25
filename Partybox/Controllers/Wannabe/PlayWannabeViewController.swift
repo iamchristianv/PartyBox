@@ -72,7 +72,7 @@ class PlayWannabeViewController: UIViewController {
     }
     
     func stopObservingChanges() {
-        let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        let name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     

@@ -11,9 +11,7 @@ import UIKit
 protocol ChangeHostViewDelegate {
     
     // MARK: - Change Host View Controller Delegate Functions
-    
-    func changeHostView(_ changeHostView: ChangeHostView, personSelected selectedPersonName: String)
-    
+        
     func changeHostView(_ changeHostView: ChangeHostView, changeButtonPressed: Bool)
     
 }
@@ -41,8 +39,8 @@ class ChangeHostView: UIView {
         return tableView
     }()
     
-    var selectedCell: SelectablePersonTableViewCell?
-    
+    var selectedPersonName: String = Party.current.details.hostName
+        
     lazy var changeButton: ActivityButton = {
         let changeButton = ActivityButton()
         changeButton.setTitle("Change", for: .normal)
@@ -104,6 +102,8 @@ class ChangeHostView: UIView {
         self.tableView.reloadData()
     }
     
+    // MARK: - Animation Functions
+    
     func startAnimatingChangeButton() {
         self.changeButton.startAnimating()
     }
@@ -119,17 +119,11 @@ extension ChangeHostView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectedCell = self.selectedCell {
-            selectedCell.setSelected(false)
-        }
-        
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let customCell = tableViewCell as! SelectablePersonTableViewCell
         
-        customCell.setSelected(true)
-        
-        self.selectedCell = customCell
-        self.delegate.changeHostView(self, personSelected: customCell.nameLabel.text!)
+        self.selectedPersonName = customCell.nameLabel.text!
+        self.reloadTable()
     }
     
 }
@@ -163,15 +157,14 @@ extension ChangeHostView: UITableViewDataSource {
         }
         
         if indexPath.row > 1 {
+            let index = indexPath.row - ChangeHostView.staticTableViewCellCount
+            
+            guard let person = Party.current.people.person(index: index) else { return UITableViewCell() }
+            
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectablePersonTableViewCell.identifier)
             let customCell = tableViewCell as! SelectablePersonTableViewCell
-            
-            let index = indexPath.row - 2
-            
-            if let person = Party.current.people.person(index: index) {
-                customCell.setName(person.name)
-            }
-            
+            customCell.setName(person.name)
+            customCell.setSelected(person.name == self.selectedPersonName)
             return customCell
         }
         

@@ -13,7 +13,7 @@ class PartyPeople {
     
     // MARK: - Instance Properties
     
-    var people: [PartyPerson] = []
+    var people: [PartyPerson]
     
     var count: Int {
         return self.people.count
@@ -35,7 +35,13 @@ class PartyPeople {
     
     // MARK: - Initialization Functions
     
+    init() {
+        self.people = []
+    }
+    
     init(JSON: JSON) {
+        self.people = []
+        
         for (name, personJSON) in JSON {
             self.add(PartyPerson(name: name, JSON: personJSON))
         }

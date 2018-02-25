@@ -28,6 +28,7 @@ class JoinPartyView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.register(JoinPartyTableViewCell.self, forCellReuseIdentifier: JoinPartyTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
@@ -86,27 +87,37 @@ class JoinPartyView: UIView {
     
     // MARK: - Action Functions
     
+    @objc func tableViewTapped() {
+        self.hideKeyboard()
+    }
+    
     @objc func joinButtonPressed() {
         self.delegate.joinPartyView(self, joinButtonPressed: true)
     }
     
     // MARK: - View Functions
     
-    func checkInviteCodeField() {
-        self.contentCell.checkInviteCodeField()
+    func hideKeyboard() {
+        self.contentCell.hideKeyboard()
     }
     
     func inviteCodeValue() -> String? {
         return self.contentCell.inviteCodeValue()
     }
     
-    func checkYourNameField() {
-        self.contentCell.checkYourNameField()
+    func checkInviteCodeField() {
+        self.contentCell.checkInviteCodeField()
     }
     
     func yourNameValue() -> String? {
         return self.contentCell.yourNameValue()
     }
+    
+    func checkYourNameField() {
+        self.contentCell.checkYourNameField()
+    }
+    
+    // MARK: - Animation Functions
     
     func startAnimatingJoinButton() {
         self.joinButton.startAnimating()
@@ -123,7 +134,7 @@ extension JoinPartyView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.contentCell.hideKeyboard()
+        self.hideKeyboard()
     }
     
 }

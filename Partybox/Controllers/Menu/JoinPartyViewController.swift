@@ -68,10 +68,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
             self.contentView.stopAnimatingJoinButton()
             
             if let error = error {
-                let subject = "Woah there ✋"
-                let message = error
-                let action = "Okay"
-                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                self.showErrorAlert(error: error, handler: nil)
             } else {
                 self.showPartyViewController(delegate: self)
             }
@@ -85,10 +82,7 @@ extension JoinPartyViewController: PartyViewControllerDelegate {
     // MARK: - Party View Controller Delegate Functions
     
     func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
-        let subject = "Whoops!"
-        let message = "You were kicked from the party by the host"
-        let action = "Okay"
-        self.showAlert(subject: subject, message: message, action: action, handler: nil)
+        self.showUserWasKickedFromPartyAlert(handler: nil)
     }
     
 }

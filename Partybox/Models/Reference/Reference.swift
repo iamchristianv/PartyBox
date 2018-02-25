@@ -22,6 +22,18 @@ enum ReferenceKey: String {
     
 }
 
+enum ReferenceNotification: String {
+    
+    // MARK: - Notification Types
+    
+    case partyHostChanged = "Party/PartyDetails/hostChanged"
+    
+    case partyDetailsChanged = "Party/PartyDetails/detailsChanged"
+    
+    case partyPeopleChanged = "Party/PartyPeople/peopleChanged"
+    
+}
+
 class Reference {
     
     // MARK: - Shared Instance
@@ -93,8 +105,17 @@ class Reference {
             Party.current.details = PartyDetails(JSON: JSON(partyJSON[PartyKey.details.rawValue]))
             Party.current.people = PartyPeople(JSON: JSON(partyJSON[PartyKey.people.rawValue]))
             
-            let person = PartyPerson(name: userName, JSON: JSON(""))
+            if Party.current.details.isClosed {
+                callback("The host closed the party\n\nPlease try again later")
+                return
+            }
             
+            if Party.current.people.count >= Party.current.details.capacity {
+                callback("The party has already reached its max capacity\n\nPlease try again later")
+                return
+            }
+            
+            let person = PartyPerson(name: userName, JSON: JSON(""))
             Party.current.people.add(person)
             
             let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
@@ -167,7 +188,40 @@ class Reference {
     // MARK: - Notification Functions
     
     func startObservingPartyChanges() {
-        var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
+        self.startObservingPartyHostChanges()
+        self.startObservingPartyDetailsChanges()
+        self.startObservingPartyPeopleChanges()
+    }
+    
+    func stopObservingPartyChanges() {
+        self.stopObservingPartyHostChanges()
+        self.stopObservingPartyDetailsChanges()
+        self.stopObservingPartyPeopleChanges()
+    }
+    
+    func startObservingPartyHostChanges() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)/\(PartyDetailsKey.hostName.rawValue)"
+        
+        Reference.current.database.child(path).observe(.value, with: {
+            (snapshot) in
+            
+            guard let hostName = snapshot.value as? String else { return }
+            
+            Party.current.details.hostName = hostName
+            
+            let name = Notification.Name(ReferenceNotification.partyHostChanged.rawValue)
+            NotificationCenter.default.post(name: name, object: nil)
+        })
+    }
+    
+    func stopObservingPartyHostChanges() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)/\(PartyDetailsKey.hostName.rawValue)"
+        
+        Reference.current.database.child(path).removeAllObservers()
+    }
+    
+    func startObservingPartyDetailsChanges() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
         
         Reference.current.database.child(path).observe(.value, with: {
             (snapshot) in
@@ -176,12 +230,19 @@ class Reference {
             
             Party.current.details = PartyDetails(JSON: JSON(snapshotJSON))
             
-            let name = Notification.Name(PartyNotification.detailsChanged.rawValue)
-            
+            let name = Notification.Name(ReferenceNotification.partyDetailsChanged.rawValue)
             NotificationCenter.default.post(name: name, object: nil)
         })
+    }
+    
+    func stopObservingPartyDetailsChanges() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
         
-        path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
+        Reference.current.database.child(path).removeAllObservers()
+    }
+    
+    func startObservingPartyPeopleChanges() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
         
         Reference.current.database.child(path).observe(.value, with: {
             (snapshot) in
@@ -190,18 +251,13 @@ class Reference {
             
             Party.current.people = PartyPeople(JSON: JSON(snapshotJSON))
             
-            let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
-            
+            let name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
             NotificationCenter.default.post(name: name, object: nil)
         })
     }
     
-    func stopObservingPartyChanges() {
-        var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
-        
-        Reference.current.database.child(path).removeAllObservers()
-        
-        path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
+    func stopObservingPartyPeopleChanges() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
         
         Reference.current.database.child(path).removeAllObservers()
     }

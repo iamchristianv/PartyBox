@@ -161,7 +161,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.bottom.equalTo(self.snp.bottom).offset(-40)
+            make.top.equalTo(self.joinPartyButton.snp.bottom).offset(30)
         })
     }
     

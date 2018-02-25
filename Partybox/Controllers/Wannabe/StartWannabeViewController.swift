@@ -59,7 +59,7 @@ class StartWannabeViewController: UIViewController {
     // MARK: - Notification Functions
     
     func startObservingChanges() {
-        var name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        var name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
         var selector = #selector(partyPeopleChanged)
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
         
@@ -69,7 +69,7 @@ class StartWannabeViewController: UIViewController {
     }
     
     func stopObservingChanges() {
-        var name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        var name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
         
         name = Notification.Name(GameNotification.detailsChanged.rawValue)

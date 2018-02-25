@@ -75,7 +75,6 @@
 		AAFFBDE52038B18F00269AB4 /* ChangeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */; };
 		AAFFBDE72038B19F00269AB4 /* ChangeHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */; };
 		AAFFBDED2038B27F00269AB4 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */; };
-		AAFFBDEF2038B29000269AB4 /* FindPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDEE2038B29000269AB4 /* FindPartyView.swift */; };
 		AAFFBDF12038B2A400269AB4 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF02038B2A400269AB4 /* StoreView.swift */; };
 		AAFFBDF320392ABE00269AB4 /* SelectablePersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */; };
 		AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF82039326400269AB4 /* SelectableView.swift */; };
@@ -158,7 +157,6 @@
 		AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewController.swift; sourceTree = "<group>"; };
 		AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostView.swift; sourceTree = "<group>"; };
 		AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
-		AAFFBDEE2038B29000269AB4 /* FindPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPartyView.swift; sourceTree = "<group>"; };
 		AAFFBDF02038B2A400269AB4 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectablePersonTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBDF82039326400269AB4 /* SelectableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
@@ -444,7 +442,6 @@
 				AAF73B131FA7FF6700D8A17B /* MenuView.swift */,
 				AAF73B151FA804EA00D8A17B /* StartPartyView.swift */,
 				AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */,
-				AAFFBDEE2038B29000269AB4 /* FindPartyView.swift */,
 				AAFFBDF02038B2A400269AB4 /* StoreView.swift */,
 			);
 			path = Menu;
@@ -663,7 +660,6 @@
 				AAFFBE04203FACC600269AB4 /* Reference.swift in Sources */,
 				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
-				AAFFBDEF2038B29000269AB4 /* FindPartyView.swift in Sources */,
 				AAB053B4200D667A00180209 /* ShapeView.swift in Sources */,
 				AAB053AD200D5F2400180209 /* SquareView.swift in Sources */,
 				AAFFBDB6202F583E00269AB4 /* Game.swift in Sources */,

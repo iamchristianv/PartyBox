@@ -22,8 +22,6 @@ class ChangeHostViewController: UIViewController {
     
     var contentView: ChangeHostView = ChangeHostView()
     
-    var selectedPersonName: String?
-    
     var delegate: ChangeHostViewControllerDelegate!
     
     // MARK: - View Controller Functions
@@ -70,10 +68,9 @@ class ChangeHostViewController: UIViewController {
     @objc func partyPeopleChanged() {
         self.contentView.reloadTable()
         
-        guard let selectedPersonName = self.selectedPersonName else { return }
-        
-        if Party.current.people.person(name: selectedPersonName) == nil {
-            self.selectedPersonName = nil
+        if Party.current.people.person(name: self.contentView.selectedPersonName) == nil {
+            self.contentView.selectedPersonName = Party.current.details.hostName
+            self.contentView.reloadTable()
         }
     }
 
@@ -83,35 +80,25 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
     
     // MARK: - Change Host View Delegate
     
-    func changeHostView(_ changeHostView: ChangeHostView, personSelected selectedPersonName: String) {
-        self.selectedPersonName = selectedPersonName
-    }
-    
     func changeHostView(_ changeHostView: ChangeHostView, changeButtonPressed: Bool) {
-        if let selectedPersonName = self.selectedPersonName {
+        if self.contentView.selectedPersonName == Party.current.details.hostName {
+            self.showUserNeedsToSelectNewHostAlert(handler: nil)
+        } else {
             self.contentView.startAnimatingChangeButton()
             
-            Reference.current.setHostForParty(name: selectedPersonName, callback: {
+            Reference.current.setHostForParty(name: self.contentView.selectedPersonName, callback: {
                 (error) in
                 
                 self.contentView.stopAnimatingChangeButton()
                 
                 if let error = error {
-                    let subject = "Woah woah!"
-                    let message = error
-                    let action = "Okay"
-                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                    self.showErrorAlert(error: error, handler: nil)
                 } else {
                     self.dismissViewController(animated: true, completion: {
                         self.delegate.changeHostViewController(self, hostChanged: true)
                     })
                 }
             })
-        } else {
-            let subject = "Woah there!"
-            let message = "Please select someone to be the new host"
-            let action = "Okay"
-            self.showAlert(subject: subject, message: message, action: action, handler: nil)
         }
     }
     

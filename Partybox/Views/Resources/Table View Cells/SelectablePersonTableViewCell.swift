@@ -46,11 +46,6 @@ class SelectablePersonTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.selectableView.setSelected(false)
-    }
-    
     // MARK: - Setup Functions
     
     func setupSubviews() {
@@ -69,8 +64,8 @@ class SelectablePersonTableViewCell: UITableViewCell {
         self.selectableView.snp.remakeConstraints({
             (make) in
             
-            make.width.equalTo(32)
-            make.height.equalTo(32)
+            make.width.equalTo(35)
+            make.height.equalTo(35)
             make.centerY.equalTo(self.snp.centerY)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
         })

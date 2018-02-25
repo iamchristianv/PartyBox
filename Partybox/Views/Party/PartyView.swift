@@ -16,7 +16,7 @@ protocol PartyViewDelegate {
     
     func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
     
-    func partyView(_ partyView: PartyView, kickButtonPressed selectedPersonIndex: Int)
+    func partyView(_ partyView: PartyView, kickPersonButtonPressed selectedPersonName: String)
 
 }
 
@@ -75,7 +75,7 @@ class PartyView: UIView {
         })
     }
     
-    // MARK: - Action Functions
+    // MARK: - View Functions
     
     func reloadTable() {
         self.tableView.reloadData()
@@ -92,15 +92,19 @@ extension PartyView: UITableViewDelegate {
             return []
         }
         
-        let deleteButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
+        let kickButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
             (_, indexPath) in
             
-            self.delegate.partyView(self, kickButtonPressed: indexPath.row - PartyView.staticTableViewCellCount)
+            let index = indexPath.row - PartyView.staticTableViewCellCount
+            
+            guard let person = Party.current.people.person(index: index) else { return }
+            
+            self.delegate.partyView(self, kickPersonButtonPressed: person.name)
         })
         
-        deleteButton.backgroundColor = UIColor.Partybox.red
+        kickButton.backgroundColor = UIColor.Partybox.red
         
-        return [deleteButton]
+        return [kickButton]
     }
     
 }
@@ -120,55 +124,54 @@ extension PartyView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: InviteCodeTableViewCell.identifier)
-            let inviteCodeCell = tableViewCell as! InviteCodeTableViewCell
-            inviteCodeCell.setInviteCode(Party.current.details.id)
-            return inviteCodeCell
+            let customCell = tableViewCell as! InviteCodeTableViewCell
+            customCell.setInviteCode(Party.current.details.id)
+            return customCell
         }
         
         if indexPath.row == 1 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let headerCell = tableViewCell as! HeaderTableViewCell
-            headerCell.setBackgroundColor(UIColor.Partybox.green)
-            headerCell.setHeader("GAME")
-            return headerCell
+            let customCell = tableViewCell as! HeaderTableViewCell
+            customCell.setBackgroundColor(UIColor.Partybox.green)
+            customCell.setHeader("GAME")
+            return customCell
         }
         
         if indexPath.row == 2 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier)
-            let gameCell = tableViewCell as! GameTableViewCell
+            let customCell = tableViewCell as! GameTableViewCell
             
             switch Game.type {
             case .wannabe:
-                gameCell.setName(Game.wannabe.details.name)
-                gameCell.setSummary(Game.wannabe.details.summary)
+                customCell.setName(Game.wannabe.details.name)
+                customCell.setSummary(Game.wannabe.details.summary)
             }
 
-            return gameCell
+            return customCell
         }
         
         if indexPath.row == 3 {
             if User.current.name == Party.current.details.hostName {
                 let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ButtonCollectionTableViewCell.identifier)
-                let buttonCollectionCell = tableViewCell as! ButtonCollectionTableViewCell
-                buttonCollectionCell.setTopButtonTitle("Play")
-                buttonCollectionCell.setBottomButtonTitle("Change")
-                buttonCollectionCell.delegate = self
-                return buttonCollectionCell
-            }
-            else {
+                let customCell = tableViewCell as! ButtonCollectionTableViewCell
+                customCell.setTopButtonTitle("Play")
+                customCell.setBottomButtonTitle("Change")
+                customCell.delegate = self
+                return customCell
+            } else {
                 let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: ActivityTableViewCell.identifier)
-                let activityCell = tableViewCell as! ActivityTableViewCell
-                activityCell.setPrompt("Waiting for Host to Start Game")
-                return activityCell
+                let customCell = tableViewCell as! ActivityTableViewCell
+                customCell.setPrompt("Waiting for Host to Start Game")
+                return customCell
             }
         }
         
         if indexPath.row == 4 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let headerCell = tableViewCell as! HeaderTableViewCell
-            headerCell.setBackgroundColor(UIColor.Partybox.green)
-            headerCell.setHeader("PEOPLE")
-            return headerCell
+            let customCell = tableViewCell as! HeaderTableViewCell
+            customCell.setBackgroundColor(UIColor.Partybox.green)
+            customCell.setHeader("PEOPLE")
+            return customCell
         }
             
         if indexPath.row > 4 {
@@ -177,12 +180,12 @@ extension PartyView: UITableViewDataSource {
             guard let partyPerson = Party.current.people.person(index: index) else { return UITableViewCell() }
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier)
-            let partyPersonCell = tableViewCell as! PersonTableViewCell
-            partyPersonCell.setName(partyPerson.name)
-            partyPersonCell.setFlair(partyPerson.name)
-            partyPersonCell.setEmoji(PartyPeople.randomEmoji())
-            partyPersonCell.setPoints(partyPerson.points)
-            return partyPersonCell
+            let customCell = tableViewCell as! PersonTableViewCell
+            customCell.setName(partyPerson.name)
+            customCell.setFlair(partyPerson.name)
+            customCell.setEmoji(PartyPeople.randomEmoji())
+            customCell.setPoints(partyPerson.points)
+            return customCell
         }
         
         return UITableViewCell()

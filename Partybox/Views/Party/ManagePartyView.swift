@@ -28,6 +28,7 @@ class ManagePartyView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.register(ManagePartyTableViewCell.self, forCellReuseIdentifier: ManagePartyTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
@@ -86,23 +87,33 @@ class ManagePartyView: UIView {
     
     // MARK: - Action Functions
     
+    @objc func tableViewTapped() {
+        self.hideKeyboard()
+    }
+    
     @objc func saveButtonPressed() {
         self.delegate.managePartyView(self, saveButtonPressed: true)
     }
     
     // MARK: - View Functions
     
+    func hideKeyboard() {
+        self.contentCell.hideKeyboard()
+    }
+    
     func reloadTable() {
         self.tableView.reloadData()
+    }
+    
+    func partyNameValue() -> String? {
+        return self.contentCell.partyNameValue()
     }
     
     func checkPartyNameField() {
         self.contentCell.checkPartyNameField()
     }
     
-    func partyNameValue() -> String? {
-        return self.contentCell.partyNameValue()
-    }
+    // MARK: - Animation Functions
     
     func startAnimatingSaveButton() {
         self.saveButton.startAnimating()
@@ -119,7 +130,7 @@ extension ManagePartyView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.contentCell.hideKeyboard()
+        self.hideKeyboard()
     }
     
 }

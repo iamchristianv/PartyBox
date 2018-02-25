@@ -66,10 +66,7 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
             self.contentView.stopAnimatingSaveButton()
             
             if let error = error {
-                let subject = "Woah woah!"
-                let message = error
-                let action = "Okay"
-                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                self.showErrorAlert(error: error, handler: nil)
             } else {
                 self.dismissViewController(animated: true, completion: nil)
             }

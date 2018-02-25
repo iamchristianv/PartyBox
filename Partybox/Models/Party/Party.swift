@@ -19,16 +19,6 @@ enum PartyKey: String {
         
 }
 
-enum PartyNotification: String {
-    
-    // MARK: - Notification Types
-    
-    case detailsChanged = "Party/PartyDetails/detailsChanged"
-    
-    case peopleChanged = "Party/PartyPeople/peopleChanged"
-    
-}
-
 class Party {
     
     // MARK: - Shared Instance
@@ -37,9 +27,9 @@ class Party {
     
     // MARK: - Instance Properties
     
-    var details: PartyDetails = PartyDetails(JSON: JSON(""))
+    var details: PartyDetails
     
-    var people: PartyPeople = PartyPeople(JSON: JSON(""))
+    var people: PartyPeople
         
     // MARK: - Database Properties
     
@@ -52,6 +42,13 @@ class Party {
         ] as [String: Any]
         
         return json
+    }
+    
+    // MARK: - Initialization Functions
+    
+    init() {
+        self.details = PartyDetails()
+        self.people = PartyPeople()
     }
     
 }

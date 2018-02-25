@@ -28,6 +28,7 @@ class StartPartyView: UIView {
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.register(StartPartyTableViewCell.self, forCellReuseIdentifier: StartPartyTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
@@ -86,27 +87,37 @@ class StartPartyView: UIView {
     
     // MARK: - Action Functions
     
+    @objc func tableViewTapped() {
+        self.hideKeyboard()
+    }
+    
     @objc func startButtonPressed() {
         self.delegate.startPartyView(self, startButtonPressed: true)
     }
     
     // MARK: - View Functions
     
-    func checkPartyNameField() {
-        self.contentCell.checkPartyNameField()
+    func hideKeyboard() {
+        self.contentCell.hideKeyboard()
     }
     
     func partyNameValue() -> String? {
         return self.contentCell.partyNameValue()
     }
     
-    func checkYourNameField() {
-        self.contentCell.checkYourNameField()
+    func checkPartyNameField() {
+        self.contentCell.checkPartyNameField()
     }
     
     func yourNameValue() -> String? {
         return self.contentCell.yourNameValue()
     }
+    
+    func checkYourNameField() {
+        self.contentCell.checkYourNameField()
+    }
+    
+    // MARK: - Animation Functions
     
     func startAnimatingStartButton() {
         self.startButton.startAnimating()
@@ -123,7 +134,7 @@ extension StartPartyView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.contentCell.hideKeyboard() 
+        self.hideKeyboard()
     }
     
 }

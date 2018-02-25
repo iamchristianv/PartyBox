@@ -222,26 +222,9 @@ class JoinPartyTableViewCell: UITableViewCell {
     
     // MARK: - Action Functions
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.hideKeyboard()
-    }
-    
     func hideKeyboard() {
         self.inviteCodeTextField.resignFirstResponder()
         self.yourNameTextField.resignFirstResponder()
-    }
-    
-    func checkInviteCodeField() {
-        let inviteCode = self.inviteCodeTextField.text!
-        
-        if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showInviteCodeRequiredStatus()
-        } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
-            self.showInviteCodeInvalidStatus()
-        } else {
-            self.hideInviteCodeStatus()
-        }
     }
     
     func inviteCodeValue() -> String? {
@@ -253,6 +236,18 @@ class JoinPartyTableViewCell: UITableViewCell {
             return nil
         } else {
             return inviteCode
+        }
+    }
+    
+    func checkInviteCodeField() {
+        let inviteCode = self.inviteCodeTextField.text!
+        
+        if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showInviteCodeRequiredStatus()
+        } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
+            self.showInviteCodeInvalidStatus()
+        } else {
+            self.hideInviteCodeStatus()
         }
     }
     
@@ -274,18 +269,6 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.inviteCodeStatusLabel.isHidden = true
     }
     
-    func checkYourNameField() {
-        let userName = self.yourNameTextField.text!
-        
-        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showYourNameRequiredStatus()
-        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            self.showYourNameInvalidStatus()
-        } else {
-            self.hideYourNameStatus()
-        }
-    }
-    
     func yourNameValue() -> String? {
         let userName = self.yourNameTextField.text!
         
@@ -295,6 +278,18 @@ class JoinPartyTableViewCell: UITableViewCell {
             return nil
         } else {
             return userName
+        }
+    }
+    
+    func checkYourNameField() {
+        let userName = self.yourNameTextField.text!
+        
+        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showYourNameRequiredStatus()
+        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+            self.showYourNameInvalidStatus()
+        } else {
+            self.hideYourNameStatus()
         }
     }
     

@@ -57,23 +57,33 @@ extension UIViewController {
     
     // MARK: - Notification Functions
     
+    func startObservingPartyHostChanges(selector: Selector) {
+        let name = Notification.Name(ReferenceNotification.partyHostChanged.rawValue)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
+    }
+    
+    func stopObservingPartyHostChanges() {
+        let name = Notification.Name(ReferenceNotification.partyHostChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
+    }
+    
     func startObservingPartyDetailsChanges(selector: Selector) {
-        let name = Notification.Name(PartyNotification.detailsChanged.rawValue)
+        let name = Notification.Name(ReferenceNotification.partyDetailsChanged.rawValue)
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
     func stopObservingPartyDetailsChanges() {
-        let name = Notification.Name(PartyNotification.detailsChanged.rawValue)
+        let name = Notification.Name(ReferenceNotification.partyDetailsChanged.rawValue)
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     
     func startObservingPartyPeopleChanges(selector: Selector) {
-        let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        let name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
     func stopObservingPartyPeopleChanges() {
-        let name = Notification.Name(PartyNotification.peopleChanged.rawValue)
+        let name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     
@@ -135,6 +145,50 @@ extension UIViewController {
     
     func popViewController(animated: Bool) {
         self.navigationController?.popViewController(animated: animated)
+    }
+    
+    // MARK: - Alert Functions
+    
+    func showErrorAlert(error: String, handler: (() -> ())?) {
+        let subject = "Whoops!"
+        let message = error
+        let action = "Okay"
+        self.showAlert(subject: subject, message: message, action: action, handler: handler)
+    }
+    
+    func showUserWasKickedFromPartyAlert(handler: (() -> ())?) {
+        let subject = "Whoops!"
+        let message = "You were kicked from the party by the host"
+        let action = "Okay"
+        self.showAlert(subject: subject, message: message, action: action, handler: handler)
+    }
+    
+    func showUserWantsToLeavePartyAlert(handler: (() -> ())?) {
+        let subject = "Woah!"
+        let message = "Are you sure you want to leave the party?"
+        let action = "Leave"
+        self.showAlert(subject: subject, message: message, action: action, handler: handler)
+    }
+    
+    func showUserIsNewPartyHostAlert(handler: (() -> ())?) {
+        let subject = "Woah!"
+        let message = "You are the host of the party\n\nTell your friends to join with the invite code"
+        let action = "Okay"
+        self.showAlert(subject: subject, message: message, action: action, handler: handler)
+    }
+    
+    func showUserWantsToKickPersonFromPartyAlert(handler: (() -> ())?) {
+        let subject = "Slow down ✋"
+        let message = "Are you sure you want to kick them from your party?"
+        let action = "Kick"
+        self.showAlert(subject: subject, message: message, action: action, handler: handler)
+    }
+    
+    func showUserNeedsToSelectNewHostAlert(handler: (() -> ())?) {
+        let subject = "Woah there!"
+        let message = "Please select a new person to be the host before you leave"
+        let action = "Okay"
+        self.showAlert(subject: subject, message: message, action: action, handler: handler)
     }
 
 }

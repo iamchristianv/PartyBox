@@ -220,26 +220,11 @@ class StartPartyTableViewCell: UITableViewCell {
         })
     }
         
-    // MARK: - Action Functions
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.hideKeyboard()
-    }
+    // MARK: - View Functions
     
     func hideKeyboard() {
         self.partyNameTextField.resignFirstResponder()
         self.yourNameTextField.resignFirstResponder()
-    }
-    
-    func checkPartyNameField() {
-        let partyName = self.partyNameTextField.text!
-        
-        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showPartyNameRequiredStatus()
-        } else {
-            self.hidePartyNameStatus()
-        }
     }
     
     func partyNameValue() -> String? {
@@ -249,6 +234,16 @@ class StartPartyTableViewCell: UITableViewCell {
             return nil
         } else {
             return partyName
+        }
+    }
+    
+    func checkPartyNameField() {
+        let partyName = self.partyNameTextField.text!
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showPartyNameRequiredStatus()
+        } else {
+            self.hidePartyNameStatus()
         }
     }
     
@@ -264,18 +259,6 @@ class StartPartyTableViewCell: UITableViewCell {
         self.partyNameStatusLabel.isHidden = true
     }
     
-    func checkYourNameField() {
-        let userName = self.yourNameTextField.text!
-        
-        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showYourNameRequiredStatus()
-        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            self.showYourNameInvalidStatus()
-        } else {
-            self.hideYourNameStatus()
-        }
-    }
-    
     func yourNameValue() -> String? {
         let userName = self.yourNameTextField.text!
         
@@ -285,6 +268,18 @@ class StartPartyTableViewCell: UITableViewCell {
             return nil
         } else {
             return userName
+        }
+    }
+    
+    func checkYourNameField() {
+        let userName = self.yourNameTextField.text!
+        
+        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showYourNameRequiredStatus()
+        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+            self.showYourNameInvalidStatus()
+        } else {
+            self.hideYourNameStatus()
         }
     }
     
