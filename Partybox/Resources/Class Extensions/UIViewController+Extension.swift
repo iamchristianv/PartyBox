@@ -87,6 +87,26 @@ extension UIViewController {
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     
+    func startObservingGameDetailsChanges(selector: Selector) {
+        let name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
+    }
+    
+    func stopObservingGameDetailsChanges() {
+        let name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
+    }
+    
+    func startObservingGamePeopleChanges(selector: Selector) {
+        let name = Notification.Name(ReferenceNotification.gamePeopleChanged.rawValue)
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
+    }
+    
+    func stopObservingGamePeopleChanges() {
+        let name = Notification.Name(ReferenceNotification.gamePeopleChanged.rawValue)
+        NotificationCenter.default.removeObserver(self, name: name, object: nil)
+    }
+    
     // MARK: - View Controller Functions
     
     func showStartPartyViewController() {
@@ -137,6 +157,17 @@ extension UIViewController {
         let setupWannabeViewController = SetupWannabeViewController()
         let navigationController = UINavigationController(rootViewController: setupWannabeViewController)
         self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func showStartWannabeViewController() {
+        let startWannabeViewController = StartWannabeViewController()
+        let navigationController = UINavigationController(rootViewController: startWannabeViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func pushStartWannabeViewController() {
+        let startWannabeViewController = StartWannabeViewController()
+        self.navigationController?.pushViewController(startWannabeViewController, animated: true)
     }
         
     func dismissViewController(animated: Bool, completion: (() -> ())?) {

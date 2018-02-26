@@ -63,7 +63,7 @@ class StartWannabeViewController: UIViewController {
         var selector = #selector(partyPeopleChanged)
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
         
-        name = Notification.Name(GameNotification.detailsChanged.rawValue)
+        name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
         selector = #selector(gameDetailsChanged)
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
@@ -72,7 +72,7 @@ class StartWannabeViewController: UIViewController {
         var name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
         
-        name = Notification.Name(GameNotification.detailsChanged.rawValue)
+        name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
     
@@ -93,23 +93,23 @@ class StartWannabeViewController: UIViewController {
             for i in 0 ..< Party.current.people.count {
                 guard let person = Party.current.people.person(index: i) else { return }
                 
-                Game.wannabe.people.add(WannabePerson(name: person.name, JSON: JSON("")))
+                Game.current.wannabe.people.add(WannabePerson(name: person.name, JSON: JSON("")))
                 
                 if i == randomIndex {
-                    Game.wannabe.details.wannabeName = person.name
+                    Game.current.wannabe.details.wannabeName = person.name
                 }
             }
             
-            Game.wannabe.details.isReady = true
+            Game.current.wannabe.details.isReady = true
             
             let path = "\(ReferenceKey.games.rawValue)"
             
-            Reference.current.database.child(path).updateChildValues(Game.json)
+            Reference.current.database.child(path).updateChildValues(Game.current.json)
         }
     }
     
     @objc func gameDetailsChanged() {
-        if Game.wannabe.details.isReady {
+        if Game.current.wannabe.details.isReady {
             self.navigationController?.pushViewController(PlayWannabeViewController(), animated: true)
         }
     }

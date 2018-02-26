@@ -25,11 +25,11 @@ class Wannabe {
     
     // MARK: - Instance Properties
         
-    var details: WannabeDetails = WannabeDetails(JSON: JSON(""))
+    var details: WannabeDetails
     
-    var people: WannabePeople = WannabePeople(JSON: JSON(""))
+    var people: WannabePeople
     
-    var pack: WannabePack = WannabePack(JSON: JSON(""))
+    var pack: WannabePack
     
     // MARK: - JSON Properties
     
@@ -45,39 +45,12 @@ class Wannabe {
         return json
     }
     
-    // MARK: - Notification Functions
+    // MARK: - Initialization Functions
     
-    func startObservingChanges() {
-        Reference.current.database.child(self.details.path).observe(.value, with: {
-            (snapshot) in
-            
-            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
-            
-            let detailsJSON = JSON(snapshotJSON)
-            
-            self.details = WannabeDetails(JSON: detailsJSON)
-            
-            let name = Notification.Name(GameNotification.detailsChanged.rawValue)
-            NotificationCenter.default.post(name: name, object: nil)
-        })
-        
-        Reference.current.database.child(self.people.path).observe(.value, with: {
-            (snapshot) in
-            
-            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
-            
-            let peopleJSON = JSON(snapshotJSON)
-            
-            self.people = WannabePeople(JSON: peopleJSON)
-            
-            let name = Notification.Name(GameNotification.peopleChanged.rawValue)
-            NotificationCenter.default.post(name: name, object: nil)
-        })
-    }
-    
-    func stopObservingChanges() {
-        Reference.current.database.child(self.details.path).removeAllObservers()
-        Reference.current.database.child(self.people.path).removeAllObservers()
+    init() {
+        self.details = WannabeDetails()
+        self.people = WannabePeople()
+        self.pack = WannabePack()
     }
     
 }

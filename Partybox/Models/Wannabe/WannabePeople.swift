@@ -13,7 +13,7 @@ class WannabePeople {
     
     // MARK: - Instance Properties
 
-    var people: [WannabePerson] = []
+    var people: [WannabePerson]
     
     var count: Int {
         return self.people.count
@@ -33,13 +33,15 @@ class WannabePeople {
         return json
     }
     
-    var path: String {
-        return "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(WannabeKey.people.rawValue)"
-    }
-    
     // MARK: - Initialization Functions
     
+    init() {
+        self.people = []
+    }
+    
     init(JSON: JSON) {
+        self.people = []
+        
         for (name, personJSON) in JSON {
             self.add(WannabePerson(name: name, JSON: personJSON))
         }

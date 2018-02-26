@@ -13,7 +13,7 @@ class WannabePack {
     
     // MARK: - Instance Properties
     
-    var cards: [WannabeCard] = []
+    var cards: [WannabeCard]
     
     var count: Int {
         return self.cards.count
@@ -33,7 +33,13 @@ class WannabePack {
     
     // MARK: - Initialization Functions
     
+    init() {
+        self.cards = []
+    }
+    
     init(JSON: JSON) {
+        self.cards = []
+        
         for (_, cardJSON) in JSON {
             self.add(WannabeCard(JSON: cardJSON))
         }

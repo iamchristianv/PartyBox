@@ -35,13 +35,13 @@ class WannabeDetails {
     
     var instructions: String = "Wannabe Instructions"
     
-    var isSetup: Bool = false
+    var isSetup: Bool
     
-    var isReady: Bool = false
+    var isReady: Bool
     
-    var rounds: Int = 0
+    var rounds: Int
     
-    var wannabeName: String = ""
+    var wannabeName: String
     
     // MARK: - Database Properties
     
@@ -56,11 +56,14 @@ class WannabeDetails {
         return json
     }
     
-    var path: String {
-        return "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(WannabeKey.details.rawValue)"
-    }
-    
     // MARK: - Initialization Functions
+    
+    init() {
+        self.isSetup = false
+        self.isReady = false
+        self.rounds = 0
+        self.wannabeName = ""
+    }
     
     init(JSON: JSON) {
         self.isSetup = JSON[WannabeDetailsKey.isSetup.rawValue].boolValue

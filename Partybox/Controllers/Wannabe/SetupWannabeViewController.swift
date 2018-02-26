@@ -22,27 +22,23 @@ class SetupWannabeViewController: UIViewController {
         self.view = self.contentView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.edgesForExtendedLayout = []
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupStatusBar()
-        self.setupNavigationBar()
-        self.startObservingChanges()
+        self.setupViewController()
+        self.startObservingGameDetailsChanges(selector: #selector(gameDetailsChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingChanges()
+        self.stopObservingGameDetailsChanges()
     }
     
     // MARK: - Setup Functions
     
-    func setupStatusBar() {
+    func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -52,7 +48,7 @@ class SetupWannabeViewController: UIViewController {
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
     
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
     
     @objc func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
@@ -60,20 +56,9 @@ class SetupWannabeViewController: UIViewController {
     
     // MARK: - Notification Functions
     
-    func startObservingChanges() {
-        let name = Notification.Name(GameNotification.detailsChanged.rawValue)
-        let selector = #selector(gameDetailsChanged)
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
-    }
-    
-    func stopObservingChanges() {
-        let name = Notification.Name(GameNotification.detailsChanged.rawValue)
-        NotificationCenter.default.removeObserver(self, name: name, object: nil)
-    }
-    
     @objc func gameDetailsChanged() {
-        if Game.wannabe.details.isSetup {
-            self.navigationController?.pushViewController(StartWannabeViewController(), animated: true)
+        if Game.current.wannabe.details.isSetup {
+            self.pushStartWannabeViewController()
         }
     }
 
@@ -83,21 +68,25 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
     
     // MARK: - Setup Wannabe View Delegate Functions
     
-    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed playButton: UIButton) {
-        let path = "\(ReferenceKey.packs.rawValue)/\(Game.wannabe.details.id)/default"
+    func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed: Bool) {
+        let path = "\(ReferenceKey.packs.rawValue)/\(Game.current.wannabe.details.id)/default"
+        
+        self.contentView.startAnimatingPlayButton()
         
         Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
+            self.contentView.stopAnimatingPlayButton()
+            
             guard let snapshotJSON = snapshot.value as? [[String: Any]] else{ return }
             
             let packJSON = JSON(snapshotJSON)
-            Game.wannabe.pack = WannabePack(JSON: packJSON)
-            Game.wannabe.details.isSetup = true
-            Game.wannabe.details.rounds = 3
+            Game.current.wannabe.pack = WannabePack(JSON: packJSON)
+            Game.current.wannabe.details.isSetup = true
+            Game.current.wannabe.details.rounds = 3
             
             let path = "\(ReferenceKey.games.rawValue)"
-            Reference.current.database.child(path).updateChildValues(Game.json)
+            Reference.current.database.child(path).updateChildValues(Game.current.json)
         })
     }
     

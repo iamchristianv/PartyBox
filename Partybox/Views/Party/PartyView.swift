@@ -141,10 +141,10 @@ extension PartyView: UITableViewDataSource {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier)
             let customCell = tableViewCell as! GameTableViewCell
             
-            switch Game.type {
+            switch Game.current.type {
             case .wannabe:
-                customCell.setName(Game.wannabe.details.name)
-                customCell.setSummary(Game.wannabe.details.summary)
+                customCell.setName(Game.current.wannabe.details.name)
+                customCell.setSummary(Game.current.wannabe.details.summary)
             }
 
             return customCell

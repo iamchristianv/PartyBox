@@ -25,11 +25,11 @@ class WannabeCard {
     
     // MARK: - Instance Properties
     
-    var type: String = ""
+    var type: String
     
-    var hint: String = ""
+    var hint: String
     
-    var content: String = ""
+    var content: String
     
     // MARK: - JSON Properties
     
@@ -44,6 +44,12 @@ class WannabeCard {
     }
     
     // MARK: - Initialization Functions
+    
+    init() {
+        self.type = ""
+        self.hint = ""
+        self.content = ""
+    }
     
     init(JSON: JSON) {
         self.type = JSON[WannabeCardKey.type.rawValue].stringValue

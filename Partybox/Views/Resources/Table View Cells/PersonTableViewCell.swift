@@ -88,7 +88,7 @@ class PersonTableViewCell: UITableViewCell {
             (make) in
             
             make.centerY.equalTo(self.nameLabel.snp.centerY)
-            make.leading.equalTo(self.nameLabel.snp.trailing).offset(12)
+            make.trailing.equalTo(self.emojiLabel.snp.leading).offset(-8)
         })
         
         self.emojiLabel.snp.remakeConstraints({

@@ -24,13 +24,19 @@ enum ReferenceKey: String {
 
 enum ReferenceNotification: String {
     
-    // MARK: - Notification Types
+    // MARK: - Party Notification Types
     
     case partyHostChanged = "Party/PartyDetails/hostChanged"
     
     case partyDetailsChanged = "Party/PartyDetails/detailsChanged"
     
     case partyPeopleChanged = "Party/PartyPeople/peopleChanged"
+    
+    // MARK: - Game Notification Types
+    
+    case gameDetailsChanged = "Game/GameDetails/detailsChanged"
+    
+    case gamePeopleChanged = "Game/GamePeople/peopleChanged"
     
 }
 
@@ -185,7 +191,7 @@ class Reference {
         })
     }
     
-    // MARK: - Notification Functions
+    // MARK: - Party Notification Functions
     
     func startObservingPartyChanges() {
         self.startObservingPartyHostChanges()
@@ -258,6 +264,101 @@ class Reference {
     
     func stopObservingPartyPeopleChanges() {
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
+        
+        Reference.current.database.child(path).removeAllObservers()
+    }
+    
+    // MARK: - Game Functions
+    
+    func startGame(callback: @escaping (String?) -> Void) {
+        Game.current = Game()
+        
+        let id = Party.current.details.id
+        let path = "\(ReferenceKey.games.rawValue)/\(id)"
+        
+        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            
+            if snapshot.exists() {
+                callback("We ran into a problem while starting your game\n\nPlease try again")
+                return
+            }
+            
+            let path = "\(ReferenceKey.games.rawValue)"
+            let value = Game.current.json
+            
+            Reference.current.database.child(path).updateChildValues(value)
+            Reference.current.startObservingGameChanges()
+            
+            callback(nil)
+        })
+    }
+    
+    func endGame() {
+        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)"
+        
+        Reference.current.stopObservingGameChanges()
+        Reference.current.database.child(path).removeValue()
+        
+        Game.current = Game()
+    }
+    
+    // MARK: - Game Notification Functions
+    
+    func startObservingGameChanges() {
+        self.startObservingGameDetailsChanges()
+        self.startObservingGamePeopleChanges()
+    }
+    
+    func stopObservingGameChanges() {
+        self.stopObservingGameDetailsChanges()
+        self.stopObservingGamePeopleChanges()
+    }
+    
+    func startObservingGameDetailsChanges() {
+        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
+        
+        Reference.current.database.child(path).observe(.value, with: {
+            (snapshot) in
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
+            
+            switch Game.current.type {
+            case .wannabe:
+                Game.current.wannabe.details = WannabeDetails(JSON: JSON(snapshotJSON))
+            }
+            
+            let name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
+            NotificationCenter.default.post(name: name, object: nil)
+        })
+    }
+    
+    func stopObservingGameDetailsChanges() {
+        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
+        
+        Reference.current.database.child(path).removeAllObservers()
+    }
+    
+    func startObservingGamePeopleChanges() {
+        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
+        
+        Reference.current.database.child(path).observe(.value, with: {
+            (snapshot) in
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
+            
+            switch Game.current.type {
+            case .wannabe:
+                Game.current.wannabe.people = WannabePeople(JSON: JSON(snapshotJSON))
+            }
+            
+            let name = Notification.Name(ReferenceNotification.gamePeopleChanged.rawValue)
+            NotificationCenter.default.post(name: name, object: nil)
+        })
+    }
+    
+    func stopObservingGamePeopleChanges() {
+        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
         
         Reference.current.database.child(path).removeAllObservers()
     }

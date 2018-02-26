@@ -66,7 +66,7 @@ class PlayWannabeViewController: UIViewController {
     // MARK: - Notification Functions
     
     func startObservingChanges() {
-        let name = Notification.Name(GameNotification.detailsChanged.rawValue)
+        let name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
         let selector = #selector(gameDetailsChanged)
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }

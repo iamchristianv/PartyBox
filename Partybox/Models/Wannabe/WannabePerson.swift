@@ -25,11 +25,11 @@ class WannabePerson {
     
     // MARK: - Instance Properties
     
-    var name: String = ""
+    var name: String
+
+    var points: Int
     
-    var points: Int = 0
-    
-    var voteName: String = ""
+    var voteName: String
     
     // MARK: - JSON Properties
     
@@ -44,7 +44,13 @@ class WannabePerson {
         return json
     }
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
+    
+    init() {
+        self.name = ""
+        self.points = 0
+        self.voteName = ""
+    }
     
     init(name: String, JSON: JSON) {
         self.name = name

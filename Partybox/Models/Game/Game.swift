@@ -22,13 +22,13 @@ enum GameType {
     
 }
 
-enum GameNotification: String {
+enum GameKey: String {
     
-    // MARK: - Notification Types
+    // MARK: - Database Keys
     
-    case detailsChanged = "Game/GameDetails/detailsChanged"
+    case details
     
-    case peopleChanged = "Game/GamePeople/peopleChanged"
+    case people
     
 }
 
@@ -40,33 +40,24 @@ class Game {
     
     // MARK: - Instance Properties
     
-    static var type: GameType = .wannabe
+    var type: GameType
     
-    static var wannabe: Wannabe = Wannabe()
+    var wannabe: Wannabe
     
     // MARK: - JSON Properties
     
-    static var json: [String: Any] {
+    var json: [String: Any] {
         switch self.type {
         case .wannabe:
-            return Game.wannabe.json
+            return self.wannabe.json
         }
     }
     
-    // MARK: - Notification Functions
+    // MARK: - Initialization Functions
     
-    static func startObservingChanges() {
-        switch Game.type {
-        case .wannabe:
-            Game.wannabe.startObservingChanges()
-        }
-    }
-    
-    static func stopObservingChanges() {
-        switch Game.type {
-        case .wannabe:
-            Game.wannabe.stopObservingChanges()
-        }
+    init() {
+        self.type = .wannabe
+        self.wannabe = Wannabe()
     }
     
 }
