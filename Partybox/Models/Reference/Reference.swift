@@ -303,6 +303,31 @@ class Reference {
         Game.current = Game()
     }
     
+    func fetchPackCollectionForGame(callback: @escaping (String?) -> Void) {
+        var path = "\(ReferenceKey.packs.rawValue)"
+        
+        switch Game.current.type {
+        case .wannabe:
+            path += "/\(Game.current.wannabe.details.id)/collection"
+        }
+        
+        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            
+            Game.current.wannabe.pack.collection.removeAll()
+            
+            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
+            
+            let packJSON = JSON(snapshotJSON)
+            
+            for (_, values) in packJSON {
+                Game.current.wannabe.pack.collection.append(values["name"].stringValue)
+            }
+            
+            callback(nil)
+        })
+    }
+    
     // MARK: - Game Notification Functions
     
     func startObservingGameChanges() {

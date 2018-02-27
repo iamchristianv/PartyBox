@@ -118,10 +118,18 @@ extension PartyViewController: PartyViewDelegate {
     // MARK: - Party View Delegate Functions
     
     func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
-        switch Game.current.type {
-        case .wannabe:
-            self.showSetupWannabeViewController()
-        }
+        Reference.current.fetchPackCollectionForGame(callback: {
+            (error) in
+            
+            if let error = error {
+                self.showErrorAlert(error: error, handler: nil)
+            } else {
+                switch Game.current.type {
+                case .wannabe:
+                    self.showSetupWannabeViewController()
+                }
+            }
+        })
     }
     
     func partyView(_ partyView: PartyView, changeButtonPressed: Bool) {

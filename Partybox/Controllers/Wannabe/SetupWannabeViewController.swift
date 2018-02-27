@@ -83,7 +83,7 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
             let packJSON = JSON(snapshotJSON)
             Game.current.wannabe.pack = WannabePack(JSON: packJSON)
             Game.current.wannabe.details.isSetup = true
-            Game.current.wannabe.details.rounds = 3
+            Game.current.wannabe.details.numRounds = 3
             
             let path = "\(ReferenceKey.games.rawValue)"
             Reference.current.database.child(path).updateChildValues(Game.current.json)

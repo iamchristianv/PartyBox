@@ -34,9 +34,14 @@ class SetupWannabeView: UIView {
         tableView.estimatedRowHeight = 50
         tableView.register(PromptTableViewCell.self, forCellReuseIdentifier: PromptTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
+        tableView.register(SelectableTableViewCell.self, forCellReuseIdentifier: SelectableTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
+    
+    var selectedNumRounds: Int = Game.current.wannabe.details.numRounds
+    
+    var selectedPackName: String = Game.current.wannabe.pack.collection[0]
     
     lazy var playButton: ActivityButton = {
         let playButton = ActivityButton()
@@ -115,7 +120,24 @@ extension SetupWannabeView: UITableViewDelegate {
     
     // MARK: - Table View Delegate Functions
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tableViewCell = self.tableView.cellForRow(at: indexPath)
+        let customCell = tableViewCell as! SelectableTableViewCell
+        
+        for roundType in WannabeDetailsRoundType.collection {
+            if customCell.contentLabel.text == "\(roundType.rawValue) rounds" {
+                self.selectedNumRounds = roundType.rawValue
+            }
+        }
+        
+        for packName in Game.current.wannabe.pack.collection {
+            if customCell.contentLabel.text == packName {
+                self.selectedPackName = packName
+            }
+        }
+        
+        self.reloadTable()
+    }
     
 }
 
@@ -128,27 +150,57 @@ extension SetupWannabeView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SetupWannabeView.staticTableViewCellCount
+        return SetupWannabeView.staticTableViewCellCount + WannabeDetailsRoundType.collection.count + Game.current.wannabe.pack.collection.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
             let customCell = tableViewCell as! PromptTableViewCell
-            customCell.setPrompt("Choose how you want to play")
+            customCell.setPrompt("Choose how to play the game")
             return customCell
         }
         
         if indexPath.row == 1 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let customCell = tableViewCell as! HeaderTableViewCell
-            customCell.setHeader("DURATION")
+            customCell.setHeader("TIME")
             customCell.setBackgroundColor(UIColor.Partybox.green)
             return customCell
         }
         
-        if indexPath.row > 1 {
-            return UITableViewCell()
+        if indexPath.row >= 2 && indexPath.row <= 4 {
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
+            let customCell = tableViewCell as! SelectableTableViewCell
+            
+            let index = indexPath.row - 2
+            let roundType = WannabeDetailsRoundType.collection[index]
+            
+            customCell.setContent("\(roundType.rawValue) rounds")
+            customCell.setSelected(self.selectedNumRounds == roundType.rawValue)
+            
+            return customCell
+        }
+        
+        if indexPath.row == 5 {
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
+            let customCell = tableViewCell as! HeaderTableViewCell
+            customCell.setHeader("PACK")
+            customCell.setBackgroundColor(UIColor.Partybox.green)
+            return customCell
+        }
+        
+        if indexPath.row >= 6 {
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
+            let customCell = tableViewCell as! SelectableTableViewCell
+            
+            let index = indexPath.row - 6
+            let packName = Game.current.wannabe.pack.collection[index]
+            
+            customCell.setContent(packName)
+            customCell.setSelected(self.selectedPackName == packName)
+            
+            return customCell
         }
         
         return UITableViewCell()

@@ -17,10 +17,28 @@ enum WannabeDetailsKey: String {
     
     case isReady
     
-    case rounds
+    case numRounds
     
     case wannabeName
         
+}
+
+enum WannabeDetailsRoundType: Int {
+    
+    // MARK: - Round Types
+    
+    case three = 3
+    
+    case five = 5
+    
+    case seven = 7
+    
+    // MARK: - Round Type Properties
+    
+    static var collection: [WannabeDetailsRoundType] {
+        return [.three, .five, .seven]
+    }
+    
 }
 
 class WannabeDetails {    
@@ -39,7 +57,7 @@ class WannabeDetails {
     
     var isReady: Bool
     
-    var rounds: Int
+    var numRounds: Int
     
     var wannabeName: String
     
@@ -49,7 +67,7 @@ class WannabeDetails {
         let json = [
             WannabeDetailsKey.isSetup.rawValue: self.isSetup,
             WannabeDetailsKey.isReady.rawValue: self.isReady,
-            WannabeDetailsKey.rounds.rawValue: self.rounds,
+            WannabeDetailsKey.numRounds.rawValue: self.numRounds,
             WannabeDetailsKey.wannabeName.rawValue: self.wannabeName,
         ] as [String : Any]
         
@@ -61,14 +79,14 @@ class WannabeDetails {
     init() {
         self.isSetup = false
         self.isReady = false
-        self.rounds = 0
+        self.numRounds = WannabeDetailsRoundType.three.rawValue
         self.wannabeName = ""
     }
     
     init(JSON: JSON) {
         self.isSetup = JSON[WannabeDetailsKey.isSetup.rawValue].boolValue
         self.isReady = JSON[WannabeDetailsKey.isReady.rawValue].boolValue
-        self.rounds = JSON[WannabeDetailsKey.rounds.rawValue].intValue
+        self.numRounds = JSON[WannabeDetailsKey.numRounds.rawValue].intValue
         self.wannabeName = JSON[WannabeDetailsKey.wannabeName.rawValue].stringValue
     }
     

@@ -29,6 +29,7 @@ class PromptTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.isUserInteractionEnabled = false
         self.selectionStyle = .none
         self.configureSubviews()
     }

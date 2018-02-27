@@ -1,5 +1,5 @@
 //
-//  SelectablePersonTableViewCell.swift
+//  SelectableTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 2/17/18.
@@ -8,24 +8,24 @@
 
 import UIKit
 
-class SelectablePersonTableViewCell: UITableViewCell {
+class SelectableTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: SelectablePersonTableViewCell.self)
+    static let identifier: String = String(describing: SelectableTableViewCell.self)
     
     // MARK: - Instance Properties
     
-    lazy var nameLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.font = UIFont.avenirNextRegular(size: 18)
-        nameLabel.textColor = UIColor.Partybox.black
-        return nameLabel
+    lazy var contentLabel: UILabel = {
+        let contentLabel = UILabel()
+        contentLabel.font = UIFont.avenirNextRegular(size: 18)
+        contentLabel.textColor = UIColor.Partybox.black
+        return contentLabel
     }()
     
     lazy var selectableView: SelectableView = {
-        let selectableOuterView = SelectableView()
-        return selectableOuterView
+        let selectableView = SelectableView()
+        return selectableView
     }()
     
     lazy var underlineLabel: UILabel = {
@@ -49,11 +49,11 @@ class SelectablePersonTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     func setupSubviews() {
-        self.addSubview(self.nameLabel)
+        self.addSubview(self.contentLabel)
         self.addSubview(self.selectableView)
         self.addSubview(self.underlineLabel)
         
-        self.nameLabel.snp.remakeConstraints({
+        self.contentLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(16)
@@ -82,8 +82,8 @@ class SelectablePersonTableViewCell: UITableViewCell {
     
     // MARK: - Setter Functions
     
-    func setName(_ name: String) {
-        self.nameLabel.text = name
+    func setContent(_ content: String) {
+        self.contentLabel.text = content
     }
     
     func setSelected(_ selected: Bool) {

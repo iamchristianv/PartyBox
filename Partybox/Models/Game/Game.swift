@@ -14,7 +14,7 @@ enum GameType {
     
     case wannabe
     
-    // MARK: - Game Type Functions
+    // MARK: - Game Type Properties
     
     static var collection: [GameType] {
         return [.wannabe]

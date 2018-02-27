@@ -34,7 +34,7 @@ class ChangeHostView: UIView {
         tableView.estimatedRowHeight = 50
         tableView.register(PromptTableViewCell.self, forCellReuseIdentifier: PromptTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
-        tableView.register(SelectablePersonTableViewCell.self, forCellReuseIdentifier: SelectablePersonTableViewCell.identifier)
+        tableView.register(SelectableTableViewCell.self, forCellReuseIdentifier: SelectableTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
@@ -120,9 +120,9 @@ extension ChangeHostView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
-        let customCell = tableViewCell as! SelectablePersonTableViewCell
+        let customCell = tableViewCell as! SelectableTableViewCell
         
-        self.selectedPersonName = customCell.nameLabel.text!
+        self.selectedPersonName = customCell.contentLabel.text!
         self.reloadTable()
     }
     
@@ -161,9 +161,9 @@ extension ChangeHostView: UITableViewDataSource {
             
             guard let person = Party.current.people.person(index: index) else { return UITableViewCell() }
             
-            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectablePersonTableViewCell.identifier)
-            let customCell = tableViewCell as! SelectablePersonTableViewCell
-            customCell.setName(person.name)
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
+            let customCell = tableViewCell as! SelectableTableViewCell
+            customCell.setContent(person.name)
             customCell.setSelected(person.name == self.selectedPersonName)
             return customCell
         }
