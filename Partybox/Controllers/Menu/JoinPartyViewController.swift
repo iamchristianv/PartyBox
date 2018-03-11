@@ -12,11 +12,12 @@ class JoinPartyViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: JoinPartyView = JoinPartyView()
+    var contentView: JoinPartyView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = JoinPartyView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -24,6 +25,7 @@ class JoinPartyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
@@ -31,7 +33,6 @@ class JoinPartyViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -54,11 +55,11 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
     // MARK: - Join Party View Delegate Functions
     
     func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
-        self.contentView.checkInviteCodeField()
-        self.contentView.checkYourNameField()
+        self.contentView.checkInviteCodeValueForErrors()
+        self.contentView.checkYourNameValueForErrors()
         
-        guard let partyId = self.contentView.inviteCodeValue() else { return }
-        guard let userName = self.contentView.yourNameValue() else { return }
+        guard let partyId = self.contentView.fetchInviteCodeValue() else { return }
+        guard let userName = self.contentView.fetchYourNameValue() else { return }
         
         self.contentView.startAnimatingJoinButton()
         
@@ -68,7 +69,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
             self.contentView.stopAnimatingJoinButton()
             
             if let error = error {
-                self.showErrorAlert(error: error, handler: nil)
+                self.showErrorAlert(error: error)
             } else {
                 self.showPartyViewController(delegate: self)
             }
@@ -82,7 +83,7 @@ extension JoinPartyViewController: PartyViewControllerDelegate {
     // MARK: - Party View Controller Delegate Functions
     
     func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
-        self.showUserWasKickedFromPartyAlert(handler: nil)
+        self.showUserWasKickedFromPartyAlert()
     }
     
 }

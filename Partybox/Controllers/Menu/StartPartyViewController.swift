@@ -12,11 +12,12 @@ class StartPartyViewController: UIViewController {
     
     // MARK: - Instance Properties
     
-    var contentView: StartPartyView = StartPartyView()
+    var contentView: StartPartyView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = StartPartyView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -24,6 +25,7 @@ class StartPartyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
@@ -31,7 +33,6 @@ class StartPartyViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -54,11 +55,11 @@ extension StartPartyViewController: StartPartyViewDelegate {
     // MARK: - Start Party View Delegate Functions
     
     func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool) {
-        self.contentView.checkPartyNameField()
-        self.contentView.checkYourNameField()
+        self.contentView.checkPartyNameValueForErrors()
+        self.contentView.checkYourNameValueForErrors()
         
-        guard let partyName = self.contentView.partyNameValue() else { return }
-        guard let userName = self.contentView.yourNameValue() else { return }
+        guard let partyName = self.contentView.fetchPartyNameValue() else { return }
+        guard let userName = self.contentView.fetchYourNameValue() else { return }
         
         self.contentView.startAnimatingStartButton()
         
@@ -68,7 +69,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
             self.contentView.stopAnimatingStartButton()
             
             if let error = error {
-                self.showErrorAlert(error: error, handler: nil)
+                self.showErrorAlert(error: error)
             } else {
                 self.showPartyViewController(delegate: self)
             }
@@ -82,7 +83,7 @@ extension StartPartyViewController: PartyViewControllerDelegate {
     // MARK: - Party View Controller Delegate Functions
     
     func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
-        self.showUserWasKickedFromPartyAlert(handler: nil)
+        self.showUserWasKickedFromPartyAlert()
     }
     
 }

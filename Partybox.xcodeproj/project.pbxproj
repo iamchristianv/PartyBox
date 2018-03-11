@@ -38,7 +38,8 @@
 		AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */; };
 		AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */; };
 		AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81411FB40401003AD1D9 /* AlertViewController.swift */; };
-		AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81431FB4046B003AD1D9 /* AlertView.swift */; };
+		AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C7D2054F33200CA5AC8 /* AlertView.swift */; };
+		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
 		AAE75B4E1F809FA9001D4E13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */; };
 		AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */; };
@@ -74,8 +75,6 @@
 		AAFFBDE32038B17100269AB4 /* ManagePartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */; };
 		AAFFBDE52038B18F00269AB4 /* ChangeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */; };
 		AAFFBDE72038B19F00269AB4 /* ChangeHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */; };
-		AAFFBDED2038B27F00269AB4 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */; };
-		AAFFBDF12038B2A400269AB4 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF02038B2A400269AB4 /* StoreView.swift */; };
 		AAFFBDF320392ABE00269AB4 /* SelectablePersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */; };
 		AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF82039326400269AB4 /* SelectableView.swift */; };
 		AAFFBDFB203A592000269AB4 /* SelectableGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */; };
@@ -118,7 +117,8 @@
 		AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81411FB40401003AD1D9 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		AADB81431FB4046B003AD1D9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		AADD9C7D2054F33200CA5AC8 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE75B461F809FA9001D4E13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,8 +156,6 @@
 		AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyView.swift; sourceTree = "<group>"; };
 		AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewController.swift; sourceTree = "<group>"; };
 		AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostView.swift; sourceTree = "<group>"; };
-		AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
-		AAFFBDF02038B2A400269AB4 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectablePersonTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBDF82039326400269AB4 /* SelectableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
 		AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableGameTableViewCell.swift; sourceTree = "<group>"; };
@@ -224,14 +222,6 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
-		AAB053BB2011A3D700180209 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				AADB81431FB4046B003AD1D9 /* AlertView.swift */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
 		AAB053BC2011A3F300180209 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +250,22 @@
 				AAFFBDDC2038A4C900269AB4 /* ChangeGameViewController.swift */,
 			);
 			path = Party;
+			sourceTree = "<group>";
+		};
+		AADD9C80205508CE00CA5AC8 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AADD9C81205508DB00CA5AC8 /* Alert.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AADD9C8320550E5400CA5AC8 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AADD9C7D2054F33200CA5AC8 /* AlertView.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		AAE75B3A1F809FA9001D4E13 = {
@@ -321,7 +327,7 @@
 				AAFFBDE82038B24200269AB4 /* Menu */,
 				AACD97351FE4E7F6000275CB /* Party */,
 				AAFFBDBB2030089100269AB4 /* Wannabe */,
-				AAB053BB2011A3D700180209 /* Alert */,
+				AADD9C8320550E5400CA5AC8 /* Alert */,
 				AA590FFD1FCA6179008988E9 /* Resources */,
 			);
 			path = Views;
@@ -330,11 +336,12 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDDB203898A200269AB4 /* User */,
 				AAFFBE02203FACB100269AB4 /* Reference */,
+				AAFFBDDB203898A200269AB4 /* User */,
 				AAF6D7FF1FDC965900014CA0 /* Party */,
 				AAFFBDB1202F583400269AB4 /* Game */,
 				AAF6D8001FDC966300014CA0 /* Wannabe */,
+				AADD9C80205508CE00CA5AC8 /* Alert */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -378,8 +385,6 @@
 				AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */,
 				AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */,
 				AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */,
-				AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */,
-				AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */,
 				AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */,
 			);
 			path = "Table View Cells";
@@ -441,8 +446,9 @@
 			children = (
 				AAF73B131FA7FF6700D8A17B /* MenuView.swift */,
 				AAF73B151FA804EA00D8A17B /* StartPartyView.swift */,
+				AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */,
 				AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */,
-				AAFFBDF02038B2A400269AB4 /* StoreView.swift */,
+				AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -453,7 +459,6 @@
 				AA0D152E1FA571C9009E31BF /* MenuViewController.swift */,
 				AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */,
 				AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */,
-				AAFFBDEC2038B27F00269AB4 /* StoreViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -619,9 +624,9 @@
 				AACD97241FDF5DDE000275CB /* WannabePeople.swift in Sources */,
 				AAFFBDFD203A6E3B00269AB4 /* ManagePartyTableViewCell.swift in Sources */,
 				AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */,
-				AAFFBDF12038B2A400269AB4 /* StoreView.swift in Sources */,
 				AACD973A1FE5E0E4000275CB /* GameInstructionsTableViewCell.swift in Sources */,
 				AAFFBDCC203008E500269AB4 /* PlayWannabeViewController.swift in Sources */,
+				AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */,
 				AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */,
 				AAFFBDC5203008AE00269AB4 /* VoteWannabeView.swift in Sources */,
 				AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */,
@@ -647,7 +652,6 @@
 				AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */,
 				AAF73B0C1FA6C97900D8A17B /* UIViewController+Extension.swift in Sources */,
 				AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */,
-				AAFFBDED2038B27F00269AB4 /* StoreViewController.swift in Sources */,
 				AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */,
 				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
 				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
@@ -655,7 +659,7 @@
 				AAFFBDE12038B16000269AB4 /* ManagePartyViewController.swift in Sources */,
 				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,
 				AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */,
-				AADB81441FB4046B003AD1D9 /* AlertView.swift in Sources */,
+				AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */,
 				AAFFBDCF203008E500269AB4 /* EndWannabeViewController.swift in Sources */,
 				AAFFBE04203FACC600269AB4 /* Reference.swift in Sources */,
 				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,

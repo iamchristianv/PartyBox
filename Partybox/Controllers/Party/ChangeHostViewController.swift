@@ -20,13 +20,14 @@ class ChangeHostViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: ChangeHostView = ChangeHostView()
+    var contentView: ChangeHostView!
     
     var delegate: ChangeHostViewControllerDelegate!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = ChangeHostView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -34,12 +35,12 @@ class ChangeHostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.startObservingPartyPeopleChanges(selector: #selector(partyPeopleChanged))
+        self.startObservingNotification(name: PartyNotification.peopleChanged.rawValue, selector: #selector(partyPeopleChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingPartyPeopleChanges()
+        self.stopObservingNotification(name: PartyNotification.peopleChanged.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -86,13 +87,13 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
         } else {
             self.contentView.startAnimatingChangeButton()
             
-            Reference.current.setHostForParty(name: self.contentView.selectedPersonName, callback: {
+            Party.current.setHostForParty(name: self.contentView.selectedPersonName, callback: {
                 (error) in
                 
                 self.contentView.stopAnimatingChangeButton()
                 
                 if let error = error {
-                    self.showErrorAlert(error: error, handler: nil)
+                    self.showErrorAlert(error: error)
                 } else {
                     self.dismissViewController(animated: true, completion: {
                         self.delegate.changeHostViewController(self, hostChanged: true)

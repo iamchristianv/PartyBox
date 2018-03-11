@@ -20,13 +20,14 @@ class PartyViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: PartyView = PartyView()
+    var contentView: PartyView!
     
     var delegate: PartyViewControllerDelegate!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = PartyView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -34,16 +35,17 @@ class PartyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.startObservingPartyHostChanges(selector: #selector(partyHostChanged))
-        self.startObservingPartyDetailsChanges(selector: #selector(partyDetailsChanged))
-        self.startObservingPartyPeopleChanges(selector: #selector(partyPeopleChanged))
+        self.setupNavigationBar()
+        self.startObservingNotification(name: PartyNotification.hostChanged.rawValue, selector: #selector(partyHostChanged))
+        self.startObservingNotification(name: PartyNotification.detailsChanged.rawValue, selector: #selector(partyDetailsChanged))
+        self.startObservingNotification(name: PartyNotification.peopleChanged.rawValue, selector: #selector(partyPeopleChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingPartyHostChanges()
-        self.stopObservingPartyDetailsChanges()
-        self.stopObservingPartyPeopleChanges()
+        self.stopObservingNotification(name: PartyNotification.hostChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.detailsChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.peopleChanged.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -51,7 +53,6 @@ class PartyViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -98,6 +99,7 @@ class PartyViewController: UIViewController {
         
     @objc func partyDetailsChanged() {
         self.contentView.reloadTable()
+        
         self.setupNavigationBar()
     }
     
@@ -122,7 +124,7 @@ extension PartyViewController: PartyViewDelegate {
             (error) in
             
             if let error = error {
-                self.showErrorAlert(error: error, handler: nil)
+                self.showErrorAlert(error: error)
             } else {
                 switch Game.current.type {
                 case .wannabe:
@@ -136,30 +138,18 @@ extension PartyViewController: PartyViewDelegate {
         self.showChangeGameViewController()
     }
     
-    func partyView(_ partyView: PartyView, kickPersonButtonPressed selectedPersonName: String) {
-        guard let person = Party.current.people.person(name: selectedPersonName) else { return }
-        
-        if person.name == User.current.name {
-            self.showUserWantsToLeavePartyAlert(handler: {
-                if User.current.name == Party.current.details.hostName && Party.current.people.count > 1 {
-                    self.showChangeHostViewController(delegate: self)
-                } else {
-                    self.dismissViewController(animated: true, completion: {
-                        Reference.current.endParty()
-                    })
+    func partyView(_ partyView: PartyView, kickButtonPressed selectedPersonName: String) {
+        self.showUserWantsToKickPersonFromPartyAlert(handler: {
+            guard let person = Party.current.people.person(name: selectedPersonName) else { return }
+            
+            Party.current.removePersonFromParty(name: person.name, callback: {
+                (error) in
+                
+                if let error = error {
+                    self.showErrorAlert(error: error)
                 }
             })
-        } else {
-            self.showUserWantsToKickPersonFromPartyAlert(handler: {
-                Reference.current.removePersonFromParty(name: person.name, callback: {
-                    (error) in
-                    
-                    if let error = error {
-                        self.showErrorAlert(error: error, handler: nil)
-                    }
-                })
-            })
-        }
+        })
     }
     
 }

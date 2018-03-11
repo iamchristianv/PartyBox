@@ -14,7 +14,7 @@ class MenuViewController: UIViewController {
     
     // MARK: - Instance Properties
     
-    var contentView: MenuView = MenuView()
+    var contentView: MenuView!
     
     var authenticationHandle: AuthStateDidChangeListenerHandle!
     
@@ -25,6 +25,7 @@ class MenuViewController: UIViewController {
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = MenuView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -32,6 +33,7 @@ class MenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.setupNavigationBar()
         self.startObservingAuthenticationChanges()
         self.startObservingMotionChanges()
         self.startDroppingConfetti()
@@ -54,7 +56,6 @@ class MenuViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .default
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -70,11 +71,9 @@ class MenuViewController: UIViewController {
             if user == nil {
                 self.contentView.startAnimatingStartPartyButton()
                 self.contentView.startAnimatingJoinPartyButton()
-                self.contentView.startAnimatingVisitStoreButton()
             } else {
                 self.contentView.stopAnimatingStartPartyButton()
                 self.contentView.stopAnimatingJoinPartyButton()
-                self.contentView.stopAnimatingVisitStoreButton()
             }
         })
     }
@@ -89,9 +88,9 @@ class MenuViewController: UIViewController {
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
             (motion, _) in
             
-            guard let motion = motion else { return }
-            
-            self.contentView.updateConfettiGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
+            if let motion = motion {
+                self.contentView.updateConfettiGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
+            }
         })
     }
     
@@ -102,7 +101,7 @@ class MenuViewController: UIViewController {
     // MARK: - Confetti Functions
     
     func startDroppingConfetti() {
-        let target = self.contentView
+        let target = self.contentView!
         let selector = #selector(MenuView.dropConfetti)
         self.confettiTimer = Timer.scheduledTimer(timeInterval: 0.2, target: target, selector: selector, userInfo: nil, repeats: true)
     }
@@ -123,10 +122,6 @@ extension MenuViewController: MenuViewDelegate {
     
     func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool) {
         self.showJoinPartyViewController()
-    }
-    
-    func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool) {
-        self.showStoreViewController()
     }
     
 }

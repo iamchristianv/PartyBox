@@ -16,8 +16,6 @@ protocol MenuViewDelegate {
     
     func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool)
     
-    func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool)
-    
 }
 
 class MenuView: UIView {
@@ -46,15 +44,6 @@ class MenuView: UIView {
         joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
-    }()
-    
-    lazy var visitStoreButton: ActivityButton = {
-        let visitStoreButton = ActivityButton()
-        visitStoreButton.setTitle("Visit Store", for: .normal)
-        visitStoreButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
-        visitStoreButton.setBackgroundColor(UIColor.Partybox.green)
-        visitStoreButton.addTarget(self, action: #selector(visitStoreButtonPressed), for: .touchUpInside)
-        return visitStoreButton
     }()
     
     lazy var animator: UIDynamicAnimator = {
@@ -128,7 +117,6 @@ class MenuView: UIView {
         self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
-        self.addSubview(self.visitStoreButton)
         
         self.partyboxImageView.snp.remakeConstraints({
             (make) in
@@ -154,15 +142,6 @@ class MenuView: UIView {
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(self.startPartyButton.snp.bottom).offset(30)
         })
-        
-        self.visitStoreButton.snp.remakeConstraints({
-            (make) in
-            
-            make.width.equalTo(220)
-            make.height.equalTo(55)
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.joinPartyButton.snp.bottom).offset(30)
-        })
     }
     
     // MARK: - Action Functions
@@ -173,10 +152,6 @@ class MenuView: UIView {
     
     @objc func joinPartyButtonPressed() {
         self.delegate.menuView(self, joinPartyButtonPressed: true)
-    }
-    
-    @objc func visitStoreButtonPressed() {
-        self.delegate.menuView(self, visitStoreButtonPressed: true)
     }
     
     // MARK: - Animation Functions
@@ -195,14 +170,6 @@ class MenuView: UIView {
     
     func stopAnimatingJoinPartyButton() {
         self.joinPartyButton.stopAnimating()
-    }
-    
-    func startAnimatingVisitStoreButton() {
-        self.visitStoreButton.startAnimating()
-    }
-    
-    func stopAnimatingVisitStoreButton() {
-        self.visitStoreButton.stopAnimating()
     }
     
     // MARK: - Confetti Functions

@@ -12,18 +12,16 @@ class User {
     
     // MARK: - Shared Instance
     
-    static var current: User = User()
+    static var current: User = User(name: "")
     
     // MARK: - Instance Properties
     
     var name: String = ""
     
-    var points: Int = 0
+    // MARK: - Initialization Functions
     
-    var hints: Int = 5
-    
-    var isMember: Bool = false
-    
-    var hasAds: Bool = true
+    init(name: String) {
+        self.name = name
+    }
     
 }

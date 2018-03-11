@@ -13,6 +13,8 @@ enum PartyPersonKey: String {
     
     // MARK: - Database Keys
     
+    case name
+    
     case points
     
     case isReady
@@ -33,10 +35,9 @@ class PartyPerson {
     
     var json: [String: Any] {
         let json = [
-            self.name: [
-                PartyPersonKey.points.rawValue: self.points,
-                PartyPersonKey.isReady.rawValue: self.isReady
-            ]
+            PartyPersonKey.name.rawValue: self.name,
+            PartyPersonKey.points.rawValue: self.points,
+            PartyPersonKey.isReady.rawValue: self.isReady
         ] as [String: Any]
         
         return json
@@ -44,14 +45,14 @@ class PartyPerson {
     
     // MARK: - Initialization Functions
     
-    init() {
-        self.name = ""
+    init(name: String) {
+        self.name = name
         self.points = 0
         self.isReady = false
     }
     
-    init(name: String, JSON: JSON) {
-        self.name = name
+    init(JSON: JSON) {
+        self.name = JSON[PartyPersonKey.name.rawValue].stringValue
         self.points = JSON[PartyPersonKey.points.rawValue].intValue
         self.isReady = JSON[PartyPersonKey.isReady.rawValue].boolValue
     }

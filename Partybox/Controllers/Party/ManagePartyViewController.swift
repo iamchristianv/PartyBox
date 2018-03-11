@@ -12,11 +12,12 @@ class ManagePartyViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: ManagePartyView = ManagePartyView()
+    var contentView: ManagePartyView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = ManagePartyView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -60,13 +61,13 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
         
         self.contentView.startAnimatingSaveButton()
         
-        Reference.current.setNameForParty(name: partyName, callback: {
+        Party.current.setNameForParty(name: partyName, callback: {
             (error) in
             
             self.contentView.stopAnimatingSaveButton()
             
             if let error = error {
-                self.showErrorAlert(error: error, handler: nil)
+                self.showErrorAlert(error: error)
             } else {
                 self.dismissViewController(animated: true, completion: nil)
             }

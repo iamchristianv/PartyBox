@@ -98,23 +98,23 @@ class JoinPartyView: UIView {
     // MARK: - View Functions
     
     func hideKeyboard() {
-        self.contentCell.hideKeyboard()
+        self.contentCell?.hideKeyboard()
     }
     
-    func inviteCodeValue() -> String? {
-        return self.contentCell.inviteCodeValue()
+    func fetchInviteCodeValue() -> String? {
+        return self.contentCell?.fetchInviteCodeValue()
     }
     
-    func checkInviteCodeField() {
-        self.contentCell.checkInviteCodeField()
+    func checkInviteCodeValueForErrors() {
+        self.contentCell?.checkInviteCodeValueForErrors()
     }
     
-    func yourNameValue() -> String? {
-        return self.contentCell.yourNameValue()
+    func fetchYourNameValue() -> String? {
+        return self.contentCell?.fetchYourNameValue()
     }
     
-    func checkYourNameField() {
-        self.contentCell.checkYourNameField()
+    func checkYourNameValueForErrors() {
+        self.contentCell?.checkYourNameValueForErrors()
     }
     
     // MARK: - Animation Functions

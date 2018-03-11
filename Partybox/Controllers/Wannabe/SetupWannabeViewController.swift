@@ -13,11 +13,12 @@ class SetupWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: SetupWannabeView = SetupWannabeView()
+    var contentView: SetupWannabeView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = SetupWannabeView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
@@ -25,12 +26,12 @@ class SetupWannabeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.startObservingGameDetailsChanges(selector: #selector(gameDetailsChanged))
+        //self.startObservingGameDetailsChanges(selector: #selector(gameDetailsChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingGameDetailsChanges()
+        //self.stopObservingGameDetailsChanges()
     }
     
     // MARK: - Setup Functions

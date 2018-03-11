@@ -98,23 +98,23 @@ class StartPartyView: UIView {
     // MARK: - View Functions
     
     func hideKeyboard() {
-        self.contentCell.hideKeyboard()
+        self.contentCell?.hideKeyboard()
     }
     
-    func partyNameValue() -> String? {
-        return self.contentCell.partyNameValue()
+    func fetchPartyNameValue() -> String? {
+        return self.contentCell?.fetchPartyNameValue()
     }
     
-    func checkPartyNameField() {
-        self.contentCell.checkPartyNameField()
+    func checkPartyNameValueForErrors() {
+        self.contentCell?.checkPartyNameValueForErrors()
     }
     
-    func yourNameValue() -> String? {
-        return self.contentCell.yourNameValue()
+    func fetchYourNameValue() -> String? {
+        return self.contentCell?.fetchYourNameValue()
     }
     
-    func checkYourNameField() {
-        self.contentCell.checkYourNameField()
+    func checkYourNameValueForErrors() {
+        self.contentCell?.checkYourNameValueForErrors()
     }
     
     // MARK: - Animation Functions

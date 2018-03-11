@@ -14,21 +14,12 @@ class AlertViewController: UIViewController {
     
     var contentView: AlertView!
     
-    var subject: String
-    
-    var message: String
-    
-    var action: String
-    
-    var handler: (() -> ())?
+    var alert: Alert
     
     // MARK: - Initialization Functions
     
-    init(subject: String, message: String, action: String, handler: (() -> ())?) {
-        self.subject = subject
-        self.message = message
-        self.action = action
-        self.handler = handler
+    init(alert: Alert) {
+        self.alert = alert
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,19 +30,23 @@ class AlertViewController: UIViewController {
     // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = AlertView(subject: self.subject, message: self.message, action: self.action)
+        self.contentView = AlertView(alert: self.alert)
         self.contentView.delegate = self
         self.view = self.contentView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.edgesForExtendedLayout = []
-        UIApplication.shared.statusBarStyle = .lightContent
+        self.setupViewController()
         self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
+    
+    func setupViewController() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
+    }
     
     func setupNavigationBar() {
         self.hideNavigationBar()
@@ -63,15 +58,16 @@ extension AlertViewController: AlertViewDelegate {
     
     // MARK: - Alert View Delegate Functions
     
-    func alertView(_ alertView: AlertView, backgroundButtonPressed: Bool) {
-        self.dismissViewController(animated: false, completion: nil)
-    }
-    
     func alertView(_ alertView: AlertView, actionButtonPressed: Bool) {
         self.dismissViewController(animated: false, completion: {
-            guard let handler = self.handler else { return }
-            handler()
+            if let handler = self.alert.handler {
+                handler()
+            }
         })
+    }
+    
+    func alertView(_ alertView: AlertView, cancelButtonPressed: Bool) {
+        self.dismissViewController(animated: false, completion: nil)
     }
     
 }

@@ -13,7 +13,7 @@ class PartyPeople {
     
     // MARK: - Instance Properties
     
-    var people: [PartyPerson]
+    private var people: [PartyPerson]
     
     var count: Int {
         return self.people.count
@@ -25,9 +25,7 @@ class PartyPeople {
         var json = [:] as [String: Any]
         
         for person in self.people {
-            for (name, values) in person.json {
-                json[name] = values
-            }
+            json[person.name] = person.json
         }
         
         return json
@@ -42,8 +40,8 @@ class PartyPeople {
     init(JSON: JSON) {
         self.people = []
         
-        for (name, personJSON) in JSON {
-            self.add(PartyPerson(name: name, JSON: personJSON))
+        for (_, personJSON) in JSON {
+            self.add(PartyPerson(JSON: personJSON))
         }
     }
     

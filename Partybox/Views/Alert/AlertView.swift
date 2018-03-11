@@ -12,21 +12,15 @@ protocol AlertViewDelegate {
     
     // MARK: - Alert View Delegate Functions
     
-    func alertView(_ alertView: AlertView, backgroundButtonPressed: Bool)
-    
     func alertView(_ alertView: AlertView, actionButtonPressed: Bool)
+    
+    func alertView(_ alertView: AlertView, cancelButtonPressed: Bool)
     
 }
 
 class AlertView: UIView {
 
     // MARK: - Instance Properties
-    
-    lazy var backgroundButton: UIButton = {
-        let backgroundButton = UIButton()
-        backgroundButton.addTarget(self, action: #selector(backgroundButtonPressed), for: .touchUpInside)
-        return backgroundButton
-    }()
     
     lazy var containerView: UIView = {
         let containerView = UIView()
@@ -35,54 +29,57 @@ class AlertView: UIView {
         containerView.addSubview(self.subjectLabel)
         containerView.addSubview(self.messageLabel)
         containerView.addSubview(self.actionButton)
+        containerView.addSubview(self.cancelButton)
         return containerView
     }()
     
     lazy var subjectLabel: UILabel = {
         let subjectLabel = UILabel()
-        subjectLabel.text = self.subject
-        subjectLabel.textColor = UIColor.Partybox.black
+        subjectLabel.text = self.alert.subject
         subjectLabel.font = UIFont.avenirNextMedium(size: 20)
-        subjectLabel.numberOfLines = 0
+        subjectLabel.textColor = UIColor.Partybox.black
         subjectLabel.textAlignment = .center
+        subjectLabel.numberOfLines = 0
         return subjectLabel
     }()
     
     lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.text = self.message
-        messageLabel.textColor = UIColor.Partybox.black
+        messageLabel.text = self.alert.message
         messageLabel.font = UIFont.avenirNextRegular(size: 18)
-        messageLabel.numberOfLines = 0
+        messageLabel.textColor = UIColor.Partybox.black
         messageLabel.textAlignment = .center
+        messageLabel.numberOfLines = 0
         return messageLabel
     }()
     
     lazy var actionButton: ActivityButton = {
         let actionButton = ActivityButton()
-        actionButton.setTitle(self.action, for: .normal)
+        actionButton.setTitle(self.alert.action, for: .normal)
         actionButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
         actionButton.setBackgroundColor(UIColor.Partybox.red)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         return actionButton
     }()
     
-    var subject: String
+    lazy var cancelButton: UIButton = {
+        let cancelButton = UIButton()
+        cancelButton.setTitle("cancel", for: .normal)
+        cancelButton.setTitleFont(UIFont.avenirNextRegularName, size: 18)
+        cancelButton.setTitleColor(UIColor.Partybox.red, for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        return cancelButton
+    }()
     
-    var message: String
-    
-    var action: String
+    var alert: Alert
     
     var delegate: AlertViewDelegate!
     
     // MARK: - Initialization Functions
     
-    init(subject: String, message: String, action: String) {
-        self.subject = subject
-        self.message = message
-        self.action = action
+    init(alert: Alert) {
+        self.alert = alert
         super.init(frame: .zero)
-        
         self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.4)
         self.setupSubviews()
     }
@@ -94,17 +91,7 @@ class AlertView: UIView {
     // MARK: - Setup Functions
     
     func setupSubviews() {
-        self.addSubview(self.backgroundButton)
         self.addSubview(self.containerView)
-        
-        self.backgroundButton.snp.remakeConstraints({
-            (make) in
-            
-            make.leading.equalTo(self.snp.leading)
-            make.trailing.equalTo(self.snp.trailing)
-            make.top.equalTo(self.snp.top)
-            make.bottom.equalTo(self.snp.bottom)
-        })
         
         self.containerView.snp.remakeConstraints({
             (make) in
@@ -136,18 +123,33 @@ class AlertView: UIView {
             make.height.equalTo(50)
             make.centerX.equalTo(self.containerView.snp.centerX)
             make.top.equalTo(self.messageLabel.snp.bottom).offset(24)
-            make.bottom.equalTo(self.containerView.snp.bottom).offset(-24)
+            
+            if self.alert.handler == nil {
+                make.bottom.equalTo(self.containerView.snp.bottom).offset(-24)
+            }
+        })
+        
+        if self.alert.handler == nil {
+            return
+        }
+        
+        self.cancelButton.snp.remakeConstraints({
+            (make) in
+            
+            make.centerX.equalTo(self.containerView.snp.centerX)
+            make.top.equalTo(self.actionButton.snp.bottom).offset(12)
+            make.bottom.equalTo(self.containerView.snp.bottom).offset(-12)
         })
     }
     
     // MARK: - Action Functions
     
-    @objc func backgroundButtonPressed() {
-        self.delegate.alertView(self, backgroundButtonPressed: true)
-    }
-    
     @objc func actionButtonPressed() {
         self.delegate.alertView(self, actionButtonPressed: true)
+    }
+    
+    @objc func cancelButtonPressed() {
+        self.delegate.alertView(self, cancelButtonPressed: true)
     }
     
 }

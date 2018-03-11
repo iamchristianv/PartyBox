@@ -16,7 +16,7 @@ protocol PartyViewDelegate {
     
     func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
     
-    func partyView(_ partyView: PartyView, kickPersonButtonPressed selectedPersonName: String)
+    func partyView(_ partyView: PartyView, kickButtonPressed selectedPersonName: String)
 
 }
 
@@ -92,14 +92,18 @@ extension PartyView: UITableViewDelegate {
             return []
         }
         
+        let index = indexPath.row - PartyView.staticTableViewCellCount
+        
+        guard let person = Party.current.people.person(index: index) else { return [] }
+        
+        if person.name == Party.current.details.hostName {
+            return []
+        }
+        
         let kickButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
             (_, indexPath) in
             
-            let index = indexPath.row - PartyView.staticTableViewCellCount
-            
-            guard let person = Party.current.people.person(index: index) else { return }
-            
-            self.delegate.partyView(self, kickPersonButtonPressed: person.name)
+            self.delegate.partyView(self, kickButtonPressed: person.name)
         })
         
         kickButton.backgroundColor = UIColor.Partybox.red

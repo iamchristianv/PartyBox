@@ -12,11 +12,12 @@ class ChangeGameViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: ChangeGameView = ChangeGameView()
+    var contentView: ChangeGameView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = ChangeGameView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
