@@ -39,7 +39,7 @@ class ChangeHostView: UIView {
         return tableView
     }()
     
-    var selectedPersonName: String = Party.current.details.hostName
+    var selectedPersonName: String = User.current.name
         
     lazy var changeButton: ActivityButton = {
         let changeButton = ActivityButton()
@@ -56,7 +56,7 @@ class ChangeHostView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -65,6 +65,10 @@ class ChangeHostView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.tableView)
@@ -100,6 +104,10 @@ class ChangeHostView: UIView {
     
     func reloadTable() {
         self.tableView.reloadData()
+    }
+    
+    func selectedPersonNameValue() -> String {
+        return self.selectedPersonName
     }
     
     // MARK: - Animation Functions

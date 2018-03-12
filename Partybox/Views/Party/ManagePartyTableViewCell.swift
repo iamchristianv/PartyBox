@@ -65,7 +65,7 @@ class ManagePartyTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -73,7 +73,16 @@ class ManagePartyTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.hideKeyboard()
+    }
+    
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.selectionStyle = .none
+    }
     
     func setupSubviews() {
         self.addSubview(self.partyNameLabel)
@@ -136,32 +145,27 @@ class ManagePartyTableViewCell: UITableViewCell {
     
     // MARK: - Action Functions
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.hideKeyboard()
-    }
-    
     func hideKeyboard() {
         self.partyNameTextField.resignFirstResponder()
     }
     
-    func checkPartyNameField() {
-        let partyName = self.partyNameTextField.text!
-        
-        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showPartyNameRequiredStatus()
-        } else {
-            self.hidePartyNameStatus()
-        }
-    }
-    
-    func partyNameValue() -> String? {
+    func fetchPartyNameValue() -> String? {
         let partyName = self.partyNameTextField.text!
         
         if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
             return nil
         } else {
             return partyName
+        }
+    }
+    
+    func checkPartyNameValueForErrors() {
+        let partyName = self.partyNameTextField.text!
+        
+        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.showPartyNameRequiredStatus()
+        } else {
+            self.hidePartyNameStatus()
         }
     }
     

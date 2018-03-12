@@ -25,9 +25,7 @@ class WannabePeople {
         var json = [:] as [String: Any]
         
         for person in self.people {
-            for (name, values) in person.json {
-                json[name] = values
-            }
+            json[person.name] = person.json
         }
         
         return json
@@ -42,8 +40,8 @@ class WannabePeople {
     init(JSON: JSON) {
         self.people = []
         
-        for (name, personJSON) in JSON {
-            self.add(WannabePerson(name: name, JSON: personJSON))
+        for (_, personJSON) in JSON {
+            self.add(WannabePerson(JSON: personJSON))
         }
     }
     

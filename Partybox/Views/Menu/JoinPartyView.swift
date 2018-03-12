@@ -51,7 +51,7 @@ class JoinPartyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -60,6 +60,10 @@ class JoinPartyView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.tableView)
@@ -92,29 +96,33 @@ class JoinPartyView: UIView {
     }
     
     @objc func joinButtonPressed() {
+        if self.inviteCodeValueHasErrors() || self.yourNameValueHasErrors() {
+            return
+        }
+        
         self.delegate.joinPartyView(self, joinButtonPressed: true)
     }
     
     // MARK: - View Functions
     
     func hideKeyboard() {
-        self.contentCell?.hideKeyboard()
+        self.contentCell.hideKeyboard()
     }
     
-    func fetchInviteCodeValue() -> String? {
-        return self.contentCell?.fetchInviteCodeValue()
+    func inviteCodeValueHasErrors() -> Bool {
+        return self.contentCell.inviteCodeValueHasErrors()
     }
     
-    func checkInviteCodeValueForErrors() {
-        self.contentCell?.checkInviteCodeValueForErrors()
+    func inviteCodeValue() -> String {
+        return self.contentCell.inviteCodeValue()
     }
     
-    func fetchYourNameValue() -> String? {
-        return self.contentCell?.fetchYourNameValue()
+    func yourNameValueHasErrors() -> Bool {
+        return self.contentCell.yourNameValueHasErrors()
     }
     
-    func checkYourNameValueForErrors() {
-        self.contentCell?.checkYourNameValueForErrors()
+    func yourNameValue() -> String {
+        return self.contentCell.yourNameValue()
     }
     
     // MARK: - Animation Functions

@@ -9,7 +9,23 @@
 import Foundation
 import SwiftyJSON
 
+enum WannabePackKey: String {
+    
+    // MARK: - Database Keys
+    
+    case id
+    
+    case name
+    
+    case cards
+    
+}
+
 class WannabePack {
+    
+    // MARK: - Class Properties
+    
+    static var collection: [WannabePack] = []
     
     // MARK: - Instance Properties
     
@@ -22,8 +38,6 @@ class WannabePack {
     var count: Int {
         return self.cards.count
     }
-    
-    var collection: [String]
     
     // MARK: - JSON Properties
     
@@ -43,16 +57,14 @@ class WannabePack {
         self.id = ""
         self.name = ""
         self.cards = []
-        self.collection = []
     }
     
     init(JSON: JSON) {
-        self.id = ""
-        self.name = ""
+        self.id = JSON[WannabePackKey.id.rawValue].stringValue
+        self.name = JSON[WannabePackKey.name.rawValue].stringValue
         self.cards = []
-        self.collection = []
-        
-        for (_, cardJSON) in JSON {
+
+        for (_, cardJSON) in JSON[WannabePackKey.cards.rawValue] {
             self.add(WannabeCard(JSON: cardJSON))
         }
     }

@@ -82,7 +82,7 @@ extension VoteWannabeView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return VoteWannabeView.staticTableViewCellCount + Game.current.wannabe.people.count
+        return VoteWannabeView.staticTableViewCellCount + Wannabe.current.people.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,16 +90,16 @@ extension VoteWannabeView: UITableViewDataSource {
             return self.tableView.votePromptCell()
         }
         
-        if indexPath.row > 0 && indexPath.row <= Game.current.wannabe.people.count {
+        if indexPath.row > 0 && indexPath.row <= Wannabe.current.people.count {
             let index = indexPath.row - 1
             
-            guard let person = Game.current.wannabe.people.person(index: index) else { return UITableViewCell() }
+            guard let person = Wannabe.current.people.person(index: index) else { return UITableViewCell() }
             
             return self.tableView.wannabePersonCell(wannabePerson: person)
         }
         
-        if indexPath.row == Game.current.wannabe.people.count + 1 {
-            guard let person = Game.current.wannabe.people.person(name: User.current.name) else { return UITableViewCell() }
+        if indexPath.row == Wannabe.current.people.count + 1 {
+            guard let person = Wannabe.current.people.person(name: User.current.name) else { return UITableViewCell() }
             
             if person.voteName.isEmpty {
                 return self.tableView.voteButtonCell(delegate: self)

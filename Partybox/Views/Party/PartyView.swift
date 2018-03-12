@@ -52,7 +52,7 @@ class PartyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -61,6 +61,10 @@ class PartyView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.tableView)
@@ -100,8 +104,8 @@ extension PartyView: UITableViewDelegate {
             return []
         }
         
-        let kickButton = UITableViewRowAction(style: .default, title: "KICK", handler: {
-            (_, indexPath) in
+        let kickButton = UITableViewRowAction(style: .normal, title: "KICK", handler: {
+            (rowAction, indexPath) in
             
             self.delegate.partyView(self, kickButtonPressed: person.name)
         })
@@ -147,8 +151,8 @@ extension PartyView: UITableViewDataSource {
             
             switch Game.current.type {
             case .wannabe:
-                customCell.setName(Game.current.wannabe.details.name)
-                customCell.setSummary(Game.current.wannabe.details.summary)
+                customCell.setName(Wannabe.current.details.name)
+                customCell.setSummary(Wannabe.current.details.summary)
             }
 
             return customCell

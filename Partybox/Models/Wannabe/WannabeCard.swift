@@ -45,12 +45,6 @@ class WannabeCard {
     
     // MARK: - Initialization Functions
     
-    init() {
-        self.type = ""
-        self.hint = ""
-        self.content = ""
-    }
-    
     init(JSON: JSON) {
         self.type = JSON[WannabeCardKey.type.rawValue].stringValue
         self.hint = JSON[WannabeCardKey.hint.rawValue].stringValue

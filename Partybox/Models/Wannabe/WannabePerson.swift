@@ -36,6 +36,7 @@ class WannabePerson {
     var json: [String: Any] {
         let json = [
             self.name: [
+                WannabePersonKey.name.rawValue: self.name,
                 WannabePersonKey.points.rawValue: self.points,
                 WannabePersonKey.voteName.rawValue: self.voteName
             ]
@@ -46,14 +47,14 @@ class WannabePerson {
     
     // MARK: - Initialization Functions
     
-    init() {
-        self.name = ""
+    init(name: String) {
+        self.name = name
         self.points = 0
         self.voteName = ""
     }
     
-    init(name: String, JSON: JSON) {
-        self.name = name
+    init(JSON: JSON) {
+        self.name = JSON[WannabePersonKey.name.rawValue].stringValue
         self.points = JSON[WannabePersonKey.points.rawValue].intValue
         self.voteName = JSON[WannabePersonKey.voteName.rawValue].stringValue
     }

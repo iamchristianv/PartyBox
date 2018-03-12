@@ -13,34 +13,35 @@ class StartWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: StartWannabeView = StartWannabeView()
+    var contentView: StartWannabeView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = StartWannabeView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.edgesForExtendedLayout = []
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupStatusBar()
+        self.setupViewController()
         self.setupNavigationBar()
+        self.startObservingNotification(name: PartyNotification.peopleChanged.rawValue, selector: #selector(partyPeopleChanged))
+        self.startObservingNotification(name: GameNotification.detailsChanged.rawValue, selector: #selector(gameDetailsChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.stopObservingNotification(name: PartyNotification.peopleChanged.rawValue)
+        self.stopObservingNotification(name: GameNotification.detailsChanged.rawValue)
     }
     
     // MARK: - Setup Functions
     
-    func setupStatusBar() {
+    func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
     }
     
     func setupNavigationBar() {
@@ -50,7 +51,7 @@ class StartWannabeViewController: UIViewController {
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
     
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
     
     @objc func leaveButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
@@ -58,26 +59,8 @@ class StartWannabeViewController: UIViewController {
     
     // MARK: - Notification Functions
     
-    func startObservingChanges() {
-        var name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
-        var selector = #selector(partyPeopleChanged)
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
-        
-        name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
-        selector = #selector(gameDetailsChanged)
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
-    }
-    
-    func stopObservingChanges() {
-        var name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
-        NotificationCenter.default.removeObserver(self, name: name, object: nil)
-        
-        name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
-        NotificationCenter.default.removeObserver(self, name: name, object: nil)
-    }
-    
     @objc func partyPeopleChanged() {
-        self.contentView.tableView.reloadData()
+        self.contentView.reloadTable()
         
         if User.current.name == Party.current.details.hostName {
             for i in 0 ..< Party.current.people.count {
@@ -93,24 +76,25 @@ class StartWannabeViewController: UIViewController {
             for i in 0 ..< Party.current.people.count {
                 guard let person = Party.current.people.person(index: i) else { return }
                 
-                Game.current.wannabe.people.add(WannabePerson(name: person.name, JSON: JSON("")))
+                Wannabe.current.people.add(WannabePerson(name: person.name))
                 
                 if i == randomIndex {
-                    Game.current.wannabe.details.wannabeName = person.name
+                    Wannabe.current.details.wannabeName = person.name
                 }
             }
             
-            Game.current.wannabe.details.isReady = true
+            Wannabe.current.details.isReady = true
             
             let path = "\(ReferenceKey.games.rawValue)"
+            let value = Wannabe.current.json
             
-            Reference.current.database.child(path).updateChildValues(Game.current.json)
+            Reference.current.database.child(path).updateChildValues(value)
         }
     }
     
     @objc func gameDetailsChanged() {
-        if Game.current.wannabe.details.isReady {
-            self.navigationController?.pushViewController(PlayWannabeViewController(), animated: true)
+        if Wannabe.current.details.isReady {
+            self.pushPlayWannabeViewController()
         }
     }
 
@@ -120,14 +104,15 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
     
     // MARK: - Start Wannabe View Delegate Functions
     
-    func startWannabeView(_ startWannabeView: StartWannabeView, readyToPlayButtonPressed button: UIButton) {
+    func startWannabeView(_ startWannabeView: StartWannabeView, readyButtonPressed: Bool) {
         guard let person = Party.current.people.person(name: User.current.name) else { return }
         
         person.isReady = true
         
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
+        let value = [person.name: person.json]
             
-        Reference.current.database.child(path).updateChildValues(person.json)
+        Reference.current.database.child(path).updateChildValues(value)
     }
     
 }

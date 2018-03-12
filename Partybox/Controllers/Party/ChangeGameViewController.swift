@@ -25,6 +25,7 @@ class ChangeGameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
@@ -32,7 +33,6 @@ class ChangeGameViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {

@@ -168,8 +168,8 @@ extension ChangeGameView: UITableViewDataSource {
             
             switch type {
             case .wannabe:
-                customCell.setName(Game.current.wannabe.details.name)
-                customCell.setSummary(Game.current.wannabe.details.summary)
+                customCell.setName(Wannabe.current.details.name)
+                customCell.setSummary(Wannabe.current.details.summary)
             }
             
             return customCell

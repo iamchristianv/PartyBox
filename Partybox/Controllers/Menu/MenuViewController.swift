@@ -18,7 +18,7 @@ class MenuViewController: UIViewController {
     
     var authenticationHandle: AuthStateDidChangeListenerHandle!
     
-    var motionManager: CMMotionManager = CMMotionManager()
+    var motionManager: CMMotionManager!
     
     var confettiTimer: Timer!
     
@@ -28,6 +28,11 @@ class MenuViewController: UIViewController {
         self.contentView = MenuView()
         self.contentView.delegate = self
         self.view = self.contentView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.motionManager = CMMotionManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +71,7 @@ class MenuViewController: UIViewController {
     
     func startObservingAuthenticationChanges() {
         self.authenticationHandle = Auth.auth().addStateDidChangeListener({
-            (_, user) in
+            (auth, user) in
             
             if user == nil {
                 self.contentView.startAnimatingStartPartyButton()
@@ -86,11 +91,11 @@ class MenuViewController: UIViewController {
     
     func startObservingMotionChanges() {
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
-            (motion, _) in
+            (motion, error) in
+
+            guard let motion = motion else { return }
             
-            if let motion = motion {
-                self.contentView.updateConfettiGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
-            }
+            self.contentView.updateConfettiGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
         })
     }
     
@@ -103,10 +108,11 @@ class MenuViewController: UIViewController {
     func startDroppingConfetti() {
         let target = self.contentView!
         let selector = #selector(MenuView.dropConfetti)
+        
         self.confettiTimer = Timer.scheduledTimer(timeInterval: 0.2, target: target, selector: selector, userInfo: nil, repeats: true)
     }
     
-    func stopDroppingConfetti() {
+    func stopDroppingConfetti() {        
         self.confettiTimer.invalidate()
     }
 

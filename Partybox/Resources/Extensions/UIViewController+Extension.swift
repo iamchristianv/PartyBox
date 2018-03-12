@@ -123,6 +123,11 @@ extension UIViewController {
         let startWannabeViewController = StartWannabeViewController()
         self.navigationController?.pushViewController(startWannabeViewController, animated: true)
     }
+    
+    func pushPlayWannabeViewController() {
+        let playWannabeViewController = PlayWannabeViewController()
+        self.navigationController?.pushViewController(playWannabeViewController, animated: true)
+    }
         
     func dismissViewController(animated: Bool, completion: (() -> ())?) {
         self.dismiss(animated: animated, completion: completion)

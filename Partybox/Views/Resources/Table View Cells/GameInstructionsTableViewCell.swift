@@ -18,16 +18,16 @@ class GameInstructionsTableViewCell: UITableViewCell {
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.textColor = .black
         nameLabel.font = UIFont.avenirNextRegular(size: 32)
+        nameLabel.textColor = .black
         nameLabel.textAlignment = .center
         return nameLabel
     }()
     
     var instructionsLabel: UILabel = {
         let instructionsLabel = UILabel()
-        instructionsLabel.textColor = .black
         instructionsLabel.font = UIFont.avenirNextRegular(size: 18)
+        instructionsLabel.textColor = .black
         instructionsLabel.numberOfLines = 0
         instructionsLabel.textAlignment = .center
         return instructionsLabel
@@ -37,17 +37,21 @@ class GameInstructionsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
-        self.configureSubviews()
+        self.setupView()
+        self.setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Configuration Functions
+    // MARK: - Setup Functions
     
-    func configureSubviews() {
+    func setupView() {
+        self.selectionStyle = .none
+    }
+    
+    func setupSubviews() {
         self.addSubview(self.nameLabel)
         self.addSubview(self.instructionsLabel)
         

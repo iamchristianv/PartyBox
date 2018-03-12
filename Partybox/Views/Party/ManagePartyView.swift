@@ -51,7 +51,7 @@ class ManagePartyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -60,6 +60,10 @@ class ManagePartyView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.tableView)
@@ -105,12 +109,12 @@ class ManagePartyView: UIView {
         self.tableView.reloadData()
     }
     
-    func partyNameValue() -> String? {
-        return self.contentCell.partyNameValue()
+    func fetchPartyNameValue() -> String? {
+        return self.contentCell.fetchPartyNameValue()
     }
     
-    func checkPartyNameField() {
-        self.contentCell.checkPartyNameField()
+    func checkPartyNameValueForErrors() {
+        self.contentCell.checkPartyNameValueForErrors()
     }
     
     // MARK: - Animation Functions

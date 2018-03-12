@@ -26,12 +26,11 @@ class SetupWannabeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        //self.startObservingGameDetailsChanges(selector: #selector(gameDetailsChanged))
+        self.setupNavigationBar()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        //self.stopObservingGameDetailsChanges()
     }
     
     // MARK: - Setup Functions
@@ -39,7 +38,6 @@ class SetupWannabeViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -54,14 +52,6 @@ class SetupWannabeViewController: UIViewController {
     @objc func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
-    
-    // MARK: - Notification Functions
-    
-    @objc func gameDetailsChanged() {
-        if Game.current.wannabe.details.isSetup {
-            self.pushStartWannabeViewController()
-        }
-    }
 
 }
 
@@ -70,24 +60,25 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
     // MARK: - Setup Wannabe View Delegate Functions
     
     func setupWannabeView(_ setupWannabeView: SetupWannabeView, playButtonPressed: Bool) {
-        let path = "\(ReferenceKey.packs.rawValue)/\(Game.current.wannabe.details.id)/default"
-        
         self.contentView.startAnimatingPlayButton()
         
-        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
-            (snapshot) in
+        Wannabe.current.loadPack(id: self.contentView.selectedPackValue().id, callback: {
+            (error) in
             
             self.contentView.stopAnimatingPlayButton()
             
-            guard let snapshotJSON = snapshot.value as? [[String: Any]] else{ return }
+            Wannabe.current.details.isSetup = true
+            Wannabe.current.details.rounds = self.contentView.selectedRoundsValue().rawValue
             
-            let packJSON = JSON(snapshotJSON)
-            Game.current.wannabe.pack = WannabePack(JSON: packJSON)
-            Game.current.wannabe.details.isSetup = true
-            Game.current.wannabe.details.numRounds = 3
-            
-            let path = "\(ReferenceKey.games.rawValue)"
-            Reference.current.database.child(path).updateChildValues(Game.current.json)
+            Reference.current.startGame(callback: {
+                (error) in
+                
+                if let error = error {
+                    self.showErrorAlert(error: error)
+                } else {
+                    self.pushStartWannabeViewController()
+                }
+            })
         })
     }
     

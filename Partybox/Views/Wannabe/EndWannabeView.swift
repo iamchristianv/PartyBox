@@ -73,7 +73,7 @@ extension EndWannabeView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            if Game.current.wannabe.details.wannabeName.isEmpty {
+            if Wannabe.current.details.wannabeName.isEmpty {
                 return self.tableView.everyoneWonPromptCell()
             }
             else {

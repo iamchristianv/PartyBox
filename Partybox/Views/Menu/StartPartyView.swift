@@ -51,7 +51,7 @@ class StartPartyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -60,6 +60,10 @@ class StartPartyView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.tableView)
@@ -92,29 +96,33 @@ class StartPartyView: UIView {
     }
     
     @objc func startButtonPressed() {
+        if self.partyNameValueHasErrors() || self.yourNameValueHasErrors() {
+            return
+        }
+        
         self.delegate.startPartyView(self, startButtonPressed: true)
     }
     
     // MARK: - View Functions
     
     func hideKeyboard() {
-        self.contentCell?.hideKeyboard()
+        self.contentCell.hideKeyboard()
     }
     
-    func fetchPartyNameValue() -> String? {
-        return self.contentCell?.fetchPartyNameValue()
+    func partyNameValueHasErrors() -> Bool {
+        return self.contentCell.partyNameValueHasErrors()
     }
     
-    func checkPartyNameValueForErrors() {
-        self.contentCell?.checkPartyNameValueForErrors()
+    func partyNameValue() -> String {
+        return self.contentCell.partyNameValue()
     }
     
-    func fetchYourNameValue() -> String? {
-        return self.contentCell?.fetchYourNameValue()
+    func yourNameValueHasErrors() -> Bool {
+        return self.contentCell.yourNameValueHasErrors()
     }
     
-    func checkYourNameValueForErrors() {
-        self.contentCell?.checkYourNameValueForErrors()
+    func yourNameValue() -> String {
+        return self.contentCell.yourNameValue()
     }
     
     // MARK: - Animation Functions

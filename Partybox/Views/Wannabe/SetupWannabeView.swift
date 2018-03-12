@@ -39,9 +39,9 @@ class SetupWannabeView: UIView {
         return tableView
     }()
     
-    var selectedNumRounds: Int = Game.current.wannabe.details.numRounds
+    var selectedRounds: WannabeRounds = WannabeRounds.collection[0]
     
-    var selectedPackName: String = Game.current.wannabe.pack.collection[0]
+    var selectedPack: WannabePack = WannabePack.collection[0]
     
     lazy var playButton: ActivityButton = {
         let playButton = ActivityButton()
@@ -58,7 +58,7 @@ class SetupWannabeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -67,6 +67,10 @@ class SetupWannabeView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.tableView)
@@ -104,6 +108,14 @@ class SetupWannabeView: UIView {
         self.tableView.reloadData()
     }
     
+    func selectedRoundsValue() -> WannabeRounds {
+        return self.selectedRounds
+    }
+    
+    func selectedPackValue() -> WannabePack {
+        return self.selectedPack
+    }
+    
     // MARK: - Animation Functions
     
     func startAnimatingPlayButton() {
@@ -124,15 +136,15 @@ extension SetupWannabeView: UITableViewDelegate {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let customCell = tableViewCell as! SelectableTableViewCell
         
-        for roundType in WannabeDetailsRoundType.collection {
-            if customCell.contentLabel.text == "\(roundType.rawValue) rounds" {
-                self.selectedNumRounds = roundType.rawValue
+        for rounds in WannabeRounds.collection {
+            if customCell.contentLabel.text == "\(rounds.rawValue) rounds" {
+                self.selectedRounds = rounds
             }
         }
         
-        for packName in Game.current.wannabe.pack.collection {
-            if customCell.contentLabel.text == packName {
-                self.selectedPackName = packName
+        for pack in WannabePack.collection {
+            if customCell.contentLabel.text == pack.name {
+                self.selectedPack = pack
             }
         }
         
@@ -150,7 +162,7 @@ extension SetupWannabeView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SetupWannabeView.staticTableViewCellCount + WannabeDetailsRoundType.collection.count + Game.current.wannabe.pack.collection.count
+        return SetupWannabeView.staticTableViewCellCount + WannabeRounds.collection.count + WannabePack.collection.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -174,10 +186,10 @@ extension SetupWannabeView: UITableViewDataSource {
             let customCell = tableViewCell as! SelectableTableViewCell
             
             let index = indexPath.row - 2
-            let roundType = WannabeDetailsRoundType.collection[index]
+            let rounds = WannabeRounds.collection[index]
             
-            customCell.setContent("\(roundType.rawValue) rounds")
-            customCell.setSelected(self.selectedNumRounds == roundType.rawValue)
+            customCell.setContent("\(rounds.rawValue) rounds")
+            customCell.setSelected(self.selectedRounds == rounds)
             
             return customCell
         }
@@ -195,10 +207,10 @@ extension SetupWannabeView: UITableViewDataSource {
             let customCell = tableViewCell as! SelectableTableViewCell
             
             let index = indexPath.row - 6
-            let packName = Game.current.wannabe.pack.collection[index]
+            let pack = WannabePack.collection[index]
             
-            customCell.setContent(packName)
-            customCell.setSelected(self.selectedPackName == packName)
+            customCell.setContent(pack.name)
+            customCell.setSelected(self.selectedPack.id == pack.id)
             
             return customCell
         }

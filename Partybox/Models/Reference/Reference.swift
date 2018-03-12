@@ -66,8 +66,11 @@ class Reference {
                 return
             }
             
-            User.current = User(name: userName)
-            Party.current = Party(id: id, name: partyName, hostName: userName)
+            User.current.name = userName
+            
+            Party.current.details.id = id
+            Party.current.details.name = partyName
+            Party.current.details.hostName = userName
             
             let person = PartyPerson(name: userName)
             Party.current.people.add(person)
@@ -104,7 +107,8 @@ class Reference {
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
             
-            User.current = User(name: userName)
+            User.current.name = userName
+            
             Party.current = Party(JSON: JSON(snapshotJSON))
             
             if Party.current.people.count >= Party.current.details.maxCapacity {
@@ -116,7 +120,7 @@ class Reference {
             Party.current.people.add(person)
             
             let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
-            let value = person.json
+            let value = [person.name: person.json]
             
             Reference.current.database.child(path).updateChildValues(value, withCompletionBlock: {
                 (error, reference) in
@@ -142,27 +146,9 @@ class Reference {
         })
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // MARK: - Game Functions
     
     func startGame(callback: @escaping (String?) -> Void) {
-        Game.current = Game()
-        
         let id = Party.current.details.id
         let path = "\(ReferenceKey.games.rawValue)/\(id)"
         
@@ -178,7 +164,7 @@ class Reference {
             let value = Game.current.json
             
             Reference.current.database.child(path).updateChildValues(value)
-            Reference.current.startObservingGameChanges()
+            Game.current.startObservingChanges()
             
             callback(nil)
         })
@@ -187,95 +173,8 @@ class Reference {
     func endGame() {
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)"
         
-        Reference.current.stopObservingGameChanges()
-        Reference.current.database.child(path).removeValue()
-        
-        Game.current = Game()
-    }
-    
-    func fetchPackCollectionForGame(callback: @escaping (String?) -> Void) {
-        var path = "\(ReferenceKey.packs.rawValue)"
-        
-        switch Game.current.type {
-        case .wannabe:
-            path += "/\(Game.current.wannabe.details.id)/collection"
-        }
-        
-        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            
-            Game.current.wannabe.pack.collection.removeAll()
-            
-            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
-            
-            let packJSON = JSON(snapshotJSON)
-            
-            for (_, values) in packJSON {
-                Game.current.wannabe.pack.collection.append(values["name"].stringValue)
-            }
-            
-            callback(nil)
-        })
-    }
-    
-    // MARK: - Game Notification Functions
-    
-    func startObservingGameChanges() {
-        self.startObservingGameDetailsChanges()
-        self.startObservingGamePeopleChanges()
-    }
-    
-    func stopObservingGameChanges() {
-        self.stopObservingGameDetailsChanges()
-        self.stopObservingGamePeopleChanges()
-    }
-    
-    func startObservingGameDetailsChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
-        
-        Reference.current.database.child(path).observe(.value, with: {
-            (snapshot) in
-            
-            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
-            
-            switch Game.current.type {
-            case .wannabe:
-                Game.current.wannabe.details = WannabeDetails(JSON: JSON(snapshotJSON))
-            }
-            
-            let name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
-            NotificationCenter.default.post(name: name, object: nil)
-        })
-    }
-    
-    func stopObservingGameDetailsChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
-        
-        Reference.current.database.child(path).removeAllObservers()
-    }
-    
-    func startObservingGamePeopleChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
-        
-        Reference.current.database.child(path).observe(.value, with: {
-            (snapshot) in
-            
-            guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
-            
-            switch Game.current.type {
-            case .wannabe:
-                Game.current.wannabe.people = WannabePeople(JSON: JSON(snapshotJSON))
-            }
-            
-            let name = Notification.Name(ReferenceNotification.gamePeopleChanged.rawValue)
-            NotificationCenter.default.post(name: name, object: nil)
-        })
-    }
-    
-    func stopObservingGamePeopleChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
-        
-        Reference.current.database.child(path).removeAllObservers()
+        Game.current.stopObservingChanges()
+        Reference.current.database.child(path).removeValue()        
     }
     
     // MARK: - Utility Functions

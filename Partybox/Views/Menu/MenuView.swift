@@ -103,7 +103,7 @@ class MenuView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -112,6 +112,10 @@ class MenuView: UIView {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.backgroundColor = .white
+    }
     
     func setupSubviews() {
         self.addSubview(self.partyboxImageView)
@@ -131,7 +135,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(50)
+            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(100)
         })
         
         self.joinPartyButton.snp.remakeConstraints({
@@ -140,7 +144,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.startPartyButton.snp.bottom).offset(30)
+            make.top.equalTo(self.startPartyButton.snp.bottom).offset(50)
         })
     }
     

@@ -110,7 +110,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -119,6 +119,10 @@ class JoinPartyTableViewCell: UITableViewCell {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.selectionStyle = .none
+    }
     
     func setupSubviews() {
         self.addSubview(self.inviteCodeLabel)
@@ -227,27 +231,18 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.yourNameTextField.resignFirstResponder()
     }
     
-    func fetchInviteCodeValue() -> String? {
-        let inviteCode = self.inviteCodeTextField.text!
-        
-        if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
-            return nil
-        } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
-            return nil
-        } else {
-            return inviteCode
-        }
-    }
-    
-    func checkInviteCodeValueForErrors() {
+    func inviteCodeValueHasErrors() -> Bool {
         let inviteCode = self.inviteCodeTextField.text!
         
         if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showInviteCodeRequiredStatus()
+            return true
         } else if !inviteCode.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.showInviteCodeInvalidStatus()
+            return true
         } else {
             self.hideInviteCodeStatus()
+            return false
         }
     }
     
@@ -269,27 +264,22 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.inviteCodeStatusLabel.isHidden = true
     }
     
-    func fetchYourNameValue() -> String? {
-        let userName = self.yourNameTextField.text!
-        
-        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            return nil
-        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            return nil
-        } else {
-            return userName
-        }
+    func inviteCodeValue() -> String {
+        return self.inviteCodeTextField.text!
     }
     
-    func checkYourNameValueForErrors() {
+    func yourNameValueHasErrors() -> Bool {
         let userName = self.yourNameTextField.text!
         
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showYourNameRequiredStatus()
+            return true
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.showYourNameInvalidStatus()
+            return true
         } else {
             self.hideYourNameStatus()
+            return false
         }
     }
     
@@ -309,6 +299,10 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
         self.yourNameStatusLabel.text = " "
         self.yourNameStatusLabel.isHidden = true
+    }
+    
+    func yourNameValue() -> String {
+        return self.yourNameTextField.text!
     }
 
 }

@@ -25,6 +25,7 @@ class ManagePartyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
@@ -32,7 +33,6 @@ class ManagePartyViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -55,13 +55,13 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
     // MARK: - Manage Party View Delegate Functions
     
     func managePartyView(_ managePartyView: ManagePartyView, saveButtonPressed: Bool) {
-        self.contentView.checkPartyNameField()
+        self.contentView.checkPartyNameValueForErrors()
         
-        guard let partyName = self.contentView.partyNameValue() else { return }
+        guard let partyName = self.contentView.fetchPartyNameValue() else { return }
         
         self.contentView.startAnimatingSaveButton()
         
-        Party.current.setNameForParty(name: partyName, callback: {
+        Party.current.setName(name: partyName, callback: {
             (error) in
             
             self.contentView.stopAnimatingSaveButton()

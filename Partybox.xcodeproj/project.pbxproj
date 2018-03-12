@@ -26,8 +26,6 @@
 		AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */; };
 		AACD97431FE6F782000275CB /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97421FE6F782000275CB /* WannabePack.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
-		AACD974E1FF4960E000275CB /* SetupWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */; };
-		AACD97501FF49623000275CB /* StartWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD974F1FF49623000275CB /* StartWannabeTableView.swift */; };
 		AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97511FF49631000275CB /* PlayWannabeTableView.swift */; };
 		AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */; };
 		AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */; };
@@ -105,8 +103,6 @@
 		AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCountdownTableViewCell.swift; sourceTree = "<group>"; };
 		AACD97421FE6F782000275CB /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
-		AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeTableView.swift; sourceTree = "<group>"; };
-		AACD974F1FF49623000275CB /* StartWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeTableView.swift; sourceTree = "<group>"; };
 		AACD97511FF49631000275CB /* PlayWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeTableView.swift; sourceTree = "<group>"; };
 		AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeTableView.swift; sourceTree = "<group>"; };
 		AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
@@ -201,8 +197,6 @@
 		AAB053A32002E17100180209 /* Table Views */ = {
 			isa = PBXGroup;
 			children = (
-				AACD974D1FF4960E000275CB /* SetupWannabeTableView.swift */,
-				AACD974F1FF49623000275CB /* StartWannabeTableView.swift */,
 				AACD97511FF49631000275CB /* PlayWannabeTableView.swift */,
 				AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */,
 				AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */,
@@ -236,6 +230,7 @@
 				AAF73B191FA809C200D8A17B /* PartyView.swift */,
 				AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */,
 				AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */,
+				AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */,
 				AAFFBDDE2038A56600269AB4 /* ChangeGameView.swift */,
 			);
 			path = Party;
@@ -305,7 +300,7 @@
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
 				AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */,
 				AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */,
-				AAFC53EB1FC22F9E0039F539 /* Class Extensions */,
+				AAFC53EB1FC22F9E0039F539 /* Extensions */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -385,12 +380,11 @@
 				AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */,
 				AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */,
 				AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */,
-				AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
-		AAFC53EB1FC22F9E0039F539 /* Class Extensions */ = {
+		AAFC53EB1FC22F9E0039F539 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */,
@@ -398,7 +392,7 @@
 				AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */,
 				AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */,
 			);
-			path = "Class Extensions";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AAFFBDB1202F583400269AB4 /* Game */ = {
@@ -611,7 +605,6 @@
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
 				AAFFBDFB203A592000269AB4 /* SelectableGameTableViewCell.swift in Sources */,
 				AACD97431FE6F782000275CB /* WannabePack.swift in Sources */,
-				AACD97501FF49623000275CB /* StartWannabeTableView.swift in Sources */,
 				AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */,
 				AAB053B6200D697B00180209 /* CircleView.swift in Sources */,
 				AAFFBDC2203008AE00269AB4 /* SetupWannabeView.swift in Sources */,
@@ -630,7 +623,6 @@
 				AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */,
 				AAFFBDC5203008AE00269AB4 /* VoteWannabeView.swift in Sources */,
 				AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */,
-				AACD974E1FF4960E000275CB /* SetupWannabeTableView.swift in Sources */,
 				AACD97381FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift in Sources */,
 				AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */,
 				AAF73B1A1FA809C200D8A17B /* PartyView.swift in Sources */,

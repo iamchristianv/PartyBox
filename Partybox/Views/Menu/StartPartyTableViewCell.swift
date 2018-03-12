@@ -110,7 +110,7 @@ class StartPartyTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
+        self.setupView()
         self.setupSubviews()
     }
     
@@ -119,6 +119,10 @@ class StartPartyTableViewCell: UITableViewCell {
     }
     
     // MARK: - Setup Functions
+    
+    func setupView() {
+        self.selectionStyle = .none
+    }
     
     func setupSubviews() {
         self.addSubview(self.partyNameLabel)
@@ -227,23 +231,15 @@ class StartPartyTableViewCell: UITableViewCell {
         self.yourNameTextField.resignFirstResponder()
     }
     
-    func fetchPartyNameValue() -> String? {
-        let partyName = self.partyNameTextField.text!
-        
-        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
-            return nil
-        } else {
-            return partyName
-        }
-    }
-    
-    func checkPartyNameValueForErrors() {
+    func partyNameValueHasErrors() -> Bool {
         let partyName = self.partyNameTextField.text!
         
         if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showPartyNameRequiredStatus()
+            return true
         } else {
             self.hidePartyNameStatus()
+            return false
         }
     }
     
@@ -259,27 +255,22 @@ class StartPartyTableViewCell: UITableViewCell {
         self.partyNameStatusLabel.isHidden = true
     }
     
-    func fetchYourNameValue() -> String? {
-        let userName = self.yourNameTextField.text!
-        
-        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            return nil
-        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            return nil
-        } else {
-            return userName
-        }
+    func partyNameValue() -> String {
+        return self.partyNameTextField.text!
     }
     
-    func checkYourNameValueForErrors() {
+    func yourNameValueHasErrors() -> Bool {
         let userName = self.yourNameTextField.text!
         
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.showYourNameRequiredStatus()
+            return true
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.showYourNameInvalidStatus()
+            return true
         } else {
             self.hideYourNameStatus()
+            return false
         }
     }
     
@@ -299,6 +290,10 @@ class StartPartyTableViewCell: UITableViewCell {
         self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
         self.yourNameStatusLabel.text = " "
         self.yourNameStatusLabel.isHidden = true
+    }
+    
+    func yourNameValue() -> String {
+        return self.yourNameTextField.text!
     }
 
 }

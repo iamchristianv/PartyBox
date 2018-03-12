@@ -35,6 +35,7 @@ class ChangeHostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.setupNavigationBar()
         self.startObservingNotification(name: PartyNotification.peopleChanged.rawValue, selector: #selector(partyPeopleChanged))
     }
     
@@ -48,7 +49,6 @@ class ChangeHostViewController: UIViewController {
     func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-        self.setupNavigationBar()
     }
     
     func setupNavigationBar() {
@@ -82,12 +82,12 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
     // MARK: - Change Host View Delegate
     
     func changeHostView(_ changeHostView: ChangeHostView, changeButtonPressed: Bool) {
-        if self.contentView.selectedPersonName == Party.current.details.hostName {
+        if self.contentView.selectedPersonNameValue() == Party.current.details.hostName {
             self.showUserNeedsToSelectNewHostAlert(handler: nil)
         } else {
             self.contentView.startAnimatingChangeButton()
             
-            Party.current.setHostForParty(name: self.contentView.selectedPersonName, callback: {
+            Party.current.setHostName(name: self.contentView.selectedPersonNameValue(), callback: {
                 (error) in
                 
                 self.contentView.stopAnimatingChangeButton()

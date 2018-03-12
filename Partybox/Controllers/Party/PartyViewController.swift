@@ -39,6 +39,7 @@ class PartyViewController: UIViewController {
         self.startObservingNotification(name: PartyNotification.hostChanged.rawValue, selector: #selector(partyHostChanged))
         self.startObservingNotification(name: PartyNotification.detailsChanged.rawValue, selector: #selector(partyDetailsChanged))
         self.startObservingNotification(name: PartyNotification.peopleChanged.rawValue, selector: #selector(partyPeopleChanged))
+        self.startObservingNotification(name: GameNotification.detailsChanged.rawValue, selector: #selector(gameDetailsChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -92,7 +93,7 @@ class PartyViewController: UIViewController {
     @objc func partyHostChanged() {
         self.contentView.reloadTable()
         
-        if Party.current.details.hostName == User.current.name {
+        if User.current.name == Party.current.details.hostName {
             self.showUserIsNewPartyHostAlert(handler: nil)
         }
     }
@@ -113,6 +114,15 @@ class PartyViewController: UIViewController {
         }
     }
     
+    @objc func gameDetailsChanged() {
+        switch Game.current.type {
+        case .wannabe:
+            if Wannabe.current.details.isSetup {
+                self.showStartPartyViewController()
+            }
+        }
+    }
+    
 }
 
 extension PartyViewController: PartyViewDelegate {
@@ -120,7 +130,7 @@ extension PartyViewController: PartyViewDelegate {
     // MARK: - Party View Delegate Functions
     
     func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
-        Reference.current.fetchPackCollectionForGame(callback: {
+        Game.current.loadPackCollection(callback: {
             (error) in
             
             if let error = error {
@@ -142,12 +152,12 @@ extension PartyViewController: PartyViewDelegate {
         self.showUserWantsToKickPersonFromPartyAlert(handler: {
             guard let person = Party.current.people.person(name: selectedPersonName) else { return }
             
-            Party.current.removePersonFromParty(name: person.name, callback: {
+            Party.current.removePerson(name: person.name, callback: {
                 (error) in
                 
-                if let error = error {
-                    self.showErrorAlert(error: error)
-                }
+                guard let error = error else { return }
+                
+                self.showErrorAlert(error: error)
             })
         })
     }

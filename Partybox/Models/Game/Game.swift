@@ -30,6 +30,20 @@ enum GameKey: String {
     
     case people
     
+    case pack
+    
+}
+
+enum GameNotification: String {
+    
+    // MARK: - Notification Types
+    
+    case detailsChanged = "Game/GameDetails/detailsChanged"
+    
+    case peopleChanged = "Game/GamePeople/peopleChanged"
+    
+    case packChanged = "Game/GamePack/packChanged"
+    
 }
 
 class Game {
@@ -42,14 +56,12 @@ class Game {
     
     var type: GameType
     
-    var wannabe: Wannabe
-    
     // MARK: - JSON Properties
     
     var json: [String: Any] {
-        switch self.type {
+        switch Game.current.type {
         case .wannabe:
-            return self.wannabe.json
+            return Wannabe.current.json
         }
     }
     
@@ -57,7 +69,31 @@ class Game {
     
     init() {
         self.type = .wannabe
-        self.wannabe = Wannabe()
+    }
+    
+    // MARK: - Database Functions
+    
+    func loadPackCollection(callback: @escaping (String?) -> Void) {
+        switch Game.current.type {
+        case .wannabe:
+            Wannabe.current.loadPackCollection(callback: callback)
+        }
+    }
+    
+    // MARK: - Notification Functions
+    
+    func startObservingChanges() {
+        switch Game.current.type {
+        case .wannabe:
+            Wannabe.current.startObservingChanges()
+        }
+    }
+    
+    func stopObservingChanges() {
+        switch Game.current.type {
+        case .wannabe:
+            Wannabe.current.stopObservingChanges()
+        }
     }
     
 }

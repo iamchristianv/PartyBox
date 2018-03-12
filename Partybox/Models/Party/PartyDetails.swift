@@ -50,10 +50,10 @@ class PartyDetails {
     
     // MARK: - Initialization Functions
     
-    init(id: String, name: String, hostName: String) {
-        self.id = id
-        self.name = name
-        self.hostName = hostName
+    init() {
+        self.id = ""
+        self.name = ""
+        self.hostName = ""
         self.maxCapacity = 10
     }
     

@@ -35,7 +35,7 @@ class Party {
     
     // MARK: - Shared Instance
     
-    static var current: Party = Party(id: "", name: "", hostName: "")
+    static var current: Party = Party()
     
     // MARK: - Instance Properties
     
@@ -58,8 +58,8 @@ class Party {
     
     // MARK: - Initialization Functions
     
-    init(id: String, name: String, hostName: String) {
-        self.details = PartyDetails(id: id, name: name, hostName: hostName)
+    init() {
+        self.details = PartyDetails()
         self.people = PartyPeople()
     }
     
@@ -70,7 +70,7 @@ class Party {
     
     // MARK: - Database Functions
     
-    func setNameForParty(name: String, callback: @escaping (String?) -> Void) {
+    func setName(name: String, callback: @escaping (String?) -> Void) {
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
         let value = [PartyDetailsKey.name.rawValue: name]
         
@@ -85,7 +85,7 @@ class Party {
         })
     }
     
-    func setHostForParty(name: String, callback: @escaping (String?) -> Void) {
+    func setHostName(name: String, callback: @escaping (String?) -> Void) {
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.details.rawValue)"
         let value = [PartyDetailsKey.hostName.rawValue: name]
         
@@ -100,7 +100,7 @@ class Party {
         })
     }
     
-    func removePersonFromParty(name: String, callback: @escaping (String?) -> Void) {
+    func removePerson(name: String, callback: @escaping (String?) -> Void) {
         let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)/\(name)"
         
         Reference.current.database.child(path).removeValue(completionBlock: {
