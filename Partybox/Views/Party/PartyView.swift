@@ -85,6 +85,16 @@ class PartyView: UIView {
         self.tableView.reloadData()
     }
     
+    // MARK: - Animation Functions
+    
+    func startAnimatingPlayButton() {
+        
+    }
+    
+    func stopAnimatingPlayButton() {
+        
+    }
+    
 }
 
 extension PartyView: UITableViewDelegate {

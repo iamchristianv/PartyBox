@@ -130,14 +130,19 @@ extension PartyViewController: PartyViewDelegate {
     // MARK: - Party View Delegate Functions
     
     func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
+        self.contentView.startAnimatingPlayButton()
+        
         Game.current.loadPackCollection(callback: {
             (error) in
+            
+            self.contentView.stopAnimatingPlayButton()
             
             if let error = error {
                 self.showErrorAlert(error: error)
             } else {
                 switch Game.current.type {
                 case .wannabe:
+                    Wannabe.current = Wannabe()
                     self.showSetupWannabeViewController()
                 }
             }

@@ -63,33 +63,35 @@ class StartWannabeViewController: UIViewController {
         self.contentView.reloadTable()
         
         if User.current.name == Party.current.details.hostName {
-            for i in 0 ..< Party.current.people.count {
-                guard let person = Party.current.people.person(index: i) else { return }
-                
-                if !person.isReady {
-                    return
-                }
-            }
-            
-            let randomIndex = Int(arc4random()) % Party.current.people.count
-            
-            for i in 0 ..< Party.current.people.count {
-                guard let person = Party.current.people.person(index: i) else { return }
-                
-                Wannabe.current.people.add(WannabePerson(name: person.name))
-                
-                if i == randomIndex {
-                    Wannabe.current.details.wannabeName = person.name
-                }
-            }
-            
-            Wannabe.current.details.isReady = true
-            
-            let path = "\(ReferenceKey.games.rawValue)"
-            let value = Wannabe.current.json
-            
-            Reference.current.database.child(path).updateChildValues(value)
+            return
         }
+        
+        for i in 0 ..< Party.current.people.count {
+            guard let person = Party.current.people.person(index: i) else { return }
+            
+            if !person.isReady {
+                return
+            }
+        }
+        
+        let randomIndex = Int(arc4random()) % Party.current.people.count
+        
+        for i in 0 ..< Party.current.people.count {
+            guard let person = Party.current.people.person(index: i) else { return }
+            
+            Wannabe.current.people.add(WannabePerson(name: person.name))
+            
+            if i == randomIndex {
+                Wannabe.current.details.wannabeName = person.name
+            }
+        }
+        
+        Wannabe.current.details.isReady = true
+        
+        let path = "\(ReferenceKey.games.rawValue)"
+        let value = Wannabe.current.json
+        
+        Reference.current.database.child(path).updateChildValues(value)
     }
     
     @objc func gameDetailsChanged() {

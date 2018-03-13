@@ -24,24 +24,6 @@ enum ReferenceKey: String {
 
 }
 
-enum ReferenceNotification: String {
-    
-    // MARK: - Party Notification Types
-    
-    case partyHostChanged = "Party/PartyDetails/hostChanged"
-    
-    case partyDetailsChanged = "Party/PartyDetails/detailsChanged"
-    
-    case partyPeopleChanged = "Party/PartyPeople/peopleChanged"
-    
-    // MARK: - Game Notification Types
-    
-    case gameDetailsChanged = "Game/GameDetails/detailsChanged"
-    
-    case gamePeopleChanged = "Game/GamePeople/peopleChanged"
-    
-}
-
 class Reference {
     
     // MARK: - Shared Instance
@@ -55,6 +37,9 @@ class Reference {
     // MARK: - Party Functions
     
     func startParty(userName: String, partyName: String, callback: @escaping (String?) -> Void) {
+        Party.current = Party()
+        Game.current = Game()
+        
         let id = Reference.current.randomPartyId()
         let path = "\(ReferenceKey.parties.rawValue)/\(id)"
         
@@ -82,6 +67,7 @@ class Reference {
                 (error, reference) in
                 
                 Party.current.startObservingChanges()
+                Game.current.startObservingChanges()
             })
             
             callback(nil)
@@ -89,6 +75,9 @@ class Reference {
     }
     
     func joinParty(userName: String, partyId: String, callback: @escaping (String?) -> Void) {
+        Party.current = Party()
+        Game.current = Game()
+        
         let id = partyId
         let path = "\(ReferenceKey.parties.rawValue)/\(id)"
         
@@ -126,6 +115,7 @@ class Reference {
                 (error, reference) in
                 
                 Party.current.startObservingChanges()
+                Game.current.startObservingChanges()
             })
             
             callback(nil)
@@ -133,48 +123,32 @@ class Reference {
     }
     
     func endParty() {
-        var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)"
-        
         if Party.current.people.count > 1 {
-            path += "/\(PartyKey.people.rawValue)/\(User.current.name)"
+            let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)/\(User.current.name)"
+            
+            Reference.current.database.child(path).removeValue(completionBlock: {
+                (error, reference) in
+                
+                Party.current.stopObservingChanges()
+                Game.current.stopObservingChanges()
+            })
+        } else {
+            var path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)"
+            
+            Reference.current.database.child(path).removeValue(completionBlock: {
+                (error, reference) in
+                
+                Party.current.stopObservingChanges()
+            })
+            
+            path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)"
+            
+            Reference.current.database.child(path).removeValue(completionBlock: {
+                (error, reference) in
+                
+                Game.current.stopObservingChanges()
+            })
         }
-        
-        Reference.current.database.child(path).removeValue(completionBlock: {
-            (error, reference) in
-            
-            Party.current.stopObservingChanges()
-        })
-    }
-    
-    // MARK: - Game Functions
-    
-    func startGame(callback: @escaping (String?) -> Void) {
-        let id = Party.current.details.id
-        let path = "\(ReferenceKey.games.rawValue)/\(id)"
-        
-        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            
-            if snapshot.exists() {
-                callback("We ran into a problem while starting your game\n\nPlease try again")
-                return
-            }
-            
-            let path = "\(ReferenceKey.games.rawValue)"
-            let value = Game.current.json
-            
-            Reference.current.database.child(path).updateChildValues(value)
-            Game.current.startObservingChanges()
-            
-            callback(nil)
-        })
-    }
-    
-    func endGame() {
-        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)"
-        
-        Game.current.stopObservingChanges()
-        Reference.current.database.child(path).removeValue()        
     }
     
     // MARK: - Utility Functions

@@ -35,11 +35,9 @@ class WannabePerson {
     
     var json: [String: Any] {
         let json = [
-            self.name: [
-                WannabePersonKey.name.rawValue: self.name,
-                WannabePersonKey.points.rawValue: self.points,
-                WannabePersonKey.voteName.rawValue: self.voteName
-            ]
+            WannabePersonKey.name.rawValue: self.name,
+            WannabePersonKey.points.rawValue: self.points,
+            WannabePersonKey.voteName.rawValue: self.voteName
         ] as [String: Any]
         
         return json

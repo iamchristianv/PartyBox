@@ -27,10 +27,12 @@ class SetupWannabeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupViewController()
         self.setupNavigationBar()
+        self.startObservingNotification(name: GameNotification.detailsChanged.rawValue, selector: #selector(gameDetailsChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        self.stopObservingNotification(name: GameNotification.detailsChanged.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -52,6 +54,14 @@ class SetupWannabeViewController: UIViewController {
     @objc func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
+    
+    // MARK: - Notification Functions
+    
+    @objc func gameDetailsChanged() {
+        if Wannabe.current.details.isSetup {
+            self.pushStartWannabeViewController()
+        }
+    }
 
 }
 
@@ -65,19 +75,16 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
         Wannabe.current.loadPack(id: self.contentView.selectedPackValue().id, callback: {
             (error) in
             
-            self.contentView.stopAnimatingPlayButton()
-            
             Wannabe.current.details.isSetup = true
             Wannabe.current.details.rounds = self.contentView.selectedRoundsValue().rawValue
             
-            Reference.current.startGame(callback: {
-                (error) in
+            let path = "\(ReferenceKey.games.rawValue)"
+            let value = Wannabe.current.json
+            
+            Reference.current.database.child(path).updateChildValues(value, withCompletionBlock: {
+                (error, reference) in
                 
-                if let error = error {
-                    self.showErrorAlert(error: error)
-                } else {
-                    self.pushStartWannabeViewController()
-                }
+                self.contentView.stopAnimatingPlayButton()
             })
         })
     }

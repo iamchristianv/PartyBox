@@ -12,25 +12,21 @@ class PlayWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: PlayWannabeView = PlayWannabeView()
+    var contentView: PlayWannabeView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = PlayWannabeView()
         self.contentView.delegate = self
         self.view = self.contentView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.edgesForExtendedLayout = []
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupStatusBar()
+        self.setupViewController()
         self.setupNavigationBar()
-        self.startObservingChanges()
+        self.startObservingNotification(name: GameNotification.detailsChanged.rawValue, selector: #selector(gameDetailsChanged))
         
         if User.current.name == Party.current.details.hostName {
             //Session.game.details.card = Party.game.pack.randomCard()
@@ -40,41 +36,30 @@ class PlayWannabeViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingChanges()
+        self.stopObservingNotification(name: GameNotification.detailsChanged.rawValue)
     }
     
     // MARK: - Setup Functions
     
-    func setupStatusBar() {
+    func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
+        self.edgesForExtendedLayout = []
     }
     
     func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle("Wannabe")
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
-        self.setNavigationBarRightButton(title: "hint", target: self, action: #selector(leaveButtonPressed))
         self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
     }
     
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
     
     @objc func leaveButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
     
     // MARK: - Notification Functions
-    
-    func startObservingChanges() {
-        let name = Notification.Name(ReferenceNotification.gameDetailsChanged.rawValue)
-        let selector = #selector(gameDetailsChanged)
-        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
-    }
-    
-    func stopObservingChanges() {
-        let name = Notification.Name(ReferenceNotification.partyPeopleChanged.rawValue)
-        NotificationCenter.default.removeObserver(self, name: name, object: nil)
-    }
     
     @objc func gameDetailsChanged() {
         self.contentView.tableView.reloadData()

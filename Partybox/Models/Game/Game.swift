@@ -8,20 +8,6 @@
 
 import Foundation
 
-enum GameType {
-    
-    // MARK: - Game Types
-    
-    case wannabe
-    
-    // MARK: - Game Type Properties
-    
-    static var collection: [GameType] {
-        return [.wannabe]
-    }
-    
-}
-
 enum GameKey: String {
     
     // MARK: - Database Keys
@@ -31,6 +17,20 @@ enum GameKey: String {
     case people
     
     case pack
+    
+}
+
+enum GameType {
+    
+    // MARK: - Game Types
+    
+    case wannabe
+    
+    // MARK: - Game Type Collection
+    
+    static var collection: [GameType] {
+        return [.wannabe]
+    }
     
 }
 

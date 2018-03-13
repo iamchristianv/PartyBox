@@ -26,7 +26,6 @@
 		AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */; };
 		AACD97431FE6F782000275CB /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97421FE6F782000275CB /* WannabePack.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
-		AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97511FF49631000275CB /* PlayWannabeTableView.swift */; };
 		AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */; };
 		AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */; };
 		AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */; };
@@ -103,7 +102,6 @@
 		AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCountdownTableViewCell.swift; sourceTree = "<group>"; };
 		AACD97421FE6F782000275CB /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
-		AACD97511FF49631000275CB /* PlayWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWannabeTableView.swift; sourceTree = "<group>"; };
 		AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeTableView.swift; sourceTree = "<group>"; };
 		AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 		AAB053A32002E17100180209 /* Table Views */ = {
 			isa = PBXGroup;
 			children = (
-				AACD97511FF49631000275CB /* PlayWannabeTableView.swift */,
 				AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */,
 				AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */,
 			);
@@ -662,7 +659,6 @@
 				AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */,
 				AAFFBDE32038B17100269AB4 /* ManagePartyView.swift in Sources */,
 				AAB053B8200EDD4D00180209 /* InviteCodeTableViewCell.swift in Sources */,
-				AACD97521FF49631000275CB /* PlayWannabeTableView.swift in Sources */,
 				AAFFBDC4203008AE00269AB4 /* PlayWannabeView.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
 			);
