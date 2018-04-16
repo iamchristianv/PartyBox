@@ -11,7 +11,9 @@
 		AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D152E1FA571C9009E31BF /* MenuViewController.swift */; };
 		AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */; };
 		AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */; };
+		AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F9C9F205CBE87005EF3EB /* Countdown.swift */; };
 		AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Wannabe.swift */; };
+		AA62BA7D206208A700250772 /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = AA62BA7C206208A700250772 /* ToDo */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
 		AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A42002E1CF00180209 /* ActivityButton.swift */; };
 		AAB053A92002EBBB00180209 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A82002EBBB00180209 /* UIColor+Extension.swift */; };
@@ -35,6 +37,7 @@
 		AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */; };
 		AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */; };
 		AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81411FB40401003AD1D9 /* AlertViewController.swift */; };
+		AADCB3AC205F52B30008939D /* Database+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCB3AB205F52B30008939D /* Database+Extension.swift */; };
 		AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C7D2054F33200CA5AC8 /* AlertView.swift */; };
 		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
@@ -78,7 +81,6 @@
 		AAFFBDFD203A6E3B00269AB4 /* ManagePartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */; };
 		AAFFBDFF203A841E00269AB4 /* StartPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */; };
 		AAFFBE01203A8D1F00269AB4 /* JoinPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */; };
-		AAFFBE04203FACC600269AB4 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBE03203FACC600269AB4 /* Reference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +89,9 @@
 		AA0D152E1FA571C9009E31BF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyViewController.swift; sourceTree = "<group>"; };
 		AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
+		AA0F9C9F205CBE87005EF3EB /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
 		AA590FF91FC26FBB008988E9 /* Wannabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wannabe.swift; sourceTree = "<group>"; };
+		AA62BA7C206208A700250772 /* ToDo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		AAB053A42002E1CF00180209 /* ActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		AAB053A82002EBBB00180209 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81411FB40401003AD1D9 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		AADCB3AB205F52B30008939D /* Database+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Extension.swift"; sourceTree = "<group>"; };
 		AADD9C7D2054F33200CA5AC8 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,7 +161,6 @@
 		AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyTableViewCell.swift; sourceTree = "<group>"; };
-		AAFFBE03203FACC600269AB4 /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
 		D393AE5C1BCD6658F642EBEE /* Pods-Partybox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partybox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Partybox/Pods-Partybox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +185,40 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AA070DB62064992000367F8A /* Start Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF73B151FA804EA00D8A17B /* StartPartyView.swift */,
+				AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */,
+			);
+			path = "Start Party";
+			sourceTree = "<group>";
+		};
+		AA070DB72064994D00367F8A /* Start Party */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */,
+			);
+			path = "Start Party";
+			sourceTree = "<group>";
+		};
+		AA070DB82064A6FF00367F8A /* Join Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */,
+				AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */,
+			);
+			path = "Join Party";
+			sourceTree = "<group>";
+		};
+		AA070DB92064A70E00367F8A /* Join Party */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */,
+			);
+			path = "Join Party";
+			sourceTree = "<group>";
+		};
 		AA590FFD1FCA6179008988E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +228,22 @@
 				AAF73B101FA6CABB00D8A17B /* Table View Cells */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA62BA7A2061F6D000250772 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				AAF73B131FA7FF6700D8A17B /* MenuView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		AA62BA7B2061FEC200250772 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D152E1FA571C9009E31BF /* MenuViewController.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		AAB053A32002E17100180209 /* Table Views */ = {
@@ -292,6 +346,7 @@
 		AAE75B591F80A432001D4E13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA62BA7C206208A700250772 /* ToDo */,
 				AAE75B461F809FA9001D4E13 /* AppDelegate.swift */,
 				AAE75B521F809FA9001D4E13 /* Info.plist */,
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
@@ -305,7 +360,9 @@
 		AAE75B5A1F80A440001D4E13 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDE92038B26500269AB4 /* Menu */,
+				AA62BA7B2061FEC200250772 /* Menu */,
+				AA070DB72064994D00367F8A /* Start Party */,
+				AA070DB92064A70E00367F8A /* Join Party */,
 				AACD97361FE4E801000275CB /* Party */,
 				AAFFBDC6203008CF00269AB4 /* Wannabe */,
 				AAB053BC2011A3F300180209 /* Alert */,
@@ -316,7 +373,9 @@
 		AAE75B5B1F80A447001D4E13 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDE82038B24200269AB4 /* Menu */,
+				AA62BA7A2061F6D000250772 /* Menu */,
+				AA070DB62064992000367F8A /* Start Party */,
+				AA070DB82064A6FF00367F8A /* Join Party */,
 				AACD97351FE4E7F6000275CB /* Party */,
 				AAFFBDBB2030089100269AB4 /* Wannabe */,
 				AADD9C8320550E5400CA5AC8 /* Alert */,
@@ -328,7 +387,6 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBE02203FACB100269AB4 /* Reference */,
 				AAFFBDDB203898A200269AB4 /* User */,
 				AAF6D7FF1FDC965900014CA0 /* Party */,
 				AAFFBDB1202F583400269AB4 /* Game */,
@@ -384,6 +442,7 @@
 		AAFC53EB1FC22F9E0039F539 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AADCB3AB205F52B30008939D /* Database+Extension.swift */,
 				AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */,
 				AAB053A82002EBBB00180209 /* UIColor+Extension.swift */,
 				AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */,
@@ -396,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				AAFFBDB2202F583E00269AB4 /* Game.swift */,
+				AA0F9C9F205CBE87005EF3EB /* Countdown.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -430,36 +490,6 @@
 				AAFFBDD92038989D00269AB4 /* User.swift */,
 			);
 			path = User;
-			sourceTree = "<group>";
-		};
-		AAFFBDE82038B24200269AB4 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				AAF73B131FA7FF6700D8A17B /* MenuView.swift */,
-				AAF73B151FA804EA00D8A17B /* StartPartyView.swift */,
-				AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */,
-				AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */,
-				AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		AAFFBDE92038B26500269AB4 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				AA0D152E1FA571C9009E31BF /* MenuViewController.swift */,
-				AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */,
-				AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		AAFFBE02203FACB100269AB4 /* Reference */ = {
-			isa = PBXGroup;
-			children = (
-				AAFFBE03203FACC600269AB4 /* Reference.swift */,
-			);
-			path = Reference;
 			sourceTree = "<group>";
 		};
 		F9634DE61855F2D1DBAD42A8 /* Frameworks */ = {
@@ -534,6 +564,7 @@
 			files = (
 				AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */,
 				AAE75B631F80ACCB001D4E13 /* GoogleService-Info.plist in Resources */,
+				AA62BA7D206208A700250772 /* ToDo in Resources */,
 				AAE75B4E1F809FA9001D4E13 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,12 +676,12 @@
 				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
 				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
 				AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */,
+				AADCB3AC205F52B30008939D /* Database+Extension.swift in Sources */,
 				AAFFBDE12038B16000269AB4 /* ManagePartyViewController.swift in Sources */,
 				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,
 				AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */,
 				AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */,
 				AAFFBDCF203008E500269AB4 /* EndWannabeViewController.swift in Sources */,
-				AAFFBE04203FACC600269AB4 /* Reference.swift in Sources */,
 				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
 				AAB053B4200D667A00180209 /* ShapeView.swift in Sources */,
@@ -661,6 +692,7 @@
 				AAB053B8200EDD4D00180209 /* InviteCodeTableViewCell.swift in Sources */,
 				AAFFBDC4203008AE00269AB4 /* PlayWannabeView.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
+				AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

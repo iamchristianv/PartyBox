@@ -6,6 +6,7 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import SwiftyJSON
 import UIKit
 
@@ -29,12 +30,14 @@ class StartWannabeViewController: UIViewController {
         self.setupNavigationBar()
         self.startObservingNotification(name: PartyNotification.peopleChanged.rawValue, selector: #selector(partyPeopleChanged))
         self.startObservingNotification(name: GameNotification.detailsChanged.rawValue, selector: #selector(gameDetailsChanged))
+        self.startObservingNotification(name: GameNotification.peopleChanged.rawValue, selector: #selector(gamePeopleChanged))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.stopObservingNotification(name: PartyNotification.peopleChanged.rawValue)
         self.stopObservingNotification(name: GameNotification.detailsChanged.rawValue)
+        self.stopObservingNotification(name: GameNotification.peopleChanged.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -60,9 +63,11 @@ class StartWannabeViewController: UIViewController {
     // MARK: - Notification Functions
     
     @objc func partyPeopleChanged() {
+
+        
         self.contentView.reloadTable()
         
-        if User.current.name == Party.current.details.hostName {
+        if User.current.name != Party.current.details.hostName {
             return
         }
         
@@ -88,16 +93,20 @@ class StartWannabeViewController: UIViewController {
         
         Wannabe.current.details.isReady = true
         
-        let path = "\(ReferenceKey.games.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)"
         let value = Wannabe.current.json
         
-        Reference.current.database.child(path).updateChildValues(value)
+        Database.current.child(path).updateChildValues(value)
     }
     
     @objc func gameDetailsChanged() {
         if Wannabe.current.details.isReady {
             self.pushPlayWannabeViewController()
         }
+    }
+    
+    @objc func gamePeopleChanged() {
+        
     }
 
 }
@@ -111,10 +120,10 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
         
         person.isReady = true
         
-        let path = "\(ReferenceKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
+        let path = "\(DatabaseKey.parties.rawValue)/\(Party.current.details.id)/\(PartyKey.people.rawValue)"
         let value = [person.name: person.json]
             
-        Reference.current.database.child(path).updateChildValues(value)
+        Database.current.child(path).updateChildValues(value)
     }
     
 }

@@ -18,79 +18,84 @@ protocol MenuViewDelegate {
     
 }
 
+protocol MenuViewDataSource {
+
+    // MARK: - Menu View Data Source Functions
+
+}
+
 class MenuView: UIView {
     
     // MARK: - Instance Properties
     
-    lazy var partyboxImageView: UIImageView = {
-        let partyboxImageView = UIImageView()
-        partyboxImageView.image = UIImage(named: "Box")
+    private lazy var partyboxImageView: UIImageView = {
+        let partyboxImageView = UIImageView(image: UIImage(named: "Partybox"))
         return partyboxImageView
     }()
     
-    lazy var startPartyButton: ActivityButton = {
+    private lazy var startPartyButton: ActivityButton = {
         let startPartyButton = ActivityButton()
         startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        startPartyButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
         startPartyButton.setBackgroundColor(UIColor.Partybox.red)
         startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         return startPartyButton
     }()
     
-    lazy var joinPartyButton: ActivityButton = {
+    private lazy var joinPartyButton: ActivityButton = {
         let joinPartyButton = ActivityButton()
         joinPartyButton.setTitle("Join Party", for: .normal)
-        joinPartyButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        joinPartyButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
         joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
     }()
     
-    lazy var animator: UIDynamicAnimator = {
+    private lazy var animator: UIDynamicAnimator = {
         let animator = UIDynamicAnimator(referenceView: self)
         animator.addBehavior(self.gravityBehavior)
         animator.addBehavior(self.extraLightConfettiBehavior)
         animator.addBehavior(self.lightConfettiBehavior)
-        animator.addBehavior(self.mediumConfettiBehavior)
+        animator.addBehavior(self.normalConfettiBehavior)
         animator.addBehavior(self.heavyConfettiBehavior)
         animator.addBehavior(self.extraHeavyConfettiBehavior)
         return animator
     }()
     
-    lazy var gravityBehavior: UIGravityBehavior = {
+    private lazy var gravityBehavior: UIGravityBehavior = {
         let gravityBehavior = UIGravityBehavior()
         return gravityBehavior
     }()
     
-    lazy var extraLightConfettiBehavior: UIDynamicItemBehavior = {
+    private lazy var extraLightConfettiBehavior: UIDynamicItemBehavior = {
         let extraLightConfettiBehavior = UIDynamicItemBehavior()
         extraLightConfettiBehavior.allowsRotation = true
         extraLightConfettiBehavior.resistance = 6.0
         return extraLightConfettiBehavior
     }()
     
-    lazy var lightConfettiBehavior: UIDynamicItemBehavior = {
+    private lazy var lightConfettiBehavior: UIDynamicItemBehavior = {
         let lightConfettiBehavior = UIDynamicItemBehavior()
         lightConfettiBehavior.allowsRotation = true
         lightConfettiBehavior.resistance = 5.5
         return lightConfettiBehavior
     }()
     
-    lazy var mediumConfettiBehavior: UIDynamicItemBehavior = {
-        let mediumConfettiBehavior = UIDynamicItemBehavior()
-        mediumConfettiBehavior.allowsRotation = true
-        mediumConfettiBehavior.resistance = 5.0
-        return mediumConfettiBehavior
+    private lazy var normalConfettiBehavior: UIDynamicItemBehavior = {
+        let normalConfettiBehavior = UIDynamicItemBehavior()
+        normalConfettiBehavior.allowsRotation = true
+        normalConfettiBehavior.resistance = 5.0
+        return normalConfettiBehavior
     }()
     
-    lazy var heavyConfettiBehavior: UIDynamicItemBehavior = {
+    private lazy var heavyConfettiBehavior: UIDynamicItemBehavior = {
         let heavyConfettiBehavior = UIDynamicItemBehavior()
         heavyConfettiBehavior.allowsRotation = true
         heavyConfettiBehavior.resistance = 4.5
         return heavyConfettiBehavior
     }()
     
-    lazy var extraHeavyConfettiBehavior: UIDynamicItemBehavior = {
+    private lazy var extraHeavyConfettiBehavior: UIDynamicItemBehavior = {
         let extraHeavyConfettiBehavior = UIDynamicItemBehavior()
         extraHeavyConfettiBehavior.allowsRotation = true
         extraHeavyConfettiBehavior.resistance = 4.0
@@ -98,7 +103,9 @@ class MenuView: UIView {
     }()
     
     var delegate: MenuViewDelegate!
-    
+
+    var dataSource: MenuViewDataSource!
+
     // MARK: - Initialization Functions
     
     override init(frame: CGRect) {
@@ -113,11 +120,11 @@ class MenuView: UIView {
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = .white
     }
     
-    func setupSubviews() {
+    private func setupSubviews() {
         self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
@@ -150,11 +157,11 @@ class MenuView: UIView {
     
     // MARK: - Action Functions
     
-    @objc func startPartyButtonPressed() {
+    @objc private func startPartyButtonPressed() {
         self.delegate.menuView(self, startPartyButtonPressed: true)
     }
     
-    @objc func joinPartyButtonPressed() {
+    @objc private func joinPartyButtonPressed() {
         self.delegate.menuView(self, joinPartyButtonPressed: true)
     }
     
@@ -175,10 +182,8 @@ class MenuView: UIView {
     func stopAnimatingJoinPartyButton() {
         self.joinPartyButton.stopAnimating()
     }
-    
-    // MARK: - Confetti Functions
-    
-    @objc func dropConfetti() {
+        
+    func dropConfetti() {
         var confetti: ShapeView!
         
         let shapes = [SquareView.self, TriangleView.self, CircleView.self]
@@ -218,8 +223,8 @@ class MenuView: UIView {
             self.lightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
         else if randomResistance == 2 {
-            self.mediumConfettiBehavior.addItem(confetti)
-            self.mediumConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
+            self.normalConfettiBehavior.addItem(confetti)
+            self.normalConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }
         else if randomResistance == 3 {
             self.heavyConfettiBehavior.addItem(confetti)

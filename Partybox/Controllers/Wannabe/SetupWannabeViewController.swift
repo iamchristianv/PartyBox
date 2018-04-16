@@ -6,6 +6,7 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import SwiftyJSON
 import UIKit
 
@@ -78,10 +79,10 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
             Wannabe.current.details.isSetup = true
             Wannabe.current.details.rounds = self.contentView.selectedRoundsValue().rawValue
             
-            let path = "\(ReferenceKey.games.rawValue)"
+            let path = "\(DatabaseKey.games.rawValue)"
             let value = Wannabe.current.json
             
-            Reference.current.database.child(path).updateChildValues(value, withCompletionBlock: {
+            Database.current.child(path).updateChildValues(value, withCompletionBlock: {
                 (error, reference) in
                 
                 self.contentView.stopAnimatingPlayButton()

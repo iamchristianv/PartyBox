@@ -8,14 +8,6 @@
 
 import UIKit
 
-protocol PlayWannabeViewDelegate {
-    
-    // MARK: - Play Wannabe View Delegate Functions
-    
-    func playWannabeView(_ playWannabeView: PlayWannabeView, countdownEnded minutes: Int)
-    
-}
-
 class PlayWannabeView: UIView {
     
     // MARK: - Class Properties
@@ -36,8 +28,6 @@ class PlayWannabeView: UIView {
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
-    
-    var delegate: PlayWannabeViewDelegate!
     
     // MARK: - Initialization Functions
     
@@ -69,6 +59,12 @@ class PlayWannabeView: UIView {
             make.bottom.equalTo(self.snp.bottom)
         })
     }
+    
+    // MARK: - View Functions
+    
+    func reloadTable() {
+        self.tableView.reloadData()
+    }
 
 }
 
@@ -89,7 +85,7 @@ extension PlayWannabeView: UITableViewDataSource {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameCountdownTableViewCell.identifier)
             let customCell = tableViewCell as! GameCountdownTableViewCell
             customCell.setPrompt("COUNTDOWN")
-            customCell.delegate = self
+            customCell.setCountdown()
             return customCell
         }
         
@@ -107,16 +103,6 @@ extension PlayWannabeView: UITableViewDataSource {
         }
         
         return UITableViewCell()
-    }
-    
-}
-
-extension PlayWannabeView: GameCountdownTableViewCellDelegate {
-    
-    // MARK: - Game Countdown Table View Cell Delegate Functions
-    
-    func gameCountdownTableViewCell(_ gameCountdownTableViewCell: GameCountdownTableViewCell, countdownEnded minutes: Int) {
-        self.delegate.playWannabeView(self, countdownEnded: minutes)
     }
     
 }

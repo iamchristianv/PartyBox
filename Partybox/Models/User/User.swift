@@ -8,18 +8,22 @@
 
 import Foundation
 
+enum UserKey: String {
+
+    // MARK: - Property Keys
+
+    case name
+
+}
+
 class User {
-    
-    // MARK: - Shared Instance
-    
-    static var current: User = User()
     
     // MARK: - Instance Properties
     
     var name: String
-    
+
     // MARK: - Initialization Functions
-    
+
     init() {
         self.name = ""
     }

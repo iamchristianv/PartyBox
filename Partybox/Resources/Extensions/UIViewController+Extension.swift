@@ -128,6 +128,16 @@ extension UIViewController {
         let playWannabeViewController = PlayWannabeViewController()
         self.navigationController?.pushViewController(playWannabeViewController, animated: true)
     }
+    
+    func pushVoteWannabeViewController() {
+        let voteWannabeViewController = VoteWannabeViewController()
+        self.navigationController?.pushViewController(voteWannabeViewController, animated: true)
+    }
+    
+    func pushEndWannabeViewController() {
+        let endWannabeViewController = EndWannabeViewController()
+        self.navigationController?.pushViewController(endWannabeViewController, animated: true)
+    }
         
     func dismissViewController(animated: Bool, completion: (() -> ())?) {
         self.dismiss(animated: animated, completion: completion)

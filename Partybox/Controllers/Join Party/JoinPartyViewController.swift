@@ -6,6 +6,7 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import UIKit
 
 class JoinPartyViewController: UIViewController {
@@ -57,7 +58,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
     func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
         self.contentView.startAnimatingJoinButton()
         
-        Reference.current.joinParty(userName: self.contentView.yourNameValue(), partyId: self.contentView.inviteCodeValue(), callback: {
+        Database.current.joinParty(userName: self.contentView.yourNameValue(), partyId: self.contentView.inviteCodeValue(), callback: {
             (error) in
             
             self.contentView.stopAnimatingJoinButton()

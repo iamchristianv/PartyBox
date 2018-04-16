@@ -6,6 +6,7 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import UIKit
 
 protocol PartyViewControllerDelegate {
@@ -78,7 +79,7 @@ class PartyViewController: UIViewController {
                 self.showChangeHostViewController(delegate: self)
             } else {
                 self.dismissViewController(animated: true, completion: {
-                    Reference.current.endParty()
+                    Database.current.endParty()
                 })
             }
         })
@@ -175,7 +176,7 @@ extension PartyViewController: ChangeHostViewControllerDelegate {
     
     func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged: Bool) {
         self.dismissViewController(animated: true, completion: {
-            Reference.current.endParty()
+            Database.current.endParty()
         })
     }
     

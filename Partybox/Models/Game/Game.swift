@@ -48,22 +48,9 @@ enum GameNotification: String {
 
 class Game {
     
-    // MARK: - Shared Instance
-    
-    static var current: Game = Game()
-    
     // MARK: - Instance Properties
     
     var type: GameType
-    
-    // MARK: - JSON Properties
-    
-    var json: [String: Any] {
-        switch Game.current.type {
-        case .wannabe:
-            return Wannabe.current.json
-        }
-    }
     
     // MARK: - Initialization Functions
     
@@ -77,22 +64,6 @@ class Game {
         switch Game.current.type {
         case .wannabe:
             Wannabe.current.loadPackCollection(callback: callback)
-        }
-    }
-    
-    // MARK: - Notification Functions
-    
-    func startObservingChanges() {
-        switch Game.current.type {
-        case .wannabe:
-            Wannabe.current.startObservingChanges()
-        }
-    }
-    
-    func stopObservingChanges() {
-        switch Game.current.type {
-        case .wannabe:
-            Wannabe.current.stopObservingChanges()
         }
     }
     

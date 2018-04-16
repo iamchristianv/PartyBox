@@ -14,25 +14,20 @@ class MenuViewController: UIViewController {
     
     // MARK: - Instance Properties
     
-    var contentView: MenuView!
+    private var contentView: MenuView = MenuView()
     
-    var authenticationHandle: AuthStateDidChangeListenerHandle!
+    private var authenticationHandle: AuthStateDidChangeListenerHandle!
     
-    var motionManager: CMMotionManager!
+    private var motionManager: CMMotionManager = CMMotionManager()
     
-    var confettiTimer: Timer!
+    private var confettiTimer: Timer = Timer()
     
     // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = MenuView()
         self.contentView.delegate = self
+        self.contentView.dataSource = self
         self.view = self.contentView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.motionManager = CMMotionManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,18 +53,18 @@ class MenuViewController: UIViewController {
     
     // MARK: - Setup Functions
     
-    func setupViewController() {
+    private func setupViewController() {
         UIApplication.shared.statusBarStyle = .default
         self.edgesForExtendedLayout = []
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         self.hideNavigationBar()
     }
     
     // MARK: - Authentication Functions
     
-    func startObservingAuthenticationChanges() {
+    private func startObservingAuthenticationChanges() {
         self.authenticationHandle = Auth.auth().addStateDidChangeListener({
             (auth, user) in
             
@@ -83,36 +78,43 @@ class MenuViewController: UIViewController {
         })
     }
     
-    func stopObservingAuthenticationChanges() {
+    private func stopObservingAuthenticationChanges() {
         Auth.auth().removeStateDidChangeListener(self.authenticationHandle)
     }
     
     // MARK: - Motion Functions
     
-    func startObservingMotionChanges() {
+    private func startObservingMotionChanges() {
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
             (motion, error) in
 
-            guard let motion = motion else { return }
+            guard let motion = motion else {
+                return
+            }
             
             self.contentView.updateConfettiGravityDirection(CGVector(dx: motion.gravity.x, dy: 0.2))
         })
     }
     
-    func stopObservingMotionChanges() {
+    private func stopObservingMotionChanges() {
         self.motionManager.stopDeviceMotionUpdates()
     }
     
     // MARK: - Confetti Functions
     
-    func startDroppingConfetti() {
-        let target = self.contentView!
-        let selector = #selector(MenuView.dropConfetti)
-        
-        self.confettiTimer = Timer.scheduledTimer(timeInterval: 0.2, target: target, selector: selector, userInfo: nil, repeats: true)
+    private func startDroppingConfetti() {
+        self.confettiTimer = Timer.scheduledTimer(timeInterval: 0.2,
+                                                  target: self,
+                                                  selector: #selector(dropConfetti),
+                                                  userInfo: nil,
+                                                  repeats: true)
+    }
+
+    @objc private func dropConfetti() {
+        self.contentView.dropConfetti()
     }
     
-    func stopDroppingConfetti() {        
+    private func stopDroppingConfetti() {        
         self.confettiTimer.invalidate()
     }
 
@@ -130,4 +132,10 @@ extension MenuViewController: MenuViewDelegate {
         self.showJoinPartyViewController()
     }
     
+}
+
+extension MenuViewController: MenuViewDataSource {
+
+    // MARK: - Menu View Data Source Functions
+
 }

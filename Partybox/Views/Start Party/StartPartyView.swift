@@ -16,11 +16,17 @@ protocol StartPartyViewDelegate {
     
 }
 
+protocol StartPartyViewDataSource {
+
+    // MARK: - Start Party View Data Source Functions
+
+}
+
 class StartPartyView: UIView {
 
     // MARK: - Instance Properties
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -33,19 +39,21 @@ class StartPartyView: UIView {
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
-    
-    var contentCell: StartPartyTableViewCell!
-    
-    lazy var startButton: ActivityButton = {
+
+    private lazy var startButton: ActivityButton = {
         let startButton = ActivityButton()
         startButton.setTitle("Start", for: .normal)
-        startButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        startButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
         startButton.setBackgroundColor(UIColor.Partybox.red)
         startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
         return startButton
     }()
     
+    private var contentCell: StartPartyTableViewCell!
+    
     var delegate: StartPartyViewDelegate!
+
+    var dataSource: StartPartyViewDataSource!
     
     // MARK: - Initialization Functions
     
@@ -61,11 +69,11 @@ class StartPartyView: UIView {
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = .white
     }
     
-    func setupSubviews() {
+    private func setupSubviews() {
         self.addSubview(self.tableView)
         self.addSubview(self.startButton)
         
@@ -91,48 +99,44 @@ class StartPartyView: UIView {
     
     // MARK: - Action Functions
     
-    @objc func tableViewTapped() {
-        self.hideKeyboard()
+    @objc private func tableViewTapped() {
+        self.contentCell.hideKeyboard()
     }
     
-    @objc func startButtonPressed() {
-        if self.partyNameValueHasErrors() || self.yourNameValueHasErrors() {
+    @objc private func startButtonPressed() {
+        if self.partyNameHasErrors() || self.yourNameHasErrors() {
             return
         }
         
         self.delegate.startPartyView(self, startButtonPressed: true)
     }
-    
-    // MARK: - View Functions
-    
-    func hideKeyboard() {
-        self.contentCell.hideKeyboard()
-    }
-    
-    func partyNameValueHasErrors() -> Bool {
-        return self.contentCell.partyNameValueHasErrors()
-    }
-    
-    func partyNameValue() -> String {
-        return self.contentCell.partyNameValue()
-    }
-    
-    func yourNameValueHasErrors() -> Bool {
-        return self.contentCell.yourNameValueHasErrors()
-    }
-    
-    func yourNameValue() -> String {
-        return self.contentCell.yourNameValue()
-    }
-    
+
     // MARK: - Animation Functions
-    
+
     func startAnimatingStartButton() {
         self.startButton.startAnimating()
     }
-    
+
     func stopAnimatingStartButton() {
         self.startButton.stopAnimating()
+    }
+    
+    // MARK: - View Functions
+    
+    private func partyNameHasErrors() -> Bool {
+        return self.contentCell.partyNameHasErrors()
+    }
+    
+    func partyName() -> String {
+        return self.contentCell.partyName()
+    }
+    
+    private func yourNameHasErrors() -> Bool {
+        return self.contentCell.yourNameHasErrors()
+    }
+    
+    func yourName() -> String {
+        return self.contentCell.yourName()
     }
 
 }
@@ -142,7 +146,7 @@ extension StartPartyView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.hideKeyboard()
+        self.contentCell.hideKeyboard()
     }
     
 }

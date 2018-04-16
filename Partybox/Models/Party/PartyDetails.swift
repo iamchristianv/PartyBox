@@ -11,15 +11,19 @@ import SwiftyJSON
 
 enum PartyDetailsKey: String {
     
-    // MARK: - Database Keys
+    // MARK: - Property Keys
     
     case id
     
     case name
+
+    case status
+
+    case value
     
-    case hostName
+    case hostId
     
-    case maxCapacity
+    case timestamp
     
 }
 
@@ -30,38 +34,33 @@ class PartyDetails {
     var id: String
     
     var name: String
+
+    var status: String
+
+    var value: Any?
     
-    var hostName: String
-    
-    var maxCapacity: Int
-    
-    // MARK: - Database Properties
-    
-    var json: [String: Any] {
-        let json = [
-            PartyDetailsKey.id.rawValue: self.id,
-            PartyDetailsKey.name.rawValue: self.name,
-            PartyDetailsKey.hostName.rawValue: self.hostName,
-            PartyDetailsKey.maxCapacity.rawValue: self.maxCapacity
-        ] as [String: Any]
-        
-        return json
-    }
+    var hostId: String
+
+    var timestamp: Int
     
     // MARK: - Initialization Functions
     
     init() {
         self.id = ""
         self.name = ""
-        self.hostName = ""
-        self.maxCapacity = 10
+        self.status = PartyStatus.waiting.rawValue
+        self.value = nil
+        self.hostId = ""
+        self.timestamp = 0
     }
-    
+
     init(JSON: JSON) {
         self.id = JSON[PartyDetailsKey.id.rawValue].stringValue
         self.name = JSON[PartyDetailsKey.name.rawValue].stringValue
-        self.hostName = JSON[PartyDetailsKey.hostName.rawValue].stringValue
-        self.maxCapacity = JSON[PartyDetailsKey.maxCapacity.rawValue].intValue
+        self.status = JSON[PartyDetailsKey.status.rawValue].stringValue
+        self.value = JSON[PartyDetailsKey.value.rawValue].object
+        self.hostId = JSON[PartyDetailsKey.hostId.rawValue].stringValue
+        self.timestamp = JSON[PartyDetailsKey.timestamp.rawValue].intValue
     }
     
 }

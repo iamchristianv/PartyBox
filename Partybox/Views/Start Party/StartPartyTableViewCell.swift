@@ -16,18 +16,18 @@ class StartPartyTableViewCell: UITableViewCell {
 
     // MARK: - Instance Properties
     
-    lazy var partyNameLabel: UILabel = {
+    private lazy var partyNameLabel: UILabel = {
         let partyNameLabel = UILabel()
         partyNameLabel.text = "Party Name"
-        partyNameLabel.font = UIFont.avenirNextRegular(size: 20)
+        partyNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
         partyNameLabel.textColor = UIColor.Partybox.black
         return partyNameLabel
     }()
     
-    lazy var partyNameTextField: UITextField = {
+    private lazy var partyNameTextField: UITextField = {
         let partyNameTextField = UITextField()
         partyNameTextField.delegate = self
-        partyNameTextField.font = UIFont.avenirNextRegular(size: 28)
+        partyNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
         partyNameTextField.textColor = UIColor.Partybox.black
         partyNameTextField.tintColor = UIColor.Partybox.red
         partyNameTextField.borderStyle = .none
@@ -36,43 +36,43 @@ class StartPartyTableViewCell: UITableViewCell {
         return partyNameTextField
     }()
     
-    lazy var partyNameUnderlineLabel: UILabel = {
+    private lazy var partyNameUnderlineLabel: UILabel = {
         let partyNameUnderlineLabel = UILabel()
         partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
         return partyNameUnderlineLabel
     }()
     
-    lazy var partyNameStatusLabel: UILabel = {
+    private lazy var partyNameStatusLabel: UILabel = {
         let partyNameStatusLabel = UILabel()
         partyNameStatusLabel.text = " "
-        partyNameStatusLabel.font = UIFont.avenirNextRegular(size: 16)
+        partyNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         partyNameStatusLabel.textColor = UIColor.Partybox.red
         partyNameStatusLabel.isHidden = true
         return partyNameStatusLabel
     }()
     
-    lazy var partyNameMaxCharacterCount: Int = 15
+    private lazy var partyNameMaxCharacterCount: Int = 15
     
-    lazy var partyNameCharacterCountLabel: UILabel = {
+    private lazy var partyNameCharacterCountLabel: UILabel = {
         let partyNameCharacterCountLabel = UILabel()
         partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
-        partyNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 16)
+        partyNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         partyNameCharacterCountLabel.textColor = UIColor.lightGray
         return partyNameCharacterCountLabel
     }()
     
-    lazy var yourNameLabel: UILabel = {
+    private lazy var yourNameLabel: UILabel = {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
-        yourNameLabel.font = UIFont.avenirNextRegular(size: 20)
+        yourNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
         yourNameLabel.textColor = UIColor.Partybox.black
         return yourNameLabel
     }()
     
-    lazy var yourNameTextField: UITextField = {
+    private lazy var yourNameTextField: UITextField = {
         let yourNameTextField = UITextField()
         yourNameTextField.delegate = self
-        yourNameTextField.font = UIFont.avenirNextRegular(size: 28)
+        yourNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
         yourNameTextField.textColor = UIColor.Partybox.black
         yourNameTextField.tintColor = UIColor.Partybox.red
         yourNameTextField.borderStyle = .none
@@ -81,27 +81,27 @@ class StartPartyTableViewCell: UITableViewCell {
         return yourNameTextField
     }()
     
-    lazy var yourNameUnderlineLabel: UILabel = {
+    private lazy var yourNameUnderlineLabel: UILabel = {
         let yourNameUnderlineLabel = UILabel()
         yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
         return yourNameUnderlineLabel
     }()
     
-    lazy var yourNameStatusLabel: UILabel = {
+    private lazy var yourNameStatusLabel: UILabel = {
         let yourNameStatusLabel = UILabel()
         yourNameStatusLabel.text = " "
-        yourNameStatusLabel.font = UIFont.avenirNextRegular(size: 16)
+        yourNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         yourNameStatusLabel.textColor = UIColor.Partybox.red
         yourNameStatusLabel.isHidden = true
         return yourNameStatusLabel
     }()
     
-    lazy var yourNameMaxCharacterCount: Int = 15
+    private lazy var yourNameMaxCharacterCount: Int = 15
     
-    lazy var yourNameCharacterCountLabel: UILabel = {
+    private lazy var yourNameCharacterCountLabel: UILabel = {
         let yourNameCharacterCountLabel = UILabel()
         yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
-        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 16)
+        yourNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         yourNameCharacterCountLabel.textColor = UIColor.lightGray
         return yourNameCharacterCountLabel
     }()
@@ -120,11 +120,11 @@ class StartPartyTableViewCell: UITableViewCell {
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.selectionStyle = .none
     }
     
-    func setupSubviews() {
+    private func setupSubviews() {
         self.addSubview(self.partyNameLabel)
         self.addSubview(self.partyNameTextField)
         self.addSubview(self.partyNameCharacterCountLabel)
@@ -231,68 +231,48 @@ class StartPartyTableViewCell: UITableViewCell {
         self.yourNameTextField.resignFirstResponder()
     }
     
-    func partyNameValueHasErrors() -> Bool {
+    func partyNameHasErrors() -> Bool {
         let partyName = self.partyNameTextField.text!
         
         if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showPartyNameRequiredStatus()
+            self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.partyNameStatusLabel.text = "Required"
+            self.partyNameStatusLabel.isHidden = false
             return true
         } else {
-            self.hidePartyNameStatus()
+            self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+            self.partyNameStatusLabel.text = " "
+            self.partyNameStatusLabel.isHidden = true
             return false
         }
     }
     
-    func showPartyNameRequiredStatus() {
-        self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.partyNameStatusLabel.text = "Required"
-        self.partyNameStatusLabel.isHidden = false
-    }
-    
-    func hidePartyNameStatus() {
-        self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
-        self.partyNameStatusLabel.text = " "
-        self.partyNameStatusLabel.isHidden = true
-    }
-    
-    func partyNameValue() -> String {
+    func partyName() -> String {
         return self.partyNameTextField.text!
     }
     
-    func yourNameValueHasErrors() -> Bool {
+    func yourNameHasErrors() -> Bool {
         let userName = self.yourNameTextField.text!
         
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.showYourNameRequiredStatus()
+            self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.yourNameStatusLabel.text = "Required"
+            self.yourNameStatusLabel.isHidden = false
             return true
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            self.showYourNameInvalidStatus()
+            self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.yourNameStatusLabel.text = "No spaces or special characters"
+            self.yourNameStatusLabel.isHidden = false
             return true
         } else {
-            self.hideYourNameStatus()
+            self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+            self.yourNameStatusLabel.text = " "
+            self.yourNameStatusLabel.isHidden = true
             return false
         }
     }
     
-    func showYourNameRequiredStatus() {
-        self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.yourNameStatusLabel.text = "Required"
-        self.yourNameStatusLabel.isHidden = false
-    }
-    
-    func showYourNameInvalidStatus() {
-        self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-        self.yourNameStatusLabel.text = "No spaces or special characters"
-        self.yourNameStatusLabel.isHidden = false
-    }
-    
-    func hideYourNameStatus() {
-        self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
-        self.yourNameStatusLabel.text = " "
-        self.yourNameStatusLabel.isHidden = true
-    }
-    
-    func yourNameValue() -> String {
+    func yourName() -> String {
         return self.yourNameTextField.text!
     }
 
@@ -308,9 +288,7 @@ extension StartPartyTableViewCell: UITextFieldDelegate {
         if textField == self.partyNameTextField && characterCount <= self.partyNameMaxCharacterCount {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - characterCount)"
             return true
-        }
-        
-        if textField == self.yourNameTextField && characterCount <= self.yourNameMaxCharacterCount {
+        } else if textField == self.yourNameTextField && characterCount <= self.yourNameMaxCharacterCount {
             self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount - characterCount)"
             return true
         }
@@ -321,9 +299,7 @@ extension StartPartyTableViewCell: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.partyNameTextField {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
-        }
-        
-        if textField == self.yourNameTextField {
+        } else if textField == self.yourNameTextField {
             self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
         }
         

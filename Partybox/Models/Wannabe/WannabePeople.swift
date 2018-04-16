@@ -19,18 +19,6 @@ class WannabePeople {
         return self.people.count
     }
     
-    // MARK: - Database Properties
-    
-    var json: [String: Any] {
-        var json = [:] as [String: Any]
-        
-        for person in self.people {
-            json[person.name] = person.json
-        }
-        
-        return json
-    }
-    
     // MARK: - Initialization Functions
     
     init() {
@@ -59,9 +47,9 @@ class WannabePeople {
         return self.people[index]
     }
     
-    func person(name: String) -> WannabePerson? {
+    func person(id: String) -> WannabePerson? {
         for person in self.people {
-            if person.name == name {
+            if person.id == id {
                 return person
             }
         }
@@ -78,11 +66,11 @@ class WannabePeople {
     }
     
     func remove(name: String) -> WannabePerson? {
-        for i in 0 ..< self.people.count {
-            let person = self.people[i]
+        for index in 0 ..< self.people.count {
+            let person = self.people[index]
             
-            if person.name == name {
-                return person
+            if person.id == id {
+                return self.people.remove(at: index)
             }
         }
         

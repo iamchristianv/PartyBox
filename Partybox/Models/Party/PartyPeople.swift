@@ -19,18 +19,6 @@ class PartyPeople {
         return self.people.count
     }
     
-    // MARK: - Database Properties
-    
-    var json: [String: Any] {
-        var json = [:] as [String: Any]
-        
-        for person in self.people {
-            json[person.name] = person.json
-        }
-        
-        return json
-    }
-    
     // MARK: - Initialization Functions
     
     init() {
@@ -55,13 +43,13 @@ class PartyPeople {
         if index < 0 || index >= self.people.count {
             return nil
         }
-        
+
         return self.people[index]
     }
     
-    func person(name: String) -> PartyPerson? {
+    func person(id: String) -> PartyPerson? {
         for person in self.people {
-            if person.name == name {
+            if person.id == id {
                 return person
             }
         }
@@ -73,16 +61,16 @@ class PartyPeople {
         if index < 0 || index >= self.people.count {
             return nil
         }
-        
+
         return self.people.remove(at: index)
     }
     
-    func remove(name: String) -> PartyPerson? {
-        for i in 0 ..< self.people.count {
-            let person = self.people[i]
+    func remove(id: String) -> PartyPerson? {
+        for index in 0 ..< self.people.count {
+            let person = self.people[index]
             
-            if person.name == name {
-                return person
+            if person.id == id {
+                return self.people.remove(at: index)
             }
         }
         
@@ -91,7 +79,7 @@ class PartyPeople {
     
     // MARK: - Utility Functions
     
-    static func randomEmoji() -> String {
+    private func randomEmoji() -> String {
         let emojis = ["😊"]
         
         let randomIndex = Int(arc4random())

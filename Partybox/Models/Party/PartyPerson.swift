@@ -11,50 +11,58 @@ import SwiftyJSON
 
 enum PartyPersonKey: String {
     
-    // MARK: - Database Keys
+    // MARK: - Property Keys
+
+    case id
     
     case name
+
+    case status
+
+    case value
     
     case points
     
-    case isReady
-            
+}
+
+enum PartyPersonStatus: String {
+
+    // MARK: - Status Types
+
+    case waiting = "Waiting"
+
 }
 
 class PartyPerson {
 
     // MARK: - Instance Properties
+
+    var id: String
     
     var name: String
+
+    var status: String
+
+    var value: Any?
     
     var points: Int
     
-    var isReady: Bool
-    
-    // MARK: - JSON Properties
-    
-    var json: [String: Any] {
-        let json = [
-            PartyPersonKey.name.rawValue: self.name,
-            PartyPersonKey.points.rawValue: self.points,
-            PartyPersonKey.isReady.rawValue: self.isReady
-        ] as [String: Any]
-        
-        return json
-    }
-    
     // MARK: - Initialization Functions
     
-    init(name: String) {
-        self.name = name
+    init() {
+        self.id = ""
+        self.name = ""
+        self.status = PartyPersonStatus.waiting.rawValue
+        self.value = nil
         self.points = 0
-        self.isReady = false
     }
     
     init(JSON: JSON) {
+        self.id = JSON[PartyPersonKey.id.rawValue].stringValue
         self.name = JSON[PartyPersonKey.name.rawValue].stringValue
+        self.status = JSON[PartyPersonKey.status.rawValue].stringValue
+        self.value = JSON[PartyPersonKey.value.rawValue].object
         self.points = JSON[PartyPersonKey.points.rawValue].intValue
-        self.isReady = JSON[PartyPersonKey.isReady.rawValue].boolValue
     }
     
 }

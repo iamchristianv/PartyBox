@@ -11,50 +11,58 @@ import SwiftyJSON
 
 enum WannabePersonKey: String {
     
-    // MARK: - Database Keys
+    // MARK: - Property Keys
+
+    case id
     
     case name
+
+    case status
+
+    case value
     
     case points
-    
-    case voteName
-    
+
+}
+
+enum WannabePersonStatus: String {
+
+    // MARK: - Status Types
+
+    case waiting = "Waiting"
+
 }
 
 class WannabePerson {
     
     // MARK: - Instance Properties
+
+    var id: String
     
     var name: String
 
+    var status: String
+
+    var value: Any?
+
     var points: Int
-    
-    var voteName: String
-    
-    // MARK: - JSON Properties
-    
-    var json: [String: Any] {
-        let json = [
-            WannabePersonKey.name.rawValue: self.name,
-            WannabePersonKey.points.rawValue: self.points,
-            WannabePersonKey.voteName.rawValue: self.voteName
-        ] as [String: Any]
-        
-        return json
-    }
     
     // MARK: - Initialization Functions
     
-    init(name: String) {
-        self.name = name
+    init() {
+        self.id = ""
+        self.name = ""
+        self.status = WannabePersonStatus.waiting.rawValue
+        self.value = nil
         self.points = 0
-        self.voteName = ""
     }
     
     init(JSON: JSON) {
+        self.id = JSON[WannabePersonKey.id.rawValue].stringValue
         self.name = JSON[WannabePersonKey.name.rawValue].stringValue
+        self.status = JSON[WannabePersonKey.status.rawValue].stringValue
+        self.value = JSON[WannabePersonKey.value.rawValue].object
         self.points = JSON[WannabePersonKey.points.rawValue].intValue
-        self.voteName = JSON[WannabePersonKey.voteName.rawValue].stringValue
     }
     
 }

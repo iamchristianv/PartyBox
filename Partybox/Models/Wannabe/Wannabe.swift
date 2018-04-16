@@ -6,12 +6,13 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import Foundation
 import SwiftyJSON
 
 enum WannabeKey: String {
     
-    // MARK: - Database Keys
+    // MARK: - Property Keys
     
     case details
     
@@ -23,10 +24,6 @@ enum WannabeKey: String {
 
 class Wannabe {
     
-    // MARK: - Shared Instance
-    
-    static var current: Wannabe = Wannabe()
-    
     // MARK: - Instance Properties
         
     var details: WannabeDetails
@@ -34,20 +31,6 @@ class Wannabe {
     var people: WannabePeople
     
     var pack: WannabePack
-    
-    // MARK: - JSON Properties
-    
-    var json: [String: Any] { 
-        let json = [
-            Party.current.details.id: [
-                WannabeKey.details.rawValue: Wannabe.current.details.json,
-                WannabeKey.people.rawValue: Wannabe.current.people.json,
-                WannabeKey.pack.rawValue: Wannabe.current.pack.json
-            ]
-        ] as [String: Any]
-        
-        return json
-    }
     
     // MARK: - Initialization Functions
     
@@ -70,9 +53,9 @@ class Wannabe {
             callback(nil)
         }
         
-        let path = "\(ReferenceKey.setups.rawValue)/games/\(Wannabe.current.details.id)/packs"
+        let path = "\(DatabaseKey.setups.rawValue)/games/\(Wannabe.current.details.id)/packs"
         
-        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.current.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -86,9 +69,9 @@ class Wannabe {
     }
     
     func loadPack(id: String, callback: @escaping (String?) -> Void) {
-        let path = "\(ReferenceKey.packs.rawValue)/\(Wannabe.current.details.id)/\(id)"
+        let path = "\(DatabaseKey.packs.rawValue)/\(Wannabe.current.details.id)/\(id)"
         
-        Reference.current.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.current.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -114,9 +97,9 @@ class Wannabe {
     }
     
     func startObservingDetailsChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
         
-        Reference.current.database.child(path).observe(.value, with: {
+        Database.current.child(path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -129,15 +112,15 @@ class Wannabe {
     }
     
     func stopObservingDetailsChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.details.rawValue)"
         
-        Reference.current.database.child(path).removeAllObservers()
+        Database.current.child(path).removeAllObservers()
     }
     
     func startObservingPeopleChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
         
-        Reference.current.database.child(path).observe(.value, with: {
+        Database.current.child(path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -150,15 +133,15 @@ class Wannabe {
     }
     
     func stopObservingPeopleChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.people.rawValue)"
         
-        Reference.current.database.child(path).removeAllObservers()
+        Database.current.child(path).removeAllObservers()
     }
     
     func startObservingPackChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.pack.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.pack.rawValue)"
         
-        Reference.current.database.child(path).observe(.value, with: {
+        Database.current.child(path).observe(.value, with: {
             (snapshot) in
             
             guard let snapshotJSON = snapshot.value as? [String: Any] else { return }
@@ -171,9 +154,9 @@ class Wannabe {
     }
     
     func stopObservingPackChanges() {
-        let path = "\(ReferenceKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.pack.rawValue)"
+        let path = "\(DatabaseKey.games.rawValue)/\(Party.current.details.id)/\(GameKey.pack.rawValue)"
         
-        Reference.current.database.child(path).removeAllObservers()
+        Database.current.child(path).removeAllObservers()
     }
     
 }

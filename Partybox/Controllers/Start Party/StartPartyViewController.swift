@@ -6,19 +6,20 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import UIKit
 
 class StartPartyViewController: UIViewController {
     
     // MARK: - Instance Properties
     
-    var contentView: StartPartyView!
+    private var contentView: StartPartyView = StartPartyView()
     
     // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = StartPartyView()
         self.contentView.delegate = self
+        self.contentView.dataSource = self
         self.view = self.contentView
     }
     
@@ -30,12 +31,12 @@ class StartPartyViewController: UIViewController {
     
     // MARK: - Setup Functions
     
-    func setupViewController() {
+    private func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle("Start Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
@@ -44,7 +45,7 @@ class StartPartyViewController: UIViewController {
     
     // MARK: - Navigation Bar Functions
     
-    @objc func cancelButtonPressed() {
+    @objc private func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
 
@@ -57,7 +58,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
     func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool) {
         self.contentView.startAnimatingStartButton()
         
-        Reference.current.startParty(userName: self.contentView.yourNameValue(), partyName: self.contentView.partyNameValue(), callback: {
+        Database.current.startParty(userName: self.contentView.yourName(), partyName: self.contentView.partyName(), callback: {
             (error) in
             
             self.contentView.stopAnimatingStartButton()
@@ -69,6 +70,12 @@ extension StartPartyViewController: StartPartyViewDelegate {
             }
         })
     }
+
+}
+
+extension StartPartyViewController: StartPartyViewDataSource {
+
+    // MARK: - Start Party View Data Source Functions
 
 }
 

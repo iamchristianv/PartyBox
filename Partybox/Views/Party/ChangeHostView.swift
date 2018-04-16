@@ -10,7 +10,7 @@ import UIKit
 
 protocol ChangeHostViewDelegate {
     
-    // MARK: - Change Host View Controller Delegate Functions
+    // MARK: - Change Host View Delegate Functions
         
     func changeHostView(_ changeHostView: ChangeHostView, changeButtonPressed: Bool)
     

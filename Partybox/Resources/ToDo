@@ -1,0 +1,6 @@
+Refer to the swift style guide: https://github.com/linkedin/swift-style-guide
+Refactor views to use data sources to become populated
+Refactor models to not be shared instances
+Refactor controllers to hold models, models to be alone, views to access models through data sources
+Create network layer with workers to specifically communicate with database
+Add private keyword to properties

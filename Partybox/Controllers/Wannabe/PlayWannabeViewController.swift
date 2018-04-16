@@ -18,7 +18,6 @@ class PlayWannabeViewController: UIViewController {
     
     override func loadView() {
         self.contentView = PlayWannabeView()
-        self.contentView.delegate = self
         self.view = self.contentView
     }
     
@@ -26,17 +25,21 @@ class PlayWannabeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setupViewController()
         self.setupNavigationBar()
-        self.startObservingNotification(name: GameNotification.detailsChanged.rawValue, selector: #selector(gameDetailsChanged))
-        
-        if User.current.name == Party.current.details.hostName {
-            //Session.game.details.card = Party.game.pack.randomCard()
-            //Session.synchronize()
-        }
+        self.startObservingNotification(name: CountdownNotification.timeStarted.rawValue, selector: #selector(timeStarted))
+        self.startObservingNotification(name: CountdownNotification.timeChanged.rawValue, selector: #selector(timeChanged))
+        self.startObservingNotification(name: CountdownNotification.timeEnded.rawValue, selector: #selector(timeEnded))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.startGame()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingNotification(name: GameNotification.detailsChanged.rawValue)
+        self.stopObservingNotification(name: CountdownNotification.timeStarted.rawValue)
+        self.stopObservingNotification(name: CountdownNotification.timeChanged.rawValue)
+        self.stopObservingNotification(name: CountdownNotification.timeEnded.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -61,22 +64,22 @@ class PlayWannabeViewController: UIViewController {
     
     // MARK: - Notification Functions
     
-    @objc func gameDetailsChanged() {
-        self.contentView.tableView.reloadData()
-        
-//        if !game.wannabe.details.card.content.isEmpty && !game.wannabe.details.card.type.isEmpty {
-//            //Party.startCountdown(seconds: Party.game.details.roundLength)
-//        }
-    }
-
-}
-
-extension PlayWannabeViewController: PlayWannabeViewDelegate {
-    
-    // MARK: - Play Wannabe View Delegate Functions
-    
-    func playWannabeView(_ playWannabeView: PlayWannabeView, countdownEnded minutes: Int) {
-        self.navigationController?.pushViewController(VoteWannabeViewController(), animated: true)
+    @objc func timeStarted() {
+        self.contentView.reloadTable()
     }
     
+    @objc func timeChanged() {
+        self.contentView.reloadTable()
+    }
+    
+    @objc func timeEnded() {
+        self.pushVoteWannabeViewController()
+    }
+    
+    // MARK: - Game Functions
+    
+    func startGame() {
+        Countdown.current.start(seconds: 10)
+    }
+
 }
