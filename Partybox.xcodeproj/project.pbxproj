@@ -13,7 +13,6 @@
 		AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */; };
 		AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F9C9F205CBE87005EF3EB /* Countdown.swift */; };
 		AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Wannabe.swift */; };
-		AA62BA7D206208A700250772 /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = AA62BA7C206208A700250772 /* ToDo */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
 		AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A42002E1CF00180209 /* ActivityButton.swift */; };
 		AAB053A92002EBBB00180209 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A82002EBBB00180209 /* UIColor+Extension.swift */; };
@@ -37,7 +36,6 @@
 		AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */; };
 		AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */; };
 		AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81411FB40401003AD1D9 /* AlertViewController.swift */; };
-		AADCB3AC205F52B30008939D /* Database+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCB3AB205F52B30008939D /* Database+Extension.swift */; };
 		AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C7D2054F33200CA5AC8 /* AlertView.swift */; };
 		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
@@ -91,7 +89,6 @@
 		AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
 		AA0F9C9F205CBE87005EF3EB /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
 		AA590FF91FC26FBB008988E9 /* Wannabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wannabe.swift; sourceTree = "<group>"; };
-		AA62BA7C206208A700250772 /* ToDo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		AAB053A42002E1CF00180209 /* ActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
 		AAB053A82002EBBB00180209 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -115,7 +112,6 @@
 		AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		AADB81411FB40401003AD1D9 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		AADCB3AB205F52B30008939D /* Database+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Extension.swift"; sourceTree = "<group>"; };
 		AADD9C7D2054F33200CA5AC8 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -346,7 +342,6 @@
 		AAE75B591F80A432001D4E13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA62BA7C206208A700250772 /* ToDo */,
 				AAE75B461F809FA9001D4E13 /* AppDelegate.swift */,
 				AAE75B521F809FA9001D4E13 /* Info.plist */,
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
@@ -392,6 +387,7 @@
 				AAFFBDB1202F583400269AB4 /* Game */,
 				AAF6D8001FDC966300014CA0 /* Wannabe */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
+				AA0F9C9F205CBE87005EF3EB /* Countdown.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -442,7 +438,6 @@
 		AAFC53EB1FC22F9E0039F539 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AADCB3AB205F52B30008939D /* Database+Extension.swift */,
 				AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */,
 				AAB053A82002EBBB00180209 /* UIColor+Extension.swift */,
 				AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */,
@@ -455,7 +450,6 @@
 			isa = PBXGroup;
 			children = (
 				AAFFBDB2202F583E00269AB4 /* Game.swift */,
-				AA0F9C9F205CBE87005EF3EB /* Countdown.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -564,7 +558,6 @@
 			files = (
 				AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */,
 				AAE75B631F80ACCB001D4E13 /* GoogleService-Info.plist in Resources */,
-				AA62BA7D206208A700250772 /* ToDo in Resources */,
 				AAE75B4E1F809FA9001D4E13 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,7 +669,6 @@
 				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
 				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
 				AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */,
-				AADCB3AC205F52B30008939D /* Database+Extension.swift in Sources */,
 				AAFFBDE12038B16000269AB4 /* ManagePartyViewController.swift in Sources */,
 				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,
 				AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */,

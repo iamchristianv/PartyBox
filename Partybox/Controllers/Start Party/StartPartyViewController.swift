@@ -13,13 +13,13 @@ class StartPartyViewController: UIViewController {
     
     // MARK: - Instance Properties
     
-    private var contentView: StartPartyView = StartPartyView()
+    private var contentView: StartPartyView!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = StartPartyView()
         self.contentView.delegate = self
-        self.contentView.dataSource = self
         self.view = self.contentView
     }
     
@@ -57,25 +57,23 @@ extension StartPartyViewController: StartPartyViewDelegate {
     
     func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool) {
         self.contentView.startAnimatingStartButton()
-        
-        Database.current.startParty(userName: self.contentView.yourName(), partyName: self.contentView.partyName(), callback: {
+
+        User.current.name = self.contentView.userName()
+        Party.current.details.name = self.contentView.partyName()
+
+        Party.current.start(callback: {
             (error) in
-            
+
             self.contentView.stopAnimatingStartButton()
-            
+
             if let error = error {
                 self.showErrorAlert(error: error)
-            } else {
-                self.showPartyViewController(delegate: self)
+                return
             }
+
+            self.showPartyViewController(delegate: self)
         })
     }
-
-}
-
-extension StartPartyViewController: StartPartyViewDataSource {
-
-    // MARK: - Start Party View Data Source Functions
 
 }
 

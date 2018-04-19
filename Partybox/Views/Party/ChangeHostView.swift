@@ -44,7 +44,7 @@ class ChangeHostView: UIView {
     lazy var changeButton: ActivityButton = {
         let changeButton = ActivityButton()
         changeButton.setTitle("Change", for: .normal)
-        changeButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        changeButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
         changeButton.setBackgroundColor(UIColor.Partybox.green)
         changeButton.addTarget(self, action: #selector(changeButtonPressed), for: .touchUpInside)
         return changeButton

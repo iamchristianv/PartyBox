@@ -18,12 +18,6 @@ protocol MenuViewDelegate {
     
 }
 
-protocol MenuViewDataSource {
-
-    // MARK: - Menu View Data Source Functions
-
-}
-
 class MenuView: UIView {
     
     // MARK: - Instance Properties
@@ -103,8 +97,6 @@ class MenuView: UIView {
     }()
     
     var delegate: MenuViewDelegate!
-
-    var dataSource: MenuViewDataSource!
 
     // MARK: - Initialization Functions
     
@@ -190,18 +182,19 @@ class MenuView: UIView {
         let randomShape = shapes[Int(arc4random()) % shapes.count]
         
         let randomSize = Int(arc4random_uniform(5) + 10)
-        let randomFrame = CGRect(x: Int(arc4random()) % Int(self.frame.size.width), y: -randomSize, width: randomSize, height: randomSize)
+        let randomFrame = CGRect(x: Int(arc4random()) % Int(self.frame.size.width),
+                                 y: -randomSize,
+                                 width: randomSize,
+                                 height: randomSize)
         
         let colors = [UIColor.Partybox.red, UIColor.Partybox.blue, UIColor.Partybox.green, UIColor.Partybox.purple]
         let randomColor = colors[Int(arc4random()) % colors.count]
         
         if randomShape == SquareView.self {
             confetti = SquareView(frame: randomFrame, color: randomColor)
-        }
-        else if randomShape == TriangleView.self {
+        } else if randomShape == TriangleView.self {
             confetti = TriangleView(frame: randomFrame, color: randomColor)
-        }
-        else if randomShape == CircleView.self {
+        } else if randomShape == CircleView.self {
             confetti = CircleView(frame: randomFrame, color: randomColor)
         }
         
@@ -217,20 +210,16 @@ class MenuView: UIView {
         if randomResistance == 0 {
             self.extraLightConfettiBehavior.addItem(confetti)
             self.extraLightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
-        }
-        else if randomResistance == 1 {
+        } else if randomResistance == 1 {
             self.lightConfettiBehavior.addItem(confetti)
             self.lightConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
-        }
-        else if randomResistance == 2 {
+        } else if randomResistance == 2 {
             self.normalConfettiBehavior.addItem(confetti)
             self.normalConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
-        }
-        else if randomResistance == 3 {
+        } else if randomResistance == 3 {
             self.heavyConfettiBehavior.addItem(confetti)
             self.heavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
-        }
-        else if randomResistance == 4 {
+        } else if randomResistance == 4 {
             self.extraHeavyConfettiBehavior.addItem(confetti)
             self.extraHeavyConfettiBehavior.addAngularVelocity(randomAngularVelocity, for: confetti)
         }

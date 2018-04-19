@@ -17,14 +17,21 @@ enum UserKey: String {
 }
 
 class User {
+
+    // MARK: - Shared Instance
+
+    static var current: User = User()
     
     // MARK: - Instance Properties
+
+    var id: String
     
     var name: String
 
     // MARK: - Initialization Functions
 
     init() {
+        self.id = ""
         self.name = ""
     }
     

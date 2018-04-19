@@ -122,13 +122,13 @@ class PersonTableViewCell: UITableViewCell {
     }
     
     func setFlair(_ name: String) {
-        if name == User.current.name && name == Party.current.details.hostName {
+        if name == User.current.name && name == Party.current.details.hostId {
             self.flairLabel.text = "ME / HOST"
         }
         else if name == User.current.name {
             self.flairLabel.text = "ME"
         }
-        else if name == Party.current.details.hostName {
+        else if name == Party.current.details.hostId {
             self.flairLabel.text = "HOST"
         }
     }

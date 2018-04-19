@@ -79,13 +79,24 @@ class PartyPeople {
     
     // MARK: - Utility Functions
     
-    private func randomEmoji() -> String {
+    func randomEmoji() -> String {
         let emojis = ["😊"]
         
         let randomIndex = Int(arc4random())
         let randomEmoji = emojis[randomIndex % emojis.count]
         
         return randomEmoji
+    }
+
+    func randomPerson() -> PartyPerson? {
+        if self.people.isEmpty {
+            return nil
+        }
+
+        let randomIndex = Int(arc4random()) % self.people.count
+        let randomPerson = self.people[randomIndex]
+
+        return randomPerson
     }
     
 }

@@ -41,6 +41,10 @@ enum PartyStatus: String {
 }
 
 class Party {
+
+    // MARK: - Shared Instance
+
+    static var current: Party = Party()
     
     // MARK: - Instance Properties
     
@@ -66,7 +70,7 @@ class Party {
 
     // MARK: - Database Functions
 
-    func start(user: User, callback: @escaping (String?) -> Void) {
+    func start(callback: @escaping (String?) -> Void) {
         let id = self.randomId()
         var path = "\(DatabaseKey.parties.rawValue)/\(id)"
 
@@ -78,37 +82,33 @@ class Party {
                 return
             }
 
-            // create the person
             let person = PartyPerson()
             path = "\(DatabaseKey.parties.rawValue)/\(id)/\(PartyKey.people.rawValue)"
             person.id = self.database.child(path).childByAutoId().key
-            person.name = user.name
+            person.name = User.current.name
 
-            // configure the party
+            User.current.id = person.id
+
             self.details.id = id
             self.details.hostId = person.id
-            self.people.add(person)
 
-            // update the database
-            path = "\(DatabaseKey.parties.rawValue)"
+            path = "\(DatabaseKey.parties.rawValue)/\(id)"
             let values = [
-                self.details.id: [
-                    PartyKey.details.rawValue: [
-                        PartyDetailsKey.id.rawValue: self.details.id,
-                        PartyDetailsKey.name.rawValue: self.details.name,
-                        PartyDetailsKey.status.rawValue: self.details.status,
-                        PartyDetailsKey.value.rawValue: self.details.value,
-                        PartyDetailsKey.hostId.rawValue: self.details.hostId,
-                        PartyDetailsKey.timestamp.rawValue: ServerValue.timestamp()
-                    ],
-                    PartyKey.people.rawValue: [
-                        person.id: [
-                            PartyPersonKey.id.rawValue: person.id,
-                            PartyPersonKey.name.rawValue: person.name,
-                            PartyPersonKey.status.rawValue: person.status,
-                            PartyPersonKey.value.rawValue: person.value,
-                            PartyPersonKey.points.rawValue: person.points
-                        ]
+                PartyKey.details.rawValue: [
+                    PartyDetailsKey.id.rawValue: self.details.id,
+                    PartyDetailsKey.name.rawValue: self.details.name,
+                    PartyDetailsKey.status.rawValue: self.details.status,
+                    PartyDetailsKey.value.rawValue: self.details.value,
+                    PartyDetailsKey.hostId.rawValue: self.details.hostId,
+                    PartyDetailsKey.timestamp.rawValue: ServerValue.timestamp()
+                ],
+                PartyKey.people.rawValue: [
+                    person.id: [
+                        PartyPersonKey.id.rawValue: person.id,
+                        PartyPersonKey.name.rawValue: person.name,
+                        PartyPersonKey.status.rawValue: person.status,
+                        PartyPersonKey.value.rawValue: person.value,
+                        PartyPersonKey.points.rawValue: person.points
                     ]
                 ]
             ]
@@ -127,7 +127,7 @@ class Party {
         })
     }
 
-    func join(user: User, callback: @escaping (String?) -> Void) {
+    func join(callback: @escaping (String?) -> Void) {
         let id = self.details.id
         var path = "\(DatabaseKey.parties.rawValue)/\(id)"
 
@@ -139,24 +139,14 @@ class Party {
                 return
             }
 
-            // create the person
             let person = PartyPerson()
             path = "\(DatabaseKey.parties.rawValue)/\(id)/\(PartyKey.people.rawValue)"
             person.id = self.database.child(path).childByAutoId().key
-            person.name = user.name
+            person.name = User.current.name
 
-            // configure the party
-            guard let snapshotJSON = snapshot.value as? [String: Any] else {
-                return
-            }
+            User.current.id = person.id
 
-            let partyJSON = JSON(snapshotJSON)
-
-            self.details = PartyDetails(JSON: partyJSON[PartyKey.details.rawValue])
-            self.people = PartyPeople(JSON: partyJSON[PartyKey.people.rawValue])
-
-            // update the database
-            path = "\(DatabaseKey.parties.rawValue)/\(self.details.id)/\(PartyKey.people.rawValue)"
+            path = "\(DatabaseKey.parties.rawValue)/\(id)/\(PartyKey.people.rawValue)"
             let values = [
                 person.id: [
                     PartyPersonKey.id.rawValue: person.id,
@@ -181,11 +171,11 @@ class Party {
         })
     }
 
-    func end(user: User, callback: @escaping (String?) -> Void) {
+    func end(callback: @escaping (String?) -> Void) {
         var path = "\(DatabaseKey.parties.rawValue)/\(self.details.id)"
 
         if self.people.count > 1 {
-            path += "/\(PartyKey.people.rawValue)/\(user.name)"
+            path += "/\(PartyKey.people.rawValue)/\(User.current.name)"
         }
 
         self.database.child(path).removeValue(completionBlock: {

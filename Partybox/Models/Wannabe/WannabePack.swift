@@ -11,7 +11,7 @@ import SwiftyJSON
 
 enum WannabePackKey: String {
     
-    // MARK: - Database Keys
+    // MARK: - Property Keys
     
     case id
     
@@ -22,9 +22,9 @@ enum WannabePackKey: String {
 }
 
 class WannabePack {
-    
+
     // MARK: - Class Properties
-    
+
     static var collection: [WannabePack] = []
     
     // MARK: - Instance Properties
@@ -34,22 +34,6 @@ class WannabePack {
     var name: String
     
     var cards: [WannabeCard]
-    
-    var count: Int {
-        return self.cards.count
-    }
-    
-    // MARK: - JSON Properties
-    
-    var json: [[String: Any]] {
-        var json = [] as [[String: Any]]
-        
-        for card in self.cards {
-            json.append(card.json)
-        }
-        
-        return json
-    }
     
     // MARK: - Initialization Functions
     
@@ -64,7 +48,9 @@ class WannabePack {
         self.name = JSON[WannabePackKey.name.rawValue].stringValue
         self.cards = []
 
-        for (_, cardJSON) in JSON[WannabePackKey.cards.rawValue] {
+        let packJSON = JSON[WannabePackKey.cards.rawValue]
+
+        for (_, cardJSON) in packJSON {
             self.add(WannabeCard(JSON: cardJSON))
         }
     }
@@ -77,7 +63,11 @@ class WannabePack {
     
     // MARK: - Utility Functions
     
-    func randomCard() -> WannabeCard {
+    func randomCard() -> WannabeCard? {
+        if self.cards.isEmpty {
+            return nil
+        }
+
         let randomIndex = Int(arc4random()) % self.cards.count
         let randomCard = self.cards[randomIndex]
         

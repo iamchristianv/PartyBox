@@ -13,7 +13,7 @@ class JoinPartyViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: JoinPartyView!
+    private var contentView: JoinPartyView!
     
     // MARK: - View Controller Functions
     
@@ -31,12 +31,12 @@ class JoinPartyViewController: UIViewController {
     
     // MARK: - Setup Functions
     
-    func setupViewController() {
+    private func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle("Join Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
@@ -45,7 +45,7 @@ class JoinPartyViewController: UIViewController {
     
     // MARK: - Navigation Bar Functions
     
-    @objc func cancelButtonPressed() {
+    @objc private func cancelButtonPressed() {
         self.dismissViewController(animated: true, completion: nil)
     }
 
@@ -57,17 +57,21 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
     
     func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
         self.contentView.startAnimatingJoinButton()
-        
-        Database.current.joinParty(userName: self.contentView.yourNameValue(), partyId: self.contentView.inviteCodeValue(), callback: {
+
+        User.current.name = self.contentView.userName()
+        Party.current.details.id = self.contentView.partyId()
+
+        Party.current.join(callback: {
             (error) in
-            
+
             self.contentView.stopAnimatingJoinButton()
-            
+
             if let error = error {
                 self.showErrorAlert(error: error)
-            } else {
-                self.showPartyViewController(delegate: self)
+                return
             }
+
+            self.showPartyViewController(delegate: self)
         })
     }
     

@@ -13,7 +13,7 @@ class WannabePeople {
     
     // MARK: - Instance Properties
 
-    var people: [WannabePerson]
+    private var people: [WannabePerson]
     
     var count: Int {
         return self.people.count
@@ -65,7 +65,7 @@ class WannabePeople {
         return self.people.remove(at: index)
     }
     
-    func remove(name: String) -> WannabePerson? {
+    func remove(id: String) -> WannabePerson? {
         for index in 0 ..< self.people.count {
             let person = self.people[index]
             
@@ -75,6 +75,19 @@ class WannabePeople {
         }
         
         return nil
+    }
+
+    // MARK: - Utility Functions
+
+    func randomPerson() -> WannabePerson? {
+        if self.people.isEmpty {
+            return nil
+        }
+
+        let randomIndex = Int(arc4random()) % self.people.count
+        let randomPerson = self.people[randomIndex]
+
+        return randomPerson
     }
     
 }

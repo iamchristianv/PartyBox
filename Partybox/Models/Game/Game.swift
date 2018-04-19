@@ -10,7 +10,7 @@ import Foundation
 
 enum GameKey: String {
     
-    // MARK: - Database Keys
+    // MARK: - Property Keys
     
     case details
     
@@ -25,9 +25,7 @@ enum GameType {
     // MARK: - Game Types
     
     case wannabe
-    
-    // MARK: - Game Type Collection
-    
+        
     static var collection: [GameType] {
         return [.wannabe]
     }
@@ -38,33 +36,31 @@ enum GameNotification: String {
     
     // MARK: - Notification Types
     
-    case detailsChanged = "Game/GameDetails/detailsChanged"
+    case detailsChanged = "Game/detailsChanged"
     
-    case peopleChanged = "Game/GamePeople/peopleChanged"
+    case peopleChanged = "Game/peopleChanged"
     
-    case packChanged = "Game/GamePack/packChanged"
+    case packChanged = "Game/packChanged"
     
 }
 
 class Game {
+
+    // MARK: - Shared Instance
+
+    static var current: Game = Game()
     
     // MARK: - Instance Properties
     
     var type: GameType
+
+    var wannabe: Wannabe
     
     // MARK: - Initialization Functions
     
     init() {
         self.type = .wannabe
-    }
-    
-    // MARK: - Database Functions
-    
-    func loadPackCollection(callback: @escaping (String?) -> Void) {
-        switch Game.current.type {
-        case .wannabe:
-            Wannabe.current.loadPackCollection(callback: callback)
-        }
+        self.wannabe = Wannabe()
     }
     
 }

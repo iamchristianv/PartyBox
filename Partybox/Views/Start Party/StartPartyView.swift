@@ -16,12 +16,6 @@ protocol StartPartyViewDelegate {
     
 }
 
-protocol StartPartyViewDataSource {
-
-    // MARK: - Start Party View Data Source Functions
-
-}
-
 class StartPartyView: UIView {
 
     // MARK: - Instance Properties
@@ -53,8 +47,6 @@ class StartPartyView: UIView {
     
     var delegate: StartPartyViewDelegate!
 
-    var dataSource: StartPartyViewDataSource!
-    
     // MARK: - Initialization Functions
     
     override init(frame: CGRect) {
@@ -131,11 +123,11 @@ class StartPartyView: UIView {
         return self.contentCell.partyName()
     }
     
-    private func yourNameHasErrors() -> Bool {
+    private func userNameHasErrors() -> Bool {
         return self.contentCell.yourNameHasErrors()
     }
     
-    func yourName() -> String {
+    func userName() -> String {
         return self.contentCell.yourName()
     }
 

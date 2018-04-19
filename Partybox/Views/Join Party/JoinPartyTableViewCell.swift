@@ -19,7 +19,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
         inviteCodeLabel.text = "Invite Code"
-        inviteCodeLabel.font = UIFont.avenirNextRegular(size: 20)
+        inviteCodeLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
         inviteCodeLabel.textColor = UIColor.Partybox.black
         return inviteCodeLabel
     }()
@@ -27,7 +27,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var inviteCodeTextField: UITextField = {
         let inviteCodeTextField = UITextField()
         inviteCodeTextField.delegate = self
-        inviteCodeTextField.font = UIFont.avenirNextRegular(size: 28)
+        inviteCodeTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
         inviteCodeTextField.textColor = UIColor.Partybox.black
         inviteCodeTextField.tintColor = UIColor.Partybox.blue
         inviteCodeTextField.borderStyle = .none
@@ -45,7 +45,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var inviteCodeStatusLabel: UILabel = {
         let inviteCodeStatusLabel = UILabel()
         inviteCodeStatusLabel.text = " "
-        inviteCodeStatusLabel.font = UIFont.avenirNextRegular(size: 16)
+        inviteCodeStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         inviteCodeStatusLabel.textColor = UIColor.Partybox.red
         inviteCodeStatusLabel.isHidden = true
         return inviteCodeStatusLabel
@@ -56,7 +56,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var inviteCodeCharacterCountLabel: UILabel = {
         let inviteCodeCharacterCountLabel = UILabel()
         inviteCodeCharacterCountLabel.text = "\(self.inviteCodeMaxCharacterCount)"
-        inviteCodeCharacterCountLabel.font = UIFont.avenirNextRegular(size: 16)
+        inviteCodeCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         inviteCodeCharacterCountLabel.textColor = UIColor.lightGray
         return inviteCodeCharacterCountLabel
     }()
@@ -64,7 +64,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var yourNameLabel: UILabel = {
         let yourNameLabel = UILabel()
         yourNameLabel.text = "Your Name"
-        yourNameLabel.font = UIFont.avenirNextRegular(size: 20)
+        yourNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
         yourNameLabel.textColor = UIColor.Partybox.black
         return yourNameLabel
     }()
@@ -72,7 +72,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var yourNameTextField: UITextField = {
         let yourNameTextField = UITextField()
         yourNameTextField.delegate = self
-        yourNameTextField.font = UIFont.avenirNextRegular(size: 28)
+        yourNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
         yourNameTextField.textColor = UIColor.Partybox.black
         yourNameTextField.tintColor = UIColor.Partybox.blue
         yourNameTextField.borderStyle = .none
@@ -90,7 +90,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var yourNameStatusLabel: UILabel = {
         let yourNameStatusLabel = UILabel()
         yourNameStatusLabel.text = " "
-        yourNameStatusLabel.font = UIFont.avenirNextRegular(size: 16)
+        yourNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         yourNameStatusLabel.textColor = UIColor.Partybox.red
         yourNameStatusLabel.isHidden = true
         return yourNameStatusLabel
@@ -101,7 +101,7 @@ class JoinPartyTableViewCell: UITableViewCell {
     lazy var yourNameCharacterCountLabel: UILabel = {
         let yourNameCharacterCountLabel = UILabel()
         yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
-        yourNameCharacterCountLabel.font = UIFont.avenirNextRegular(size: 16)
+        yourNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
         yourNameCharacterCountLabel.textColor = UIColor.lightGray
         return yourNameCharacterCountLabel
     }()
@@ -231,7 +231,7 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.yourNameTextField.resignFirstResponder()
     }
     
-    func inviteCodeValueHasErrors() -> Bool {
+    func inviteCodeHasErrors() -> Bool {
         let inviteCode = self.inviteCodeTextField.text!
         
         if inviteCode.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -264,11 +264,11 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.inviteCodeStatusLabel.isHidden = true
     }
     
-    func inviteCodeValue() -> String {
+    func inviteCode() -> String {
         return self.inviteCodeTextField.text!
     }
     
-    func yourNameValueHasErrors() -> Bool {
+    func yourNameHasErrors() -> Bool {
         let userName = self.yourNameTextField.text!
         
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -301,7 +301,7 @@ class JoinPartyTableViewCell: UITableViewCell {
         self.yourNameStatusLabel.isHidden = true
     }
     
-    func yourNameValue() -> String {
+    func yourName() -> String {
         return self.yourNameTextField.text!
     }
 

@@ -14,19 +14,19 @@ class MenuViewController: UIViewController {
     
     // MARK: - Instance Properties
     
-    private var contentView: MenuView = MenuView()
+    private var contentView: MenuView!
     
     private var authenticationHandle: AuthStateDidChangeListenerHandle!
     
-    private var motionManager: CMMotionManager = CMMotionManager()
+    private var motionManager: CMMotionManager!
     
-    private var confettiTimer: Timer = Timer()
+    private var confettiTimer: Timer!
     
     // MARK: - View Controller Functions
     
     override func loadView() {
+        self.contentView = MenuView()
         self.contentView.delegate = self
-        self.contentView.dataSource = self
         self.view = self.contentView
     }
     
@@ -85,6 +85,8 @@ class MenuViewController: UIViewController {
     // MARK: - Motion Functions
     
     private func startObservingMotionChanges() {
+        self.motionManager = CMMotionManager()
+
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
             (motion, error) in
 
@@ -103,6 +105,8 @@ class MenuViewController: UIViewController {
     // MARK: - Confetti Functions
     
     private func startDroppingConfetti() {
+        self.confettiTimer = Timer()
+
         self.confettiTimer = Timer.scheduledTimer(timeInterval: 0.2,
                                                   target: self,
                                                   selector: #selector(dropConfetti),
@@ -132,10 +136,4 @@ extension MenuViewController: MenuViewDelegate {
         self.showJoinPartyViewController()
     }
     
-}
-
-extension MenuViewController: MenuViewDataSource {
-
-    // MARK: - Menu View Data Source Functions
-
 }

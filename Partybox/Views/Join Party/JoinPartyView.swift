@@ -20,7 +20,7 @@ class JoinPartyView: UIView {
     
     // MARK: - Instance Properties
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -33,17 +33,17 @@ class JoinPartyView: UIView {
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
-    
-    var contentCell: JoinPartyTableViewCell!
 
-    lazy var joinButton: ActivityButton = {
+    private lazy var joinButton: ActivityButton = {
         let joinButton = ActivityButton()
         joinButton.setTitle("Join", for: .normal)
-        joinButton.setTitleFont(UIFont.avenirNextMediumName, size: 22)
+        joinButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
         joinButton.setBackgroundColor(UIColor.Partybox.blue)
         joinButton.addTarget(self, action: #selector(joinButtonPressed), for: .touchUpInside)
         return joinButton
     }()
+
+    private var contentCell: JoinPartyTableViewCell!
     
     var delegate: JoinPartyViewDelegate!
     
@@ -61,11 +61,11 @@ class JoinPartyView: UIView {
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = .white
     }
     
-    func setupSubviews() {
+    private func setupSubviews() {
         self.addSubview(self.tableView)
         self.addSubview(self.joinButton)
         
@@ -91,48 +91,44 @@ class JoinPartyView: UIView {
     
     // MARK: - Action Functions
     
-    @objc func tableViewTapped() {
-        self.hideKeyboard()
+    @objc private func tableViewTapped() {
+        self.contentCell.hideKeyboard()
     }
     
-    @objc func joinButtonPressed() {
-        if self.inviteCodeValueHasErrors() || self.yourNameValueHasErrors() {
+    @objc private func joinButtonPressed() {
+        if self.partyIdHasErrors() || self.userNameHasErrors() {
             return
         }
         
         self.delegate.joinPartyView(self, joinButtonPressed: true)
     }
-    
-    // MARK: - View Functions
-    
-    func hideKeyboard() {
-        self.contentCell.hideKeyboard()
-    }
-    
-    func inviteCodeValueHasErrors() -> Bool {
-        return self.contentCell.inviteCodeValueHasErrors()
-    }
-    
-    func inviteCodeValue() -> String {
-        return self.contentCell.inviteCodeValue()
-    }
-    
-    func yourNameValueHasErrors() -> Bool {
-        return self.contentCell.yourNameValueHasErrors()
-    }
-    
-    func yourNameValue() -> String {
-        return self.contentCell.yourNameValue()
-    }
-    
+
     // MARK: - Animation Functions
-    
+
     func startAnimatingJoinButton() {
         self.joinButton.startAnimating()
     }
-    
+
     func stopAnimatingJoinButton() {
         self.joinButton.stopAnimating()
+    }
+    
+    // MARK: - View Functions
+    
+    private func partyIdHasErrors() -> Bool {
+        return self.contentCell.inviteCodeHasErrors()
+    }
+    
+    func partyId() -> String {
+        return self.contentCell.inviteCode()
+    }
+    
+    private func userNameHasErrors() -> Bool {
+        return self.contentCell.yourNameHasErrors()
+    }
+    
+    func userName() -> String {
+        return self.contentCell.yourName()
     }
     
 }
@@ -142,7 +138,7 @@ extension JoinPartyView: UITableViewDelegate {
     // MARK: - Table View Delegate Functions
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.hideKeyboard()
+        self.contentCell.hideKeyboard()
     }
     
 }

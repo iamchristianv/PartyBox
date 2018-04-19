@@ -18,7 +18,7 @@ class SelectableTableViewCell: UITableViewCell {
     
     lazy var contentLabel: UILabel = {
         let contentLabel = UILabel()
-        contentLabel.font = UIFont.avenirNextRegular(size: 18)
+        contentLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
         contentLabel.textColor = UIColor.Partybox.black
         return contentLabel
     }()

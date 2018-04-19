@@ -69,8 +69,8 @@ class ChangeHostViewController: UIViewController {
     @objc func partyPeopleChanged() {
         self.contentView.reloadTable()
         
-        if Party.current.people.person(name: self.contentView.selectedPersonName) == nil {
-            self.contentView.selectedPersonName = Party.current.details.hostName
+        if Party.current.people.person(id: self.contentView.selectedPersonName) == nil {
+            self.contentView.selectedPersonName = Party.current.details.hostId
             self.contentView.reloadTable()
         }
     }
@@ -82,12 +82,12 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
     // MARK: - Change Host View Delegate
     
     func changeHostView(_ changeHostView: ChangeHostView, changeButtonPressed: Bool) {
-        if self.contentView.selectedPersonNameValue() == Party.current.details.hostName {
+        if self.contentView.selectedPersonNameValue() == Party.current.details.hostId {
             self.showUserNeedsToSelectNewHostAlert(handler: nil)
         } else {
             self.contentView.startAnimatingChangeButton()
             
-            Party.current.setHostName(name: self.contentView.selectedPersonNameValue(), callback: {
+            Party.current.setHostId(self.contentView.selectedPersonNameValue(), callback: {
                 (error) in
                 
                 self.contentView.stopAnimatingChangeButton()
