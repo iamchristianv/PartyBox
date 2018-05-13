@@ -278,7 +278,7 @@ extension PartyViewController: PartyViewDataSource {
     }
 
     func partyViewPartyGameSummary() -> String {
-        return self.game.wannabe.manual.summary
+        return self.game.wannabe.details.summary
     }
 
 }

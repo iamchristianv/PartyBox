@@ -31,8 +31,6 @@
 		AA5E89F820A141BE00FE8960 /* PartyPersonKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */; };
 		AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */; };
 		AA5E8A0520A1484500FE8960 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0420A1484500FE8960 /* Game.swift */; };
-		AA5E8A0820A14A7600FE8960 /* WannabeManual.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0720A14A7600FE8960 /* WannabeManual.swift */; };
-		AA5E8A0A20A15DD200FE8960 /* WannabeManualKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0920A15DD200FE8960 /* WannabeManualKey.swift */; };
 		AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */; };
 		AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */; };
 		AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */; };
@@ -49,6 +47,7 @@
 		AA5E8A2820A5380F00FE8960 /* WannabeCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2720A5380F00FE8960 /* WannabeCollectionDataSource.swift */; };
 		AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */; };
 		AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */; };
+		AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
 		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
@@ -107,8 +106,6 @@
 		AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPersonKey.swift; sourceTree = "<group>"; };
 		AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeKey.swift; sourceTree = "<group>"; };
 		AA5E8A0420A1484500FE8960 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		AA5E8A0720A14A7600FE8960 /* WannabeManual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeManual.swift; sourceTree = "<group>"; };
-		AA5E8A0920A15DD200FE8960 /* WannabeManualKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeManualKey.swift; sourceTree = "<group>"; };
 		AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsKey.swift; sourceTree = "<group>"; };
 		AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsNotification.swift; sourceTree = "<group>"; };
 		AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsStatus.swift; sourceTree = "<group>"; };
@@ -125,6 +122,7 @@
 		AA5E8A2720A5380F00FE8960 /* WannabeCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCollectionDataSource.swift; sourceTree = "<group>"; };
 		AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackKey.swift; sourceTree = "<group>"; };
 		AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewDelegate.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
 		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -275,41 +273,6 @@
 			path = "Wannabe Card";
 			sourceTree = "<group>";
 		};
-		AA5E8A0020A147CF00FE8960 /* Game Models */ = {
-			isa = PBXGroup;
-			children = (
-				AA5E8A0320A1482E00FE8960 /* Game */,
-				AA5E8A0220A1480200FE8960 /* Wannabe Models */,
-			);
-			path = "Game Models";
-			sourceTree = "<group>";
-		};
-		AA5E8A0120A147E200FE8960 /* Party Models */ = {
-			isa = PBXGroup;
-			children = (
-				AAF6D7FF1FDC965900014CA0 /* Party */,
-				AA5E89E620A13B8B00FE8960 /* Party Details */,
-				AA5E89E720A13B9F00FE8960 /* Party People */,
-				AA5E89F020A13D4A00FE8960 /* Party Person */,
-			);
-			path = "Party Models";
-			sourceTree = "<group>";
-		};
-		AA5E8A0220A1480200FE8960 /* Wannabe Models */ = {
-			isa = PBXGroup;
-			children = (
-				AAF6D8001FDC966300014CA0 /* Wannabe */,
-				AA5E8A0620A14A4000FE8960 /* Wannabe Manual */,
-				AA5E89F920A1466200FE8960 /* Wannabe Details */,
-				AA5E89FA20A1466900FE8960 /* Wannabe People */,
-				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
-				AA5E8A2220A5354300FE8960 /* Wannabe Collection */,
-				AA5E89FB20A1466E00FE8960 /* Wannabe Pack */,
-				AA5E89FD20A1467800FE8960 /* Wannabe Card */,
-			);
-			path = "Wannabe Models";
-			sourceTree = "<group>";
-		};
 		AA5E8A0320A1482E00FE8960 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,21 +281,12 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
-		AA5E8A0620A14A4000FE8960 /* Wannabe Manual */ = {
-			isa = PBXGroup;
-			children = (
-				AA5E8A0720A14A7600FE8960 /* WannabeManual.swift */,
-				AA5E8A0920A15DD200FE8960 /* WannabeManualKey.swift */,
-			);
-			path = "Wannabe Manual";
-			sourceTree = "<group>";
-		};
-		AA5E8A1B20A2B5F400FE8960 /* Ordered Set Models */ = {
+		AA5E8A1B20A2B5F400FE8960 /* Ordered Set */ = {
 			isa = PBXGroup;
 			children = (
 				AA5E8A1C20A2B60A00FE8960 /* OrderedSet.swift */,
 			);
-			path = "Ordered Set Models";
+			path = "Ordered Set";
 			sourceTree = "<group>";
 		};
 		AA5E8A2220A5354300FE8960 /* Wannabe Collection */ = {
@@ -397,10 +351,20 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDDB203898A200269AB4 /* User Models */,
-				AA5E8A0120A147E200FE8960 /* Party Models */,
-				AA5E8A0020A147CF00FE8960 /* Game Models */,
-				AA5E8A1B20A2B5F400FE8960 /* Ordered Set Models */,
+				AAFFBDDB203898A200269AB4 /* User */,
+				AAF6D7FF1FDC965900014CA0 /* Party */,
+				AA5E89E620A13B8B00FE8960 /* Party Details */,
+				AA5E89E720A13B9F00FE8960 /* Party People */,
+				AA5E89F020A13D4A00FE8960 /* Party Person */,
+				AA5E8A0320A1482E00FE8960 /* Game */,
+				AAF6D8001FDC966300014CA0 /* Wannabe */,
+				AA5E89F920A1466200FE8960 /* Wannabe Details */,
+				AA5E89FA20A1466900FE8960 /* Wannabe People */,
+				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
+				AA5E8A2220A5354300FE8960 /* Wannabe Collection */,
+				AA5E89FB20A1466E00FE8960 /* Wannabe Pack */,
+				AA5E89FD20A1467800FE8960 /* Wannabe Card */,
+				AA5E8A1B20A2B5F400FE8960 /* Ordered Set */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
 				AAF81281208BD03B0010FFB1 /* Countdown */,
 			);
@@ -436,7 +400,7 @@
 		AAF8128320923CAE0010FFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAF8128520923CCE0010FFB1 /* Menu Views */,
+				AAF8128520923CCE0010FFB1 /* Menu */,
 				AAF812A72092A6C80010FFB1 /* Start Party */,
 				AAF812AF2092B1660010FFB1 /* Join Party */,
 				AAF812BA2094426F0010FFB1 /* Party */,
@@ -459,12 +423,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		AAF8128520923CCE0010FFB1 /* Menu Views */ = {
+		AAF8128520923CCE0010FFB1 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				AAF8128720923CF10010FFB1 /* MenuView.swift */,
+				AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */,
 			);
-			path = "Menu Views";
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		AAF8128620923CD20010FFB1 /* Menu Controllers */ = {
@@ -597,13 +562,13 @@
 			path = Party;
 			sourceTree = "<group>";
 		};
-		AAFFBDDB203898A200269AB4 /* User Models */ = {
+		AAFFBDDB203898A200269AB4 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				AAFFBDD92038989D00269AB4 /* User.swift */,
 				AA5E89E320A13ADE00FE8960 /* UserKey.swift */,
 			);
-			path = "User Models";
+			path = User;
 			sourceTree = "<group>";
 		};
 		F9634DE61855F2D1DBAD42A8 /* Frameworks */ = {
@@ -737,7 +702,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA5E8A0A20A15DD200FE8960 /* WannabeManualKey.swift in Sources */,
 				AAF812A32092552D0010FFB1 /* ShapeView.swift in Sources */,
 				AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */,
 				AAF81290209240660010FFB1 /* UIColor+Extension.swift in Sources */,
@@ -749,6 +713,7 @@
 				AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */,
 				AA5E8A1420A15F8500FE8960 /* WannabeDetailsDataSource.swift in Sources */,
 				AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */,
+				AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */,
 				AAF812AD2092A7020010FFB1 /* StartPartyView.swift in Sources */,
 				AA2A87B0209A9A69009C55BF /* HeaderTableViewCell.swift in Sources */,
 				AAF81297209241550010FFB1 /* AlertView.swift in Sources */,
@@ -779,7 +744,6 @@
 				AAF812AE2092A7020010FFB1 /* StartPartyTableViewCell.swift in Sources */,
 				AA5E89E420A13ADE00FE8960 /* UserKey.swift in Sources */,
 				AAF812992092415C0010FFB1 /* AlertViewController.swift in Sources */,
-				AA5E8A0820A14A7600FE8960 /* WannabeManual.swift in Sources */,
 				AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */,
 				AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */,
 				AA5E89F620A1401000FE8960 /* PartyPeopleDataSource.swift in Sources */,
