@@ -10,7 +10,7 @@ import UIKit
 
 class CircleView: ShapeView {
 
-    // MARK: - Draw Methods
+    // MARK: - Draw Functions
     
     override func draw(_ rect: CGRect) {
         let pathX = self.frame.size.width / 2 - self.frame.size.height / 2

@@ -34,10 +34,11 @@ class JoinPartyView: UIView {
         return tableView
     }()
 
-    private lazy var joinButton: ActivityButton = {
-        let joinButton = ActivityButton()
+    private lazy var joinButton: ActivityIndicatorButton = {
+        let joinButton = ActivityIndicatorButton()
         joinButton.setTitle("Join", for: .normal)
         joinButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
+        joinButton.setTitleColor(UIColor.Partybox.white, for: .normal)
         joinButton.setBackgroundColor(UIColor.Partybox.blue)
         joinButton.addTarget(self, action: #selector(joinButtonPressed), for: .touchUpInside)
         return joinButton
@@ -46,26 +47,21 @@ class JoinPartyView: UIView {
     private var contentCell: JoinPartyTableViewCell!
     
     var delegate: JoinPartyViewDelegate!
-    
-    // MARK: - Initialization Functions
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setupView()
-        self.setupSubviews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    // MARK: - Construction Functions
+
+    static func construct(delegate: JoinPartyViewDelegate) -> JoinPartyView {
+        let view = JoinPartyView()
+        view.delegate = delegate
+        view.setupView()
+        return view
     }
     
     // MARK: - Setup Functions
     
-    private func setupView() {
+    func setupView() {
         self.backgroundColor = .white
-    }
-    
-    private func setupSubviews() {
+
         self.addSubview(self.tableView)
         self.addSubview(self.joinButton)
         
@@ -96,10 +92,13 @@ class JoinPartyView: UIView {
     }
     
     @objc private func joinButtonPressed() {
-        if self.partyIdHasErrors() || self.userNameHasErrors() {
+        let partyIdHasErrors = self.contentCell.partyIdHasErrors()
+        let userNameHasErrors = self.contentCell.userNameHasErrors()
+
+        if partyIdHasErrors || userNameHasErrors {
             return
         }
-        
+
         self.delegate.joinPartyView(self, joinButtonPressed: true)
     }
 
@@ -115,20 +114,12 @@ class JoinPartyView: UIView {
     
     // MARK: - View Functions
     
-    private func partyIdHasErrors() -> Bool {
-        return self.contentCell.inviteCodeHasErrors()
-    }
-    
     func partyId() -> String {
-        return self.contentCell.inviteCode()
-    }
-    
-    private func userNameHasErrors() -> Bool {
-        return self.contentCell.yourNameHasErrors()
+        return self.contentCell.partyId()
     }
     
     func userName() -> String {
-        return self.contentCell.yourName()
+        return self.contentCell.userName()
     }
     
 }
@@ -137,7 +128,7 @@ extension JoinPartyView: UITableViewDelegate {
     
     // MARK: - Table View Delegate Functions
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.contentCell.hideKeyboard()
     }
     
@@ -147,17 +138,18 @@ extension JoinPartyView: UITableViewDataSource {
     
     // MARK: - Table View Data Source Functions
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    internal func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: JoinPartyTableViewCell.identifier)
         self.contentCell = tableViewCell as! JoinPartyTableViewCell
+        self.contentCell.configure()
         return self.contentCell
     }
     

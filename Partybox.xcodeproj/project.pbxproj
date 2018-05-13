@@ -8,111 +8,125 @@
 
 /* Begin PBXBuildFile section */
 		4DB447EF78B05BE6756A1533 /* Pods_Partybox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77681979AF3A60830BDC604 /* Pods_Partybox.framework */; };
-		AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D152E1FA571C9009E31BF /* MenuViewController.swift */; };
-		AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */; };
-		AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */; };
 		AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F9C9F205CBE87005EF3EB /* Countdown.swift */; };
+		AA2A87A120969FC1009C55BF /* PartyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87A020969FC1009C55BF /* PartyDetails.swift */; };
+		AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87A8209A95A2009C55BF /* PartyView.swift */; };
+		AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87AA209A95AD009C55BF /* PartyViewController.swift */; };
+		AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87AD209A9766009C55BF /* InviteCodeTableViewCell.swift */; };
+		AA2A87B0209A9A69009C55BF /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87AF209A9A69009C55BF /* HeaderTableViewCell.swift */; };
+		AA2A87B2209A9B7E009C55BF /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87B1209A9B7E009C55BF /* GameTableViewCell.swift */; };
+		AA2A87B4209AB52C009C55BF /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87B3209AB52C009C55BF /* PersonTableViewCell.swift */; };
+		AA2A87B9209C1166009C55BF /* PartyPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87B8209C1166009C55BF /* PartyPeople.swift */; };
+		AA2A87BB209D825D009C55BF /* WannabePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87BA209D825D009C55BF /* WannabePeople.swift */; };
+		AA2A87BD209D8781009C55BF /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87BC209D8781009C55BF /* WannabePack.swift */; };
 		AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Wannabe.swift */; };
+		AA5E89E420A13ADE00FE8960 /* UserKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89E320A13ADE00FE8960 /* UserKey.swift */; };
+		AA5E89E920A13C0C00FE8960 /* PartyDetailsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89E820A13C0C00FE8960 /* PartyDetailsKey.swift */; };
+		AA5E89EB20A13C3A00FE8960 /* PartyDetailsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89EA20A13C3A00FE8960 /* PartyDetailsNotification.swift */; };
+		AA5E89ED20A13C5B00FE8960 /* PartyDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89EC20A13C5B00FE8960 /* PartyDetailsDataSource.swift */; };
+		AA5E89EF20A13D3800FE8960 /* PartyKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89EE20A13D3800FE8960 /* PartyKey.swift */; };
+		AA5E89F220A13F7300FE8960 /* PartyPeopleKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F120A13F7300FE8960 /* PartyPeopleKey.swift */; };
+		AA5E89F420A13F9700FE8960 /* PartyPeopleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F320A13F9700FE8960 /* PartyPeopleNotification.swift */; };
+		AA5E89F620A1401000FE8960 /* PartyPeopleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F520A1401000FE8960 /* PartyPeopleDataSource.swift */; };
+		AA5E89F820A141BE00FE8960 /* PartyPersonKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */; };
+		AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */; };
+		AA5E8A0520A1484500FE8960 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0420A1484500FE8960 /* Game.swift */; };
+		AA5E8A0820A14A7600FE8960 /* WannabeManual.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0720A14A7600FE8960 /* WannabeManual.swift */; };
+		AA5E8A0A20A15DD200FE8960 /* WannabeManualKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0920A15DD200FE8960 /* WannabeManualKey.swift */; };
+		AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */; };
+		AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */; };
+		AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */; };
+		AA5E8A1220A15E5F00FE8960 /* WannabeDetailsRounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */; };
+		AA5E8A1420A15F8500FE8960 /* WannabeDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */; };
+		AA5E8A1620A1615500FE8960 /* WannabePeopleKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1520A1615500FE8960 /* WannabePeopleKey.swift */; };
+		AA5E8A1820A1617500FE8960 /* WannabePeopleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1720A1617500FE8960 /* WannabePeopleNotification.swift */; };
+		AA5E8A1A20A1618E00FE8960 /* WannabePeopleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1920A1618E00FE8960 /* WannabePeopleDataSource.swift */; };
+		AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1C20A2B60A00FE8960 /* OrderedSet.swift */; };
+		AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */; };
+		AA5E8A2120A5347D00FE8960 /* WannabeCardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */; };
+		AA5E8A2420A5355A00FE8960 /* WannabeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2320A5355A00FE8960 /* WannabeCollection.swift */; };
+		AA5E8A2620A537C200FE8960 /* WannabeCollectionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2520A537C200FE8960 /* WannabeCollectionKey.swift */; };
+		AA5E8A2820A5380F00FE8960 /* WannabeCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2720A5380F00FE8960 /* WannabeCollectionDataSource.swift */; };
+		AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */; };
+		AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
-		AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A42002E1CF00180209 /* ActivityButton.swift */; };
-		AAB053A92002EBBB00180209 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053A82002EBBB00180209 /* UIColor+Extension.swift */; };
-		AAB053AD200D5F2400180209 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053AC200D5F2400180209 /* SquareView.swift */; };
-		AAB053AF200D633C00180209 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053AE200D633C00180209 /* TriangleView.swift */; };
-		AAB053B4200D667A00180209 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053B3200D667A00180209 /* ShapeView.swift */; };
-		AAB053B6200D697B00180209 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053B5200D697B00180209 /* CircleView.swift */; };
-		AAB053B8200EDD4D00180209 /* InviteCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB053B7200EDD4D00180209 /* InviteCodeTableViewCell.swift */; };
-		AACD97241FDF5DDE000275CB /* WannabePeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97231FDF5DDE000275CB /* WannabePeople.swift */; };
-		AACD97381FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */; };
-		AACD973A1FE5E0E4000275CB /* GameInstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */; };
-		AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */; };
-		AACD97431FE6F782000275CB /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97421FE6F782000275CB /* WannabePack.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
-		AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */; };
-		AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */; };
-		AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */; };
-		AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */; };
-		AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */; };
-		AADB813C1FB29BD9003AD1D9 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813B1FB29BD9003AD1D9 /* PersonTableViewCell.swift */; };
-		AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */; };
-		AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */; };
-		AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADB81411FB40401003AD1D9 /* AlertViewController.swift */; };
-		AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C7D2054F33200CA5AC8 /* AlertView.swift */; };
 		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
 		AAE75B4E1F809FA9001D4E13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */; };
 		AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */; };
 		AAE75B631F80ACCB001D4E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */; };
-		AAEDA0DD1FF86AB20076B163 /* EndWannabeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */; };
 		AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */; };
 		AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */; };
-		AAF6D7FB1FDC955900014CA0 /* PartyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */; };
-		AAF6D8051FDC99DB00014CA0 /* PartyPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */; };
 		AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */; };
-		AAF73B0A1FA6C57900D8A17B /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B091FA6C57900D8A17B /* PartyViewController.swift */; };
-		AAF73B0C1FA6C97900D8A17B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */; };
-		AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */; };
-		AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B131FA7FF6700D8A17B /* MenuView.swift */; };
-		AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B151FA804EA00D8A17B /* StartPartyView.swift */; };
-		AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */; };
-		AAF73B1A1FA809C200D8A17B /* PartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF73B191FA809C200D8A17B /* PartyView.swift */; };
-		AAFFBDB6202F583E00269AB4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDB2202F583E00269AB4 /* Game.swift */; };
-		AAFFBDC1203008AE00269AB4 /* EndWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDBC203008AD00269AB4 /* EndWannabeView.swift */; };
-		AAFFBDC2203008AE00269AB4 /* SetupWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDBD203008AD00269AB4 /* SetupWannabeView.swift */; };
-		AAFFBDC3203008AE00269AB4 /* StartWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDBE203008AE00269AB4 /* StartWannabeView.swift */; };
-		AAFFBDC4203008AE00269AB4 /* PlayWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDBF203008AE00269AB4 /* PlayWannabeView.swift */; };
-		AAFFBDC5203008AE00269AB4 /* VoteWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDC0203008AE00269AB4 /* VoteWannabeView.swift */; };
-		AAFFBDCC203008E500269AB4 /* PlayWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDC7203008E400269AB4 /* PlayWannabeViewController.swift */; };
-		AAFFBDCD203008E500269AB4 /* StartWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDC8203008E400269AB4 /* StartWannabeViewController.swift */; };
-		AAFFBDCE203008E500269AB4 /* SetupWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDC9203008E500269AB4 /* SetupWannabeViewController.swift */; };
-		AAFFBDCF203008E500269AB4 /* EndWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDCA203008E500269AB4 /* EndWannabeViewController.swift */; };
-		AAFFBDD0203008E500269AB4 /* VoteWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDCB203008E500269AB4 /* VoteWannabeViewController.swift */; };
+		AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128720923CF10010FFB1 /* MenuView.swift */; };
+		AAF8128A20923CF90010FFB1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128920923CF90010FFB1 /* MenuViewController.swift */; };
+		AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128C20923E370010FFB1 /* UIViewController+Extension.swift */; };
+		AAF81290209240660010FFB1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128E209240650010FFB1 /* UIColor+Extension.swift */; };
+		AAF81291209240660010FFB1 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128F209240650010FFB1 /* UIFont+Extension.swift */; };
+		AAF812932092406E0010FFB1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812922092406E0010FFB1 /* UIButton+Extension.swift */; };
+		AAF81297209241550010FFB1 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF81296209241550010FFB1 /* AlertView.swift */; };
+		AAF812992092415C0010FFB1 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812982092415C0010FFB1 /* AlertViewController.swift */; };
+		AAF8129D20924EB80010FFB1 /* ActivityIndicatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8129C20924EB80010FFB1 /* ActivityIndicatorButton.swift */; };
+		AAF812A32092552D0010FFB1 /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8129F2092552D0010FFB1 /* ShapeView.swift */; };
+		AAF812A42092552D0010FFB1 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812A02092552D0010FFB1 /* CircleView.swift */; };
+		AAF812A52092552D0010FFB1 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812A12092552D0010FFB1 /* TriangleView.swift */; };
+		AAF812A62092552D0010FFB1 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812A22092552D0010FFB1 /* SquareView.swift */; };
+		AAF812AA2092A6F70010FFB1 /* StartPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812A92092A6F70010FFB1 /* StartPartyViewController.swift */; };
+		AAF812AD2092A7020010FFB1 /* StartPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812AB2092A7010010FFB1 /* StartPartyView.swift */; };
+		AAF812AE2092A7020010FFB1 /* StartPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812AC2092A7020010FFB1 /* StartPartyTableViewCell.swift */; };
+		AAF812B22092B18B0010FFB1 /* JoinPartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812B12092B18B0010FFB1 /* JoinPartyViewController.swift */; };
+		AAF812B52092B1930010FFB1 /* JoinPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812B32092B1920010FFB1 /* JoinPartyView.swift */; };
+		AAF812B62092B1930010FFB1 /* JoinPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF812B42092B1930010FFB1 /* JoinPartyTableViewCell.swift */; };
 		AAFFBDDA2038989D00269AB4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDD92038989D00269AB4 /* User.swift */; };
-		AAFFBDDD2038A4C900269AB4 /* ChangeGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDDC2038A4C900269AB4 /* ChangeGameViewController.swift */; };
-		AAFFBDDF2038A56600269AB4 /* ChangeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDDE2038A56600269AB4 /* ChangeGameView.swift */; };
-		AAFFBDE12038B16000269AB4 /* ManagePartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE02038B16000269AB4 /* ManagePartyViewController.swift */; };
-		AAFFBDE32038B17100269AB4 /* ManagePartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */; };
-		AAFFBDE52038B18F00269AB4 /* ChangeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */; };
-		AAFFBDE72038B19F00269AB4 /* ChangeHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */; };
-		AAFFBDF320392ABE00269AB4 /* SelectablePersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */; };
-		AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDF82039326400269AB4 /* SelectableView.swift */; };
-		AAFFBDFB203A592000269AB4 /* SelectableGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */; };
-		AAFFBDFD203A6E3B00269AB4 /* ManagePartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */; };
-		AAFFBDFF203A841E00269AB4 /* StartPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */; };
-		AAFFBE01203A8D1F00269AB4 /* JoinPartyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		05CC40299A0BDBF35F2F54B1 /* Pods-Partybox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partybox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Partybox/Pods-Partybox.debug.xcconfig"; sourceTree = "<group>"; };
 		A77681979AF3A60830BDC604 /* Pods_Partybox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Partybox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA0D152E1FA571C9009E31BF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyViewController.swift; sourceTree = "<group>"; };
-		AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
 		AA0F9C9F205CBE87005EF3EB /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
+		AA2A87A020969FC1009C55BF /* PartyDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyDetails.swift; sourceTree = "<group>"; };
+		AA2A87A8209A95A2009C55BF /* PartyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyView.swift; sourceTree = "<group>"; };
+		AA2A87AA209A95AD009C55BF /* PartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
+		AA2A87AD209A9766009C55BF /* InviteCodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCodeTableViewCell.swift; sourceTree = "<group>"; };
+		AA2A87AF209A9A69009C55BF /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		AA2A87B1209A9B7E009C55BF /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		AA2A87B3209AB52C009C55BF /* PersonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
+		AA2A87B8209C1166009C55BF /* PartyPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeople.swift; sourceTree = "<group>"; };
+		AA2A87BA209D825D009C55BF /* WannabePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeople.swift; sourceTree = "<group>"; };
+		AA2A87BC209D8781009C55BF /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
 		AA590FF91FC26FBB008988E9 /* Wannabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wannabe.swift; sourceTree = "<group>"; };
+		AA5E89E320A13ADE00FE8960 /* UserKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKey.swift; sourceTree = "<group>"; };
+		AA5E89E820A13C0C00FE8960 /* PartyDetailsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDetailsKey.swift; sourceTree = "<group>"; };
+		AA5E89EA20A13C3A00FE8960 /* PartyDetailsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDetailsNotification.swift; sourceTree = "<group>"; };
+		AA5E89EC20A13C5B00FE8960 /* PartyDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDetailsDataSource.swift; sourceTree = "<group>"; };
+		AA5E89EE20A13D3800FE8960 /* PartyKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyKey.swift; sourceTree = "<group>"; };
+		AA5E89F120A13F7300FE8960 /* PartyPeopleKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeopleKey.swift; sourceTree = "<group>"; };
+		AA5E89F320A13F9700FE8960 /* PartyPeopleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeopleNotification.swift; sourceTree = "<group>"; };
+		AA5E89F520A1401000FE8960 /* PartyPeopleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeopleDataSource.swift; sourceTree = "<group>"; };
+		AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPersonKey.swift; sourceTree = "<group>"; };
+		AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeKey.swift; sourceTree = "<group>"; };
+		AA5E8A0420A1484500FE8960 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		AA5E8A0720A14A7600FE8960 /* WannabeManual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeManual.swift; sourceTree = "<group>"; };
+		AA5E8A0920A15DD200FE8960 /* WannabeManualKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeManualKey.swift; sourceTree = "<group>"; };
+		AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsKey.swift; sourceTree = "<group>"; };
+		AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsNotification.swift; sourceTree = "<group>"; };
+		AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsStatus.swift; sourceTree = "<group>"; };
+		AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsRounds.swift; sourceTree = "<group>"; };
+		AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A1520A1615500FE8960 /* WannabePeopleKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeopleKey.swift; sourceTree = "<group>"; };
+		AA5E8A1720A1617500FE8960 /* WannabePeopleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeopleNotification.swift; sourceTree = "<group>"; };
+		AA5E8A1920A1618E00FE8960 /* WannabePeopleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeopleDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A1C20A2B60A00FE8960 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
+		AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePersonKey.swift; sourceTree = "<group>"; };
+		AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCardKey.swift; sourceTree = "<group>"; };
+		AA5E8A2320A5355A00FE8960 /* WannabeCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCollection.swift; sourceTree = "<group>"; };
+		AA5E8A2520A537C200FE8960 /* WannabeCollectionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCollectionKey.swift; sourceTree = "<group>"; };
+		AA5E8A2720A5380F00FE8960 /* WannabeCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCollectionDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackKey.swift; sourceTree = "<group>"; };
+		AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackDataSource.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
-		AAB053A42002E1CF00180209 /* ActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
-		AAB053A82002EBBB00180209 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		AAB053AC200D5F2400180209 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
-		AAB053AE200D633C00180209 /* TriangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
-		AAB053B3200D667A00180209 /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
-		AAB053B5200D697B00180209 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
-		AAB053B7200EDD4D00180209 /* InviteCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCodeTableViewCell.swift; sourceTree = "<group>"; };
-		AACD97231FDF5DDE000275CB /* WannabePeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeople.swift; sourceTree = "<group>"; };
-		AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionTableViewCell.swift; sourceTree = "<group>"; };
-		AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsTableViewCell.swift; sourceTree = "<group>"; };
-		AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCountdownTableViewCell.swift; sourceTree = "<group>"; };
-		AACD97421FE6F782000275CB /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
-		AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteWannabeTableView.swift; sourceTree = "<group>"; };
-		AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
-		AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
-		AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
-		AADB813B1FB29BD9003AD1D9 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
-		AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
-		AADB81411FB40401003AD1D9 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		AADD9C7D2054F33200CA5AC8 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE75B461F809FA9001D4E13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,43 +134,29 @@
 		AAE75B501F809FA9001D4E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		AAE75B521F809FA9001D4E13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWannabeTableView.swift; sourceTree = "<group>"; };
 		AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPerson.swift; sourceTree = "<group>"; };
 		AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePerson.swift; sourceTree = "<group>"; };
-		AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDetails.swift; sourceTree = "<group>"; };
-		AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeople.swift; sourceTree = "<group>"; };
 		AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetails.swift; sourceTree = "<group>"; };
-		AAF73B091FA6C57900D8A17B /* PartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
-		AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
-		AAF73B131FA7FF6700D8A17B /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		AAF73B151FA804EA00D8A17B /* StartPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyView.swift; sourceTree = "<group>"; };
-		AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyView.swift; sourceTree = "<group>"; };
-		AAF73B191FA809C200D8A17B /* PartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyView.swift; sourceTree = "<group>"; };
-		AAFFBDB2202F583E00269AB4 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		AAFFBDBC203008AD00269AB4 /* EndWannabeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndWannabeView.swift; sourceTree = "<group>"; };
-		AAFFBDBD203008AD00269AB4 /* SetupWannabeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupWannabeView.swift; sourceTree = "<group>"; };
-		AAFFBDBE203008AE00269AB4 /* StartWannabeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWannabeView.swift; sourceTree = "<group>"; };
-		AAFFBDBF203008AE00269AB4 /* PlayWannabeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayWannabeView.swift; sourceTree = "<group>"; };
-		AAFFBDC0203008AE00269AB4 /* VoteWannabeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteWannabeView.swift; sourceTree = "<group>"; };
-		AAFFBDC7203008E400269AB4 /* PlayWannabeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayWannabeViewController.swift; sourceTree = "<group>"; };
-		AAFFBDC8203008E400269AB4 /* StartWannabeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWannabeViewController.swift; sourceTree = "<group>"; };
-		AAFFBDC9203008E500269AB4 /* SetupWannabeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupWannabeViewController.swift; sourceTree = "<group>"; };
-		AAFFBDCA203008E500269AB4 /* EndWannabeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndWannabeViewController.swift; sourceTree = "<group>"; };
-		AAFFBDCB203008E500269AB4 /* VoteWannabeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteWannabeViewController.swift; sourceTree = "<group>"; };
+		AAF8128720923CF10010FFB1 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		AAF8128920923CF90010FFB1 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		AAF8128C20923E370010FFB1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		AAF8128E209240650010FFB1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		AAF8128F209240650010FFB1 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		AAF812922092406E0010FFB1 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		AAF81296209241550010FFB1 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		AAF812982092415C0010FFB1 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		AAF8129C20924EB80010FFB1 /* ActivityIndicatorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorButton.swift; sourceTree = "<group>"; };
+		AAF8129F2092552D0010FFB1 /* ShapeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
+		AAF812A02092552D0010FFB1 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		AAF812A12092552D0010FFB1 /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
+		AAF812A22092552D0010FFB1 /* SquareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
+		AAF812A92092A6F70010FFB1 /* StartPartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPartyViewController.swift; sourceTree = "<group>"; };
+		AAF812AB2092A7010010FFB1 /* StartPartyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPartyView.swift; sourceTree = "<group>"; };
+		AAF812AC2092A7020010FFB1 /* StartPartyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartPartyTableViewCell.swift; sourceTree = "<group>"; };
+		AAF812B12092B18B0010FFB1 /* JoinPartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPartyViewController.swift; sourceTree = "<group>"; };
+		AAF812B32092B1920010FFB1 /* JoinPartyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPartyView.swift; sourceTree = "<group>"; };
+		AAF812B42092B1930010FFB1 /* JoinPartyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinPartyTableViewCell.swift; sourceTree = "<group>"; };
 		AAFFBDD92038989D00269AB4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		AAFFBDDC2038A4C900269AB4 /* ChangeGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGameViewController.swift; sourceTree = "<group>"; };
-		AAFFBDDE2038A56600269AB4 /* ChangeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGameView.swift; sourceTree = "<group>"; };
-		AAFFBDE02038B16000269AB4 /* ManagePartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewController.swift; sourceTree = "<group>"; };
-		AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyView.swift; sourceTree = "<group>"; };
-		AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewController.swift; sourceTree = "<group>"; };
-		AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostView.swift; sourceTree = "<group>"; };
-		AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectablePersonTableViewCell.swift; sourceTree = "<group>"; };
-		AAFFBDF82039326400269AB4 /* SelectableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
-		AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableGameTableViewCell.swift; sourceTree = "<group>"; };
-		AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyTableViewCell.swift; sourceTree = "<group>"; };
-		AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyTableViewCell.swift; sourceTree = "<group>"; };
-		AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyTableViewCell.swift; sourceTree = "<group>"; };
 		D393AE5C1BCD6658F642EBEE /* Pods-Partybox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partybox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Partybox/Pods-Partybox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,131 +181,174 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AA070DB62064992000367F8A /* Start Party */ = {
+		AA2A87AC209A9742009C55BF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				AAF73B151FA804EA00D8A17B /* StartPartyView.swift */,
-				AAFFBDFE203A841E00269AB4 /* StartPartyTableViewCell.swift */,
+				AA2A87B1209A9B7E009C55BF /* GameTableViewCell.swift */,
+				AA2A87AF209A9A69009C55BF /* HeaderTableViewCell.swift */,
+				AA2A87AD209A9766009C55BF /* InviteCodeTableViewCell.swift */,
+				AA2A87B3209AB52C009C55BF /* PersonTableViewCell.swift */,
 			);
-			path = "Start Party";
+			path = Cells;
 			sourceTree = "<group>";
 		};
-		AA070DB72064994D00367F8A /* Start Party */ = {
+		AA5E89E620A13B8B00FE8960 /* Party Details */ = {
 			isa = PBXGroup;
 			children = (
-				AA0D15301FA582AD009E31BF /* StartPartyViewController.swift */,
+				AA2A87A020969FC1009C55BF /* PartyDetails.swift */,
+				AA5E89E820A13C0C00FE8960 /* PartyDetailsKey.swift */,
+				AA5E89EA20A13C3A00FE8960 /* PartyDetailsNotification.swift */,
+				AA5E89EC20A13C5B00FE8960 /* PartyDetailsDataSource.swift */,
 			);
-			path = "Start Party";
+			path = "Party Details";
 			sourceTree = "<group>";
 		};
-		AA070DB82064A6FF00367F8A /* Join Party */ = {
+		AA5E89E720A13B9F00FE8960 /* Party People */ = {
 			isa = PBXGroup;
 			children = (
-				AAF73B171FA8077C00D8A17B /* JoinPartyView.swift */,
-				AAFFBE00203A8D1F00269AB4 /* JoinPartyTableViewCell.swift */,
+				AA2A87B8209C1166009C55BF /* PartyPeople.swift */,
+				AA5E89F120A13F7300FE8960 /* PartyPeopleKey.swift */,
+				AA5E89F320A13F9700FE8960 /* PartyPeopleNotification.swift */,
+				AA5E89F520A1401000FE8960 /* PartyPeopleDataSource.swift */,
 			);
-			path = "Join Party";
+			path = "Party People";
 			sourceTree = "<group>";
 		};
-		AA070DB92064A70E00367F8A /* Join Party */ = {
+		AA5E89F020A13D4A00FE8960 /* Party Person */ = {
 			isa = PBXGroup;
 			children = (
-				AA0D15321FA5957F009E31BF /* JoinPartyViewController.swift */,
+				AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */,
+				AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */,
 			);
-			path = "Join Party";
+			path = "Party Person";
 			sourceTree = "<group>";
 		};
-		AA590FFD1FCA6179008988E9 /* Resources */ = {
+		AA5E89F920A1466200FE8960 /* Wannabe Details */ = {
 			isa = PBXGroup;
 			children = (
-				AAB053A42002E1CF00180209 /* ActivityButton.swift */,
-				AAB053B0200D65D000180209 /* Shapes */,
-				AAB053A32002E17100180209 /* Table Views */,
-				AAF73B101FA6CABB00D8A17B /* Table View Cells */,
+				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
+				AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */,
+				AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */,
+				AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */,
+				AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */,
+				AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */,
 			);
-			path = Resources;
+			path = "Wannabe Details";
 			sourceTree = "<group>";
 		};
-		AA62BA7A2061F6D000250772 /* Menu */ = {
+		AA5E89FA20A1466900FE8960 /* Wannabe People */ = {
 			isa = PBXGroup;
 			children = (
-				AAF73B131FA7FF6700D8A17B /* MenuView.swift */,
+				AA2A87BA209D825D009C55BF /* WannabePeople.swift */,
+				AA5E8A1520A1615500FE8960 /* WannabePeopleKey.swift */,
+				AA5E8A1720A1617500FE8960 /* WannabePeopleNotification.swift */,
+				AA5E8A1920A1618E00FE8960 /* WannabePeopleDataSource.swift */,
 			);
-			path = Menu;
+			path = "Wannabe People";
 			sourceTree = "<group>";
 		};
-		AA62BA7B2061FEC200250772 /* Menu */ = {
+		AA5E89FB20A1466E00FE8960 /* Wannabe Pack */ = {
 			isa = PBXGroup;
 			children = (
-				AA0D152E1FA571C9009E31BF /* MenuViewController.swift */,
+				AA2A87BC209D8781009C55BF /* WannabePack.swift */,
+				AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */,
+				AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */,
 			);
-			path = Menu;
+			path = "Wannabe Pack";
 			sourceTree = "<group>";
 		};
-		AAB053A32002E17100180209 /* Table Views */ = {
+		AA5E89FC20A1467400FE8960 /* Wannabe Person */ = {
 			isa = PBXGroup;
 			children = (
-				AACD97531FF4963C000275CB /* VoteWannabeTableView.swift */,
-				AAEDA0DC1FF86AB20076B163 /* EndWannabeTableView.swift */,
+				AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */,
+				AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */,
 			);
-			path = "Table Views";
+			path = "Wannabe Person";
 			sourceTree = "<group>";
 		};
-		AAB053B0200D65D000180209 /* Shapes */ = {
+		AA5E89FD20A1467800FE8960 /* Wannabe Card */ = {
 			isa = PBXGroup;
 			children = (
-				AAB053B3200D667A00180209 /* ShapeView.swift */,
-				AAB053AC200D5F2400180209 /* SquareView.swift */,
-				AAB053AE200D633C00180209 /* TriangleView.swift */,
-				AAB053B5200D697B00180209 /* CircleView.swift */,
-				AAFFBDF82039326400269AB4 /* SelectableView.swift */,
+				AACD97441FE6F8D1000275CB /* WannabeCard.swift */,
+				AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */,
 			);
-			path = Shapes;
+			path = "Wannabe Card";
 			sourceTree = "<group>";
 		};
-		AAB053BC2011A3F300180209 /* Alert */ = {
+		AA5E8A0020A147CF00FE8960 /* Game Models */ = {
 			isa = PBXGroup;
 			children = (
-				AADB81411FB40401003AD1D9 /* AlertViewController.swift */,
+				AA5E8A0320A1482E00FE8960 /* Game */,
+				AA5E8A0220A1480200FE8960 /* Wannabe Models */,
 			);
-			path = Alert;
+			path = "Game Models";
 			sourceTree = "<group>";
 		};
-		AACD97351FE4E7F6000275CB /* Party */ = {
+		AA5E8A0120A147E200FE8960 /* Party Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAF73B191FA809C200D8A17B /* PartyView.swift */,
-				AAFFBDE62038B19F00269AB4 /* ChangeHostView.swift */,
-				AAFFBDE22038B17100269AB4 /* ManagePartyView.swift */,
-				AAFFBDFC203A6E3B00269AB4 /* ManagePartyTableViewCell.swift */,
-				AAFFBDDE2038A56600269AB4 /* ChangeGameView.swift */,
+				AAF6D7FF1FDC965900014CA0 /* Party */,
+				AA5E89E620A13B8B00FE8960 /* Party Details */,
+				AA5E89E720A13B9F00FE8960 /* Party People */,
+				AA5E89F020A13D4A00FE8960 /* Party Person */,
 			);
-			path = Party;
+			path = "Party Models";
 			sourceTree = "<group>";
 		};
-		AACD97361FE4E801000275CB /* Party */ = {
+		AA5E8A0220A1480200FE8960 /* Wannabe Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAF73B091FA6C57900D8A17B /* PartyViewController.swift */,
-				AAFFBDE42038B18F00269AB4 /* ChangeHostViewController.swift */,
-				AAFFBDE02038B16000269AB4 /* ManagePartyViewController.swift */,
-				AAFFBDDC2038A4C900269AB4 /* ChangeGameViewController.swift */,
+				AAF6D8001FDC966300014CA0 /* Wannabe */,
+				AA5E8A0620A14A4000FE8960 /* Wannabe Manual */,
+				AA5E89F920A1466200FE8960 /* Wannabe Details */,
+				AA5E89FA20A1466900FE8960 /* Wannabe People */,
+				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
+				AA5E8A2220A5354300FE8960 /* Wannabe Collection */,
+				AA5E89FB20A1466E00FE8960 /* Wannabe Pack */,
+				AA5E89FD20A1467800FE8960 /* Wannabe Card */,
 			);
-			path = Party;
+			path = "Wannabe Models";
+			sourceTree = "<group>";
+		};
+		AA5E8A0320A1482E00FE8960 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A0420A1484500FE8960 /* Game.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		AA5E8A0620A14A4000FE8960 /* Wannabe Manual */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A0720A14A7600FE8960 /* WannabeManual.swift */,
+				AA5E8A0920A15DD200FE8960 /* WannabeManualKey.swift */,
+			);
+			path = "Wannabe Manual";
+			sourceTree = "<group>";
+		};
+		AA5E8A1B20A2B5F400FE8960 /* Ordered Set Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A1C20A2B60A00FE8960 /* OrderedSet.swift */,
+			);
+			path = "Ordered Set Models";
+			sourceTree = "<group>";
+		};
+		AA5E8A2220A5354300FE8960 /* Wannabe Collection */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A2320A5355A00FE8960 /* WannabeCollection.swift */,
+				AA5E8A2520A537C200FE8960 /* WannabeCollectionKey.swift */,
+				AA5E8A2720A5380F00FE8960 /* WannabeCollectionDataSource.swift */,
+			);
+			path = "Wannabe Collection";
 			sourceTree = "<group>";
 		};
 		AADD9C80205508CE00CA5AC8 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
 				AADD9C81205508DB00CA5AC8 /* Alert.swift */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
-		AADD9C8320550E5400CA5AC8 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				AADD9C7D2054F33200CA5AC8 /* AlertView.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -332,8 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				AAE75B5C1F80A44C001D4E13 /* Models */,
-				AAE75B5B1F80A447001D4E13 /* Views */,
-				AAE75B5A1F80A440001D4E13 /* Controllers */,
+				AAF8128320923CAE0010FFB1 /* Views */,
+				AAF8128420923CB90010FFB1 /* Controllers */,
 				AAE75B591F80A432001D4E13 /* Resources */,
 			);
 			path = Partybox;
@@ -347,47 +390,19 @@
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
 				AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */,
 				AAE75B4D1F809FA9001D4E13 /* Assets.xcassets */,
-				AAFC53EB1FC22F9E0039F539 /* Extensions */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		AAE75B5A1F80A440001D4E13 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				AA62BA7B2061FEC200250772 /* Menu */,
-				AA070DB72064994D00367F8A /* Start Party */,
-				AA070DB92064A70E00367F8A /* Join Party */,
-				AACD97361FE4E801000275CB /* Party */,
-				AAFFBDC6203008CF00269AB4 /* Wannabe */,
-				AAB053BC2011A3F300180209 /* Alert */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		AAE75B5B1F80A447001D4E13 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				AA62BA7A2061F6D000250772 /* Menu */,
-				AA070DB62064992000367F8A /* Start Party */,
-				AA070DB82064A6FF00367F8A /* Join Party */,
-				AACD97351FE4E7F6000275CB /* Party */,
-				AAFFBDBB2030089100269AB4 /* Wannabe */,
-				AADD9C8320550E5400CA5AC8 /* Alert */,
-				AA590FFD1FCA6179008988E9 /* Resources */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDDB203898A200269AB4 /* User */,
-				AAF6D7FF1FDC965900014CA0 /* Party */,
-				AAFFBDB1202F583400269AB4 /* Game */,
-				AAF6D8001FDC966300014CA0 /* Wannabe */,
+				AAFFBDDB203898A200269AB4 /* User Models */,
+				AA5E8A0120A147E200FE8960 /* Party Models */,
+				AA5E8A0020A147CF00FE8960 /* Game Models */,
+				AA5E8A1B20A2B5F400FE8960 /* Ordered Set Models */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
-				AA0F9C9F205CBE87005EF3EB /* Countdown.swift */,
+				AAF81281208BD03B0010FFB1 /* Countdown */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -396,9 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				AA6706C21F89D9F5000BF5F5 /* Party.swift */,
-				AAF6D7FA1FDC955900014CA0 /* PartyDetails.swift */,
-				AAF6D8041FDC99DB00014CA0 /* PartyPeople.swift */,
-				AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */,
+				AA5E89EE20A13D3800FE8960 /* PartyKey.swift */,
 			);
 			path = Party;
 			sourceTree = "<group>";
@@ -407,83 +420,190 @@
 			isa = PBXGroup;
 			children = (
 				AA590FF91FC26FBB008988E9 /* Wannabe.swift */,
-				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
-				AACD97231FDF5DDE000275CB /* WannabePeople.swift */,
-				AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */,
-				AACD97421FE6F782000275CB /* WannabePack.swift */,
-				AACD97441FE6F8D1000275CB /* WannabeCard.swift */,
+				AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */,
 			);
 			path = Wannabe;
 			sourceTree = "<group>";
 		};
-		AAF73B101FA6CABB00D8A17B /* Table View Cells */ = {
+		AAF81281208BD03B0010FFB1 /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
-				AAB053B7200EDD4D00180209 /* InviteCodeTableViewCell.swift */,
-				AADB81371FB156A4003AD1D9 /* HeaderTableViewCell.swift */,
-				AADB81391FB16E00003AD1D9 /* GameTableViewCell.swift */,
-				AACD97371FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift */,
-				AADB813D1FB2B155003AD1D9 /* ActivityTableViewCell.swift */,
-				AADB813B1FB29BD9003AD1D9 /* PersonTableViewCell.swift */,
-				AADB813F1FB3E36B003AD1D9 /* ButtonTableViewCell.swift */,
-				AADB81331FB14958003AD1D9 /* PromptTableViewCell.swift */,
-				AACD97391FE5E0E4000275CB /* GameInstructionsTableViewCell.swift */,
-				AACD973F1FE63668000275CB /* GameCountdownTableViewCell.swift */,
-				AAFFBDF220392ABE00269AB4 /* SelectablePersonTableViewCell.swift */,
-				AAFFBDFA203A592000269AB4 /* SelectableGameTableViewCell.swift */,
+				AA0F9C9F205CBE87005EF3EB /* Countdown.swift */,
 			);
-			path = "Table View Cells";
+			path = Countdown;
 			sourceTree = "<group>";
 		};
-		AAFC53EB1FC22F9E0039F539 /* Extensions */ = {
+		AAF8128320923CAE0010FFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAF73B0D1FA6C9E500D8A17B /* UIButton+Extension.swift */,
-				AAB053A82002EBBB00180209 /* UIColor+Extension.swift */,
-				AADB81351FB15468003AD1D9 /* UIFont+Extension.swift */,
-				AAF73B0B1FA6C97900D8A17B /* UIViewController+Extension.swift */,
+				AAF8128520923CCE0010FFB1 /* Menu Views */,
+				AAF812A72092A6C80010FFB1 /* Start Party */,
+				AAF812AF2092B1660010FFB1 /* Join Party */,
+				AAF812BA2094426F0010FFB1 /* Party */,
+				AAF812952092413D0010FFB1 /* Alert */,
+				AAF8129A20924E8B0010FFB1 /* Resources */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AAF8128420923CB90010FFB1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8128620923CD20010FFB1 /* Menu Controllers */,
+				AAF812A82092A6DA0010FFB1 /* Start Party */,
+				AAF812B02092B1730010FFB1 /* Join Party */,
+				AAF812BB209442790010FFB1 /* Party */,
+				AAF81294209241340010FFB1 /* Alert */,
+				AAF812B72092D1550010FFB1 /* Resources */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AAF8128520923CCE0010FFB1 /* Menu Views */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8128720923CF10010FFB1 /* MenuView.swift */,
+			);
+			path = "Menu Views";
+			sourceTree = "<group>";
+		};
+		AAF8128620923CD20010FFB1 /* Menu Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8128920923CF90010FFB1 /* MenuViewController.swift */,
+			);
+			path = "Menu Controllers";
+			sourceTree = "<group>";
+		};
+		AAF81294209241340010FFB1 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AAF812982092415C0010FFB1 /* AlertViewController.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AAF812952092413D0010FFB1 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AAF81296209241550010FFB1 /* AlertView.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AAF8129A20924E8B0010FFB1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8129B20924E990010FFB1 /* Buttons */,
+				AA2A87AC209A9742009C55BF /* Cells */,
+				AAF8129E209255030010FFB1 /* Shapes */,
+				AAF812B92092D1650010FFB1 /* Extensions */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AAF8129B20924E990010FFB1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8129C20924EB80010FFB1 /* ActivityIndicatorButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		AAF8129E209255030010FFB1 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8129F2092552D0010FFB1 /* ShapeView.swift */,
+				AAF812A02092552D0010FFB1 /* CircleView.swift */,
+				AAF812A22092552D0010FFB1 /* SquareView.swift */,
+				AAF812A12092552D0010FFB1 /* TriangleView.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		AAF812A72092A6C80010FFB1 /* Start Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF812AB2092A7010010FFB1 /* StartPartyView.swift */,
+				AAF812AC2092A7020010FFB1 /* StartPartyTableViewCell.swift */,
+			);
+			path = "Start Party";
+			sourceTree = "<group>";
+		};
+		AAF812A82092A6DA0010FFB1 /* Start Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF812A92092A6F70010FFB1 /* StartPartyViewController.swift */,
+			);
+			path = "Start Party";
+			sourceTree = "<group>";
+		};
+		AAF812AF2092B1660010FFB1 /* Join Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF812B32092B1920010FFB1 /* JoinPartyView.swift */,
+				AAF812B42092B1930010FFB1 /* JoinPartyTableViewCell.swift */,
+			);
+			path = "Join Party";
+			sourceTree = "<group>";
+		};
+		AAF812B02092B1730010FFB1 /* Join Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF812B12092B18B0010FFB1 /* JoinPartyViewController.swift */,
+			);
+			path = "Join Party";
+			sourceTree = "<group>";
+		};
+		AAF812B72092D1550010FFB1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AAF812B82092D15D0010FFB1 /* Extensions */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AAF812B82092D15D0010FFB1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8128C20923E370010FFB1 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		AAFFBDB1202F583400269AB4 /* Game */ = {
+		AAF812B92092D1650010FFB1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDB2202F583E00269AB4 /* Game.swift */,
+				AAF812922092406E0010FFB1 /* UIButton+Extension.swift */,
+				AAF8128E209240650010FFB1 /* UIColor+Extension.swift */,
+				AAF8128F209240650010FFB1 /* UIFont+Extension.swift */,
 			);
-			path = Game;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		AAFFBDBB2030089100269AB4 /* Wannabe */ = {
+		AAF812BA2094426F0010FFB1 /* Party */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDBD203008AD00269AB4 /* SetupWannabeView.swift */,
-				AAFFBDBE203008AE00269AB4 /* StartWannabeView.swift */,
-				AAFFBDBF203008AE00269AB4 /* PlayWannabeView.swift */,
-				AAFFBDC0203008AE00269AB4 /* VoteWannabeView.swift */,
-				AAFFBDBC203008AD00269AB4 /* EndWannabeView.swift */,
+				AA2A87A8209A95A2009C55BF /* PartyView.swift */,
 			);
-			path = Wannabe;
+			path = Party;
 			sourceTree = "<group>";
 		};
-		AAFFBDC6203008CF00269AB4 /* Wannabe */ = {
+		AAF812BB209442790010FFB1 /* Party */ = {
 			isa = PBXGroup;
 			children = (
-				AAFFBDC9203008E500269AB4 /* SetupWannabeViewController.swift */,
-				AAFFBDC8203008E400269AB4 /* StartWannabeViewController.swift */,
-				AAFFBDC7203008E400269AB4 /* PlayWannabeViewController.swift */,
-				AAFFBDCB203008E500269AB4 /* VoteWannabeViewController.swift */,
-				AAFFBDCA203008E500269AB4 /* EndWannabeViewController.swift */,
+				AA2A87AA209A95AD009C55BF /* PartyViewController.swift */,
 			);
-			path = Wannabe;
+			path = Party;
 			sourceTree = "<group>";
 		};
-		AAFFBDDB203898A200269AB4 /* User */ = {
+		AAFFBDDB203898A200269AB4 /* User Models */ = {
 			isa = PBXGroup;
 			children = (
 				AAFFBDD92038989D00269AB4 /* User.swift */,
+				AA5E89E320A13ADE00FE8960 /* UserKey.swift */,
 			);
-			path = User;
+			path = "User Models";
 			sourceTree = "<group>";
 		};
 		F9634DE61855F2D1DBAD42A8 /* Frameworks */ = {
@@ -617,74 +737,74 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAEDA0DD1FF86AB20076B163 /* EndWannabeTableView.swift in Sources */,
-				AAFFBDE72038B19F00269AB4 /* ChangeHostView.swift in Sources */,
+				AA5E8A0A20A15DD200FE8960 /* WannabeManualKey.swift in Sources */,
+				AAF812A32092552D0010FFB1 /* ShapeView.swift in Sources */,
+				AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */,
+				AAF81290209240660010FFB1 /* UIColor+Extension.swift in Sources */,
+				AA5E89E920A13C0C00FE8960 /* PartyDetailsKey.swift in Sources */,
 				AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */,
-				AAFFBDE52038B18F00269AB4 /* ChangeHostViewController.swift in Sources */,
-				AAFFBDF320392ABE00269AB4 /* SelectablePersonTableViewCell.swift in Sources */,
-				AAFFBDCE203008E500269AB4 /* SetupWannabeViewController.swift in Sources */,
+				AA2A87B9209C1166009C55BF /* PartyPeople.swift in Sources */,
+				AA2A87A120969FC1009C55BF /* PartyDetails.swift in Sources */,
+				AA2A87BB209D825D009C55BF /* WannabePeople.swift in Sources */,
+				AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */,
+				AA5E8A1420A15F8500FE8960 /* WannabeDetailsDataSource.swift in Sources */,
+				AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */,
+				AAF812AD2092A7020010FFB1 /* StartPartyView.swift in Sources */,
+				AA2A87B0209A9A69009C55BF /* HeaderTableViewCell.swift in Sources */,
+				AAF81297209241550010FFB1 /* AlertView.swift in Sources */,
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
-				AAFFBDFB203A592000269AB4 /* SelectableGameTableViewCell.swift in Sources */,
-				AACD97431FE6F782000275CB /* WannabePack.swift in Sources */,
-				AA0D15311FA582AD009E31BF /* StartPartyViewController.swift in Sources */,
-				AAB053B6200D697B00180209 /* CircleView.swift in Sources */,
-				AAFFBDC2203008AE00269AB4 /* SetupWannabeView.swift in Sources */,
-				AADB81401FB3E36B003AD1D9 /* ButtonTableViewCell.swift in Sources */,
-				AAFFBDDD2038A4C900269AB4 /* ChangeGameViewController.swift in Sources */,
-				AAF6D7FB1FDC955900014CA0 /* PartyDetails.swift in Sources */,
-				AAB053AF200D633C00180209 /* TriangleView.swift in Sources */,
-				AADB813C1FB29BD9003AD1D9 /* PersonTableViewCell.swift in Sources */,
-				AAB053A52002E1CF00180209 /* ActivityButton.swift in Sources */,
-				AACD97241FDF5DDE000275CB /* WannabePeople.swift in Sources */,
-				AAFFBDFD203A6E3B00269AB4 /* ManagePartyTableViewCell.swift in Sources */,
+				AA5E89EB20A13C3A00FE8960 /* PartyDetailsNotification.swift in Sources */,
+				AAF812A52092552D0010FFB1 /* TriangleView.swift in Sources */,
+				AAF812A42092552D0010FFB1 /* CircleView.swift in Sources */,
+				AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */,
+				AAF812AA2092A6F70010FFB1 /* StartPartyViewController.swift in Sources */,
+				AAF812A62092552D0010FFB1 /* SquareView.swift in Sources */,
+				AA5E89ED20A13C5B00FE8960 /* PartyDetailsDataSource.swift in Sources */,
+				AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */,
+				AAF8129D20924EB80010FFB1 /* ActivityIndicatorButton.swift in Sources */,
 				AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */,
-				AACD973A1FE5E0E4000275CB /* GameInstructionsTableViewCell.swift in Sources */,
-				AAFFBDCC203008E500269AB4 /* PlayWannabeViewController.swift in Sources */,
+				AA5E8A1A20A1618E00FE8960 /* WannabePeopleDataSource.swift in Sources */,
+				AA5E8A2420A5355A00FE8960 /* WannabeCollection.swift in Sources */,
 				AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */,
-				AADB81361FB15468003AD1D9 /* UIFont+Extension.swift in Sources */,
-				AAFFBDC5203008AE00269AB4 /* VoteWannabeView.swift in Sources */,
-				AAF73B0E1FA6C9E500D8A17B /* UIButton+Extension.swift in Sources */,
-				AACD97381FE5D9C9000275CB /* ButtonCollectionTableViewCell.swift in Sources */,
-				AAF73B161FA804EA00D8A17B /* StartPartyView.swift in Sources */,
-				AAF73B1A1FA809C200D8A17B /* PartyView.swift in Sources */,
-				AAFFBDFF203A841E00269AB4 /* StartPartyTableViewCell.swift in Sources */,
-				AAFFBDC3203008AE00269AB4 /* StartWannabeView.swift in Sources */,
+				AA5E8A1820A1617500FE8960 /* WannabePeopleNotification.swift in Sources */,
+				AA5E8A2620A537C200FE8960 /* WannabeCollectionKey.swift in Sources */,
+				AAF812B52092B1930010FFB1 /* JoinPartyView.swift in Sources */,
+				AA5E89F220A13F7300FE8960 /* PartyPeopleKey.swift in Sources */,
+				AA5E8A1220A15E5F00FE8960 /* WannabeDetailsRounds.swift in Sources */,
+				AAF812B62092B1930010FFB1 /* JoinPartyTableViewCell.swift in Sources */,
 				AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */,
+				AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */,
+				AA2A87BD209D8781009C55BF /* WannabePack.swift in Sources */,
+				AA5E89EF20A13D3800FE8960 /* PartyKey.swift in Sources */,
+				AAF812AE2092A7020010FFB1 /* StartPartyTableViewCell.swift in Sources */,
+				AA5E89E420A13ADE00FE8960 /* UserKey.swift in Sources */,
+				AAF812992092415C0010FFB1 /* AlertViewController.swift in Sources */,
+				AA5E8A0820A14A7600FE8960 /* WannabeManual.swift in Sources */,
 				AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */,
-				AAB053A92002EBBB00180209 /* UIColor+Extension.swift in Sources */,
-				AAFFBDDF2038A56600269AB4 /* ChangeGameView.swift in Sources */,
-				AACD97401FE63668000275CB /* GameCountdownTableViewCell.swift in Sources */,
-				AAFFBDCD203008E500269AB4 /* StartWannabeViewController.swift in Sources */,
-				AAF73B0A1FA6C57900D8A17B /* PartyViewController.swift in Sources */,
-				AAFFBDD0203008E500269AB4 /* VoteWannabeViewController.swift in Sources */,
-				AAFFBDC1203008AE00269AB4 /* EndWannabeView.swift in Sources */,
-				AACD97541FF4963C000275CB /* VoteWannabeTableView.swift in Sources */,
+				AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */,
+				AA5E89F620A1401000FE8960 /* PartyPeopleDataSource.swift in Sources */,
 				AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */,
-				AAFFBE01203A8D1F00269AB4 /* JoinPartyTableViewCell.swift in Sources */,
-				AAF6D8051FDC99DB00014CA0 /* PartyPeople.swift in Sources */,
-				AAF73B141FA7FF6800D8A17B /* MenuView.swift in Sources */,
-				AAF73B0C1FA6C97900D8A17B /* UIViewController+Extension.swift in Sources */,
-				AA0D152F1FA571C9009E31BF /* MenuViewController.swift in Sources */,
-				AADB813A1FB16E00003AD1D9 /* GameTableViewCell.swift in Sources */,
-				AADB81341FB14958003AD1D9 /* PromptTableViewCell.swift in Sources */,
-				AAF73B181FA8077C00D8A17B /* JoinPartyView.swift in Sources */,
-				AADB813E1FB2B155003AD1D9 /* ActivityTableViewCell.swift in Sources */,
-				AAFFBDE12038B16000269AB4 /* ManagePartyViewController.swift in Sources */,
-				AADB81381FB156A4003AD1D9 /* HeaderTableViewCell.swift in Sources */,
-				AAFFBDF92039326400269AB4 /* SelectableView.swift in Sources */,
-				AADD9C7E2054F33200CA5AC8 /* AlertView.swift in Sources */,
-				AAFFBDCF203008E500269AB4 /* EndWannabeViewController.swift in Sources */,
-				AADB81421FB40401003AD1D9 /* AlertViewController.swift in Sources */,
+				AA2A87B4209AB52C009C55BF /* PersonTableViewCell.swift in Sources */,
+				AA5E8A2820A5380F00FE8960 /* WannabeCollectionDataSource.swift in Sources */,
+				AAF812B22092B18B0010FFB1 /* JoinPartyViewController.swift in Sources */,
+				AAF8128A20923CF90010FFB1 /* MenuViewController.swift in Sources */,
+				AA2A87B2209A9B7E009C55BF /* GameTableViewCell.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
-				AAB053B4200D667A00180209 /* ShapeView.swift in Sources */,
-				AAB053AD200D5F2400180209 /* SquareView.swift in Sources */,
-				AAFFBDB6202F583E00269AB4 /* Game.swift in Sources */,
-				AA0D15331FA5957F009E31BF /* JoinPartyViewController.swift in Sources */,
-				AAFFBDE32038B17100269AB4 /* ManagePartyView.swift in Sources */,
-				AAB053B8200EDD4D00180209 /* InviteCodeTableViewCell.swift in Sources */,
-				AAFFBDC4203008AE00269AB4 /* PlayWannabeView.swift in Sources */,
+				AA5E8A1620A1615500FE8960 /* WannabePeopleKey.swift in Sources */,
+				AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */,
+				AA5E8A0520A1484500FE8960 /* Game.swift in Sources */,
+				AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
+				AAF81291209240660010FFB1 /* UIFont+Extension.swift in Sources */,
+				AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */,
+				AA5E89F420A13F9700FE8960 /* PartyPeopleNotification.swift in Sources */,
 				AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */,
+				AAF812932092406E0010FFB1 /* UIButton+Extension.swift in Sources */,
+				AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */,
+				AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */,
+				AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */,
+				AA5E8A2120A5347D00FE8960 /* WannabeCardKey.swift in Sources */,
+				AA5E89F820A141BE00FE8960 /* PartyPersonKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

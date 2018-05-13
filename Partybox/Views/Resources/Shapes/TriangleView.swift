@@ -10,7 +10,7 @@ import UIKit
 
 class TriangleView: ShapeView {
     
-    // MARK: - Draw Methods
+    // MARK: - Draw Functions
     
     override func draw(_ rect: CGRect) {
         self.path = UIBezierPath()

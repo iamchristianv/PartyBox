@@ -18,11 +18,25 @@ protocol AlertViewDelegate {
     
 }
 
+protocol AlertViewDataSource {
+
+    // MARK: - Alert View Data Source Functions
+
+    func alertSubject() -> String
+
+    func alertMessage() -> String
+
+    func alertAction() -> String
+
+    func alertHandler() -> (() -> Void)?
+
+}
+
 class AlertView: UIView {
 
     // MARK: - Instance Properties
     
-    lazy var containerView: UIView = {
+    private lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 15.0
@@ -33,64 +47,55 @@ class AlertView: UIView {
         return containerView
     }()
     
-    lazy var subjectLabel: UILabel = {
+    private lazy var subjectLabel: UILabel = {
         let subjectLabel = UILabel()
-        subjectLabel.text = self.alert.subject
-        subjectLabel.font = UIFont.avenirNextMedium(size: 20)
+        subjectLabel.text = self.dataSource.alertSubject()
+        subjectLabel.font = UIFont.Partybox.avenirNextMedium(size: 20)
         subjectLabel.textColor = UIColor.Partybox.black
         subjectLabel.textAlignment = .center
         subjectLabel.numberOfLines = 0
         return subjectLabel
     }()
     
-    lazy var messageLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.text = self.alert.message
-        messageLabel.font = UIFont.avenirNextRegular(size: 18)
+        messageLabel.text = self.dataSource.alertMessage()
+        messageLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
         messageLabel.textColor = UIColor.Partybox.black
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         return messageLabel
     }()
     
-    lazy var actionButton: ActivityButton = {
-        let actionButton = ActivityButton()
-        actionButton.setTitle(self.alert.action, for: .normal)
-        actionButton.setTitleFont(UIFont.avenirNextMediumName, size: 20)
+    private lazy var actionButton: ActivityIndicatorButton = {
+        let actionButton = ActivityIndicatorButton()
+        actionButton.setTitle(self.dataSource.alertAction(), for: .normal)
+        actionButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 20)
+        actionButton.setTitleColor(UIColor.Partybox.white, for: .normal)
         actionButton.setBackgroundColor(UIColor.Partybox.red)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         return actionButton
     }()
     
-    lazy var cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let cancelButton = UIButton()
         cancelButton.setTitle("cancel", for: .normal)
-        cancelButton.setTitleFont(UIFont.avenirNextRegularName, size: 18)
+        cancelButton.setTitleFont(UIFont.Partybox.avenirNextRegularName, size: 18)
         cancelButton.setTitleColor(UIColor.Partybox.red, for: .normal)
+        cancelButton.setBackgroundColor(UIColor.Partybox.white)
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         return cancelButton
     }()
-    
-    var alert: Alert
-    
+
     var delegate: AlertViewDelegate!
-    
-    // MARK: - Initialization Functions
-    
-    init(alert: Alert) {
-        self.alert = alert
-        super.init(frame: .zero)
-        self.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.4)
-        self.setupSubviews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
+    var dataSource: AlertViewDataSource!
+
     // MARK: - Setup Functions
     
-    func setupSubviews() {
+    func setupView() {
+        self.backgroundColor = UIColor.Partybox.black.withAlphaComponent(0.4)
+
         self.addSubview(self.containerView)
         
         self.containerView.snp.remakeConstraints({
@@ -124,12 +129,12 @@ class AlertView: UIView {
             make.centerX.equalTo(self.containerView.snp.centerX)
             make.top.equalTo(self.messageLabel.snp.bottom).offset(24)
             
-            if self.alert.handler == nil {
+            if self.dataSource.alertHandler() == nil {
                 make.bottom.equalTo(self.containerView.snp.bottom).offset(-24)
             }
         })
         
-        if self.alert.handler == nil {
+        if self.dataSource.alertHandler() == nil {
             return
         }
         
@@ -144,11 +149,11 @@ class AlertView: UIView {
     
     // MARK: - Action Functions
     
-    @objc func actionButtonPressed() {
+    @objc private func actionButtonPressed() {
         self.delegate.alertView(self, actionButtonPressed: true)
     }
     
-    @objc func cancelButtonPressed() {
+    @objc private func cancelButtonPressed() {
         self.delegate.alertView(self, cancelButtonPressed: true)
     }
     

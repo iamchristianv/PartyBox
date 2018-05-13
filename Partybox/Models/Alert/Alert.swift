@@ -12,17 +12,19 @@ class Alert {
     
     // MARK: - Instance Properties
     
-    var subject: String
+    var subject: String = "none"
     
-    var message: String
+    var message: String = "none"
     
-    var action: String
+    var action: String = "none"
     
-    var handler: (() -> ())?
+    var handler: (() -> ())? = nil
     
     // MARK: - Initialization Functions
     
-    init(subject: String, message: String, action: String, handler: (() -> ())?) {
+    convenience init(subject: String, message: String, action: String, handler: (() -> ())?) {
+        self.init()
+
         self.subject = subject
         self.message = message
         self.action = action

@@ -12,44 +12,38 @@ class AlertViewController: UIViewController {
 
     // MARK: - Instance Properties
     
-    var contentView: AlertView!
+    private var contentView: AlertView = AlertView()
     
-    var alert: Alert
-    
-    // MARK: - Initialization Functions
-    
-    init(alert: Alert) {
-        self.alert = alert
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    var alert: Alert!
+
     // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = AlertView(alert: self.alert)
         self.contentView.delegate = self
+        self.contentView.dataSource = self
         self.view = self.contentView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
     
-    func setupViewController() {
+    private func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
+        self.setupNavigationBar()
+        self.setupView()
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         self.hideNavigationBar()
+    }
+
+    private func setupView() {
+        self.contentView.setupView()
     }
 
 }
@@ -58,16 +52,34 @@ extension AlertViewController: AlertViewDelegate {
     
     // MARK: - Alert View Delegate Functions
     
-    func alertView(_ alertView: AlertView, actionButtonPressed: Bool) {
-        self.dismissViewController(animated: false, completion: {
-            if let handler = self.alert.handler {
-                handler()
-            }
-        })
+    internal func alertView(_ alertView: AlertView, actionButtonPressed: Bool) {
+        self.dismiss(animated: false, completion: self.alert.handler)
     }
     
-    func alertView(_ alertView: AlertView, cancelButtonPressed: Bool) {
-        self.dismissViewController(animated: false, completion: nil)
+    internal func alertView(_ alertView: AlertView, cancelButtonPressed: Bool) {
+        self.dismiss(animated: false, completion: nil)
     }
     
+}
+
+extension AlertViewController: AlertViewDataSource {
+
+    // MARK: - Alert View Data Source Functions
+
+    internal func alertSubject() -> String {
+        return self.alert.subject
+    }
+
+    internal func alertMessage() -> String {
+        return self.alert.message
+    }
+
+    internal func alertAction() -> String {
+        return self.alert.action
+    }
+
+    internal func alertHandler() -> (() -> Void)? {
+        return self.alert.handler
+    }
+
 }

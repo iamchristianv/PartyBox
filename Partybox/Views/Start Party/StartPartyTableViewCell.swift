@@ -61,80 +61,72 @@ class StartPartyTableViewCell: UITableViewCell {
         return partyNameCharacterCountLabel
     }()
     
-    private lazy var yourNameLabel: UILabel = {
-        let yourNameLabel = UILabel()
-        yourNameLabel.text = "Your Name"
-        yourNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
-        yourNameLabel.textColor = UIColor.Partybox.black
-        return yourNameLabel
+    private lazy var userNameLabel: UILabel = {
+        let userNameLabel = UILabel()
+        userNameLabel.text = "Your Name"
+        userNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
+        userNameLabel.textColor = UIColor.Partybox.black
+        return userNameLabel
     }()
     
-    private lazy var yourNameTextField: UITextField = {
-        let yourNameTextField = UITextField()
-        yourNameTextField.delegate = self
-        yourNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
-        yourNameTextField.textColor = UIColor.Partybox.black
-        yourNameTextField.tintColor = UIColor.Partybox.red
-        yourNameTextField.borderStyle = .none
-        yourNameTextField.autocapitalizationType = .words
-        yourNameTextField.clearButtonMode = .whileEditing
-        return yourNameTextField
+    private lazy var userNameTextField: UITextField = {
+        let userNameTextField = UITextField()
+        userNameTextField.delegate = self
+        userNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
+        userNameTextField.textColor = UIColor.Partybox.black
+        userNameTextField.tintColor = UIColor.Partybox.red
+        userNameTextField.borderStyle = .none
+        userNameTextField.autocapitalizationType = .words
+        userNameTextField.clearButtonMode = .whileEditing
+        return userNameTextField
     }()
     
-    private lazy var yourNameUnderlineLabel: UILabel = {
-        let yourNameUnderlineLabel = UILabel()
-        yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
-        return yourNameUnderlineLabel
+    private lazy var userNameUnderlineLabel: UILabel = {
+        let userNameUnderlineLabel = UILabel()
+        userNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+        return userNameUnderlineLabel
     }()
     
-    private lazy var yourNameStatusLabel: UILabel = {
-        let yourNameStatusLabel = UILabel()
-        yourNameStatusLabel.text = " "
-        yourNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
-        yourNameStatusLabel.textColor = UIColor.Partybox.red
-        yourNameStatusLabel.isHidden = true
-        return yourNameStatusLabel
+    private lazy var userNameStatusLabel: UILabel = {
+        let userNameStatusLabel = UILabel()
+        userNameStatusLabel.text = " "
+        userNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
+        userNameStatusLabel.textColor = UIColor.Partybox.red
+        userNameStatusLabel.isHidden = true
+        return userNameStatusLabel
     }()
     
-    private lazy var yourNameMaxCharacterCount: Int = 15
+    private lazy var userNameMaxCharacterCount: Int = 15
     
-    private lazy var yourNameCharacterCountLabel: UILabel = {
-        let yourNameCharacterCountLabel = UILabel()
-        yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
-        yourNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
-        yourNameCharacterCountLabel.textColor = UIColor.lightGray
-        return yourNameCharacterCountLabel
+    private lazy var userNameCharacterCountLabel: UILabel = {
+        let userNameCharacterCountLabel = UILabel()
+        userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
+        userNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
+        userNameCharacterCountLabel.textColor = UIColor.lightGray
+        return userNameCharacterCountLabel
     }()
-    
-    // MARK: - Initialization Functions
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+    // MARK: - Configuration Functions
+
+    func configure() {
         self.setupView()
-        self.setupSubviews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Setup Functions
     
-    private func setupView() {
+    func setupView() {
         self.selectionStyle = .none
-    }
-    
-    private func setupSubviews() {
+
         self.addSubview(self.partyNameLabel)
         self.addSubview(self.partyNameTextField)
         self.addSubview(self.partyNameCharacterCountLabel)
         self.addSubview(self.partyNameUnderlineLabel)
         self.addSubview(self.partyNameStatusLabel)
-        self.addSubview(self.yourNameLabel)
-        self.addSubview(self.yourNameTextField)
-        self.addSubview(self.yourNameCharacterCountLabel)
-        self.addSubview(self.yourNameUnderlineLabel)
-        self.addSubview(self.yourNameStatusLabel)
+        self.addSubview(self.userNameLabel)
+        self.addSubview(self.userNameTextField)
+        self.addSubview(self.userNameCharacterCountLabel)
+        self.addSubview(self.userNameUnderlineLabel)
+        self.addSubview(self.userNameStatusLabel)
         
         self.partyNameLabel.snp.remakeConstraints({
             (make) in
@@ -179,7 +171,7 @@ class StartPartyTableViewCell: UITableViewCell {
             make.top.equalTo(self.partyNameUnderlineLabel.snp.bottom).offset(8)
         })
         
-        self.yourNameLabel.snp.remakeConstraints({
+        self.userNameLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(32)
@@ -187,39 +179,39 @@ class StartPartyTableViewCell: UITableViewCell {
             make.top.equalTo(self.partyNameStatusLabel.snp.bottom).offset(40)
         })
         
-        self.yourNameTextField.snp.remakeConstraints({
+        self.userNameTextField.snp.remakeConstraints({
             (make) in
             
             make.height.equalTo(50)
             make.leading.equalTo(self.snp.leading).offset(32)
-            make.trailing.equalTo(self.yourNameCharacterCountLabel.snp.leading).offset(-4)
-            make.top.equalTo(self.yourNameLabel.snp.bottom)
+            make.trailing.equalTo(self.userNameCharacterCountLabel.snp.leading).offset(-4)
+            make.top.equalTo(self.userNameLabel.snp.bottom)
         })
         
-        self.yourNameCharacterCountLabel.snp.remakeConstraints({
+        self.userNameCharacterCountLabel.snp.remakeConstraints({
             (make) in
             
             make.width.lessThanOrEqualTo(20)
-            make.leading.equalTo(self.yourNameTextField.snp.trailing).offset(4)
+            make.leading.equalTo(self.userNameTextField.snp.trailing).offset(4)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.centerY.equalTo(self.yourNameTextField.snp.centerY)
+            make.centerY.equalTo(self.userNameTextField.snp.centerY)
         })
         
-        self.yourNameUnderlineLabel.snp.remakeConstraints({
+        self.userNameUnderlineLabel.snp.remakeConstraints({
             (make) in
             
             make.height.equalTo(1)
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.yourNameTextField.snp.bottom)
+            make.top.equalTo(self.userNameTextField.snp.bottom)
         })
         
-        self.yourNameStatusLabel.snp.remakeConstraints({
+        self.userNameStatusLabel.snp.remakeConstraints({
             (make) in
             
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.yourNameUnderlineLabel.snp.bottom).offset(8)
+            make.top.equalTo(self.userNameUnderlineLabel.snp.bottom).offset(8)
             make.bottom.equalTo(self.snp.bottom).offset(-32)
         })
     }
@@ -228,12 +220,12 @@ class StartPartyTableViewCell: UITableViewCell {
     
     func hideKeyboard() {
         self.partyNameTextField.resignFirstResponder()
-        self.yourNameTextField.resignFirstResponder()
+        self.userNameTextField.resignFirstResponder()
     }
-    
+
     func partyNameHasErrors() -> Bool {
         let partyName = self.partyNameTextField.text!
-        
+
         if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
             self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
             self.partyNameStatusLabel.text = "Required"
@@ -250,30 +242,30 @@ class StartPartyTableViewCell: UITableViewCell {
     func partyName() -> String {
         return self.partyNameTextField.text!
     }
-    
-    func yourNameHasErrors() -> Bool {
-        let userName = self.yourNameTextField.text!
-        
+
+    func userNameHasErrors() -> Bool {
+        let userName = self.userNameTextField.text!
+
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-            self.yourNameStatusLabel.text = "Required"
-            self.yourNameStatusLabel.isHidden = false
+            self.userNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.userNameStatusLabel.text = "Required"
+            self.userNameStatusLabel.isHidden = false
             return true
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
-            self.yourNameStatusLabel.text = "No spaces or special characters"
-            self.yourNameStatusLabel.isHidden = false
+            self.userNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.userNameStatusLabel.text = "No spaces or special characters"
+            self.userNameStatusLabel.isHidden = false
             return true
         } else {
-            self.yourNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
-            self.yourNameStatusLabel.text = " "
-            self.yourNameStatusLabel.isHidden = true
+            self.userNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+            self.userNameStatusLabel.text = " "
+            self.userNameStatusLabel.isHidden = true
             return false
         }
     }
     
-    func yourName() -> String {
-        return self.yourNameTextField.text!
+    func userName() -> String {
+        return self.userNameTextField.text!
     }
 
 }
@@ -282,25 +274,29 @@ extension StartPartyTableViewCell: UITextFieldDelegate {
     
     // MARK: - Text Field Delegate Functions
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    internal func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let characterCount = textField.text!.count + string.count - range.length
         
         if textField == self.partyNameTextField && characterCount <= self.partyNameMaxCharacterCount {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - characterCount)"
             return true
-        } else if textField == self.yourNameTextField && characterCount <= self.yourNameMaxCharacterCount {
-            self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount - characterCount)"
+        }
+
+        if textField == self.userNameTextField && characterCount <= self.userNameMaxCharacterCount {
+            self.userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount - characterCount)"
             return true
         }
         
         return false
     }
     
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+    internal func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.partyNameTextField {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
-        } else if textField == self.yourNameTextField {
-            self.yourNameCharacterCountLabel.text = "\(self.yourNameMaxCharacterCount)"
+        }
+
+        if textField == self.userNameTextField {
+            self.userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
         }
         
         return true

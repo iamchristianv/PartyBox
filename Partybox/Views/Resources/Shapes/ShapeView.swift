@@ -16,16 +16,22 @@ class ShapeView: UIView {
     
     var color: UIColor!
     
-    // MARK: - Initialization Methods
+    // MARK: - Initialization Functions
     
     init(frame: CGRect, color: UIColor) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
+        self.setupView()
         self.color = color
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Setup Functions
+
+    func setupView() {
+        self.backgroundColor = .clear
     }
 
 }

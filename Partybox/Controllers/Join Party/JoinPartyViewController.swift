@@ -6,7 +6,6 @@
 //  Copyright © 2017 Christian Villa. All rights reserved.
 //
 
-import Firebase
 import UIKit
 
 class JoinPartyViewController: UIViewController {
@@ -14,19 +13,24 @@ class JoinPartyViewController: UIViewController {
     // MARK: - Instance Properties
     
     private var contentView: JoinPartyView!
+
+    // MARK: - Construction Functions
+
+    static func construct() -> JoinPartyViewController {
+        let controller = JoinPartyViewController()
+        controller.contentView = JoinPartyView.construct(delegate: controller)
+        return controller
+    }
     
     // MARK: - View Controller Functions
     
     override func loadView() {
-        self.contentView = JoinPartyView()
-        self.contentView.delegate = self
         self.view = self.contentView
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.setupNavigationBar()
     }
     
     // MARK: - Setup Functions
@@ -34,9 +38,6 @@ class JoinPartyViewController: UIViewController {
     private func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-    }
-    
-    private func setupNavigationBar() {
         self.showNavigationBar()
         self.setNavigationBarTitle("Join Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
@@ -46,7 +47,7 @@ class JoinPartyViewController: UIViewController {
     // MARK: - Navigation Bar Functions
     
     @objc private func cancelButtonPressed() {
-        self.dismissViewController(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
@@ -55,34 +56,46 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
     
     // MARK: - Join Party View Delegate Functions
     
-    func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
+    internal func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
         self.contentView.startAnimatingJoinButton()
 
-        User.current.name = self.contentView.userName()
-        Party.current.details.id = self.contentView.partyId()
+        let partyId = self.contentView.partyId()
+        let userName = self.contentView.userName()
 
-        Party.current.join(callback: {
+        let user = User.construct(name: userName)
+        let party = Party.construct(id: partyId)
+        let game = Game.construct(party: party.details.id)
+
+        party.join(user: user, callback: {
             (error) in
 
             self.contentView.stopAnimatingJoinButton()
 
             if let error = error {
-                self.showErrorAlert(error: error)
-                return
+                let subject = "Uh oh"
+                let message = error
+                let action = "Okay"
+                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+            } else {
+                let partyViewController = PartyViewController.construct(user: user, party: party, game: game, delegate: self)
+                let navigationController = UINavigationController(rootViewController: partyViewController)
+                self.present(navigationController, animated: true, completion: nil)
             }
-
-            self.showPartyViewController(delegate: self)
         })
     }
     
 }
 
 extension JoinPartyViewController: PartyViewControllerDelegate {
-    
+
     // MARK: - Party View Controller Delegate Functions
-    
-    func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
-        self.showUserWasKickedFromPartyAlert()
+
+    internal func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
+        let subject = "Oh no"
+        let message = "You were kicked from the party"
+        let action = "Okay"
+        self.showAlert(subject: subject, message: message, action: action, handler: nil)
     }
-    
+
 }
+

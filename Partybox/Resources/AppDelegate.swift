@@ -10,9 +10,67 @@ import Firebase
 import SnapKit
 import UIKit
 
+struct Partybox {
+
+    // MARK: - Instance Properties
+
+    static let none: String = "none"
+
+    static let null: NSNull = NSNull()
+
+    static let zero: Int = 0
+
+    static func randomPartyId() -> String {
+        var randomId = ""
+
+        let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                       "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+        let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        for _ in 1...5 {
+            let randomIndex = Int(arc4random())
+            let randomLetter = letters[randomIndex % letters.count]
+            let randomNumber = String(numbers[randomIndex % numbers.count])
+
+            randomId += (randomIndex % 2 == 0 ? randomLetter : randomNumber)
+        }
+
+        return randomId
+    }
+
+    static func randomPersonEmoji() -> String {
+        let emojis = ["😊"]
+
+        let randomIndex = Int(arc4random()) % emojis.count
+        let randomEmoji = emojis[randomIndex]
+
+        return randomEmoji
+    }
+
+    static func randomGameId() -> String {
+        let randomId = "C2D4V"
+
+        return randomId
+    }
+
+}
+
 enum DatabaseKey: String {
 
-    // MARK: - Database Keys
+    // MARK: - Property Keys
+
+    case parties
+
+    case games
+
+    case setups
+
+}
+
+enum SetupKey: String {
+
+    // MARK: - Property Keys
 
     case parties
 
@@ -20,7 +78,7 @@ enum DatabaseKey: String {
 
     case packs
 
-    case configs
+    case cards
 
 }
 
@@ -39,9 +97,11 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+
+        let rootViewController = MenuViewController.construct()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = UINavigationController(rootViewController: MenuViewController())
+        self.window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         self.window?.makeKeyAndVisible()
         
         return true
