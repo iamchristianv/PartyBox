@@ -33,9 +33,16 @@ class InviteCodeTableViewCell: UITableViewCell {
         return inviteCodeLabel
     }()
 
+    // MARK: - Configuration Functions
+
+    func configure(inviteCode: String) {
+        self.inviteCodeLabel.text = inviteCode
+        self.setupView()
+    }
+
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = UIColor.Partybox.white
         self.isUserInteractionEnabled = false
         self.selectionStyle = .none
@@ -57,12 +64,6 @@ class InviteCodeTableViewCell: UITableViewCell {
             make.top.equalTo(self.inviteCodeTitleLabel.snp.bottom)
             make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
-    }
-    
-    // MARK: - Setter Functions
-    
-    func setInviteCode(_ inviteCode: String) {
-        self.inviteCodeLabel.text = inviteCode
     }
 
 }

@@ -56,8 +56,8 @@ extension StartPartyViewController: StartPartyViewDelegate {
     
     // MARK: - Start Party View Delegate Functions
     
-    internal func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool) {
-        self.contentView.startAnimatingStartButton()
+    internal func startPartyView(_ startPartyView: StartPartyView, startPartyButtonPressed: Bool) {
+        self.contentView.startAnimatingStartPartyButton()
 
         let partyName = self.contentView.partyName()
         let userName = self.contentView.userName()
@@ -69,7 +69,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
         party.start(user: user, callback: {
             (error) in
 
-            self.contentView.stopAnimatingStartButton()
+            self.contentView.stopAnimatingStartPartyButton()
 
             if let error = error {
                 let subject = "Uh oh"

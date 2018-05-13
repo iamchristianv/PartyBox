@@ -8,14 +8,6 @@
 
 import UIKit
 
-protocol PartyViewControllerDelegate {
-    
-    // MARK: - Party View Controller Delegate Functions
-    
-    func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool)
-    
-}
-
 class PartyViewController: UIViewController {
 
     // MARK: - Instance Properties
@@ -85,7 +77,6 @@ class PartyViewController: UIViewController {
     private func setupViewController() {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
-
         self.showNavigationBar()
         self.setNavigationBarTitle(self.party.details.name)
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
@@ -168,7 +159,7 @@ class PartyViewController: UIViewController {
     @objc private func partyPeoplePersonRemoved(notification: Notification) {
         self.contentView.reloadTable()
 
-        if self.party.people.persons.contains(PartyPerson.construct(name: self.user.name)) {
+        if !self.party.people.persons.contains(PartyPerson.construct(name: self.user.name)) {
             self.dismiss(animated: true, completion: {
                 self.delegate.partyViewController(self, userKicked: true)
             })
@@ -202,14 +193,14 @@ extension PartyViewController: PartyViewDelegate {
 
     // MARK: - Party View Delegate Functions
     
-    func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
-        self.contentView.startAnimatingPlayButton()
+    internal func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
+        self.contentView.startAnimatingPlayGameButton()
 
         if self.party.details.game == self.game.wannabe.details.id {
             self.game.wannabe.collection.fetchPacks(callback: {
                 (error) in
 
-                self.contentView.stopAnimatingPlayButton()
+                self.contentView.stopAnimatingPlayGameButton()
 
                 if let error = error {
                     let subject = "Oh no"
@@ -223,11 +214,11 @@ extension PartyViewController: PartyViewDelegate {
         }
     }
     
-    func partyView(_ partyView: PartyView, changeButtonPressed: Bool) {
+    internal func partyView(_ partyView: PartyView, changeButtonPressed: Bool) {
         //self.showChangeGameViewController()
     }
     
-    func partyView(_ partyView: PartyView, kickButtonPressed person: PartyPerson) {
+    internal func partyView(_ partyView: PartyView, kickButtonPressed person: PartyPerson) {
         let subject = "Woah there"
         let message = "Are you sure you want to kick this person?"
         let action = "Kick"
@@ -253,31 +244,31 @@ extension PartyViewController: PartyViewDataSource {
 
     // MARK: - Party View Data Source Functions
 
-    func partyViewUserName() -> String {
+    internal func partyViewUserName() -> String {
         return self.user.name
     }
 
-    func partyViewPartyHost() -> String {
-        return self.party.details.host
-    }
-
-    func partyViewPartyPerson(index: Int) -> PartyPerson? {
-        return self.party.people.persons.fetch(index: index)
-    }
-
-    func partyViewPartyPeopleCount() -> Int {
-        return self.party.people.persons.count
-    }
-
-    func partyViewPartyId() -> String {
+    internal func partyViewPartyId() -> String {
         return self.party.details.id
     }
 
-    func partyViewPartyGameName() -> String {
+    internal func partyViewPartyHost() -> String {
+        return self.party.details.host
+    }
+
+    internal func partyViewPartyPeopleCount() -> Int {
+        return self.party.people.persons.count
+    }
+
+    internal func partyViewPartyPerson(index: Int) -> PartyPerson? {
+        return self.party.people.persons.fetch(index: index)
+    }
+
+    internal func partyViewPartyGameName() -> String {
         return self.game.wannabe.details.name
     }
 
-    func partyViewPartyGameSummary() -> String {
+    internal func partyViewPartyGameSummary() -> String {
         return self.game.wannabe.details.summary
     }
 

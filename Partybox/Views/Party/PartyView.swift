@@ -8,47 +8,13 @@
 
 import UIKit
 
-protocol PartyViewDelegate {
-    
-    // MARK: - Party View Delegate Functions
-    
-    func partyView(_ partyView: PartyView, playButtonPressed: Bool)
-    
-    func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
-    
-    func partyView(_ partyView: PartyView, kickButtonPressed person: PartyPerson)
-
-}
-
-protocol PartyViewDataSource {
-
-    // MARK: - Party View Data Source Functions
-
-    func partyViewUserName() -> String
-
-    func partyViewPartyHost() -> String
-
-    func partyViewPartyPerson(index: Int) -> PartyPerson?
-
-    func partyViewPartyPeopleCount() -> Int
-
-    func partyViewPartyId() -> String
-
-    func partyViewPartyGameName() -> String
-
-    func partyViewPartyGameSummary() -> String
-
-}
-
 class PartyView: UIView {
-    
-    // MARK: - Class Properties
-    
-    static let staticTableViewCellCount: Int = 4
 
     // MARK: - Instance Properties
+
+    private let staticTableViewCellCount: Int = 4
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,10 +29,14 @@ class PartyView: UIView {
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
-    
-    var delegate: PartyViewDelegate!
 
-    var dataSource: PartyViewDataSource!
+    private var playGameButton: ActivityIndicatorButton?
+
+    private var changeGameButton: ActivityIndicatorButton?
+    
+    private var delegate: PartyViewDelegate!
+
+    private var dataSource: PartyViewDataSource!
 
     // MARK: - Construction Functions
 
@@ -103,12 +73,20 @@ class PartyView: UIView {
     
     // MARK: - Animation Functions
     
-    func startAnimatingPlayButton() {
-        
+    func startAnimatingPlayGameButton() {
+        self.playGameButton?.startAnimating()
     }
     
-    func stopAnimatingPlayButton() {
-        
+    func stopAnimatingPlayGameButton() {
+        self.playGameButton?.stopAnimating()
+    }
+
+    func startAnimatingChangeGameButton() {
+        self.changeGameButton?.startAnimating()
+    }
+
+    func stopAnimatingChangeGameButton() {
+        self.changeGameButton?.stopAnimating()
     }
     
 }
@@ -122,7 +100,7 @@ extension PartyView: UITableViewDelegate {
             return []
         }
         
-        let index = indexPath.row - PartyView.staticTableViewCellCount
+        let index = indexPath.row - self.staticTableViewCellCount
         
         guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
             return []
@@ -154,48 +132,46 @@ extension PartyView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyView.staticTableViewCellCount + self.dataSource.partyViewPartyPeopleCount()
+        return self.staticTableViewCellCount + self.dataSource.partyViewPartyPeopleCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: InviteCodeTableViewCell.identifier)
             let customCell = tableViewCell as! InviteCodeTableViewCell
-            customCell.setInviteCode(self.dataSource.partyViewPartyId())
-            customCell.setupView()
+            let inviteCode = self.dataSource.partyViewPartyId()
+            customCell.configure(inviteCode: inviteCode)
             return customCell
         }
         
         if indexPath.row == 1 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let customCell = tableViewCell as! HeaderTableViewCell
-            customCell.setHeader("GAME")
-            customCell.setupView()
+            customCell.configure(header: "GAME")
             return customCell
         }
         
         if indexPath.row == 2 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier)
             let customCell = tableViewCell as! GameTableViewCell
-            customCell.delegate = self
-            customCell.setName(self.dataSource.partyViewPartyGameName())
-            customCell.setSummary(self.dataSource.partyViewPartyGameSummary())
-            customCell.setIsEnabledForHost(self.dataSource.partyViewUserName() == self.dataSource.partyViewPartyHost())
-            customCell.setupView()
-
+            let name = self.dataSource.partyViewPartyGameName()
+            let summary = self.dataSource.partyViewPartyGameSummary()
+            let isHostEnabled = self.dataSource.partyViewUserName() == self.dataSource.partyViewPartyHost()
+            customCell.configure(name: name, summary: summary, isHostEnabled: isHostEnabled, delegate: self)
+            self.playGameButton = customCell.playGameButton
+            self.changeGameButton = customCell.changeGameButton
             return customCell
         }
         
         if indexPath.row == 3 {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let customCell = tableViewCell as! HeaderTableViewCell
-            customCell.setHeader("PEOPLE")
-            customCell.setupView()
+            customCell.configure(header: "PEOPLE")
             return customCell
         }
             
         if indexPath.row > 3 {
-            let index = indexPath.row - PartyView.staticTableViewCellCount
+            let index = indexPath.row - self.staticTableViewCellCount
             
             guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
                 return UITableViewCell()
@@ -203,12 +179,12 @@ extension PartyView: UITableViewDataSource {
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier)
             let customCell = tableViewCell as! PersonTableViewCell
-            customCell.setName(person.name)
-            customCell.setFlair(isMe: person.name == self.dataSource.partyViewUserName(),
-                                isHost: person.name == self.dataSource.partyViewPartyHost())
-            customCell.setEmoji(person.emoji)
-            customCell.setPoints(person.points)
-            customCell.setupView()
+            let name = person.name
+            let isMe = person.name == self.dataSource.partyViewUserName()
+            let isHost = person.name == self.dataSource.partyViewPartyHost()
+            let emoji = person.emoji
+            let points = person.points
+            customCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)
             return customCell
         }
         
@@ -221,11 +197,11 @@ extension PartyView: GameTableViewCellDelegate {
     
     // MARK: - Game Table View Cell Delegate Functions
 
-    func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, playButtonPressed: Bool) {
+    func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, playGameButtonPressed: Bool) {
         self.delegate.partyView(self, playButtonPressed: true)
     }
 
-    func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, changeButtonPressed: Bool) {
+    func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, changeGameButtonPressed: Bool) {
         self.delegate.partyView(self, changeButtonPressed: true)
     }
     

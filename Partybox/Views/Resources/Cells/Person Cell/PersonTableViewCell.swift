@@ -49,8 +49,26 @@ class PersonTableViewCell: UITableViewCell {
         underlineLabel.backgroundColor = UIColor.Partybox.lightGray
         return underlineLabel
     }()
+
+    // MARK: - Configuration Functions
+
+    func configure(name: String, isMe: Bool, isHost: Bool, emoji: String, points: Int) {
+        self.nameLabel.text = name
+
+        if isMe && isHost {
+            self.flairLabel.text = "ME / HOST"
+        } else if isMe {
+            self.flairLabel.text = "ME"
+        } else if isHost {
+            self.flairLabel.text = "HOST"
+        }
+
+        self.emojiLabel.text = emoji
+        self.pointsLabel.text = "\(points) pts"
+        self.setupView()
+    }
     
-    // MARK: - Initialization Functions
+    // MARK: - View Functions
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -107,30 +125,6 @@ class PersonTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.snp.trailing)
             make.bottom.equalTo(self.snp.bottom)
         })
-    }
-    
-    // MARK: - Setter Methods
-    
-    func setName(_ name: String) {
-        self.nameLabel.text = name
-    }
-    
-    func setFlair(isMe: Bool, isHost: Bool) {
-        if isMe && isHost {
-            self.flairLabel.text = "ME / HOST"
-        } else if isMe {
-            self.flairLabel.text = "ME"
-        } else if isHost {
-            self.flairLabel.text = "HOST"
-        }
-    }
-    
-    func setEmoji(_ emoji: String) {
-        self.emojiLabel.text = emoji
-    }
-    
-    func setPoints(_ points: Int) {
-        self.pointsLabel.text = "\(points) pts"
     }
 
 }

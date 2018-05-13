@@ -89,7 +89,7 @@ class MenuView: UIView {
         return extraHeavyConfettiBehavior
     }()
     
-    var delegate: MenuViewDelegate!
+    private var delegate: MenuViewDelegate!
 
     // MARK: - Constructor Functions
 

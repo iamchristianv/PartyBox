@@ -22,10 +22,17 @@ class HeaderTableViewCell: UITableViewCell {
         headerLabel.textColor = UIColor.Partybox.white
         return headerLabel
     }()
+
+    // MARK: - Configuration Functions
+
+    func configure(header: String) {
+        self.headerLabel.text = header
+        self.setupView()
+    }
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = UIColor.Partybox.green
         self.isUserInteractionEnabled = false
         self.selectionStyle = .none
@@ -39,12 +46,6 @@ class HeaderTableViewCell: UITableViewCell {
             make.top.equalTo(self.snp.top).offset(12)
             make.bottom.equalTo(self.snp.bottom).offset(-12)
         })
-    }
-    
-    // MARK: - Setter Functions
-    
-    func setHeader(_ header: String) {
-        self.headerLabel.text = header
     }
 
 }
