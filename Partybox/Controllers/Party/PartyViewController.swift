@@ -95,12 +95,27 @@ class PartyViewController: UIViewController {
         let message = "Are you sure you want to leave?"
         let action = "Leave"
         self.showAlert(subject: subject, message: message, action: action, handler: {
-            if self.user.name == self.party.details.host && self.party.people.persons.count > 1 {
-                let changeHostViewController = ChangeHostViewController.construct(user: self.user,
-                                                                                  party: self.party,
-                                                                                  delegate: self)
-                let navigationController = UINavigationController(rootViewController: changeHostViewController)
-                self.present(navigationController, animated: true, completion: nil)
+            if self.party.people.persons.count > 1 {
+                if self.user.name == self.party.details.host {
+                    let changeHostViewController = ChangeHostViewController.construct(user: self.user,
+                                                                                      party: self.party,
+                                                                                      delegate: self)
+                    let navigationController = UINavigationController(rootViewController: changeHostViewController)
+                    self.present(navigationController, animated: true, completion: nil)
+                } else {
+                    self.dismiss(animated: true, completion: {
+                        self.party.leave(user: self.user, callback: {
+                            (error) in
+
+                            if let error = error {
+                                let subject = "Oh no"
+                                let message = error
+                                let action = "Okay"
+                                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                            }
+                        })
+                    })
+                }
             } else {
                 self.dismiss(animated: true, completion: {
                     self.party.end(user: self.user, callback: {
@@ -277,7 +292,7 @@ extension PartyViewController: ChangeHostViewControllerDelegate {
 
     // MARK: - Change Host View Controller Delegate Functions
 
-    func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged hostName: String) {
+    internal func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged hostName: String) {
         let values = [PartyDetailsKey.host.rawValue: hostName]
 
         self.party.details.update(values: values, callback: {
