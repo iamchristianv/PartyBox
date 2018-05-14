@@ -12,9 +12,9 @@ protocol PartyViewDelegate {
 
     // MARK: - Party View Delegate Functions
 
-    func partyView(_ partyView: PartyView, playButtonPressed: Bool)
+    func partyView(_ partyView: PartyView, playGameButtonPressed: Bool)
 
-    func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
+    func partyView(_ partyView: PartyView, changeGameButtonPressed: Bool)
 
     func partyView(_ partyView: PartyView, kickButtonPressed person: PartyPerson)
 

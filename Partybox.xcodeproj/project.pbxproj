@@ -54,6 +54,22 @@
 		AA5E8A3820A7ED0C00FE8960 /* PartyViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A3720A7ED0C00FE8960 /* PartyViewDataSource.swift */; };
 		AA5E8A3B20A80EB400FE8960 /* GameTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A3A20A80EB400FE8960 /* GameTableViewCellDelegate.swift */; };
 		AA5E8A4020A8150B00FE8960 /* PartyViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A3F20A8150B00FE8960 /* PartyViewControllerDelegate.swift */; };
+		AA5E8A4220A8BE4700FE8960 /* PartyDetailsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4120A8BE4700FE8960 /* PartyDetailsStatus.swift */; };
+		AA5E8A4420A8C6B000FE8960 /* PartyViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4320A8C6B000FE8960 /* PartyViewCellRow.swift */; };
+		AA5E8A4920A8CF2500FE8960 /* ManagePartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4720A8CF2500FE8960 /* ManagePartyView.swift */; };
+		AA5E8A4C20A8CF2E00FE8960 /* ManagePartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4B20A8CF2E00FE8960 /* ManagePartyViewController.swift */; };
+		AA5E8A4E20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4D20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift */; };
+		AA5E8A5020A9010500FE8960 /* ManagePartyViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4F20A9010500FE8960 /* ManagePartyViewDataSource.swift */; };
+		AA5E8A5420A90D6800FE8960 /* ChangeHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5320A90D6800FE8960 /* ChangeHostView.swift */; };
+		AA5E8A5620A90D7100FE8960 /* ChangeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5520A90D7100FE8960 /* ChangeHostViewController.swift */; };
+		AA5E8A5A20A9121100FE8960 /* ChangeHostViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5920A9121100FE8960 /* ChangeHostViewControllerDelegate.swift */; };
+		AA5E8A5C20A912E900FE8960 /* ChangeHostViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5B20A912E900FE8960 /* ChangeHostViewDelegate.swift */; };
+		AA5E8A5E20A9130E00FE8960 /* ChangeHostViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5D20A9130E00FE8960 /* ChangeHostViewCellRow.swift */; };
+		AA5E8A6020A9159800FE8960 /* ChangeHostViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5F20A9159800FE8960 /* ChangeHostViewDataSource.swift */; };
+		AA5E8A6320A9167A00FE8960 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6220A9167A00FE8960 /* PromptTableViewCell.swift */; };
+		AA5E8A6620A9172C00FE8960 /* SelectableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6520A9172B00FE8960 /* SelectableTableViewCell.swift */; };
+		AA5E8A6820A9177200FE8960 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6720A9177100FE8960 /* SelectableView.swift */; };
+		AA5E8A6A20A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6920A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
 		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
@@ -133,6 +149,22 @@
 		AA5E8A3720A7ED0C00FE8960 /* PartyViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyViewDataSource.swift; sourceTree = "<group>"; };
 		AA5E8A3A20A80EB400FE8960 /* GameTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCellDelegate.swift; sourceTree = "<group>"; };
 		AA5E8A3F20A8150B00FE8960 /* PartyViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AA5E8A4120A8BE4700FE8960 /* PartyDetailsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDetailsStatus.swift; sourceTree = "<group>"; };
+		AA5E8A4320A8C6B000FE8960 /* PartyViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyViewCellRow.swift; sourceTree = "<group>"; };
+		AA5E8A4720A8CF2500FE8960 /* ManagePartyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagePartyView.swift; sourceTree = "<group>"; };
+		AA5E8A4B20A8CF2E00FE8960 /* ManagePartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagePartyViewController.swift; sourceTree = "<group>"; };
+		AA5E8A4D20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewDelegate.swift; sourceTree = "<group>"; };
+		AA5E8A4F20A9010500FE8960 /* ManagePartyViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A5320A90D6800FE8960 /* ChangeHostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeHostView.swift; sourceTree = "<group>"; };
+		AA5E8A5520A90D7100FE8960 /* ChangeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeHostViewController.swift; sourceTree = "<group>"; };
+		AA5E8A5920A9121100FE8960 /* ChangeHostViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AA5E8A5B20A912E900FE8960 /* ChangeHostViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewDelegate.swift; sourceTree = "<group>"; };
+		AA5E8A5D20A9130E00FE8960 /* ChangeHostViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewCellRow.swift; sourceTree = "<group>"; };
+		AA5E8A5F20A9159800FE8960 /* ChangeHostViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A6220A9167A00FE8960 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
+		AA5E8A6520A9172B00FE8960 /* SelectableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableTableViewCell.swift; sourceTree = "<group>"; };
+		AA5E8A6720A9177100FE8960 /* SelectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
+		AA5E8A6920A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
 		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -194,6 +226,8 @@
 				AA5E8A3C20A8113B00FE8960 /* Header Cell */,
 				AA5E8A3D20A8120700FE8960 /* Invite Code Cell */,
 				AA5E8A3E20A8125400FE8960 /* Person Cell */,
+				AA5E8A6120A9165B00FE8960 /* Prompt Cell */,
+				AA5E8A6420A9170000FE8960 /* Selectable Cell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -204,6 +238,7 @@
 				AA2A87A020969FC1009C55BF /* PartyDetails.swift */,
 				AA5E89E820A13C0C00FE8960 /* PartyDetailsKey.swift */,
 				AA5E89EA20A13C3A00FE8960 /* PartyDetailsNotification.swift */,
+				AA5E8A4120A8BE4700FE8960 /* PartyDetailsStatus.swift */,
 				AA5E89EC20A13C5B00FE8960 /* PartyDetailsDataSource.swift */,
 			);
 			path = "Party Details";
@@ -340,6 +375,62 @@
 			path = "Person Cell";
 			sourceTree = "<group>";
 		};
+		AA5E8A4520A8CEEF00FE8960 /* Manage Party */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A4B20A8CF2E00FE8960 /* ManagePartyViewController.swift */,
+				AA5E8A6920A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift */,
+			);
+			path = "Manage Party";
+			sourceTree = "<group>";
+		};
+		AA5E8A4620A8CF0300FE8960 /* Manage Party */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A4720A8CF2500FE8960 /* ManagePartyView.swift */,
+				AA5E8A4D20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift */,
+				AA5E8A4F20A9010500FE8960 /* ManagePartyViewDataSource.swift */,
+			);
+			path = "Manage Party";
+			sourceTree = "<group>";
+		};
+		AA5E8A5120A90D3500FE8960 /* Change Host */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A5520A90D7100FE8960 /* ChangeHostViewController.swift */,
+				AA5E8A5920A9121100FE8960 /* ChangeHostViewControllerDelegate.swift */,
+			);
+			path = "Change Host";
+			sourceTree = "<group>";
+		};
+		AA5E8A5220A90D4600FE8960 /* Change Host */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A5320A90D6800FE8960 /* ChangeHostView.swift */,
+				AA5E8A5D20A9130E00FE8960 /* ChangeHostViewCellRow.swift */,
+				AA5E8A5B20A912E900FE8960 /* ChangeHostViewDelegate.swift */,
+				AA5E8A5F20A9159800FE8960 /* ChangeHostViewDataSource.swift */,
+			);
+			path = "Change Host";
+			sourceTree = "<group>";
+		};
+		AA5E8A6120A9165B00FE8960 /* Prompt Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A6220A9167A00FE8960 /* PromptTableViewCell.swift */,
+			);
+			path = "Prompt Cell";
+			sourceTree = "<group>";
+		};
+		AA5E8A6420A9170000FE8960 /* Selectable Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA5E8A6520A9172B00FE8960 /* SelectableTableViewCell.swift */,
+				AA5E8A6720A9177100FE8960 /* SelectableView.swift */,
+			);
+			path = "Selectable Cell";
+			sourceTree = "<group>";
+		};
 		AADD9C80205508CE00CA5AC8 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,6 +536,8 @@
 				AAF812A72092A6C80010FFB1 /* Start Party */,
 				AAF812AF2092B1660010FFB1 /* Join Party */,
 				AAF812BA2094426F0010FFB1 /* Party */,
+				AA5E8A4620A8CF0300FE8960 /* Manage Party */,
+				AA5E8A5220A90D4600FE8960 /* Change Host */,
 				AAF812952092413D0010FFB1 /* Alert */,
 				AAF8129A20924E8B0010FFB1 /* Resources */,
 			);
@@ -454,10 +547,12 @@
 		AAF8128420923CB90010FFB1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AAF8128620923CD20010FFB1 /* Menu Controllers */,
+				AAF8128620923CD20010FFB1 /* Menu */,
 				AAF812A82092A6DA0010FFB1 /* Start Party */,
 				AAF812B02092B1730010FFB1 /* Join Party */,
 				AAF812BB209442790010FFB1 /* Party */,
+				AA5E8A4520A8CEEF00FE8960 /* Manage Party */,
+				AA5E8A5120A90D3500FE8960 /* Change Host */,
 				AAF81294209241340010FFB1 /* Alert */,
 				AAF812B72092D1550010FFB1 /* Resources */,
 			);
@@ -473,12 +568,12 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		AAF8128620923CD20010FFB1 /* Menu Controllers */ = {
+		AAF8128620923CD20010FFB1 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				AAF8128920923CF90010FFB1 /* MenuViewController.swift */,
 			);
-			path = "Menu Controllers";
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		AAF81294209241340010FFB1 /* Alert */ = {
@@ -591,6 +686,7 @@
 			isa = PBXGroup;
 			children = (
 				AA2A87A8209A95A2009C55BF /* PartyView.swift */,
+				AA5E8A4320A8C6B000FE8960 /* PartyViewCellRow.swift */,
 				AA5E8A3520A7EC2000FE8960 /* PartyViewDelegate.swift */,
 				AA5E8A3720A7ED0C00FE8960 /* PartyViewDataSource.swift */,
 			);
@@ -749,6 +845,7 @@
 				AAF812A32092552D0010FFB1 /* ShapeView.swift in Sources */,
 				AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */,
 				AAF81290209240660010FFB1 /* UIColor+Extension.swift in Sources */,
+				AA5E8A5620A90D7100FE8960 /* ChangeHostViewController.swift in Sources */,
 				AA5E89E920A13C0C00FE8960 /* PartyDetailsKey.swift in Sources */,
 				AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */,
 				AA2A87B9209C1166009C55BF /* PartyPeople.swift in Sources */,
@@ -756,6 +853,7 @@
 				AA2A87BB209D825D009C55BF /* WannabePeople.swift in Sources */,
 				AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */,
 				AA5E8A1420A15F8500FE8960 /* WannabeDetailsDataSource.swift in Sources */,
+				AA5E8A5420A90D6800FE8960 /* ChangeHostView.swift in Sources */,
 				AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */,
 				AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */,
 				AAF812AD2092A7020010FFB1 /* StartPartyView.swift in Sources */,
@@ -763,10 +861,14 @@
 				AAF81297209241550010FFB1 /* AlertView.swift in Sources */,
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
 				AA5E89EB20A13C3A00FE8960 /* PartyDetailsNotification.swift in Sources */,
+				AA5E8A5C20A912E900FE8960 /* ChangeHostViewDelegate.swift in Sources */,
 				AAF812A52092552D0010FFB1 /* TriangleView.swift in Sources */,
+				AA5E8A4C20A8CF2E00FE8960 /* ManagePartyViewController.swift in Sources */,
 				AA5E8A3220A7E2E600FE8960 /* StartPartyViewDelegate.swift in Sources */,
 				AAF812A42092552D0010FFB1 /* CircleView.swift in Sources */,
+				AA5E8A6820A9177200FE8960 /* SelectableView.swift in Sources */,
 				AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */,
+				AA5E8A4220A8BE4700FE8960 /* PartyDetailsStatus.swift in Sources */,
 				AAF812AA2092A6F70010FFB1 /* StartPartyViewController.swift in Sources */,
 				AAF812A62092552D0010FFB1 /* SquareView.swift in Sources */,
 				AA5E89ED20A13C5B00FE8960 /* PartyDetailsDataSource.swift in Sources */,
@@ -778,6 +880,7 @@
 				AA5E8A2420A5355A00FE8960 /* WannabeCollection.swift in Sources */,
 				AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */,
 				AA5E8A1820A1617500FE8960 /* WannabePeopleNotification.swift in Sources */,
+				AA5E8A6320A9167A00FE8960 /* PromptTableViewCell.swift in Sources */,
 				AA5E8A2620A537C200FE8960 /* WannabeCollectionKey.swift in Sources */,
 				AAF812B52092B1930010FFB1 /* JoinPartyView.swift in Sources */,
 				AA5E89F220A13F7300FE8960 /* PartyPeopleKey.swift in Sources */,
@@ -787,6 +890,10 @@
 				AA2A87BD209D8781009C55BF /* WannabePack.swift in Sources */,
 				AA5E89EF20A13D3800FE8960 /* PartyKey.swift in Sources */,
 				AA5E89E420A13ADE00FE8960 /* UserKey.swift in Sources */,
+				AA5E8A4E20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift in Sources */,
+				AA5E8A5020A9010500FE8960 /* ManagePartyViewDataSource.swift in Sources */,
+				AA5E8A4920A8CF2500FE8960 /* ManagePartyView.swift in Sources */,
+				AA5E8A5E20A9130E00FE8960 /* ChangeHostViewCellRow.swift in Sources */,
 				AAF812992092415C0010FFB1 /* AlertViewController.swift in Sources */,
 				AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */,
 				AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */,
@@ -796,18 +903,23 @@
 				AA5E8A3420A7E3BC00FE8960 /* JoinPartyViewDelegate.swift in Sources */,
 				AA2A87B4209AB52C009C55BF /* PersonTableViewCell.swift in Sources */,
 				AA5E8A2820A5380F00FE8960 /* WannabeCollectionDataSource.swift in Sources */,
+				AA5E8A4420A8C6B000FE8960 /* PartyViewCellRow.swift in Sources */,
 				AAF812B22092B18B0010FFB1 /* JoinPartyViewController.swift in Sources */,
 				AAF8128A20923CF90010FFB1 /* MenuViewController.swift in Sources */,
 				AA2A87B2209A9B7E009C55BF /* GameTableViewCell.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
 				AA5E8A1620A1615500FE8960 /* WannabePeopleKey.swift in Sources */,
+				AA5E8A5A20A9121100FE8960 /* ChangeHostViewControllerDelegate.swift in Sources */,
 				AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */,
 				AA5E8A3B20A80EB400FE8960 /* GameTableViewCellDelegate.swift in Sources */,
 				AA5E8A0520A1484500FE8960 /* Game.swift in Sources */,
 				AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
+				AA5E8A6620A9172C00FE8960 /* SelectableTableViewCell.swift in Sources */,
+				AA5E8A6A20A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift in Sources */,
 				AAF81291209240660010FFB1 /* UIFont+Extension.swift in Sources */,
 				AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */,
+				AA5E8A6020A9159800FE8960 /* ChangeHostViewDataSource.swift in Sources */,
 				AA5E8A4020A8150B00FE8960 /* PartyViewControllerDelegate.swift in Sources */,
 				AA5E89F420A13F9700FE8960 /* PartyPeopleNotification.swift in Sources */,
 				AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */,

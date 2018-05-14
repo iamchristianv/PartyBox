@@ -77,7 +77,10 @@ extension StartPartyViewController: StartPartyViewDelegate {
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
             } else {
-                let partyViewController = PartyViewController.construct(user: user, party: party, game: game, delegate: self)
+                let partyViewController = PartyViewController.construct(user: user,
+                                                                        party: party,
+                                                                        game: game,
+                                                                        delegate: self)
                 let navigationController = UINavigationController(rootViewController: partyViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }

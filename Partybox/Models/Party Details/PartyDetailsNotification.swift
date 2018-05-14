@@ -14,8 +14,10 @@ enum PartyDetailsNotification: String {
 
     case nameChanged = "PartyDetailsNotification/nameChanged"
 
-    case hostChanged = "PartyDetailsNotification/hostChanged"
-
     case gameChanged = "PartyDetailsNotification/gameChanged"
+
+    case statusChanged = "PartyDetailsNotification/statusChanged"
+
+    case hostChanged = "PartyDetailsNotification/hostChanged"
 
 }

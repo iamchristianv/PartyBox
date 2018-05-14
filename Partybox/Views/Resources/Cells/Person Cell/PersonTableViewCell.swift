@@ -77,7 +77,7 @@ class PersonTableViewCell: UITableViewCell {
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = UIColor.Partybox.white
         self.isUserInteractionEnabled = true
         self.selectionStyle = .none

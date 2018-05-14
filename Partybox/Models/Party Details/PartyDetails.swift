@@ -20,6 +20,8 @@ class PartyDetails {
 
     var game: String = Partybox.none
 
+    var status: String = Partybox.none
+
     var host: String = Partybox.none
 
     var time: Int = Partybox.zero
@@ -33,6 +35,7 @@ class PartyDetails {
         details.id = Partybox.randomPartyId()
         details.name = name
         details.game = Partybox.randomGameId()
+        details.status = PartyDetailsStatus.waiting.rawValue
         details.host = Partybox.none
         details.time = Partybox.zero
         details.dataSource = dataSource
@@ -44,6 +47,7 @@ class PartyDetails {
         details.id = id
         details.name = Partybox.none
         details.game = Partybox.randomGameId()
+        details.status = PartyDetailsStatus.waiting.rawValue
         details.host = Partybox.none
         details.time = Partybox.zero
         details.dataSource = dataSource
@@ -55,6 +59,7 @@ class PartyDetails {
         details.id = json[PartyDetailsKey.id.rawValue].stringValue
         details.name = json[PartyDetailsKey.name.rawValue].stringValue
         details.game = json[PartyDetailsKey.game.rawValue].stringValue
+        details.status = json[PartyDetailsKey.status.rawValue].stringValue
         details.host = json[PartyDetailsKey.host.rawValue].stringValue
         details.time = json[PartyDetailsKey.time.rawValue].intValue
         details.dataSource = dataSource
@@ -92,6 +97,13 @@ class PartyDetails {
                 self.game = snapshot.value as? String ?? self.game
 
                 let name = Notification.Name(PartyDetailsNotification.gameChanged.rawValue)
+                NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
+            }
+
+            if snapshot.key == PartyDetailsKey.status.rawValue {
+                self.status = snapshot.value as? String ?? self.status
+
+                let name = Notification.Name(PartyDetailsNotification.statusChanged.rawValue)
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
 
