@@ -23,7 +23,7 @@ class JoinPartyView: UIView {
     private lazy var partyIdTextField: UITextField = {
         let partyIdTextField = UITextField()
         partyIdTextField.delegate = self
-        partyIdTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        partyIdTextField.font = Partybox.fonts.avenirNextRegular(size: 30)
         partyIdTextField.textColor = Partybox.colors.black
         partyIdTextField.tintColor = Partybox.colors.blue
         partyIdTextField.borderStyle = .none
@@ -54,6 +54,7 @@ class JoinPartyView: UIView {
         partyIdCharacterCountLabel.text = "\(self.partyIdMaxCharacterCount)"
         partyIdCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
         partyIdCharacterCountLabel.textColor = UIColor.lightGray
+        partyIdCharacterCountLabel.textAlignment = .center
         return partyIdCharacterCountLabel
     }()
 
@@ -68,7 +69,7 @@ class JoinPartyView: UIView {
     private lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         userNameTextField.delegate = self
-        userNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        userNameTextField.font = Partybox.fonts.avenirNextRegular(size: 30)
         userNameTextField.textColor = Partybox.colors.black
         userNameTextField.tintColor = Partybox.colors.blue
         userNameTextField.borderStyle = .none
@@ -99,17 +100,18 @@ class JoinPartyView: UIView {
         userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
         userNameCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
         userNameCharacterCountLabel.textColor = UIColor.lightGray
+        userNameCharacterCountLabel.textAlignment = .center
         return userNameCharacterCountLabel
     }()
 
-    private lazy var joinPartyButton: ActivityIndicatorButton = {
-        let joinPartyButton = ActivityIndicatorButton()
-        joinPartyButton.setTitle("Join Party", for: .normal)
-        joinPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        joinPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
-        joinPartyButton.setBackgroundColor(Partybox.colors.blue)
-        joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
-        return joinPartyButton
+    private lazy var joinButton: ActivityIndicatorButton = {
+        let joinButton = ActivityIndicatorButton()
+        joinButton.setTitle("Join", for: .normal)
+        joinButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        joinButton.setTitleColor(Partybox.colors.white, for: .normal)
+        joinButton.setBackgroundColor(Partybox.colors.blue)
+        joinButton.addTarget(self, action: #selector(joinButtonPressed), for: .touchUpInside)
+        return joinButton
     }()
 
     private var delegate: JoinPartyViewDelegate!
@@ -139,7 +141,7 @@ class JoinPartyView: UIView {
         self.addSubview(self.userNameCharacterCountLabel)
         self.addSubview(self.userNameUnderlineLabel)
         self.addSubview(self.userNameStatusLabel)
-        self.addSubview(self.joinPartyButton)
+        self.addSubview(self.joinButton)
         
         self.partyIdLabel.snp.remakeConstraints({
             (make) in
@@ -161,7 +163,7 @@ class JoinPartyView: UIView {
         self.partyIdCharacterCountLabel.snp.remakeConstraints({
             (make) in
 
-            make.width.lessThanOrEqualTo(20)
+            make.width.equalTo(20)
             make.centerY.equalTo(self.partyIdTextField.snp.centerY)
             make.leading.equalTo(self.partyIdTextField.snp.trailing).offset(4)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
@@ -204,7 +206,7 @@ class JoinPartyView: UIView {
         self.userNameCharacterCountLabel.snp.remakeConstraints({
             (make) in
 
-            make.width.lessThanOrEqualTo(20)
+            make.width.equalTo(20)
             make.centerY.equalTo(self.userNameTextField.snp.centerY)
             make.leading.equalTo(self.userNameTextField.snp.trailing).offset(4)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
@@ -227,7 +229,7 @@ class JoinPartyView: UIView {
             make.top.equalTo(self.userNameUnderlineLabel.snp.bottom).offset(8)
         })
         
-        self.joinPartyButton.snp.remakeConstraints({
+        self.joinButton.snp.remakeConstraints({
             (make) in
             
             make.width.equalTo(220)
@@ -244,7 +246,7 @@ class JoinPartyView: UIView {
         self.userNameTextField.resignFirstResponder()
     }
     
-    @objc private func joinPartyButtonPressed() {
+    @objc private func joinButtonPressed() {
         let partyIdHasErrors = self.partyIdHasErrors()
         let userNameHasErrors = self.userNameHasErrors()
 
@@ -252,17 +254,17 @@ class JoinPartyView: UIView {
             return
         }
 
-        self.delegate.joinPartyView(self, joinPartyButtonPressed: true)
+        self.delegate.joinPartyView(self, joinButtonPressed: true)
     }
 
     // MARK: - Animation Functions
 
-    func startAnimatingJoinPartyButton() {
-        self.joinPartyButton.startAnimating()
+    func startAnimatingJoinButton() {
+        self.joinButton.startAnimating()
     }
 
-    func stopAnimatingJoinPartyButton() {
-        self.joinPartyButton.stopAnimating()
+    func stopAnimatingJoinButton() {
+        self.joinButton.stopAnimating()
     }
     
     // MARK: - View Functions

@@ -56,8 +56,8 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
     
     // MARK: - Join Party View Delegate Functions
     
-    internal func joinPartyView(_ joinPartyView: JoinPartyView, joinPartyButtonPressed: Bool) {
-        self.contentView.startAnimatingJoinPartyButton()
+    internal func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
+        self.contentView.startAnimatingJoinButton()
 
         let partyId = self.contentView.partyId()
         let userName = self.contentView.userName()
@@ -69,7 +69,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
         party.join(user: user, callback: {
             (error) in
 
-            self.contentView.stopAnimatingJoinPartyButton()
+            self.contentView.stopAnimatingJoinButton()
 
             if let error = error {
                 let subject = "Uh oh"

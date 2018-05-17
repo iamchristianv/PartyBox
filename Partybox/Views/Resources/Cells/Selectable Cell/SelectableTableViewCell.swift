@@ -38,7 +38,7 @@ class SelectableTableViewCell: UITableViewCell {
 
     func configure(content: String, selected: Bool) {
         self.contentLabel.text = content
-        self.selectableView.setSelected(selected)
+        self.selectableView = SelectableView.construct(selected: selected)
         self.setupView()
     }
 

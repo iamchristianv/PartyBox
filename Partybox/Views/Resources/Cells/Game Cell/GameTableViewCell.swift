@@ -33,7 +33,7 @@ class GameTableViewCell: UITableViewCell {
 
     lazy var playGameButton: ActivityIndicatorButton = {
         let playGameButton = ActivityIndicatorButton()
-        playGameButton.setTitle("Play Game", for: .normal)
+        playGameButton.setTitle("Play", for: .normal)
         playGameButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
         playGameButton.setTitleColor(Partybox.colors.white, for: .normal)
         playGameButton.setBackgroundColor(Partybox.colors.green)
@@ -43,7 +43,7 @@ class GameTableViewCell: UITableViewCell {
 
     lazy var changeGameButton: ActivityIndicatorButton = {
         let changeGameButton = ActivityIndicatorButton()
-        changeGameButton.setTitle("Change Game", for: .normal)
+        changeGameButton.setTitle("Change", for: .normal)
         changeGameButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
         changeGameButton.setTitleColor(Partybox.colors.white, for: .normal)
         changeGameButton.setBackgroundColor(Partybox.colors.green)

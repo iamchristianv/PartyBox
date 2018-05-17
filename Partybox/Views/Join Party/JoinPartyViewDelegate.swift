@@ -12,6 +12,6 @@ protocol JoinPartyViewDelegate {
 
     // MARK: - Join Party View Delegate Functions
 
-    func joinPartyView(_ joinPartyView: JoinPartyView, joinPartyButtonPressed: Bool)
+    func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool)
 
 }

@@ -23,7 +23,7 @@ class StartPartyView: UIView {
     private lazy var partyNameTextField: UITextField = {
         let partyNameTextField = UITextField()
         partyNameTextField.delegate = self
-        partyNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        partyNameTextField.font = Partybox.fonts.avenirNextRegular(size: 30)
         partyNameTextField.textColor = Partybox.colors.black
         partyNameTextField.tintColor = Partybox.colors.red
         partyNameTextField.borderStyle = .none
@@ -54,6 +54,7 @@ class StartPartyView: UIView {
         partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
         partyNameCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
         partyNameCharacterCountLabel.textColor = UIColor.lightGray
+        partyNameCharacterCountLabel.textAlignment = .center
         return partyNameCharacterCountLabel
     }()
 
@@ -68,7 +69,7 @@ class StartPartyView: UIView {
     private lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         userNameTextField.delegate = self
-        userNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        userNameTextField.font = Partybox.fonts.avenirNextRegular(size: 30)
         userNameTextField.textColor = Partybox.colors.black
         userNameTextField.tintColor = Partybox.colors.red
         userNameTextField.borderStyle = .none
@@ -99,17 +100,18 @@ class StartPartyView: UIView {
         userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
         userNameCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
         userNameCharacterCountLabel.textColor = UIColor.lightGray
+        userNameCharacterCountLabel.textAlignment = .center
         return userNameCharacterCountLabel
     }()
 
-    private lazy var startPartyButton: ActivityIndicatorButton = {
-        let startPartyButton = ActivityIndicatorButton()
-        startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        startPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
-        startPartyButton.setBackgroundColor(Partybox.colors.red)
-        startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
-        return startPartyButton
+    private lazy var startButton: ActivityIndicatorButton = {
+        let startButton = ActivityIndicatorButton()
+        startButton.setTitle("Start", for: .normal)
+        startButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        startButton.setTitleColor(Partybox.colors.white, for: .normal)
+        startButton.setBackgroundColor(Partybox.colors.red)
+        startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
+        return startButton
     }()
 
     private var delegate: StartPartyViewDelegate!
@@ -139,7 +141,7 @@ class StartPartyView: UIView {
         self.addSubview(self.userNameCharacterCountLabel)
         self.addSubview(self.userNameUnderlineLabel)
         self.addSubview(self.userNameStatusLabel)
-        self.addSubview(self.startPartyButton)
+        self.addSubview(self.startButton)
 
         self.partyNameLabel.snp.remakeConstraints({
             (make) in
@@ -161,7 +163,7 @@ class StartPartyView: UIView {
         self.partyNameCharacterCountLabel.snp.remakeConstraints({
             (make) in
 
-            make.width.lessThanOrEqualTo(20)
+            make.width.equalTo(20)
             make.centerY.equalTo(self.partyNameTextField.snp.centerY)
             make.leading.equalTo(self.partyNameTextField.snp.trailing).offset(4)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
@@ -204,7 +206,7 @@ class StartPartyView: UIView {
         self.userNameCharacterCountLabel.snp.remakeConstraints({
             (make) in
 
-            make.width.lessThanOrEqualTo(20)
+            make.width.equalTo(20)
             make.centerY.equalTo(self.userNameTextField.snp.centerY)
             make.leading.equalTo(self.userNameTextField.snp.trailing).offset(4)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
@@ -227,7 +229,7 @@ class StartPartyView: UIView {
             make.top.equalTo(self.userNameUnderlineLabel.snp.bottom).offset(8)
         })
 
-        self.startPartyButton.snp.remakeConstraints({
+        self.startButton.snp.remakeConstraints({
             (make) in
             
             make.width.equalTo(220)
@@ -244,7 +246,7 @@ class StartPartyView: UIView {
         self.userNameTextField.resignFirstResponder()
     }
     
-    @objc private func startPartyButtonPressed() {
+    @objc private func startButtonPressed() {
         let partyNameHasErrors = self.partyNameHasErrors()
         let userNameHasErrors = self.userNameHasErrors()
 
@@ -252,17 +254,17 @@ class StartPartyView: UIView {
             return
         }
 
-        self.delegate.startPartyView(self, startPartyButtonPressed: true)
+        self.delegate.startPartyView(self, startButtonPressed: true)
     }
 
     // MARK: - Animation Functions
 
-    func startAnimatingStartPartyButton() {
-        self.startPartyButton.startAnimating()
+    func startAnimatingStartButton() {
+        self.startButton.startAnimating()
     }
 
-    func stopAnimatingStartPartyButton() {
-        self.startPartyButton.stopAnimating()
+    func stopAnimatingStartButton() {
+        self.startButton.stopAnimating()
     }
     
     // MARK: - View Functions

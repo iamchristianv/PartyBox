@@ -93,6 +93,10 @@ class MenuViewController: UIViewController {
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
             (motion, error) in
 
+            if error != nil {
+                return
+            }
+
             guard let motion = motion else {
                 return
             }

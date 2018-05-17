@@ -29,7 +29,7 @@ class ChangeHostView: UIView {
 
     private lazy var saveChangesButton: ActivityIndicatorButton = {
         let saveChangesButton = ActivityIndicatorButton()
-        saveChangesButton.setTitle("Save Changes", for: .normal)
+        saveChangesButton.setTitle("Save", for: .normal)
         saveChangesButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
         saveChangesButton.setTitleColor(Partybox.colors.white, for: .normal)
         saveChangesButton.setBackgroundColor(Partybox.colors.green)

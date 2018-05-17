@@ -68,6 +68,7 @@
 		AA5E8A6820A9177200FE8960 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6720A9177100FE8960 /* SelectableView.swift */; };
 		AA5E8A6A20A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6920A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift */; };
 		AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6706C21F89D9F5000BF5F5 /* Party.swift */; };
+		AA69F9C420AD089100A91E3E /* Partybox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA69F9C320AD089100A91E3E /* Partybox.swift */; };
 		AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD97441FE6F8D1000275CB /* WannabeCard.swift */; };
 		AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD9C81205508DB00CA5AC8 /* Alert.swift */; };
 		AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE75B461F809FA9001D4E13 /* AppDelegate.swift */; };
@@ -158,6 +159,7 @@
 		AA5E8A6720A9177100FE8960 /* SelectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
 		AA5E8A6920A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AA6706C21F89D9F5000BF5F5 /* Party.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Party.swift; sourceTree = "<group>"; };
+		AA69F9C320AD089100A91E3E /* Partybox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partybox.swift; sourceTree = "<group>"; };
 		AACD97441FE6F8D1000275CB /* WannabeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCard.swift; sourceTree = "<group>"; };
 		AADD9C81205508DB00CA5AC8 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		AAE75B431F809FA9001D4E13 /* Partybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -452,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE75B461F809FA9001D4E13 /* AppDelegate.swift */,
+				AA69F9C320AD089100A91E3E /* Partybox.swift */,
 				AAE75B521F809FA9001D4E13 /* Info.plist */,
 				AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */,
 				AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */,
@@ -886,6 +889,7 @@
 				AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */,
 				AA5E8A3B20A80EB400FE8960 /* GameTableViewCellDelegate.swift in Sources */,
 				AA5E8A0520A1484500FE8960 /* Game.swift in Sources */,
+				AA69F9C420AD089100A91E3E /* Partybox.swift in Sources */,
 				AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
 				AA5E8A6620A9172C00FE8960 /* SelectableTableViewCell.swift in Sources */,

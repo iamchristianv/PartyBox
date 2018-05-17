@@ -24,8 +24,10 @@ class SelectableView: UIView {
 
     // MARK: - Construction Functions
 
-    static func construct() -> SelectableView {
+    static func construct(selected: Bool) -> SelectableView {
         let view = SelectableView()
+        view.innerView.color = selected ? Partybox.colors.green : Partybox.colors.white
+        view.innerView.setNeedsDisplay()
         view.setupView()
         return view
     }
@@ -51,13 +53,6 @@ class SelectableView: UIView {
             make.height.equalTo(self.outerView.snp.height).offset(-2)
             make.center.equalTo(self.outerView.snp.center)
         })
-    }
-    
-    // MARK: - Setter Functions
-    
-    func setSelected(_ selected: Bool) {
-        self.innerView.color = selected ? Partybox.colors.green : Partybox.colors.white
-        self.innerView.setNeedsDisplay()
     }
     
 }

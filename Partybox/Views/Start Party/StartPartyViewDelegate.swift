@@ -12,6 +12,6 @@ protocol StartPartyViewDelegate {
 
     // MARK: - Start Party View Delegate Functions
 
-    func startPartyView(_ startPartyView: StartPartyView, startPartyButtonPressed: Bool)
+    func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool)
 
 }
