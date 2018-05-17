@@ -14,39 +14,39 @@ class WannabeDetails {
     
     // MARK: - Instance Properties
     
-    var id: String = Partybox.none
+    var id: String = Partybox.defaults.none
     
-    var name: String = Partybox.none
+    var name: String = Partybox.defaults.none
 
-    var party: String = Partybox.none
+    var partyId: String = Partybox.defaults.none
 
-    var summary: String = Partybox.none
+    var summary: String = Partybox.defaults.none
 
-    var instructions: String = Partybox.none
+    var instructions: String = Partybox.defaults.none
     
-    var status: String = Partybox.none
+    var status: String = Partybox.defaults.none
 
-    var rounds: Int = Partybox.zero
+    var rounds: Int = Partybox.defaults.zero
 
     var card: WannabeCard = WannabeCard()
     
-    var wannabe: String = Partybox.none
+    var wannabeName: String = Partybox.defaults.none
 
     private var dataSource: WannabeDetailsDataSource!
 
     // MARK: - Construction Functions
 
-    static func construct(party: String, dataSource: WannabeDetailsDataSource) -> WannabeDetails {
+    static func construct(partyId: String, dataSource: WannabeDetailsDataSource) -> WannabeDetails {
         let details = WannabeDetails()
         details.id = "C2D4V"
         details.name = "Wannabe"
-        details.party = party
+        details.partyId = partyId
         details.summary = "Wannabe Summary"
         details.instructions = "Wannabe Instructions"
         details.status = WannabeDetailsStatus.starting.rawValue
         details.rounds = WannabeDetailsRounds.three.rawValue
         details.card = WannabeCard.construct()
-        details.wannabe = Partybox.none
+        details.wannabeName = Partybox.defaults.none
         details.dataSource = dataSource
         return details
     }
@@ -55,13 +55,13 @@ class WannabeDetails {
         let details = WannabeDetails()
         details.id = json[WannabeDetailsKey.id.rawValue].stringValue
         details.name = json[WannabeDetailsKey.name.rawValue].stringValue
-        details.party = json[WannabeDetailsKey.party.rawValue].stringValue
+        details.partyId = json[WannabeDetailsKey.partyId.rawValue].stringValue
         details.summary = "Wannabe Summary"
         details.instructions = "Wannabe Instructions"
         details.status = json[WannabeDetailsKey.status.rawValue].stringValue
         details.rounds = json[WannabeDetailsKey.rounds.rawValue].intValue
         details.card = WannabeCard.construct(json: json[WannabeDetailsKey.card.rawValue])
-        details.wannabe = json[WannabeDetailsKey.wannabe.rawValue].stringValue
+        details.wannabeName = json[WannabeDetailsKey.wannabeName.rawValue].stringValue
         details.dataSource = dataSource
         return details
     }

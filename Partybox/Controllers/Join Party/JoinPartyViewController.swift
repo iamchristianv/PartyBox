@@ -41,7 +41,7 @@ class JoinPartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Join Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(UIColor.Partybox.blue)
+        self.setNavigationBarBackgroundColor(Partybox.colors.blue)
     }
     
     // MARK: - Navigation Bar Functions
@@ -64,7 +64,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
 
         let user = User.construct(name: userName)
         let party = Party.construct(id: partyId)
-        let game = Game.construct(party: party.details.id)
+        let game = Game.construct(partyId: party.details.id)
 
         party.join(user: user, callback: {
             (error) in

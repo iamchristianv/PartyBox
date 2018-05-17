@@ -18,8 +18,8 @@ class PromptTableViewCell: UITableViewCell {
     
     private var promptLabel: UILabel = {
         let promptLabel = UILabel()
-        promptLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
-        promptLabel.textColor = UIColor.Partybox.black
+        promptLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
+        promptLabel.textColor = Partybox.colors.black
         promptLabel.textAlignment = .center
         promptLabel.numberOfLines = 0
         return promptLabel
@@ -35,7 +35,7 @@ class PromptTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = UIColor.Partybox.white
+        self.backgroundColor = Partybox.colors.white
         self.isUserInteractionEnabled = true
         self.selectionStyle = .none
 

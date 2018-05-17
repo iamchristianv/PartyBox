@@ -12,7 +12,7 @@ class User {
     
     // MARK: - Instance Properties
 
-    var name: String = Partybox.none
+    var name: String = Partybox.defaults.none
 
     // MARK: - Construction Functions
 

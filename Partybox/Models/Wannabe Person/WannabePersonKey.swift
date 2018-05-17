@@ -16,6 +16,6 @@ enum WannabePersonKey: String {
 
     case points
 
-    case vote
+    case voteName
 
 }

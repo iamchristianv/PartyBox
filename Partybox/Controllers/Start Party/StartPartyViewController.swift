@@ -41,7 +41,7 @@ class StartPartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Start Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(UIColor.Partybox.red)
+        self.setNavigationBarBackgroundColor(Partybox.colors.red)
     }
     
     // MARK: - Navigation Bar Functions
@@ -64,7 +64,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
 
         let user = User.construct(name: userName)
         let party = Party.construct(name: partyName)
-        let game = Game.construct(party: party.details.id)
+        let game = Game.construct(partyId: party.details.id)
 
         party.start(user: user, callback: {
             (error) in

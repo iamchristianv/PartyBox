@@ -14,9 +14,9 @@ class WannabePack {
 
     // MARK: - Instance Properties
 
-    var id: String = Partybox.none
+    var id: String = Partybox.defaults.none
 
-    var name: String = Partybox.none
+    var name: String = Partybox.defaults.none
 
     var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
 
@@ -26,8 +26,8 @@ class WannabePack {
 
     static func construct(dataSource: WannabePackDataSource) -> WannabePack {
         let pack = WannabePack()
-        pack.id = Partybox.none
-        pack.name = Partybox.none
+        pack.id = Partybox.defaults.none
+        pack.name = Partybox.defaults.none
         pack.cards = OrderedSet<WannabeCard>()
         pack.dataSource = dataSource
         return pack

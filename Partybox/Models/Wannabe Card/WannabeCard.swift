@@ -13,16 +13,16 @@ class WannabeCard {
     
     // MARK: - Instance Properties
 
-    var hint: String = Partybox.none
+    var hint: String = Partybox.defaults.none
     
-    var action: String = Partybox.none
+    var action: String = Partybox.defaults.none
     
     // MARK: - Construction Functions
 
     static func construct() -> WannabeCard {
         let card = WannabeCard()
-        card.hint = Partybox.none
-        card.action = Partybox.none
+        card.hint = Partybox.defaults.none
+        card.action = Partybox.defaults.none
         return card
     }
 

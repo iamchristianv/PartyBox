@@ -21,9 +21,9 @@ class MenuView: UIView {
     private lazy var startPartyButton: ActivityIndicatorButton = {
         let startPartyButton = ActivityIndicatorButton()
         startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
-        startPartyButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        startPartyButton.setBackgroundColor(UIColor.Partybox.red)
+        startPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        startPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
+        startPartyButton.setBackgroundColor(Partybox.colors.red)
         startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         return startPartyButton
     }()
@@ -31,9 +31,9 @@ class MenuView: UIView {
     private lazy var joinPartyButton: ActivityIndicatorButton = {
         let joinPartyButton = ActivityIndicatorButton()
         joinPartyButton.setTitle("Join Party", for: .normal)
-        joinPartyButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
-        joinPartyButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        joinPartyButton.setBackgroundColor(UIColor.Partybox.blue)
+        joinPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        joinPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
+        joinPartyButton.setBackgroundColor(Partybox.colors.blue)
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
     }()
@@ -179,7 +179,7 @@ class MenuView: UIView {
                                  width: randomSize,
                                  height: randomSize)
         
-        let colors = [UIColor.Partybox.red, UIColor.Partybox.blue, UIColor.Partybox.green, UIColor.Partybox.purple]
+        let colors = [Partybox.colors.red, Partybox.colors.blue, Partybox.colors.green, Partybox.colors.purple]
         let randomColor = colors[Int(arc4random()) % colors.count]
         
         if randomShape == SquareView.self {

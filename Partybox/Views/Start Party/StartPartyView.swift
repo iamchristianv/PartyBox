@@ -15,17 +15,17 @@ class StartPartyView: UIView {
     private lazy var partyNameLabel: UILabel = {
         let partyNameLabel = UILabel()
         partyNameLabel.text = "Party Name"
-        partyNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
-        partyNameLabel.textColor = UIColor.Partybox.black
+        partyNameLabel.font = Partybox.fonts.avenirNextRegular(size: 20)
+        partyNameLabel.textColor = Partybox.colors.black
         return partyNameLabel
     }()
 
     private lazy var partyNameTextField: UITextField = {
         let partyNameTextField = UITextField()
         partyNameTextField.delegate = self
-        partyNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
-        partyNameTextField.textColor = UIColor.Partybox.black
-        partyNameTextField.tintColor = UIColor.Partybox.red
+        partyNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        partyNameTextField.textColor = Partybox.colors.black
+        partyNameTextField.tintColor = Partybox.colors.red
         partyNameTextField.borderStyle = .none
         partyNameTextField.autocapitalizationType = .words
         partyNameTextField.clearButtonMode = .whileEditing
@@ -34,15 +34,15 @@ class StartPartyView: UIView {
 
     private lazy var partyNameUnderlineLabel: UILabel = {
         let partyNameUnderlineLabel = UILabel()
-        partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+        partyNameUnderlineLabel.backgroundColor = Partybox.colors.black
         return partyNameUnderlineLabel
     }()
 
     private lazy var partyNameStatusLabel: UILabel = {
         let partyNameStatusLabel = UILabel()
         partyNameStatusLabel.text = " "
-        partyNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
-        partyNameStatusLabel.textColor = UIColor.Partybox.red
+        partyNameStatusLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
+        partyNameStatusLabel.textColor = Partybox.colors.red
         partyNameStatusLabel.isHidden = true
         return partyNameStatusLabel
     }()
@@ -52,7 +52,7 @@ class StartPartyView: UIView {
     private lazy var partyNameCharacterCountLabel: UILabel = {
         let partyNameCharacterCountLabel = UILabel()
         partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
-        partyNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
+        partyNameCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
         partyNameCharacterCountLabel.textColor = UIColor.lightGray
         return partyNameCharacterCountLabel
     }()
@@ -60,17 +60,17 @@ class StartPartyView: UIView {
     private lazy var userNameLabel: UILabel = {
         let userNameLabel = UILabel()
         userNameLabel.text = "Your Name"
-        userNameLabel.font = UIFont.Partybox.avenirNextRegular(size: 20)
-        userNameLabel.textColor = UIColor.Partybox.black
+        userNameLabel.font = Partybox.fonts.avenirNextRegular(size: 20)
+        userNameLabel.textColor = Partybox.colors.black
         return userNameLabel
     }()
 
     private lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
         userNameTextField.delegate = self
-        userNameTextField.font = UIFont.Partybox.avenirNextRegular(size: 28)
-        userNameTextField.textColor = UIColor.Partybox.black
-        userNameTextField.tintColor = UIColor.Partybox.red
+        userNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        userNameTextField.textColor = Partybox.colors.black
+        userNameTextField.tintColor = Partybox.colors.red
         userNameTextField.borderStyle = .none
         userNameTextField.autocapitalizationType = .words
         userNameTextField.clearButtonMode = .whileEditing
@@ -79,15 +79,15 @@ class StartPartyView: UIView {
 
     private lazy var userNameUnderlineLabel: UILabel = {
         let userNameUnderlineLabel = UILabel()
-        userNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+        userNameUnderlineLabel.backgroundColor = Partybox.colors.black
         return userNameUnderlineLabel
     }()
 
     private lazy var userNameStatusLabel: UILabel = {
         let userNameStatusLabel = UILabel()
         userNameStatusLabel.text = " "
-        userNameStatusLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
-        userNameStatusLabel.textColor = UIColor.Partybox.red
+        userNameStatusLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
+        userNameStatusLabel.textColor = Partybox.colors.red
         userNameStatusLabel.isHidden = true
         return userNameStatusLabel
     }()
@@ -97,7 +97,7 @@ class StartPartyView: UIView {
     private lazy var userNameCharacterCountLabel: UILabel = {
         let userNameCharacterCountLabel = UILabel()
         userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
-        userNameCharacterCountLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
+        userNameCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
         userNameCharacterCountLabel.textColor = UIColor.lightGray
         return userNameCharacterCountLabel
     }()
@@ -105,9 +105,9 @@ class StartPartyView: UIView {
     private lazy var startPartyButton: ActivityIndicatorButton = {
         let startPartyButton = ActivityIndicatorButton()
         startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
-        startPartyButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        startPartyButton.setBackgroundColor(UIColor.Partybox.red)
+        startPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        startPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
+        startPartyButton.setBackgroundColor(Partybox.colors.red)
         startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         return startPartyButton
     }()
@@ -271,12 +271,12 @@ class StartPartyView: UIView {
         let partyName = self.partyNameTextField.text!
 
         if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.partyNameStatusLabel.text = "Required"
             self.partyNameStatusLabel.isHidden = false
             return true
         } else {
-            self.partyNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+            self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.black
             self.partyNameStatusLabel.text = " "
             self.partyNameStatusLabel.isHidden = true
             return false
@@ -291,17 +291,17 @@ class StartPartyView: UIView {
         let userName = self.userNameTextField.text!
 
         if userName.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.userNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.userNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.userNameStatusLabel.text = "Required"
             self.userNameStatusLabel.isHidden = false
             return true
         } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
-            self.userNameUnderlineLabel.backgroundColor = UIColor.Partybox.red
+            self.userNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.userNameStatusLabel.text = "No spaces or special characters"
             self.userNameStatusLabel.isHidden = false
             return true
         } else {
-            self.userNameUnderlineLabel.backgroundColor = UIColor.Partybox.black
+            self.userNameUnderlineLabel.backgroundColor = Partybox.colors.black
             self.userNameStatusLabel.text = " "
             self.userNameStatusLabel.isHidden = true
             return false

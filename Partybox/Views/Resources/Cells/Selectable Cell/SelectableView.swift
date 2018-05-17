@@ -12,30 +12,27 @@ class SelectableView: UIView {
 
     // MARK: - Instance Properties
     
-    lazy var outerView: CircleView = {
-        let outerView = CircleView(frame: .zero, color: UIColor.Partybox.lightGray)
+    private lazy var outerView: CircleView = {
+        let outerView = CircleView(frame: .zero, color: Partybox.colors.lightGray)
         return outerView
     }()
     
-    lazy var innerView: CircleView = {
-        let innerView = CircleView(frame: .zero, color: UIColor.Partybox.white)
+    private lazy var innerView: CircleView = {
+        let innerView = CircleView(frame: .zero, color: Partybox.colors.white)
         return innerView
     }()
-    
-    // MARK: - Initialization Functions
-    
-    init() {
-        super.init(frame: .zero)
-        self.setupSubviews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    // MARK: - Construction Functions
+
+    static func construct() -> SelectableView {
+        let view = SelectableView()
+        view.setupView()
+        return view
     }
     
     // MARK: - Setup Functions
     
-    func setupSubviews() {
+    func setupView() {
         self.addSubview(self.outerView)
         self.addSubview(self.innerView)
         
@@ -59,7 +56,7 @@ class SelectableView: UIView {
     // MARK: - Setter Functions
     
     func setSelected(_ selected: Bool) {
-        self.innerView.color = selected ? UIColor.Partybox.green : UIColor.Partybox.white
+        self.innerView.color = selected ? Partybox.colors.green : Partybox.colors.white
         self.innerView.setNeedsDisplay()
     }
     

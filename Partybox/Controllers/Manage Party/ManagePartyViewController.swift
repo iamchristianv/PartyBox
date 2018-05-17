@@ -53,7 +53,7 @@ class ManagePartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Manage Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
+        self.setNavigationBarBackgroundColor(Partybox.colors.green)
     }
 
     // MARK: - Action Functions
@@ -83,7 +83,7 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
         let host = self.contentView.partyHost()
 
         let values = [PartyDetailsKey.name.rawValue: name,
-                      PartyDetailsKey.host.rawValue: host]
+                      PartyDetailsKey.hostName.rawValue: host]
         
         self.party.details.update(values: values, callback: {
             (error) in
@@ -113,7 +113,7 @@ extension ManagePartyViewController: ManagePartyViewDataSource {
     }
 
     internal func managePartyViewPartyHost() -> String {
-        return self.party.details.host
+        return self.party.details.hostName
     }
 
 }

@@ -114,7 +114,7 @@ extension PartyView: UITableViewDelegate {
             self.delegate.partyView(self, kickButtonPressed: person)
         })
         
-        kickButton.backgroundColor = UIColor.Partybox.red
+        kickButton.backgroundColor = Partybox.colors.red
         
         return [kickButton]
     }

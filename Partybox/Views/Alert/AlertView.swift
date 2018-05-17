@@ -50,8 +50,8 @@ class AlertView: UIView {
     private lazy var subjectLabel: UILabel = {
         let subjectLabel = UILabel()
         subjectLabel.text = self.dataSource.alertSubject()
-        subjectLabel.font = UIFont.Partybox.avenirNextMedium(size: 20)
-        subjectLabel.textColor = UIColor.Partybox.black
+        subjectLabel.font = Partybox.fonts.avenirNextMedium(size: 20)
+        subjectLabel.textColor = Partybox.colors.black
         subjectLabel.textAlignment = .center
         subjectLabel.numberOfLines = 0
         return subjectLabel
@@ -60,8 +60,8 @@ class AlertView: UIView {
     private lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
         messageLabel.text = self.dataSource.alertMessage()
-        messageLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
-        messageLabel.textColor = UIColor.Partybox.black
+        messageLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
+        messageLabel.textColor = Partybox.colors.black
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         return messageLabel
@@ -70,9 +70,9 @@ class AlertView: UIView {
     private lazy var actionButton: ActivityIndicatorButton = {
         let actionButton = ActivityIndicatorButton()
         actionButton.setTitle(self.dataSource.alertAction(), for: .normal)
-        actionButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 20)
-        actionButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        actionButton.setBackgroundColor(UIColor.Partybox.red)
+        actionButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 20)
+        actionButton.setTitleColor(Partybox.colors.white, for: .normal)
+        actionButton.setBackgroundColor(Partybox.colors.red)
         actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         return actionButton
     }()
@@ -80,9 +80,9 @@ class AlertView: UIView {
     private lazy var cancelButton: UIButton = {
         let cancelButton = UIButton()
         cancelButton.setTitle("cancel", for: .normal)
-        cancelButton.setTitleFont(UIFont.Partybox.avenirNextRegularName, size: 18)
-        cancelButton.setTitleColor(UIColor.Partybox.red, for: .normal)
-        cancelButton.setBackgroundColor(UIColor.Partybox.white)
+        cancelButton.setTitleFont(Partybox.fonts.avenirNextRegularName, size: 18)
+        cancelButton.setTitleColor(Partybox.colors.red, for: .normal)
+        cancelButton.setBackgroundColor(Partybox.colors.white)
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         return cancelButton
     }()
@@ -94,7 +94,7 @@ class AlertView: UIView {
     // MARK: - Setup Functions
     
     func setupView() {
-        self.backgroundColor = UIColor.Partybox.black.withAlphaComponent(0.4)
+        self.backgroundColor = Partybox.colors.black.withAlphaComponent(0.4)
 
         self.addSubview(self.containerView)
         

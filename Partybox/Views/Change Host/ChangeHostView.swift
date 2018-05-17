@@ -30,9 +30,9 @@ class ChangeHostView: UIView {
     private lazy var saveChangesButton: ActivityIndicatorButton = {
         let saveChangesButton = ActivityIndicatorButton()
         saveChangesButton.setTitle("Save Changes", for: .normal)
-        saveChangesButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
-        saveChangesButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        saveChangesButton.setBackgroundColor(UIColor.Partybox.green)
+        saveChangesButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        saveChangesButton.setTitleColor(Partybox.colors.white, for: .normal)
+        saveChangesButton.setBackgroundColor(Partybox.colors.green)
         saveChangesButton.addTarget(self, action: #selector(saveChangesButtonPressed), for: .touchUpInside)
         return saveChangesButton
     }()
@@ -130,14 +130,16 @@ extension ChangeHostView: UITableViewDataSource {
         if indexPath.row == ChangeHostViewCellRow.promptCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
             let promptCell = tableViewCell as! PromptTableViewCell
-            promptCell.configure(prompt: "Choose a new person to be the host")
+            let prompt = "Choose a new person to be the host"
+            promptCell.configure(prompt: prompt)
             return promptCell
         }
         
         if indexPath.row == ChangeHostViewCellRow.peopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let headerCell = tableViewCell as! HeaderTableViewCell
-            headerCell.configure(header: "PEOPLE")
+            let header = "PEOPLE"
+            headerCell.configure(header: header)
             return headerCell
         }
         
@@ -151,8 +153,8 @@ extension ChangeHostView: UITableViewDataSource {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
             let content = person.name
-            let isSelected = person.name == self.selectedHostName
-            selectableCell.configure(content: content, isSelected: isSelected)
+            let selected = person.name == self.selectedHostName
+            selectableCell.configure(content: content, selected: selected)
             return selectableCell
         }
         

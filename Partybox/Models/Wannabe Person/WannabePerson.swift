@@ -13,19 +13,19 @@ class WannabePerson {
     
     // MARK: - Instance Properties
 
-    var name: String = Partybox.none
+    var name: String = Partybox.defaults.none
 
-    var points: Int = Partybox.zero
+    var points: Int = Partybox.defaults.zero
 
-    var vote: String = Partybox.none
+    var voteName: String = Partybox.defaults.none
     
     // MARK: - Construction Functions
 
     static func construct(name: String) -> WannabePerson {
         let person = WannabePerson()
         person.name = name
-        person.points = Partybox.zero
-        person.vote = Partybox.none
+        person.points = Partybox.defaults.zero
+        person.voteName = Partybox.defaults.none
         return person
     }
 
@@ -33,7 +33,7 @@ class WannabePerson {
         let person = WannabePerson()
         person.name = json[WannabePersonKey.name.rawValue].stringValue
         person.points = json[WannabePersonKey.points.rawValue].intValue
-        person.vote = json[WannabePersonKey.vote.rawValue].stringValue
+        person.voteName = json[WannabePersonKey.voteName.rawValue].stringValue
         return person
     }
     

@@ -18,35 +18,35 @@ class PersonTableViewCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
-        nameLabel.textColor = UIColor.Partybox.black
+        nameLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
+        nameLabel.textColor = Partybox.colors.black
         return nameLabel
     }()
     
     private lazy var flairLabel: UILabel = {
         let flairLabel = UILabel()
-        flairLabel.font = UIFont.Partybox.avenirNextMedium(size: 14)
-        flairLabel.textColor = UIColor.Partybox.black
+        flairLabel.font = Partybox.fonts.avenirNextMedium(size: 14)
+        flairLabel.textColor = Partybox.colors.black
         return flairLabel
     }()
     
     private lazy var emojiLabel: UILabel = {
         let emojiLabel = UILabel()
-        emojiLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
-        emojiLabel.textColor = UIColor.Partybox.black
+        emojiLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
+        emojiLabel.textColor = Partybox.colors.black
         return emojiLabel
     }()
     
     private lazy var pointsLabel: UILabel = {
         let pointsLabel = UILabel()
-        pointsLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
-        pointsLabel.textColor = UIColor.Partybox.black
+        pointsLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
+        pointsLabel.textColor = Partybox.colors.black
         return pointsLabel
     }()
     
     private lazy var underlineLabel: UILabel = {
         let underlineLabel = UILabel()
-        underlineLabel.backgroundColor = UIColor.Partybox.lightGray
+        underlineLabel.backgroundColor = Partybox.colors.lightGray
         return underlineLabel
     }()
 
@@ -78,7 +78,7 @@ class PersonTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = UIColor.Partybox.white
+        self.backgroundColor = Partybox.colors.white
         self.isUserInteractionEnabled = true
         self.selectionStyle = .none
 

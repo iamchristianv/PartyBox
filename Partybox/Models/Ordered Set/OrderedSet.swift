@@ -8,13 +8,13 @@
 
 import Foundation
 
-class OrderedSet<T: Hashable> {
+class OrderedSet<Object: Hashable> {
 
     // MARK: - Initialization Functions
 
-    var objects: [T] = []
+    var objects: [Object] = []
 
-    var hashValuesToIndexes: [Int: Int] = [:]
+    private var hashValuesToIndexes: [Int: Int] = [:]
 
     var count: Int {
         return self.objects.count
@@ -22,7 +22,7 @@ class OrderedSet<T: Hashable> {
 
     // MARK: - Ordered Set Functions
 
-    func add(_ object: T) {
+    func add(_ object: Object) {
         if let index = self.hashValuesToIndexes[object.hashValue] {
             self.objects[index] = object
         } else {
@@ -31,19 +31,19 @@ class OrderedSet<T: Hashable> {
         }
     }
 
-    func remove(_ object: T) {
+    func remove(_ object: Object) {
         if let index = self.hashValuesToIndexes[object.hashValue] {
             self.objects.remove(at: index)
             self.hashValuesToIndexes.removeValue(forKey: object.hashValue)
 
             for i in index ..< self.objects.count {
-                let t = self.objects[i]
-                self.hashValuesToIndexes[t.hashValue] = i
+                let obj = self.objects[i]
+                self.hashValuesToIndexes[obj.hashValue] = i
             }
         }
     }
 
-    func fetch(index: Int) -> T? {
+    func fetch(index: Int) -> Object? {
         if index < 0 || index >= self.objects.count {
             return nil
         } else {
@@ -51,7 +51,7 @@ class OrderedSet<T: Hashable> {
         }
     }
 
-    func fetch(key: String) -> T? {
+    func fetch(key: String) -> Object? {
         if let index = self.hashValuesToIndexes[key.hashValue] {
             return self.objects[index]
         } else {
@@ -75,7 +75,7 @@ class OrderedSet<T: Hashable> {
         }
     }
 
-    func random() -> T? {
+    func random() -> Object? {
         if self.objects.count == 0 {
             return nil
         }

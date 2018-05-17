@@ -50,7 +50,7 @@ class ChangeHostViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Change Host")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(UIColor.Partybox.green)
+        self.setNavigationBarBackgroundColor(Partybox.colors.green)
     }
     
     // MARK: - Navigation Bar Functions
@@ -77,7 +77,7 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
     // MARK: - Change Host View Delegate
     
     func changeHostView(_ changeHostView: ChangeHostView, saveChangesButtonPressed: Bool) {
-        if self.contentView.hostName() == self.party.details.host {
+        if self.contentView.hostName() == self.party.details.hostName {
             let subject = "Woah there"
             let message = "Please select a new person to be the host"
             let action = "Okay"
@@ -95,7 +95,7 @@ extension ChangeHostViewController: ChangeHostViewDataSource {
     // MARK: - Change Host View Data Source Functions
 
     func changeHostViewHostName() -> String {
-        return self.party.details.host
+        return self.party.details.hostName
     }
 
     func changeHostViewPeopleCount() -> Int {

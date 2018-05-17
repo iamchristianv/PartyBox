@@ -16,12 +16,12 @@ enum PartyDetailsKey: String {
 
     case name
 
-    case game
+    case gameId
 
     case status
 
-    case host
+    case hostName
 
-    case time
+    case timestamp
 
 }

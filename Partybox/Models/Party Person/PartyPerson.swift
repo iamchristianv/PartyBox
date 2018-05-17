@@ -13,19 +13,19 @@ class PartyPerson {
 
     // MARK: - Instance Properties
 
-    var name: String = Partybox.none
+    var name: String = Partybox.defaults.none
 
-    var points: Int = Partybox.zero
+    var points: Int = Partybox.defaults.zero
 
-    var emoji: String = Partybox.none
+    var emoji: String = Partybox.defaults.none
 
     // MARK: - Construction Functions
 
     static func construct(name: String) -> PartyPerson {
         let person = PartyPerson()
         person.name = name
-        person.points = Partybox.zero
-        person.emoji = Partybox.randomPersonEmoji()
+        person.points = Partybox.defaults.zero
+        person.emoji = Partybox.defaults.randomPersonEmoji()
         return person
     }
 

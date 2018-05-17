@@ -18,17 +18,14 @@ class Wannabe {
     
     var people: WannabePeople!
 
-    var collection: WannabeCollection!
-
     var pack: WannabePack!
 
     // MARK: - Construction Functions
 
-    static func construct(party: String) -> Wannabe {
+    static func construct(partyId: String) -> Wannabe {
         let wannabe = Wannabe()
-        wannabe.details = WannabeDetails.construct(party: party, dataSource: wannabe)
+        wannabe.details = WannabeDetails.construct(partyId: partyId, dataSource: wannabe)
         wannabe.people = WannabePeople.construct(dataSource: wannabe)
-        wannabe.collection = WannabeCollection.construct(dataSource: wannabe, packDataSource: wannabe)
         wannabe.pack = WannabePack.construct(dataSource: wannabe)
         return wannabe
     }
@@ -36,7 +33,7 @@ class Wannabe {
     // MARK: - Wannabe Functions
 
     func start(user: User, callback: @escaping (String?) -> Void) {
-        var path = "\(DatabaseKey.games.rawValue)/\(self.details.party)"
+        var path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)"
 
         Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -58,18 +55,18 @@ class Wannabe {
                         WannabeCardKey.hint.rawValue: self.details.card.hint,
                         WannabeCardKey.action.rawValue: self.details.card.action
                     ],
-                    WannabeDetailsKey.wannabe.rawValue: self.details.wannabe
+                    WannabeDetailsKey.wannabeName.rawValue: self.details.wannabeName
                 ],
                 WannabeKey.people.rawValue: [
                     person.name: [
                         WannabePersonKey.name.rawValue: person.name,
                         WannabePersonKey.points.rawValue: person.points,
-                        WannabePersonKey.vote.rawValue: person.vote
+                        WannabePersonKey.voteName.rawValue: person.voteName
                     ]
                 ]
             ]
 
-            path = "\(DatabaseKey.games.rawValue)/\(self.details.party)"
+            path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)"
 
             Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
@@ -79,7 +76,7 @@ class Wannabe {
                     return
                 }
 
-                path = "\(DatabaseKey.games.rawValue)/\(self.details.party)"
+                path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)"
 
                 Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
                     (snapshot) in
@@ -109,7 +106,7 @@ class Wannabe {
     }
 
     func leave(user: User, callback: @escaping (String?) -> Void) {
-        let path = "\(DatabaseKey.games.rawValue)/\(self.details.party)"
+        let path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)"
 
         self.details.stopObservingChanges()
         self.people.stopObservingChanges()
@@ -122,7 +119,7 @@ class Wannabe {
     }
 
     func join(user: User, callback: @escaping (String?) -> Void) {
-        var path = "\(DatabaseKey.games.rawValue)/\(self.details.party)"
+        var path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)"
 
         Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -138,11 +135,11 @@ class Wannabe {
                 person.name: [
                     WannabePersonKey.name.rawValue: person.name,
                     WannabePersonKey.points.rawValue: person.points,
-                    WannabePersonKey.vote.rawValue: person.vote
+                    WannabePersonKey.voteName.rawValue: person.voteName
                 ]
             ]
 
-            path = "\(DatabaseKey.games.rawValue)/\(self.details.party)/\(WannabeKey.people.rawValue)"
+            path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)/\(WannabeKey.people.rawValue)"
 
             Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
@@ -152,7 +149,7 @@ class Wannabe {
                     return
                 }
 
-                path = "\(DatabaseKey.games.rawValue)/\(self.details.party)"
+                path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)"
 
                 Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
                     (snapshot) in
@@ -182,7 +179,7 @@ class Wannabe {
     }
 
     func end(user: User, callback: @escaping (String?) -> Void) {
-        let path = "\(DatabaseKey.games.rawValue)/\(self.details.party)/\(WannabeKey.people.rawValue)/\(user.name)"
+        let path = "\(DatabaseKey.games.rawValue)/\(self.details.partyId)/\(WannabeKey.people.rawValue)/\(user.name)"
 
         self.details.stopObservingChanges()
         self.people.stopObservingChanges()
@@ -201,7 +198,7 @@ extension Wannabe: WannabeDetailsDataSource {
     // MARK: - Wannabe Details Data Source Functions
 
     internal func wannabeDetailsPath() -> String {
-        return "\(DatabaseKey.games.rawValue)/\(self.details.party)/\(WannabeKey.details.rawValue)"
+        return "\(DatabaseKey.games.rawValue)/\(self.details.partyId)/\(WannabeKey.details.rawValue)"
     }
 
 }
@@ -211,17 +208,7 @@ extension Wannabe: WannabePeopleDataSource {
     // MARK: - Wannabe People Data Source Functions
 
     internal func wannabePeoplePath() -> String {
-        return "\(DatabaseKey.games.rawValue)/\(self.details.party)/\(WannabeKey.people.rawValue)"
-    }
-
-}
-
-extension Wannabe: WannabeCollectionDataSource {
-
-    // MARK: - Wannabe Collection Data Source Functions
-
-    internal func wannabeCollectionPath() -> String {
-        return "\(DatabaseKey.setups.rawValue)/\(SetupKey.games.rawValue)/\(self.details.party)/\(SetupKey.packs.rawValue)"
+        return "\(DatabaseKey.games.rawValue)/\(self.details.partyId)/\(WannabeKey.people.rawValue)"
     }
 
 }
@@ -231,7 +218,7 @@ extension Wannabe: WannabePackDataSource {
     // MARK: - Wannabe Pack Data Source Functions
 
     internal func wannabePackPath() -> String {
-        return "\(DatabaseKey.setups.rawValue)/\(SetupKey.games.rawValue)/\(self.details.party)/\(SetupKey.cards.rawValue)/\(self.pack.id)"
+        return "\(DatabaseKey.setups.rawValue)/\(SetupKey.games.rawValue)/\(self.details.partyId)/\(SetupKey.cards.rawValue)/\(self.pack.id)"
     }
 
 }

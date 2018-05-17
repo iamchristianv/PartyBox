@@ -10,7 +10,7 @@ import Foundation
 
 enum PartyDetailsStatus: String {
 
-    // MARK: - Party Details Status
+    // MARK: - Party Details Statuses
 
     case waiting
 

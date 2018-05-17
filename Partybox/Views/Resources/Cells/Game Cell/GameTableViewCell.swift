@@ -18,15 +18,15 @@ class GameTableViewCell: UITableViewCell {
 
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = UIFont.Partybox.avenirNextMedium(size: 26)
-        nameLabel.textColor = UIColor.Partybox.black
+        nameLabel.font = Partybox.fonts.avenirNextMedium(size: 26)
+        nameLabel.textColor = Partybox.colors.black
         return nameLabel
     }()
     
     private lazy var summaryLabel: UILabel = {
         let summaryLabel = UILabel()
-        summaryLabel.font = UIFont.Partybox.avenirNextRegular(size: 16)
-        summaryLabel.textColor = UIColor.Partybox.black
+        summaryLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
+        summaryLabel.textColor = Partybox.colors.black
         summaryLabel.numberOfLines = 0
         return summaryLabel
     }()
@@ -34,9 +34,9 @@ class GameTableViewCell: UITableViewCell {
     lazy var playGameButton: ActivityIndicatorButton = {
         let playGameButton = ActivityIndicatorButton()
         playGameButton.setTitle("Play Game", for: .normal)
-        playGameButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
-        playGameButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        playGameButton.setBackgroundColor(UIColor.Partybox.green)
+        playGameButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        playGameButton.setTitleColor(Partybox.colors.white, for: .normal)
+        playGameButton.setBackgroundColor(Partybox.colors.green)
         playGameButton.addTarget(self, action: #selector(playGameButtonPressed), for: .touchUpInside)
         return playGameButton
     }()
@@ -44,9 +44,9 @@ class GameTableViewCell: UITableViewCell {
     lazy var changeGameButton: ActivityIndicatorButton = {
         let changeGameButton = ActivityIndicatorButton()
         changeGameButton.setTitle("Change Game", for: .normal)
-        changeGameButton.setTitleFont(UIFont.Partybox.avenirNextMediumName, size: 22)
-        changeGameButton.setTitleColor(UIColor.Partybox.white, for: .normal)
-        changeGameButton.setBackgroundColor(UIColor.Partybox.green)
+        changeGameButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        changeGameButton.setTitleColor(Partybox.colors.white, for: .normal)
+        changeGameButton.setBackgroundColor(Partybox.colors.green)
         changeGameButton.addTarget(self, action: #selector(changeGameButtonPressed), for: .touchUpInside)
         return changeGameButton
     }()
@@ -67,8 +67,8 @@ class GameTableViewCell: UITableViewCell {
     private lazy var promptLabel: UILabel = {
         let promptLabel = UILabel()
         promptLabel.text = "Waiting for Host to Start Game"
-        promptLabel.font = UIFont.Partybox.avenirNextRegular(size: 18)
-        promptLabel.textColor = UIColor.Partybox.black
+        promptLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
+        promptLabel.textColor = Partybox.colors.black
         return promptLabel
     }()
 
@@ -96,7 +96,7 @@ class GameTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = UIColor.Partybox.white
+        self.backgroundColor = Partybox.colors.white
         self.isUserInteractionEnabled = true
         self.selectionStyle = .none
 

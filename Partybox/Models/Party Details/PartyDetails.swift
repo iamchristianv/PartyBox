@@ -14,17 +14,17 @@ class PartyDetails {
     
     // MARK: - Instance Properties
     
-    var id: String = Partybox.none
+    var id: String = Partybox.defaults.none
     
-    var name: String = Partybox.none
+    var name: String = Partybox.defaults.none
 
-    var game: String = Partybox.none
+    var gameId: String = Partybox.defaults.none
 
-    var status: String = Partybox.none
+    var status: String = Partybox.defaults.none
 
-    var host: String = Partybox.none
+    var hostName: String = Partybox.defaults.none
 
-    var time: Int = Partybox.zero
+    var timestamp: Int = Partybox.defaults.zero
 
     private var dataSource: PartyDetailsDataSource!
 
@@ -32,12 +32,12 @@ class PartyDetails {
 
     static func construct(name: String, dataSource: PartyDetailsDataSource) -> PartyDetails {
         let details = PartyDetails()
-        details.id = Partybox.randomPartyId()
+        details.id = Partybox.defaults.randomPartyId()
         details.name = name
-        details.game = Partybox.randomGameId()
+        details.gameId = Partybox.defaults.randomGameId()
         details.status = PartyDetailsStatus.waiting.rawValue
-        details.host = Partybox.none
-        details.time = Partybox.zero
+        details.hostName = Partybox.defaults.none
+        details.timestamp = Partybox.defaults.zero
         details.dataSource = dataSource
         return details
     }
@@ -45,11 +45,11 @@ class PartyDetails {
     static func construct(id: String, dataSource: PartyDetailsDataSource) -> PartyDetails {
         let details = PartyDetails()
         details.id = id
-        details.name = Partybox.none
-        details.game = Partybox.randomGameId()
+        details.name = Partybox.defaults.none
+        details.gameId = Partybox.defaults.randomGameId()
         details.status = PartyDetailsStatus.waiting.rawValue
-        details.host = Partybox.none
-        details.time = Partybox.zero
+        details.hostName = Partybox.defaults.none
+        details.timestamp = Partybox.defaults.zero
         details.dataSource = dataSource
         return details
     }
@@ -58,10 +58,10 @@ class PartyDetails {
         let details = PartyDetails()
         details.id = json[PartyDetailsKey.id.rawValue].stringValue
         details.name = json[PartyDetailsKey.name.rawValue].stringValue
-        details.game = json[PartyDetailsKey.game.rawValue].stringValue
+        details.gameId = json[PartyDetailsKey.gameId.rawValue].stringValue
         details.status = json[PartyDetailsKey.status.rawValue].stringValue
-        details.host = json[PartyDetailsKey.host.rawValue].stringValue
-        details.time = json[PartyDetailsKey.time.rawValue].intValue
+        details.hostName = json[PartyDetailsKey.hostName.rawValue].stringValue
+        details.timestamp = json[PartyDetailsKey.timestamp.rawValue].intValue
         details.dataSource = dataSource
         return details
     }
@@ -93,10 +93,10 @@ class PartyDetails {
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
 
-            if snapshot.key == PartyDetailsKey.game.rawValue {
-                self.game = snapshot.value as? String ?? self.game
+            if snapshot.key == PartyDetailsKey.gameId.rawValue {
+                self.gameId = snapshot.value as? String ?? self.gameId
 
-                let name = Notification.Name(PartyDetailsNotification.gameChanged.rawValue)
+                let name = Notification.Name(PartyDetailsNotification.gameIdChanged.rawValue)
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
 
@@ -107,10 +107,10 @@ class PartyDetails {
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
 
-            if snapshot.key == PartyDetailsKey.host.rawValue {
-                self.host = snapshot.value as? String ?? self.host
+            if snapshot.key == PartyDetailsKey.hostName.rawValue {
+                self.hostName = snapshot.value as? String ?? self.hostName
 
-                let name = Notification.Name(PartyDetailsNotification.hostChanged.rawValue)
+                let name = Notification.Name(PartyDetailsNotification.hostNameChanged.rawValue)
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
         })

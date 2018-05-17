@@ -16,11 +16,7 @@ enum WannabeDetailsKey: String {
 
     case name
 
-    case party
-
-    case summary
-
-    case instructions
+    case partyId
 
     case status
 
@@ -28,6 +24,6 @@ enum WannabeDetailsKey: String {
 
     case card
 
-    case wannabe
+    case wannabeName
 
 }

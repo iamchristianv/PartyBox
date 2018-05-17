@@ -49,16 +49,16 @@ class Party {
 
             let person = PartyPerson.construct(name: user.name)
 
-            self.details.host = person.name
+            self.details.hostName = person.name
 
             let values = [
                 PartyKey.details.rawValue: [
                     PartyDetailsKey.id.rawValue: self.details.id,
                     PartyDetailsKey.name.rawValue: self.details.name,
-                    PartyDetailsKey.game.rawValue: self.details.game,
+                    PartyDetailsKey.gameId.rawValue: self.details.gameId,
                     PartyDetailsKey.status.rawValue: self.details.status,
-                    PartyDetailsKey.host.rawValue: self.details.host,
-                    PartyDetailsKey.time.rawValue: ServerValue.timestamp(),
+                    PartyDetailsKey.hostName.rawValue: self.details.hostName,
+                    PartyDetailsKey.timestamp.rawValue: ServerValue.timestamp(),
                 ],
                 PartyKey.people.rawValue: [
                     person.name: [
@@ -108,17 +108,13 @@ class Party {
         })
     }
 
-    func end(user: User, callback: @escaping (String?) -> Void) {
+    func end(user: User) {
         let path = "\(DatabaseKey.parties.rawValue)/\(self.details.id)"
 
         self.details.stopObservingChanges()
         self.people.stopObservingChanges()
 
-        Database.database().reference().child(path).removeValue(completionBlock: {
-            (error, reference) in
-
-            callback(error?.localizedDescription)
-        })
+        Database.database().reference().child(path).removeValue()
     }
 
     func join(user: User, callback: @escaping (String?) -> Void) {
@@ -188,17 +184,13 @@ class Party {
         })
     }
 
-    func leave(user: User, callback: @escaping (String?) -> Void) {
+    func leave(user: User) {
         let path = "\(DatabaseKey.parties.rawValue)/\(self.details.id)/\(PartyKey.people.rawValue)/\(user.name)"
 
         self.details.stopObservingChanges()
         self.people.stopObservingChanges()
 
-        Database.database().reference().child(path).removeValue(completionBlock: {
-            (error, reference) in
-
-            callback(error?.localizedDescription)
-        })
+        Database.database().reference().child(path).removeValue()
     }
     
 }
