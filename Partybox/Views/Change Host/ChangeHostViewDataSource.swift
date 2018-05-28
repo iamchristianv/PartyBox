@@ -10,8 +10,6 @@ import Foundation
 
 protocol ChangeHostViewDataSource {
 
-    // MARK: - Change Host View Data Source Functions
-
     func changeHostViewHostName() -> String
 
     func changeHostViewPeopleCount() -> Int

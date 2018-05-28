@@ -10,10 +10,8 @@ import Foundation
 
 protocol ManagePartyViewDelegate {
 
-    // MARK: - Manage Party View Delegate Functions
+    func managePartyView(_ managePartyView: ManagePartyView, hostNameTextFieldPressed: Bool)
 
-    func managePartyView(_ managePartyView: ManagePartyView, partyHostTextFieldPressed: Bool)
-
-    func managePartyView(_ managePartyView: ManagePartyView, saveChangesButtonPressed: Bool)
+    func managePartyView(_ managePartyView: ManagePartyView, saveButtonPressed: Bool)
 
 }

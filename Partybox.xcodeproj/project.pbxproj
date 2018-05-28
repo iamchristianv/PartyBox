@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		4DB447EF78B05BE6756A1533 /* Pods_Partybox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77681979AF3A60830BDC604 /* Pods_Partybox.framework */; };
 		AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F9C9F205CBE87005EF3EB /* Countdown.swift */; };
+		AA1CEE8720BB4416008AE617 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE8620BB4416008AE617 /* Session.swift */; };
+		AA1CEE8920BB4820008AE617 /* SessionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE8820BB4820008AE617 /* SessionKey.swift */; };
+		AA1CEE8B20BB4B17008AE617 /* PartyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE8A20BB4B17008AE617 /* PartyDataSource.swift */; };
+		AA1CEE8E20BB54A5008AE617 /* WannabeManual.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE8D20BB54A5008AE617 /* WannabeManual.swift */; };
+		AA1CEE9020BB54FC008AE617 /* WannabeManualKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE8F20BB54FC008AE617 /* WannabeManualKey.swift */; };
+		AA1CEE9220BB59BB008AE617 /* WannabeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9120BB59BB008AE617 /* WannabeDataSource.swift */; };
+		AA1CEE9A20BBD074008AE617 /* ChangeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9920BBD074008AE617 /* ChangeGameView.swift */; };
+		AA1CEE9C20BBD07E008AE617 /* ChangeGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9B20BBD07E008AE617 /* ChangeGameViewController.swift */; };
+		AA1CEE9E20BBD0ED008AE617 /* ChangeGameViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9D20BBD0ED008AE617 /* ChangeGameViewDelegate.swift */; };
+		AA1CEEA020BBD1AA008AE617 /* ChangeGameViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9F20BBD1AA008AE617 /* ChangeGameViewDataSource.swift */; };
+		AA1CEEA220BBD2DF008AE617 /* ChangeGameViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEA120BBD2DF008AE617 /* ChangeGameViewCellRow.swift */; };
+		AA1CEEA420BBD578008AE617 /* ChangeGameViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEA320BBD578008AE617 /* ChangeGameViewControllerDelegate.swift */; };
 		AA2A87A120969FC1009C55BF /* PartyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87A020969FC1009C55BF /* PartyDetails.swift */; };
 		AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87A8209A95A2009C55BF /* PartyView.swift */; };
 		AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87AA209A95AD009C55BF /* PartyViewController.swift */; };
@@ -30,7 +42,6 @@
 		AA5E89F620A1401000FE8960 /* PartyPeopleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F520A1401000FE8960 /* PartyPeopleDataSource.swift */; };
 		AA5E89F820A141BE00FE8960 /* PartyPersonKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */; };
 		AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */; };
-		AA5E8A0520A1484500FE8960 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0420A1484500FE8960 /* Game.swift */; };
 		AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */; };
 		AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */; };
 		AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */; };
@@ -100,6 +111,18 @@
 		05CC40299A0BDBF35F2F54B1 /* Pods-Partybox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Partybox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Partybox/Pods-Partybox.debug.xcconfig"; sourceTree = "<group>"; };
 		A77681979AF3A60830BDC604 /* Pods_Partybox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Partybox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0F9C9F205CBE87005EF3EB /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
+		AA1CEE8620BB4416008AE617 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Session.swift; path = ../Session.swift; sourceTree = "<group>"; };
+		AA1CEE8820BB4820008AE617 /* SessionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionKey.swift; path = Partybox/Models/Session/SessionKey.swift; sourceTree = SOURCE_ROOT; };
+		AA1CEE8A20BB4B17008AE617 /* PartyDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyDataSource.swift; sourceTree = "<group>"; };
+		AA1CEE8D20BB54A5008AE617 /* WannabeManual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeManual.swift; sourceTree = "<group>"; };
+		AA1CEE8F20BB54FC008AE617 /* WannabeManualKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeManualKey.swift; sourceTree = "<group>"; };
+		AA1CEE9120BB59BB008AE617 /* WannabeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDataSource.swift; sourceTree = "<group>"; };
+		AA1CEE9920BBD074008AE617 /* ChangeGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeGameView.swift; sourceTree = "<group>"; };
+		AA1CEE9B20BBD07E008AE617 /* ChangeGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeGameViewController.swift; sourceTree = "<group>"; };
+		AA1CEE9D20BBD0ED008AE617 /* ChangeGameViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGameViewDelegate.swift; sourceTree = "<group>"; };
+		AA1CEE9F20BBD1AA008AE617 /* ChangeGameViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGameViewDataSource.swift; sourceTree = "<group>"; };
+		AA1CEEA120BBD2DF008AE617 /* ChangeGameViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGameViewCellRow.swift; sourceTree = "<group>"; };
+		AA1CEEA320BBD578008AE617 /* ChangeGameViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGameViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AA2A87A020969FC1009C55BF /* PartyDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyDetails.swift; sourceTree = "<group>"; };
 		AA2A87A8209A95A2009C55BF /* PartyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyView.swift; sourceTree = "<group>"; };
 		AA2A87AA209A95AD009C55BF /* PartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +144,6 @@
 		AA5E89F520A1401000FE8960 /* PartyPeopleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPeopleDataSource.swift; sourceTree = "<group>"; };
 		AA5E89F720A141BE00FE8960 /* PartyPersonKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPersonKey.swift; sourceTree = "<group>"; };
 		AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeKey.swift; sourceTree = "<group>"; };
-		AA5E8A0420A1484500FE8960 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsKey.swift; sourceTree = "<group>"; };
 		AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsNotification.swift; sourceTree = "<group>"; };
 		AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsStatus.swift; sourceTree = "<group>"; };
@@ -211,6 +233,79 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AA1CEE8320BB43A9008AE617 /* Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF6D7FF1FDC965900014CA0 /* Party */,
+				AA5E89E620A13B8B00FE8960 /* Party Details */,
+				AA5E89E720A13B9F00FE8960 /* Party People */,
+				AA5E89F020A13D4A00FE8960 /* Party Person */,
+			);
+			path = Party;
+			sourceTree = "<group>";
+		};
+		AA1CEE8420BB43D6008AE617 /* Wannabe */ = {
+			isa = PBXGroup;
+			children = (
+				AAF6D8001FDC966300014CA0 /* Wannabe */,
+				AA1CEE8C20BB5497008AE617 /* WannabeManual */,
+				AA5E89F920A1466200FE8960 /* Wannabe Details */,
+				AA5E89FA20A1466900FE8960 /* Wannabe People */,
+				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
+				AA5E89FB20A1466E00FE8960 /* Wannabe Pack */,
+				AA5E89FD20A1467800FE8960 /* Wannabe Card */,
+			);
+			path = Wannabe;
+			sourceTree = "<group>";
+		};
+		AA1CEE8520BB440E008AE617 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEE8620BB4416008AE617 /* Session.swift */,
+				AA1CEE8820BB4820008AE617 /* SessionKey.swift */,
+			);
+			name = Session;
+			path = Session/Session;
+			sourceTree = "<group>";
+		};
+		AA1CEE8C20BB5497008AE617 /* WannabeManual */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEE8D20BB54A5008AE617 /* WannabeManual.swift */,
+				AA1CEE8F20BB54FC008AE617 /* WannabeManualKey.swift */,
+			);
+			path = WannabeManual;
+			sourceTree = "<group>";
+		};
+		AA1CEE9620BBAF3C008AE617 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AAF81281208BD03B0010FFB1 /* Countdown */,
+				AA5E8A1B20A2B5F400FE8960 /* Ordered Set */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA1CEE9720BBCFF8008AE617 /* Change Game */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEE9B20BBD07E008AE617 /* ChangeGameViewController.swift */,
+				AA1CEEA320BBD578008AE617 /* ChangeGameViewControllerDelegate.swift */,
+			);
+			path = "Change Game";
+			sourceTree = "<group>";
+		};
+		AA1CEE9820BBD00E008AE617 /* Change Game */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEE9920BBD074008AE617 /* ChangeGameView.swift */,
+				AA1CEEA120BBD2DF008AE617 /* ChangeGameViewCellRow.swift */,
+				AA1CEE9D20BBD0ED008AE617 /* ChangeGameViewDelegate.swift */,
+				AA1CEE9F20BBD1AA008AE617 /* ChangeGameViewDataSource.swift */,
+			);
+			path = "Change Game";
+			sourceTree = "<group>";
+		};
 		AA2A87AC209A9742009C55BF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,8 +324,8 @@
 			children = (
 				AA2A87A020969FC1009C55BF /* PartyDetails.swift */,
 				AA5E89E820A13C0C00FE8960 /* PartyDetailsKey.swift */,
-				AA5E89EA20A13C3A00FE8960 /* PartyDetailsNotification.swift */,
 				AA5E8A4120A8BE4700FE8960 /* PartyDetailsStatus.swift */,
+				AA5E89EA20A13C3A00FE8960 /* PartyDetailsNotification.swift */,
 				AA5E89EC20A13C5B00FE8960 /* PartyDetailsDataSource.swift */,
 			);
 			path = "Party Details";
@@ -261,9 +356,9 @@
 			children = (
 				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
 				AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */,
-				AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */,
 				AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */,
 				AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */,
+				AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */,
 				AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */,
 			);
 			path = "Wannabe Details";
@@ -306,14 +401,6 @@
 				AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */,
 			);
 			path = "Wannabe Card";
-			sourceTree = "<group>";
-		};
-		AA5E8A0320A1482E00FE8960 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				AA5E8A0420A1484500FE8960 /* Game.swift */,
-			);
-			path = Game;
 			sourceTree = "<group>";
 		};
 		AA5E8A1B20A2B5F400FE8960 /* Ordered Set */ = {
@@ -466,21 +553,12 @@
 		AAE75B5C1F80A44C001D4E13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AA1CEE8520BB440E008AE617 /* Session */,
 				AAFFBDDB203898A200269AB4 /* User */,
-				AAF6D7FF1FDC965900014CA0 /* Party */,
-				AA5E89E620A13B8B00FE8960 /* Party Details */,
-				AA5E89E720A13B9F00FE8960 /* Party People */,
-				AA5E89F020A13D4A00FE8960 /* Party Person */,
-				AA5E8A0320A1482E00FE8960 /* Game */,
-				AAF6D8001FDC966300014CA0 /* Wannabe */,
-				AA5E89F920A1466200FE8960 /* Wannabe Details */,
-				AA5E89FA20A1466900FE8960 /* Wannabe People */,
-				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
-				AA5E89FB20A1466E00FE8960 /* Wannabe Pack */,
-				AA5E89FD20A1467800FE8960 /* Wannabe Card */,
-				AA5E8A1B20A2B5F400FE8960 /* Ordered Set */,
+				AA1CEE8320BB43A9008AE617 /* Party */,
+				AA1CEE8420BB43D6008AE617 /* Wannabe */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
-				AAF81281208BD03B0010FFB1 /* Countdown */,
+				AA1CEE9620BBAF3C008AE617 /* Resources */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +568,7 @@
 			children = (
 				AA6706C21F89D9F5000BF5F5 /* Party.swift */,
 				AA5E89EE20A13D3800FE8960 /* PartyKey.swift */,
+				AA1CEE8A20BB4B17008AE617 /* PartyDataSource.swift */,
 			);
 			path = Party;
 			sourceTree = "<group>";
@@ -499,6 +578,7 @@
 			children = (
 				AA590FF91FC26FBB008988E9 /* Wannabe.swift */,
 				AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */,
+				AA1CEE9120BB59BB008AE617 /* WannabeDataSource.swift */,
 			);
 			path = Wannabe;
 			sourceTree = "<group>";
@@ -520,6 +600,7 @@
 				AAF812BA2094426F0010FFB1 /* Party */,
 				AA5E8A4620A8CF0300FE8960 /* Manage Party */,
 				AA5E8A5220A90D4600FE8960 /* Change Host */,
+				AA1CEE9820BBD00E008AE617 /* Change Game */,
 				AAF812952092413D0010FFB1 /* Alert */,
 				AAF8129A20924E8B0010FFB1 /* Resources */,
 			);
@@ -535,6 +616,7 @@
 				AAF812BB209442790010FFB1 /* Party */,
 				AA5E8A4520A8CEEF00FE8960 /* Manage Party */,
 				AA5E8A5120A90D3500FE8960 /* Change Host */,
+				AA1CEE9720BBCFF8008AE617 /* Change Game */,
 				AAF81294209241340010FFB1 /* Alert */,
 				AAF812B72092D1550010FFB1 /* Resources */,
 			);
@@ -823,6 +905,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAF812A32092552D0010FFB1 /* ShapeView.swift in Sources */,
+				AA1CEEA220BBD2DF008AE617 /* ChangeGameViewCellRow.swift in Sources */,
 				AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */,
 				AA5E8A5620A90D7100FE8960 /* ChangeHostViewController.swift in Sources */,
 				AA5E89E920A13C0C00FE8960 /* PartyDetailsKey.swift in Sources */,
@@ -837,6 +920,9 @@
 				AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */,
 				AAF812AD2092A7020010FFB1 /* StartPartyView.swift in Sources */,
 				AA2A87B0209A9A69009C55BF /* HeaderTableViewCell.swift in Sources */,
+				AA1CEE8B20BB4B17008AE617 /* PartyDataSource.swift in Sources */,
+				AA1CEE8920BB4820008AE617 /* SessionKey.swift in Sources */,
+				AA1CEE9220BB59BB008AE617 /* WannabeDataSource.swift in Sources */,
 				AAF81297209241550010FFB1 /* AlertView.swift in Sources */,
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
 				AA5E89EB20A13C3A00FE8960 /* PartyDetailsNotification.swift in Sources */,
@@ -856,6 +942,7 @@
 				AAF8129D20924EB80010FFB1 /* ActivityIndicatorButton.swift in Sources */,
 				AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */,
 				AA5E8A1A20A1618E00FE8960 /* WannabePeopleDataSource.swift in Sources */,
+				AA1CEE9020BB54FC008AE617 /* WannabeManualKey.swift in Sources */,
 				AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */,
 				AA5E8A1820A1617500FE8960 /* WannabePeopleNotification.swift in Sources */,
 				AA5E8A6320A9167A00FE8960 /* PromptTableViewCell.swift in Sources */,
@@ -864,11 +951,15 @@
 				AA5E8A1220A15E5F00FE8960 /* WannabeDetailsRounds.swift in Sources */,
 				AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */,
 				AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */,
+				AA1CEEA420BBD578008AE617 /* ChangeGameViewControllerDelegate.swift in Sources */,
 				AA2A87BD209D8781009C55BF /* WannabePack.swift in Sources */,
+				AA1CEEA020BBD1AA008AE617 /* ChangeGameViewDataSource.swift in Sources */,
 				AA5E89EF20A13D3800FE8960 /* PartyKey.swift in Sources */,
+				AA1CEE9E20BBD0ED008AE617 /* ChangeGameViewDelegate.swift in Sources */,
 				AA5E89E420A13ADE00FE8960 /* UserKey.swift in Sources */,
 				AA5E8A4E20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift in Sources */,
 				AA5E8A5020A9010500FE8960 /* ManagePartyViewDataSource.swift in Sources */,
+				AA1CEE9A20BBD074008AE617 /* ChangeGameView.swift in Sources */,
 				AA5E8A4920A8CF2500FE8960 /* ManagePartyView.swift in Sources */,
 				AA5E8A5E20A9130E00FE8960 /* ChangeHostViewCellRow.swift in Sources */,
 				AAF812992092415C0010FFB1 /* AlertViewController.swift in Sources */,
@@ -878,6 +969,7 @@
 				AA5E8A3620A7EC2000FE8960 /* PartyViewDelegate.swift in Sources */,
 				AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */,
 				AA5E8A3420A7E3BC00FE8960 /* JoinPartyViewDelegate.swift in Sources */,
+				AA1CEE8720BB4416008AE617 /* Session.swift in Sources */,
 				AA2A87B4209AB52C009C55BF /* PersonTableViewCell.swift in Sources */,
 				AA5E8A4420A8C6B000FE8960 /* PartyViewCellRow.swift in Sources */,
 				AAF812B22092B18B0010FFB1 /* JoinPartyViewController.swift in Sources */,
@@ -888,7 +980,6 @@
 				AA5E8A5A20A9121100FE8960 /* ChangeHostViewControllerDelegate.swift in Sources */,
 				AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */,
 				AA5E8A3B20A80EB400FE8960 /* GameTableViewCellDelegate.swift in Sources */,
-				AA5E8A0520A1484500FE8960 /* Game.swift in Sources */,
 				AA69F9C420AD089100A91E3E /* Partybox.swift in Sources */,
 				AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
@@ -899,11 +990,13 @@
 				AA5E8A4020A8150B00FE8960 /* PartyViewControllerDelegate.swift in Sources */,
 				AA5E89F420A13F9700FE8960 /* PartyPeopleNotification.swift in Sources */,
 				AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */,
+				AA1CEE9C20BBD07E008AE617 /* ChangeGameViewController.swift in Sources */,
 				AAF812932092406E0010FFB1 /* UIButton+Extension.swift in Sources */,
 				AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */,
 				AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */,
 				AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */,
 				AA5E8A2120A5347D00FE8960 /* WannabeCardKey.swift in Sources */,
+				AA1CEE8E20BB54A5008AE617 /* WannabeManual.swift in Sources */,
 				AA5E89F820A141BE00FE8960 /* PartyPersonKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

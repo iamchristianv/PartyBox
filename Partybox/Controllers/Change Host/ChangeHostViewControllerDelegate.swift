@@ -10,8 +10,6 @@ import Foundation
 
 protocol ChangeHostViewControllerDelegate {
 
-    // MARK: - Change Host View Controller Delegate Functions
-
-    func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged hostName: String)
+    func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostNameChanged hostName: String)
 
 }

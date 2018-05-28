@@ -76,9 +76,13 @@ class MenuViewController: UIViewController {
             if user == nil {
                 self.contentView.startAnimatingStartPartyButton()
                 self.contentView.startAnimatingJoinPartyButton()
+                self.contentView.startAnimatingFindPartyButton()
+                self.contentView.startAnimatingVisitStoreButton()
             } else {
                 self.contentView.stopAnimatingStartPartyButton()
                 self.contentView.stopAnimatingJoinPartyButton()
+                self.contentView.stopAnimatingFindPartyButton()
+                self.contentView.stopAnimatingVisitStoreButton()
             }
         })
     }
@@ -92,10 +96,6 @@ class MenuViewController: UIViewController {
     private func startObservingMotionChanges() {
         self.motionManager.startDeviceMotionUpdates(to: OperationQueue(), withHandler: {
             (motion, error) in
-
-            if error != nil {
-                return
-            }
 
             guard let motion = motion else {
                 return
@@ -127,9 +127,7 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: MenuViewDelegate {
-    
-    // MARK: - Menu View Delegate Functions
-    
+        
     internal func menuView(_ menuView: MenuView, startPartyButtonPressed: Bool) {
         let startPartyViewController = StartPartyViewController.construct()
         let navigationController = UINavigationController(rootViewController: startPartyViewController)
@@ -140,6 +138,14 @@ extension MenuViewController: MenuViewDelegate {
         let joinPartyViewController = JoinPartyViewController.construct()
         let navigationController = UINavigationController(rootViewController: joinPartyViewController)
         self.present(navigationController, animated: true, completion: nil)
+    }
+
+    internal func menuView(_ menuView: MenuView, findPartyButtonPressed: Bool) {
+
+    }
+
+    internal func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool) {
+
     }
     
 }

@@ -10,8 +10,6 @@ import Foundation
 
 enum UserKey: String {
 
-    // MARK: - User Keys
-
     case name
 
 }

@@ -53,20 +53,13 @@ class StartPartyViewController: UIViewController {
 }
 
 extension StartPartyViewController: StartPartyViewDelegate {
-    
-    // MARK: - Start Party View Delegate Functions
-    
+
     internal func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool) {
         self.contentView.startAnimatingStartButton()
+        
+        let session = Session.construct(userName: self.contentView.userName(), partyName: self.contentView.partyName())
 
-        let partyName = self.contentView.partyName()
-        let userName = self.contentView.userName()
-
-        let user = User.construct(name: userName)
-        let party = Party.construct(name: partyName)
-        let game = Game.construct(partyId: party.details.id)
-
-        party.start(user: user, callback: {
+        session.party.start(callback: {
             (error) in
 
             self.contentView.stopAnimatingStartButton()
@@ -77,10 +70,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
             } else {
-                let partyViewController = PartyViewController.construct(user: user,
-                                                                        party: party,
-                                                                        game: game,
-                                                                        delegate: self)
+                let partyViewController = PartyViewController.construct(session: session, delegate: self)
                 let navigationController = UINavigationController(rootViewController: partyViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
@@ -91,8 +81,6 @@ extension StartPartyViewController: StartPartyViewDelegate {
 
 extension StartPartyViewController: PartyViewControllerDelegate {
 
-    // MARK: - Party View Controller Delegate Functions
-
     internal func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
         let subject = "Oh no"
         let message = "You were kicked from the party"
@@ -101,4 +89,3 @@ extension StartPartyViewController: PartyViewControllerDelegate {
     }
 
 }
-

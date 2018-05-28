@@ -10,7 +10,7 @@ import UIKit
 
 struct Partybox {
 
-    struct defaults {
+    struct values {
 
         // MARK: - Default Values
 

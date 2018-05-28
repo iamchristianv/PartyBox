@@ -12,11 +12,7 @@ class ManagePartyViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var user: User!
-
-    private var party: Party!
-
-    private var game: Game!
+    private var session: Session!
     
     private var contentView: ManagePartyView!
 
@@ -24,11 +20,9 @@ class ManagePartyViewController: UIViewController {
 
     // MARK: - Construction Functions
 
-    static func construct(user: User, party: Party, game: Game, delegate: ManagePartyViewControllerDelegate) -> ManagePartyViewController {
+    static func construct(session: Session, delegate: ManagePartyViewControllerDelegate) -> ManagePartyViewController {
         let controller = ManagePartyViewController()
-        controller.user = user
-        controller.party = party
-        controller.game = game
+        controller.session = session
         controller.contentView = ManagePartyView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
@@ -65,30 +59,23 @@ class ManagePartyViewController: UIViewController {
 }
 
 extension ManagePartyViewController: ManagePartyViewDelegate {
-    
-    // MARK: - Manage Party View Delegate Functions
 
-    internal func managePartyView(_ managePartyView: ManagePartyView, partyHostTextFieldPressed: Bool) {
-        let changeHostViewController = ChangeHostViewController.construct(user: self.user,
-                                                                          party: self.party,
-                                                                          delegate: self)
+    internal func managePartyView(_ managePartyView: ManagePartyView, hostNameTextFieldPressed: Bool) {
+        let changeHostViewController = ChangeHostViewController.construct(session: self.session, delegate: self)
         let navigationController = UINavigationController(rootViewController: changeHostViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func managePartyView(_ managePartyView: ManagePartyView, saveChangesButtonPressed: Bool) {
-        self.contentView.startAnimatingSaveChangesButton()
-
-        let name = self.contentView.partyName()
-        let host = self.contentView.partyHost()
-
-        let values = [PartyDetailsKey.name.rawValue: name,
-                      PartyDetailsKey.hostName.rawValue: host]
+    internal func managePartyView(_ managePartyView: ManagePartyView, saveButtonPressed: Bool) {
+        self.contentView.startAnimatingSaveButton()
         
-        self.party.details.update(values: values, callback: {
+        let values = [PartyDetailsKey.name.rawValue: self.contentView.name(),
+                      PartyDetailsKey.hostName.rawValue: self.contentView.hostName()]
+        
+        self.session.party.details.update(values: values, callback: {
             (error) in
             
-            self.contentView.stopAnimatingSaveChangesButton()
+            self.contentView.stopAnimatingSaveButton()
             
             if let error = error {
                 let subject = "Oh no"
@@ -106,24 +93,20 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 
 extension ManagePartyViewController: ManagePartyViewDataSource {
 
-    // MARK: - Manage Party Data Source Functions
-
-    internal func managePartyViewPartyName() -> String {
-        return self.party.details.name
+    internal func managePartyViewName() -> String {
+        return self.session.party.details.name
     }
 
-    internal func managePartyViewPartyHost() -> String {
-        return self.party.details.hostName
+    internal func managePartyViewHostName() -> String {
+        return self.session.party.details.hostName
     }
 
 }
 
 extension ManagePartyViewController: ChangeHostViewControllerDelegate {
 
-    // MARK: - Change Host View Controller Delegate Functions
-
-    internal func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostChanged hostName: String) {
-        self.contentView.setPartyHost(hostName: hostName)
+    internal func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostNameChanged hostName: String) {
+        self.contentView.setHostName(hostName)
     }
 
 }

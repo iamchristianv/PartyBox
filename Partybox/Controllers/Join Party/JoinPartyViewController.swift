@@ -53,20 +53,13 @@ class JoinPartyViewController: UIViewController {
 }
 
 extension JoinPartyViewController: JoinPartyViewDelegate {
-    
-    // MARK: - Join Party View Delegate Functions
-    
+
     internal func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
         self.contentView.startAnimatingJoinButton()
 
-        let partyId = self.contentView.partyId()
-        let userName = self.contentView.userName()
+        let session = Session.construct(userName: self.contentView.userName(), partyId: self.contentView.partyId())
 
-        let user = User.construct(name: userName)
-        let party = Party.construct(id: partyId)
-        let game = Game.construct(partyId: party.details.id)
-
-        party.join(user: user, callback: {
+        session.party.join(callback: {
             (error) in
 
             self.contentView.stopAnimatingJoinButton()
@@ -77,10 +70,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
             } else {
-                let partyViewController = PartyViewController.construct(user: user,
-                                                                        party: party,
-                                                                        game: game,
-                                                                        delegate: self)
+                let partyViewController = PartyViewController.construct(session: session, delegate: self)
                 let navigationController = UINavigationController(rootViewController: partyViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
@@ -91,8 +81,6 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
 
 extension JoinPartyViewController: PartyViewControllerDelegate {
 
-    // MARK: - Party View Controller Delegate Functions
-
     internal func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
         let subject = "Oh no"
         let message = "You were kicked from the party"
@@ -101,4 +89,3 @@ extension JoinPartyViewController: PartyViewControllerDelegate {
     }
 
 }
-

@@ -27,14 +27,14 @@ class ChangeHostView: UIView {
         return tableView
     }()
 
-    private lazy var saveChangesButton: ActivityIndicatorButton = {
-        let saveChangesButton = ActivityIndicatorButton()
-        saveChangesButton.setTitle("Save", for: .normal)
-        saveChangesButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        saveChangesButton.setTitleColor(Partybox.colors.white, for: .normal)
-        saveChangesButton.setBackgroundColor(Partybox.colors.green)
-        saveChangesButton.addTarget(self, action: #selector(saveChangesButtonPressed), for: .touchUpInside)
-        return saveChangesButton
+    private lazy var saveButton: ActivityIndicatorButton = {
+        let saveButton = ActivityIndicatorButton()
+        saveButton.setTitle("Save", for: .normal)
+        saveButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        saveButton.setTitleColor(Partybox.colors.white, for: .normal)
+        saveButton.setBackgroundColor(Partybox.colors.green)
+        saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        return saveButton
     }()
 
     private var selectedHostName: String!
@@ -47,20 +47,20 @@ class ChangeHostView: UIView {
 
     static func construct(delegate: ChangeHostViewDelegate, dataSource: ChangeHostViewDataSource) -> ChangeHostView {
         let view = ChangeHostView()
+        view.selectedHostName = dataSource.changeHostViewHostName()
         view.delegate = delegate
         view.dataSource = dataSource
-        view.selectedHostName = dataSource.changeHostViewHostName()
         view.setupView()
         return view
     }
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = .white
 
         self.addSubview(self.tableView)
-        self.addSubview(self.saveChangesButton)
+        self.addSubview(self.saveButton)
         
         self.tableView.snp.remakeConstraints({
             (make) in
@@ -68,10 +68,10 @@ class ChangeHostView: UIView {
             make.leading.equalTo(self.snp.leading)
             make.trailing.equalTo(self.snp.trailing)
             make.top.equalTo(self.snp.top)
-            make.bottom.equalTo(self.saveChangesButton.snp.top).offset(-32)
+            make.bottom.equalTo(self.saveButton.snp.top).offset(-32)
         })
         
-        self.saveChangesButton.snp.remakeConstraints({
+        self.saveButton.snp.remakeConstraints({
             (make) in
             
             make.width.equalTo(220)
@@ -84,14 +84,18 @@ class ChangeHostView: UIView {
     
     // MARK: - Action Functions
     
-    @objc func saveChangesButtonPressed() {
-        self.delegate.changeHostView(self, saveChangesButtonPressed: true)
+    @objc private func saveButtonPressed() {
+        self.delegate.changeHostView(self, saveButtonPressed: true)
     }
     
     // MARK: - View Functions
     
     func reloadTable() {
         self.tableView.reloadData()
+    }
+
+    func setHostName(_ hostName: String) {
+        self.selectedHostName = hostName
     }
     
     func hostName() -> String {
@@ -104,11 +108,10 @@ extension ChangeHostView: UITableViewDelegate {
     
     // MARK: - Table View Delegate Functions
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
         self.selectedHostName = selectableCell.content()
-
         self.tableView.reloadData()
     }
     
@@ -118,19 +121,19 @@ extension ChangeHostView: UITableViewDataSource {
     
     // MARK: - Table View Data Source Functions
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    internal func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ChangeHostViewCellRow.personCells.rawValue + self.dataSource.changeHostViewPeopleCount()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == ChangeHostViewCellRow.promptCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
             let promptCell = tableViewCell as! PromptTableViewCell
-            let prompt = "Choose a new person to be the host"
+            let prompt = "Who should be the host?"
             promptCell.configure(prompt: prompt)
             return promptCell
         }
@@ -143,7 +146,7 @@ extension ChangeHostView: UITableViewDataSource {
             return headerCell
         }
         
-        if indexPath.row > 1 {
+        if indexPath.row >= ChangeHostViewCellRow.personCells.rawValue {
             let index = indexPath.row - ChangeHostViewCellRow.personCells.rawValue
             
             guard let person = self.dataSource.changeHostViewPerson(index: index) else {

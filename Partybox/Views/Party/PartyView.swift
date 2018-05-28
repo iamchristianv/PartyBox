@@ -28,9 +28,9 @@ class PartyView: UIView {
         return tableView
     }()
 
-    private var playGameButton: ActivityIndicatorButton?
+    private var playButton: ActivityIndicatorButton?
 
-    private var changeGameButton: ActivityIndicatorButton?
+    private var changeButton: ActivityIndicatorButton?
     
     private var delegate: PartyViewDelegate!
 
@@ -40,6 +40,8 @@ class PartyView: UIView {
 
     static func construct(delegate: PartyViewDelegate, dataSource: PartyViewDataSource) -> PartyView {
         let view = PartyView()
+        view.playButton = nil
+        view.changeButton = nil
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -48,7 +50,7 @@ class PartyView: UIView {
     
     // MARK: - Setup Functions
     
-    func setupView() {
+    private func setupView() {
         self.backgroundColor = .white
 
         self.addSubview(self.tableView)
@@ -71,28 +73,26 @@ class PartyView: UIView {
     
     // MARK: - Animation Functions
     
-    func startAnimatingPlayGameButton() {
-        self.playGameButton?.startAnimating()
+    func startAnimatingPlayButton() {
+        self.playButton?.startAnimating()
     }
     
-    func stopAnimatingPlayGameButton() {
-        self.playGameButton?.stopAnimating()
+    func stopAnimatingPlayButton() {
+        self.playButton?.stopAnimating()
     }
 
-    func startAnimatingChangeGameButton() {
-        self.changeGameButton?.startAnimating()
+    func startAnimatingChangeButton() {
+        self.changeButton?.startAnimating()
     }
 
-    func stopAnimatingChangeGameButton() {
-        self.changeGameButton?.stopAnimating()
+    func stopAnimatingChangeButton() {
+        self.changeButton?.stopAnimating()
     }
     
 }
 
 extension PartyView: UITableViewDelegate {
-    
-    // MARK: - Table View Delegate Functions
-    
+
     internal func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if self.dataSource.partyViewUserName() != self.dataSource.partyViewHostName() {
             return []
@@ -111,7 +111,7 @@ extension PartyView: UITableViewDelegate {
         let kickButton = UITableViewRowAction(style: .normal, title: "KICK", handler: {
             (rowAction, indexPath) in
             
-            self.delegate.partyView(self, kickButtonPressed: person)
+            self.delegate.partyView(self, kickButtonPressed: person.name)
         })
         
         kickButton.backgroundColor = Partybox.colors.red
@@ -122,9 +122,7 @@ extension PartyView: UITableViewDelegate {
 }
 
 extension PartyView: UITableViewDataSource {
-    
-    // MARK: - Table View Data Source Functions
-    
+
     internal func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -145,7 +143,8 @@ extension PartyView: UITableViewDataSource {
         if indexPath.row == PartyViewCellRow.gameHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let gameHeaderCell = tableViewCell as! HeaderTableViewCell
-            gameHeaderCell.configure(header: "GAME")
+            let header = "GAME"
+            gameHeaderCell.configure(header: header)
             return gameHeaderCell
         }
         
@@ -156,15 +155,16 @@ extension PartyView: UITableViewDataSource {
             let summary = self.dataSource.partyViewGameSummary()
             let isHostEnabled = self.dataSource.partyViewUserName() == self.dataSource.partyViewHostName()
             gameCell.configure(name: name, summary: summary, isHostEnabled: isHostEnabled, delegate: self)
-            self.playGameButton = gameCell.playGameButton
-            self.changeGameButton = gameCell.changeGameButton
+            self.playButton = gameCell.playButton
+            self.changeButton = gameCell.changeButton
             return gameCell
         }
         
         if indexPath.row == PartyViewCellRow.peopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let peopleHeaderCell = tableViewCell as! HeaderTableViewCell
-            peopleHeaderCell.configure(header: "PEOPLE")
+            let header = "PEOPLE"
+            peopleHeaderCell.configure(header: header)
             return peopleHeaderCell
         }
             
@@ -193,14 +193,12 @@ extension PartyView: UITableViewDataSource {
 
 extension PartyView: GameTableViewCellDelegate {
     
-    // MARK: - Game Table View Cell Delegate Functions
-
-    internal func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, playGameButtonPressed: Bool) {
-        self.delegate.partyView(self, playGameButtonPressed: true)
+    internal func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, playButtonPressed: Bool) {
+        self.delegate.partyView(self, playButtonPressed: true)
     }
 
-    internal func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, changeGameButtonPressed: Bool) {
-        self.delegate.partyView(self, changeGameButtonPressed: true)
+    internal func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, changeButtonPressed: Bool) {
+        self.delegate.partyView(self, changeButtonPressed: true)
     }
     
 }

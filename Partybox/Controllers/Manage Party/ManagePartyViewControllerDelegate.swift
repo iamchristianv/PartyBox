@@ -10,8 +10,6 @@ import Foundation
 
 protocol ManagePartyViewControllerDelegate {
 
-    // MARK: - Manage Party View Controller Delegate Functions
-
     func managePartyViewController(_ managePartyViewController: ManagePartyViewController, partyManaged: Bool)
 
 }

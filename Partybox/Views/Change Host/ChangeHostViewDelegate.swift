@@ -10,8 +10,6 @@ import Foundation
 
 protocol ChangeHostViewDelegate {
 
-    // MARK: - Change Host View Delegate Functions
-
-    func changeHostView(_ changeHostView: ChangeHostView, saveChangesButtonPressed: Bool)
+    func changeHostView(_ changeHostView: ChangeHostView, saveButtonPressed: Bool)
 
 }

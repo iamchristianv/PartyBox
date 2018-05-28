@@ -12,9 +12,7 @@ class ChangeHostViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var user: User!
-
-    private var party: Party!
+    private var session: Session!
     
     private var contentView: ChangeHostView!
     
@@ -22,10 +20,9 @@ class ChangeHostViewController: UIViewController {
 
     // MARK: - Construction Functions
 
-    static func construct(user: User, party: Party, delegate: ChangeHostViewControllerDelegate) -> ChangeHostViewController {
+    static func construct(session: Session, delegate: ChangeHostViewControllerDelegate) -> ChangeHostViewController {
         let controller = ChangeHostViewController()
-        controller.user = user
-        controller.party = party
+        controller.session = session
         controller.contentView = ChangeHostView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
@@ -40,6 +37,19 @@ class ChangeHostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
+        self.startObservingNotification(name: PartyPeopleNotification.personAdded.rawValue,
+                                        selector: #selector(partyPeoplePersonAdded))
+        self.startObservingNotification(name: PartyPeopleNotification.personChanged.rawValue,
+                                        selector: #selector(partyPeoplePersonChanged))
+        self.startObservingNotification(name: PartyPeopleNotification.personRemoved.rawValue,
+                                        selector: #selector(partyPeoplePersonRemoved))
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.stopObservingNotification(name: PartyPeopleNotification.personAdded.rawValue)
+        self.stopObservingNotification(name: PartyPeopleNotification.personChanged.rawValue)
+        self.stopObservingNotification(name: PartyPeopleNotification.personRemoved.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -61,29 +71,35 @@ class ChangeHostViewController: UIViewController {
     
     // MARK: - Notification Functions
     
-    @objc private func partyPeopleChanged() {
-//        self.contentView.reloadTable()
-//
-//        if Party.current.people.person(name: self.contentView.selectedPersonId) == nil {
-//            self.contentView.selectedPersonId = Party.current.details.hostName
-//            self.contentView.reloadTable()
-//        }
+    @objc private func partyPeoplePersonAdded(notification: Notification) {
+        self.contentView.reloadTable()
+    }
+
+    @objc private func partyPeoplePersonChanged(notification: Notification) {
+        self.contentView.reloadTable()
+    }
+
+    @objc private func partyPeoplePersonRemoved(notification: Notification) {
+        self.contentView.reloadTable()
+
+        if !self.session.party.people.persons.contains(key: self.contentView.hostName()) {
+            self.contentView.setHostName(self.session.party.details.hostName)
+            self.contentView.reloadTable()
+        }
     }
 
 }
 
 extension ChangeHostViewController: ChangeHostViewDelegate {
-    
-    // MARK: - Change Host View Delegate
-    
-    func changeHostView(_ changeHostView: ChangeHostView, saveChangesButtonPressed: Bool) {
-        if self.contentView.hostName() == self.party.details.hostName {
+        
+    func changeHostView(_ changeHostView: ChangeHostView, saveButtonPressed: Bool) {
+        if self.contentView.hostName() == self.session.party.details.hostName {
             let subject = "Woah there"
             let message = "Please select a new person to be the host"
             let action = "Okay"
             self.showAlert(subject: subject, message: message, action: action, handler: nil)
         } else {
-            self.delegate.changeHostViewController(self, hostChanged: self.contentView.hostName())
+            self.delegate.changeHostViewController(self, hostNameChanged: self.contentView.hostName())
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -92,18 +108,16 @@ extension ChangeHostViewController: ChangeHostViewDelegate {
 
 extension ChangeHostViewController: ChangeHostViewDataSource {
 
-    // MARK: - Change Host View Data Source Functions
-
     func changeHostViewHostName() -> String {
-        return self.party.details.hostName
+        return self.session.party.details.hostName
     }
 
     func changeHostViewPeopleCount() -> Int {
-        return self.party.people.persons.count
+        return self.session.party.people.persons.count
     }
 
     func changeHostViewPerson(index: Int) -> PartyPerson? {
-        return self.party.people.persons.fetch(index: index)
+        return self.session.party.people.persons.fetch(index: index)
     }
 
 }

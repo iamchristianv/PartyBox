@@ -20,16 +20,6 @@ enum DatabaseKey: String {
 
     case setups
 
-}
-
-enum SetupKey: String {
-
-    // MARK: - Property Keys
-
-    case parties
-
-    case games
-
     case packs
 
     case cards

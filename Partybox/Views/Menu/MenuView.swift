@@ -37,6 +37,26 @@ class MenuView: UIView {
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
     }()
+
+    private lazy var findPartyButton: ActivityIndicatorButton = {
+        let findPartyButton = ActivityIndicatorButton()
+        findPartyButton.setTitle("Find Party", for: .normal)
+        findPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        findPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
+        findPartyButton.setBackgroundColor(Partybox.colors.purple)
+        findPartyButton.addTarget(self, action: #selector(findPartyButtonPressed), for: .touchUpInside)
+        return findPartyButton
+    }()
+
+    private lazy var visitStoreButton: ActivityIndicatorButton = {
+        let visitStoreButton = ActivityIndicatorButton()
+        visitStoreButton.setTitle("Visit Store", for: .normal)
+        visitStoreButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        visitStoreButton.setTitleColor(Partybox.colors.white, for: .normal)
+        visitStoreButton.setBackgroundColor(Partybox.colors.green)
+        visitStoreButton.addTarget(self, action: #selector(visitStoreButtonPressed), for: .touchUpInside)
+        return visitStoreButton
+    }()
     
     private lazy var animator: UIDynamicAnimator = {
         let animator = UIDynamicAnimator(referenceView: self)
@@ -108,6 +128,8 @@ class MenuView: UIView {
         self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
+        self.addSubview(self.findPartyButton)
+        self.addSubview(self.visitStoreButton)
         
         self.partyboxImageView.snp.remakeConstraints({
             (make) in
@@ -122,7 +144,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(80)
+            make.top.equalTo(self.partyboxImageView.snp.bottom).offset(40)
         })
         
         self.joinPartyButton.snp.remakeConstraints({
@@ -131,7 +153,25 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.startPartyButton.snp.bottom).offset(40)
+            make.top.equalTo(self.startPartyButton.snp.bottom).offset(20)
+        })
+
+        self.findPartyButton.snp.remakeConstraints({
+            (make) in
+
+            make.width.equalTo(220)
+            make.height.equalTo(55)
+            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalTo(self.joinPartyButton.snp.bottom).offset(20)
+        })
+
+        self.visitStoreButton.snp.remakeConstraints({
+            (make) in
+
+            make.width.equalTo(220)
+            make.height.equalTo(55)
+            make.centerX.equalTo(self.snp.centerX)
+            make.bottom.equalTo(self.snp.bottom).offset(-32)
         })
     }
     
@@ -143,6 +183,14 @@ class MenuView: UIView {
     
     @objc private func joinPartyButtonPressed() {
         self.delegate.menuView(self, joinPartyButtonPressed: true)
+    }
+
+    @objc private func findPartyButtonPressed() {
+        self.delegate.menuView(self, findPartyButtonPressed: true)
+    }
+
+    @objc private func visitStoreButtonPressed() {
+        self.delegate.menuView(self, visitStoreButtonPressed: true)
     }
     
     // MARK: - Animation Functions
@@ -161,6 +209,22 @@ class MenuView: UIView {
     
     func stopAnimatingJoinPartyButton() {
         self.joinPartyButton.stopAnimating()
+    }
+
+    func startAnimatingFindPartyButton() {
+        self.findPartyButton.startAnimating()
+    }
+
+    func stopAnimatingFindPartyButton() {
+        self.findPartyButton.stopAnimating()
+    }
+
+    func startAnimatingVisitStoreButton() {
+        self.visitStoreButton.startAnimating()
+    }
+
+    func stopAnimatingVisitStoreButton() {
+        self.visitStoreButton.stopAnimating()
     }
 
     func setConfettiGravityDirection(_ direction: CGVector) {

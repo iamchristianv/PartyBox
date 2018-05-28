@@ -10,10 +10,12 @@ import Foundation
 
 protocol MenuViewDelegate {
 
-    // MARK: - Menu View Delegate Functions
-
     func menuView(_ menuView: MenuView, startPartyButtonPressed: Bool)
 
     func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool)
+
+    func menuView(_ menuView: MenuView, findPartyButtonPressed: Bool)
+
+    func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool)
 
 }

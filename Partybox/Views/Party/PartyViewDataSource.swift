@@ -10,8 +10,6 @@ import Foundation
 
 protocol PartyViewDataSource {
 
-    // MARK: - Party View Data Source Functions
-
     func partyViewUserName() -> String
 
     func partyViewPartyId() -> String

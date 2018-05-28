@@ -31,24 +31,24 @@ class GameTableViewCell: UITableViewCell {
         return summaryLabel
     }()
 
-    lazy var playGameButton: ActivityIndicatorButton = {
-        let playGameButton = ActivityIndicatorButton()
-        playGameButton.setTitle("Play", for: .normal)
-        playGameButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        playGameButton.setTitleColor(Partybox.colors.white, for: .normal)
-        playGameButton.setBackgroundColor(Partybox.colors.green)
-        playGameButton.addTarget(self, action: #selector(playGameButtonPressed), for: .touchUpInside)
-        return playGameButton
+    lazy var playButton: ActivityIndicatorButton = {
+        let playButton = ActivityIndicatorButton()
+        playButton.setTitle("Play", for: .normal)
+        playButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        playButton.setTitleColor(Partybox.colors.white, for: .normal)
+        playButton.setBackgroundColor(Partybox.colors.green)
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        return playButton
     }()
 
-    lazy var changeGameButton: ActivityIndicatorButton = {
-        let changeGameButton = ActivityIndicatorButton()
-        changeGameButton.setTitle("Change", for: .normal)
-        changeGameButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        changeGameButton.setTitleColor(Partybox.colors.white, for: .normal)
-        changeGameButton.setBackgroundColor(Partybox.colors.green)
-        changeGameButton.addTarget(self, action: #selector(changeGameButtonPressed), for: .touchUpInside)
-        return changeGameButton
+    lazy var changeButton: ActivityIndicatorButton = {
+        let changeButton = ActivityIndicatorButton()
+        changeButton.setTitle("Change", for: .normal)
+        changeButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        changeButton.setTitleColor(Partybox.colors.white, for: .normal)
+        changeButton.setBackgroundColor(Partybox.colors.green)
+        changeButton.addTarget(self, action: #selector(changeButtonPressed), for: .touchUpInside)
+        return changeButton
     }()
 
     private lazy var containerView: UIView = {
@@ -122,10 +122,10 @@ class GameTableViewCell: UITableViewCell {
         if self.isHostEnabled {
             self.containerView.removeFromSuperview()
 
-            self.addSubview(self.playGameButton)
-            self.addSubview(self.changeGameButton)
+            self.addSubview(self.playButton)
+            self.addSubview(self.changeButton)
 
-            self.playGameButton.snp.remakeConstraints({
+            self.playButton.snp.remakeConstraints({
                 (make) in
 
                 make.width.equalTo(220)
@@ -134,18 +134,18 @@ class GameTableViewCell: UITableViewCell {
                 make.top.equalTo(self.summaryLabel.snp.bottom).offset(24)
             })
 
-            self.changeGameButton.snp.remakeConstraints({
+            self.changeButton.snp.remakeConstraints({
                 (make) in
 
                 make.width.equalTo(220)
                 make.height.equalTo(55)
                 make.centerX.equalTo(self.snp.centerX)
-                make.top.equalTo(self.playGameButton.snp.bottom).offset(24)
+                make.top.equalTo(self.playButton.snp.bottom).offset(24)
                 make.bottom.equalTo(self.snp.bottom).offset(-24)
             })
         } else {
-            self.playGameButton.removeFromSuperview()
-            self.changeGameButton.removeFromSuperview()
+            self.playButton.removeFromSuperview()
+            self.changeButton.removeFromSuperview()
 
             self.addSubview(self.containerView)
 
@@ -179,12 +179,12 @@ class GameTableViewCell: UITableViewCell {
 
     // MARK: - Action Functions
 
-    @objc private func playGameButtonPressed() {
-        self.delegate.gameTableViewCell(self, playGameButtonPressed: true)
+    @objc private func playButtonPressed() {
+        self.delegate.gameTableViewCell(self, playButtonPressed: true)
     }
 
-    @objc private func changeGameButtonPressed() {
-        self.delegate.gameTableViewCell(self, changeGameButtonPressed: true)
+    @objc private func changeButtonPressed() {
+        self.delegate.gameTableViewCell(self, changeButtonPressed: true)
     }
 
 }

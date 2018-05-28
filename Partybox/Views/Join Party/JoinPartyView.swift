@@ -323,8 +323,6 @@ class JoinPartyView: UIView {
 
 extension JoinPartyView: UITextFieldDelegate {
 
-    // MARK: - Text Field Delegate Functions
-
     internal func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let characterCount = textField.text!.count + string.count - range.length
 
