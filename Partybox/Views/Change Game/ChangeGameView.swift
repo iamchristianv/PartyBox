@@ -115,7 +115,7 @@ extension ChangeGameView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedGameId = selectableCell.content()
+        self.selectedGameId = selectableCell.id()
         self.tableView.reloadData()
     }
     
@@ -153,9 +153,10 @@ extension ChangeGameView: UITableViewDataSource {
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
+            let id = self.dataSource.changeGameViewGameId(index: index)
             let content = self.dataSource.changeGameViewGameName(index: index)
             let selected = self.dataSource.changeGameViewGameId(index: index) == self.selectedGameId
-            selectableCell.configure(content: content, selected: selected)
+            selectableCell.configure(id: id, content: content, selected: selected)
             return selectableCell
         }
         

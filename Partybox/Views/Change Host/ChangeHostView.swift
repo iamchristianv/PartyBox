@@ -111,7 +111,7 @@ extension ChangeHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedHostName = selectableCell.content()
+        self.selectedHostName = selectableCell.id()
         self.tableView.reloadData()
     }
     
@@ -155,9 +155,10 @@ extension ChangeHostView: UITableViewDataSource {
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
+            let id = person.name
             let content = person.name
             let selected = person.name == self.selectedHostName
-            selectableCell.configure(content: content, selected: selected)
+            selectableCell.configure(id: id, content: content, selected: selected)
             return selectableCell
         }
         

@@ -36,7 +36,7 @@ class PromptTableViewCell: UITableViewCell {
     
     private func setupView() {
         self.backgroundColor = Partybox.colors.white
-        self.isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = false
         self.selectionStyle = .none
 
         self.addSubview(self.promptLabel)

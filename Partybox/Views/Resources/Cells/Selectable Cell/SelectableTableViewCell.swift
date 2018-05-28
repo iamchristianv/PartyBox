@@ -34,11 +34,14 @@ class SelectableTableViewCell: UITableViewCell {
         return underlineLabel
     }()
 
+    private var contentId: String!
+
     // MARK: - Configuration Functions
 
-    func configure(content: String, selected: Bool) {
+    func configure(id: String, content: String, selected: Bool) {
         self.contentLabel.text = content
         self.selectableView = SelectableView.construct(selected: selected)
+        self.contentId = id
         self.setupView()
     }
 
@@ -81,6 +84,10 @@ class SelectableTableViewCell: UITableViewCell {
     }
 
     // MARK: - View Functions
+
+    func id() -> String {
+        return self.contentId
+    }
 
     func content() -> String {
         return self.contentLabel.text!
