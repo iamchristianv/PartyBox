@@ -61,7 +61,7 @@ class Party {
                     PartyDetailsKey.status.rawValue: self.details.status,
                     PartyDetailsKey.gameId.rawValue: self.details.gameId,
                     PartyDetailsKey.hostName.rawValue: self.details.hostName,
-                    PartyDetailsKey.startTime.rawValue: ServerValue.timestamp(),
+                    PartyDetailsKey.timestamp.rawValue: ServerValue.timestamp(),
                 ],
                 PartyKey.people.rawValue: [
                     person.name: [

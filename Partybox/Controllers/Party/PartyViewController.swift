@@ -167,22 +167,11 @@ class PartyViewController: UIViewController {
 extension PartyViewController: PartyViewDelegate {
 
     internal func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
-        self.contentView.startAnimatingPlayButton()
-
-        self.session.fetchPacks(callback: {
-            (error) in
-
-            self.contentView.stopAnimatingPlayButton()
-
-            if let error = error {
-                let subject = "Oh no"
-                let message = error
-                let action = "Okay"
-                self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            } else {
-                //self.showSetupWannabeViewController()
-            }
-        })
+        if self.session.party.details.gameId == self.session.wannabe.details.id {
+            let setupWannabeViewController = SetupWannabeViewController.construct(session: self.session)
+            let navigationController = UINavigationController(rootViewController: setupWannabeViewController)
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
     
     internal func partyView(_ partyView: PartyView, changeButtonPressed: Bool) {
@@ -278,7 +267,7 @@ extension PartyViewController: ChangeHostViewControllerDelegate {
 
 extension PartyViewController: ChangeGameViewControllerDelegate {
 
-    func changeGameViewController(_ changeGameViewController: ChangeGameViewController, gameChanged: Bool) {
+    internal func changeGameViewController(_ changeGameViewController: ChangeGameViewController, gameChanged: Bool) {
         self.contentView.reloadTable()
     }
 

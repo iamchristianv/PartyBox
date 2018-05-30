@@ -24,7 +24,7 @@ class PartyDetails {
 
     var hostName: String = Partybox.values.none
 
-    var startTime: Int = Partybox.values.zero
+    var timestamp: Int = Partybox.values.zero
 
     private var dataSource: PartyDetailsDataSource!
 
@@ -37,7 +37,7 @@ class PartyDetails {
         details.status = PartyDetailsStatus.waiting.rawValue
         details.gameId = Partybox.values.randomGameId()
         details.hostName = Partybox.values.none
-        details.startTime = Partybox.values.zero
+        details.timestamp = Partybox.values.zero
         details.dataSource = dataSource
         return details
     }
@@ -49,7 +49,7 @@ class PartyDetails {
         details.status = PartyDetailsStatus.waiting.rawValue
         details.gameId = Partybox.values.randomGameId()
         details.hostName = Partybox.values.none
-        details.startTime = Partybox.values.zero
+        details.timestamp = Partybox.values.zero
         details.dataSource = dataSource
         return details
     }
@@ -61,7 +61,7 @@ class PartyDetails {
         details.status = json[PartyDetailsKey.status.rawValue].stringValue
         details.gameId = json[PartyDetailsKey.gameId.rawValue].stringValue
         details.hostName = json[PartyDetailsKey.hostName.rawValue].stringValue
-        details.startTime = json[PartyDetailsKey.startTime.rawValue].intValue
+        details.timestamp = json[PartyDetailsKey.timestamp.rawValue].intValue
         details.dataSource = dataSource
         return details
     }

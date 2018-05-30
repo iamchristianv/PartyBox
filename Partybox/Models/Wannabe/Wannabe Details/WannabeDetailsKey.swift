@@ -16,9 +16,9 @@ enum WannabeDetailsKey: String {
 
     case status
 
-    case maxRounds
+    case rounds
 
-    case activeCard
+    case card
 
     case wannabeName
 

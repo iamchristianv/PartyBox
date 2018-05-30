@@ -27,10 +27,6 @@ class PartyView: UIView {
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
-
-    private var playButton: ActivityIndicatorButton?
-
-    private var changeButton: ActivityIndicatorButton?
     
     private var delegate: PartyViewDelegate!
 
@@ -40,8 +36,6 @@ class PartyView: UIView {
 
     static func construct(delegate: PartyViewDelegate, dataSource: PartyViewDataSource) -> PartyView {
         let view = PartyView()
-        view.playButton = nil
-        view.changeButton = nil
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -69,24 +63,6 @@ class PartyView: UIView {
 
     func reloadTable() {
         self.tableView.reloadData()
-    }
-    
-    // MARK: - Animation Functions
-    
-    func startAnimatingPlayButton() {
-        self.playButton?.startAnimating()
-    }
-    
-    func stopAnimatingPlayButton() {
-        self.playButton?.stopAnimating()
-    }
-
-    func startAnimatingChangeButton() {
-        self.changeButton?.startAnimating()
-    }
-
-    func stopAnimatingChangeButton() {
-        self.changeButton?.stopAnimating()
     }
     
 }
@@ -155,8 +131,6 @@ extension PartyView: UITableViewDataSource {
             let summary = self.dataSource.partyViewGameSummary()
             let isHostEnabled = self.dataSource.partyViewUserName() == self.dataSource.partyViewHostName()
             gameCell.configure(name: name, summary: summary, isHostEnabled: isHostEnabled, delegate: self)
-            self.playButton = gameCell.playButton
-            self.changeButton = gameCell.changeButton
             return gameCell
         }
         

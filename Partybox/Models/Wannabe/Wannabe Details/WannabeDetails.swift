@@ -20,9 +20,9 @@ class WannabeDetails {
 
     var status: String = Partybox.values.none
 
-    var maxRounds: Int = Partybox.values.zero
+    var rounds: Int = Partybox.values.zero
 
-    var activeCard: WannabeCard = WannabeCard()
+    var card: WannabeCard = WannabeCard()
     
     var wannabeName: String = Partybox.values.none
 
@@ -35,8 +35,8 @@ class WannabeDetails {
         details.id = "C2D4V"
         details.name = "Wannabe"
         details.status = WannabeDetailsStatus.starting.rawValue
-        details.maxRounds = WannabeDetailsRounds.three.rawValue
-        details.activeCard = WannabeCard.construct()
+        details.rounds = WannabeDetailsRounds.three.rawValue
+        details.card = WannabeCard.construct()
         details.wannabeName = Partybox.values.none
         details.dataSource = dataSource
         return details
@@ -47,8 +47,8 @@ class WannabeDetails {
         details.id = json[WannabeDetailsKey.id.rawValue].stringValue
         details.name = json[WannabeDetailsKey.name.rawValue].stringValue
         details.status = json[WannabeDetailsKey.status.rawValue].stringValue
-        details.maxRounds = json[WannabeDetailsKey.maxRounds.rawValue].intValue
-        details.activeCard = WannabeCard.construct(json: json[WannabeDetailsKey.activeCard.rawValue])
+        details.rounds = json[WannabeDetailsKey.rounds.rawValue].intValue
+        details.card = WannabeCard.construct(json: json[WannabeDetailsKey.card.rawValue])
         details.wannabeName = json[WannabeDetailsKey.wannabeName.rawValue].stringValue
         details.dataSource = dataSource
         return details
@@ -81,16 +81,16 @@ class WannabeDetails {
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
 
-            if snapshot.key == WannabeDetailsKey.activeCard.rawValue {
+            if snapshot.key == WannabeDetailsKey.card.rawValue {
                 guard let data = snapshot.value as? [String: Any] else {
                     return
                 }
 
                 let json = JSON(data)
 
-                self.activeCard = WannabeCard.construct(json: json)
+                self.card = WannabeCard.construct(json: json)
 
-                let name = Notification.Name(WannabeDetailsNotification.activeCardChanged.rawValue)
+                let name = Notification.Name(WannabeDetailsNotification.cardChanged.rawValue)
                 NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
             }
         })

@@ -31,7 +31,7 @@ class GameTableViewCell: UITableViewCell {
         return summaryLabel
     }()
 
-    lazy var playButton: ActivityIndicatorButton = {
+    private lazy var playButton: ActivityIndicatorButton = {
         let playButton = ActivityIndicatorButton()
         playButton.setTitle("Play", for: .normal)
         playButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
@@ -41,7 +41,7 @@ class GameTableViewCell: UITableViewCell {
         return playButton
     }()
 
-    lazy var changeButton: ActivityIndicatorButton = {
+    private lazy var changeButton: ActivityIndicatorButton = {
         let changeButton = ActivityIndicatorButton()
         changeButton.setTitle("Change", for: .normal)
         changeButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)

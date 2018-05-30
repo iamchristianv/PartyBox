@@ -20,6 +20,6 @@ enum PartyDetailsKey: String {
 
     case hostName
 
-    case startTime
+    case timestamp
 
 }

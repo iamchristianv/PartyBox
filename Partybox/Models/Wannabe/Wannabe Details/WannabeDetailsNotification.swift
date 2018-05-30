@@ -12,6 +12,6 @@ enum WannabeDetailsNotification: String {
 
     case statusChanged = "WannabeDetailsNotification/statusChanged"
 
-    case activeCardChanged = "WannabeDetailsNotification/activeCardChanged"
+    case cardChanged = "WannabeDetailsNotification/cardChanged"
 
 }

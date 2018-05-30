@@ -56,10 +56,10 @@ class Wannabe {
                     WannabeDetailsKey.id.rawValue: self.details.id,
                     WannabeDetailsKey.name.rawValue: self.details.name,
                     WannabeDetailsKey.status.rawValue: self.details.status,
-                    WannabeDetailsKey.maxRounds.rawValue: self.details.maxRounds,
-                    WannabeDetailsKey.activeCard.rawValue: [
-                        WannabeCardKey.hint.rawValue: self.details.activeCard.hint,
-                        WannabeCardKey.action.rawValue: self.details.activeCard.action
+                    WannabeDetailsKey.rounds.rawValue: self.details.rounds,
+                    WannabeDetailsKey.card.rawValue: [
+                        WannabeCardKey.hint.rawValue: self.details.card.hint,
+                        WannabeCardKey.action.rawValue: self.details.card.action
                     ],
                     WannabeDetailsKey.wannabeName.rawValue: self.details.wannabeName
                 ],
