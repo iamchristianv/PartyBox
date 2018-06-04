@@ -1,5 +1,5 @@
 //
-//  ChangeHostViewCellRow.swift
+//  ChangePartyHostViewCellRow.swift
 //  Partybox
 //
 //  Created by Christian Villa on 5/13/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ChangeHostViewCellRow: Int {
+enum ChangePartyHostViewCellRow: Int {
 
     case promptCell = 0
 

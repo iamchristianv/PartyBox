@@ -1,5 +1,5 @@
 //
-//  ChangeHostViewController.swift
+//  ChangePartyHostViewController.swift
 //  Partybox
 //
 //  Created by Christian Villa on 2/17/18.
@@ -8,22 +8,22 @@
 
 import UIKit
 
-class ChangeHostViewController: UIViewController {
+class ChangePartyHostViewController: UIViewController {
 
     // MARK: - Instance Properties
 
     private var session: Session!
     
-    private var contentView: ChangeHostView!
+    private var contentView: ChangePartyHostView!
     
-    private var delegate: ChangeHostViewControllerDelegate!
+    private var delegate: ChangePartyHostViewControllerDelegate!
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session, delegate: ChangeHostViewControllerDelegate) -> ChangeHostViewController {
-        let controller = ChangeHostViewController()
+    static func construct(session: Session, delegate: ChangePartyHostViewControllerDelegate) -> ChangePartyHostViewController {
+        let controller = ChangePartyHostViewController()
         controller.session = session
-        controller.contentView = ChangeHostView.construct(delegate: controller, dataSource: controller)
+        controller.contentView = ChangePartyHostView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
     }
@@ -82,41 +82,41 @@ class ChangeHostViewController: UIViewController {
     @objc private func partyPeoplePersonRemoved(notification: Notification) {
         self.contentView.reloadTable()
 
-        if !self.session.party.people.persons.contains(key: self.contentView.hostName()) {
-            self.contentView.setHostName(self.session.party.details.hostName)
+        if !self.session.party.people.persons.contains(key: self.contentView.partyHostName()) {
+            self.contentView.setPartyHostName(self.session.party.details.hostName)
             self.contentView.reloadTable()
         }
     }
 
 }
 
-extension ChangeHostViewController: ChangeHostViewDelegate {
+extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
         
-    func changeHostView(_ changeHostView: ChangeHostView, saveButtonPressed: Bool) {
-        if self.contentView.hostName() == self.session.party.details.hostName {
+    func changePartyHostView(_ view: ChangePartyHostView, saveButtonPressed: Bool) {
+        if self.contentView.partyHostName() == self.session.party.details.hostName {
             let subject = "Woah there"
             let message = "Please select a new person to be the host"
             let action = "Okay"
             self.showAlert(subject: subject, message: message, action: action, handler: nil)
         } else {
-            self.delegate.changeHostViewController(self, hostNameChanged: self.contentView.hostName())
+            self.delegate.changePartyHostViewController(self, partyHostChanged: self.contentView.partyHostName())
             self.dismiss(animated: true, completion: nil)
         }
     }
     
 }
 
-extension ChangeHostViewController: ChangeHostViewDataSource {
+extension ChangePartyHostViewController: ChangePartyHostViewDataSource {
 
-    func changeHostViewHostName() -> String {
+    func changePartyHostViewHostName() -> String {
         return self.session.party.details.hostName
     }
 
-    func changeHostViewPeopleCount() -> Int {
+    func changePartyHostViewPeopleCount() -> Int {
         return self.session.party.people.persons.count
     }
 
-    func changeHostViewPerson(index: Int) -> PartyPerson? {
+    func changePartyHostViewPerson(index: Int) -> PartyPerson? {
         return self.session.party.people.persons.fetch(index: index)
     }
 

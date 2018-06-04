@@ -83,12 +83,12 @@
 		AA5E8A4C20A8CF2E00FE8960 /* ManagePartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4B20A8CF2E00FE8960 /* ManagePartyViewController.swift */; };
 		AA5E8A4E20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4D20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift */; };
 		AA5E8A5020A9010500FE8960 /* ManagePartyViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A4F20A9010500FE8960 /* ManagePartyViewDataSource.swift */; };
-		AA5E8A5420A90D6800FE8960 /* ChangeHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5320A90D6800FE8960 /* ChangeHostView.swift */; };
-		AA5E8A5620A90D7100FE8960 /* ChangeHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5520A90D7100FE8960 /* ChangeHostViewController.swift */; };
-		AA5E8A5A20A9121100FE8960 /* ChangeHostViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5920A9121100FE8960 /* ChangeHostViewControllerDelegate.swift */; };
-		AA5E8A5C20A912E900FE8960 /* ChangeHostViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5B20A912E900FE8960 /* ChangeHostViewDelegate.swift */; };
-		AA5E8A5E20A9130E00FE8960 /* ChangeHostViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5D20A9130E00FE8960 /* ChangeHostViewCellRow.swift */; };
-		AA5E8A6020A9159800FE8960 /* ChangeHostViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5F20A9159800FE8960 /* ChangeHostViewDataSource.swift */; };
+		AA5E8A5420A90D6800FE8960 /* ChangePartyHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5320A90D6800FE8960 /* ChangePartyHostView.swift */; };
+		AA5E8A5620A90D7100FE8960 /* ChangePartyHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5520A90D7100FE8960 /* ChangePartyHostViewController.swift */; };
+		AA5E8A5A20A9121100FE8960 /* ChangePartyHostViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5920A9121100FE8960 /* ChangePartyHostViewControllerDelegate.swift */; };
+		AA5E8A5C20A912E900FE8960 /* ChangePartyHostViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5B20A912E900FE8960 /* ChangePartyHostViewDelegate.swift */; };
+		AA5E8A5E20A9130E00FE8960 /* ChangePartyHostViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5D20A9130E00FE8960 /* ChangePartyHostViewCellRow.swift */; };
+		AA5E8A6020A9159800FE8960 /* ChangePartyHostViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A5F20A9159800FE8960 /* ChangePartyHostViewDataSource.swift */; };
 		AA5E8A6320A9167A00FE8960 /* PromptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6220A9167A00FE8960 /* PromptTableViewCell.swift */; };
 		AA5E8A6620A9172C00FE8960 /* SelectableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6520A9172B00FE8960 /* SelectableTableViewCell.swift */; };
 		AA5E8A6820A9177200FE8960 /* SelectableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A6720A9177100FE8960 /* SelectableView.swift */; };
@@ -200,12 +200,12 @@
 		AA5E8A4B20A8CF2E00FE8960 /* ManagePartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagePartyViewController.swift; sourceTree = "<group>"; };
 		AA5E8A4D20A8EEDA00FE8960 /* ManagePartyViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewDelegate.swift; sourceTree = "<group>"; };
 		AA5E8A4F20A9010500FE8960 /* ManagePartyViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePartyViewDataSource.swift; sourceTree = "<group>"; };
-		AA5E8A5320A90D6800FE8960 /* ChangeHostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeHostView.swift; sourceTree = "<group>"; };
-		AA5E8A5520A90D7100FE8960 /* ChangeHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeHostViewController.swift; sourceTree = "<group>"; };
-		AA5E8A5920A9121100FE8960 /* ChangeHostViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewControllerDelegate.swift; sourceTree = "<group>"; };
-		AA5E8A5B20A912E900FE8960 /* ChangeHostViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewDelegate.swift; sourceTree = "<group>"; };
-		AA5E8A5D20A9130E00FE8960 /* ChangeHostViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewCellRow.swift; sourceTree = "<group>"; };
-		AA5E8A5F20A9159800FE8960 /* ChangeHostViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeHostViewDataSource.swift; sourceTree = "<group>"; };
+		AA5E8A5320A90D6800FE8960 /* ChangePartyHostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePartyHostView.swift; sourceTree = "<group>"; };
+		AA5E8A5520A90D7100FE8960 /* ChangePartyHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePartyHostViewController.swift; sourceTree = "<group>"; };
+		AA5E8A5920A9121100FE8960 /* ChangePartyHostViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePartyHostViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AA5E8A5B20A912E900FE8960 /* ChangePartyHostViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePartyHostViewDelegate.swift; sourceTree = "<group>"; };
+		AA5E8A5D20A9130E00FE8960 /* ChangePartyHostViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePartyHostViewCellRow.swift; sourceTree = "<group>"; };
+		AA5E8A5F20A9159800FE8960 /* ChangePartyHostViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePartyHostViewDataSource.swift; sourceTree = "<group>"; };
 		AA5E8A6220A9167A00FE8960 /* PromptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptTableViewCell.swift; sourceTree = "<group>"; };
 		AA5E8A6520A9172B00FE8960 /* SelectableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableTableViewCell.swift; sourceTree = "<group>"; };
 		AA5E8A6720A9177100FE8960 /* SelectableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableView.swift; sourceTree = "<group>"; };
@@ -388,7 +388,7 @@
 				AAF812AF2092B1660010FFB1 /* Join Party */,
 				AAF812BA2094426F0010FFB1 /* Party */,
 				AA5E8A4620A8CF0300FE8960 /* Manage Party */,
-				AA5E8A5220A90D4600FE8960 /* Change Host */,
+				AA5E8A5220A90D4600FE8960 /* Change Party Host */,
 				AA1CEE9820BBD00E008AE617 /* Change Game */,
 			);
 			path = Party;
@@ -412,7 +412,7 @@
 				AAF812B02092B1730010FFB1 /* Join Party */,
 				AAF812BB209442790010FFB1 /* Party */,
 				AA5E8A4520A8CEEF00FE8960 /* Manage Party */,
-				AA5E8A5120A90D3500FE8960 /* Change Host */,
+				AA5E8A5120A90D3500FE8960 /* Change Party Host */,
 				AA1CEE9720BBCFF8008AE617 /* Change Game */,
 			);
 			path = Party;
@@ -613,24 +613,24 @@
 			path = "Manage Party";
 			sourceTree = "<group>";
 		};
-		AA5E8A5120A90D3500FE8960 /* Change Host */ = {
+		AA5E8A5120A90D3500FE8960 /* Change Party Host */ = {
 			isa = PBXGroup;
 			children = (
-				AA5E8A5520A90D7100FE8960 /* ChangeHostViewController.swift */,
-				AA5E8A5920A9121100FE8960 /* ChangeHostViewControllerDelegate.swift */,
+				AA5E8A5520A90D7100FE8960 /* ChangePartyHostViewController.swift */,
+				AA5E8A5920A9121100FE8960 /* ChangePartyHostViewControllerDelegate.swift */,
 			);
-			path = "Change Host";
+			path = "Change Party Host";
 			sourceTree = "<group>";
 		};
-		AA5E8A5220A90D4600FE8960 /* Change Host */ = {
+		AA5E8A5220A90D4600FE8960 /* Change Party Host */ = {
 			isa = PBXGroup;
 			children = (
-				AA5E8A5320A90D6800FE8960 /* ChangeHostView.swift */,
-				AA5E8A5D20A9130E00FE8960 /* ChangeHostViewCellRow.swift */,
-				AA5E8A5B20A912E900FE8960 /* ChangeHostViewDelegate.swift */,
-				AA5E8A5F20A9159800FE8960 /* ChangeHostViewDataSource.swift */,
+				AA5E8A5320A90D6800FE8960 /* ChangePartyHostView.swift */,
+				AA5E8A5D20A9130E00FE8960 /* ChangePartyHostViewCellRow.swift */,
+				AA5E8A5B20A912E900FE8960 /* ChangePartyHostViewDelegate.swift */,
+				AA5E8A5F20A9159800FE8960 /* ChangePartyHostViewDataSource.swift */,
 			);
-			path = "Change Host";
+			path = "Change Party Host";
 			sourceTree = "<group>";
 		};
 		AA5E8A6120A9165B00FE8960 /* Prompt Cell */ = {
@@ -1024,7 +1024,7 @@
 				AAF812A32092552D0010FFB1 /* ShapeView.swift in Sources */,
 				AA1CEEA220BBD2DF008AE617 /* ChangeGameViewCellRow.swift in Sources */,
 				AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */,
-				AA5E8A5620A90D7100FE8960 /* ChangeHostViewController.swift in Sources */,
+				AA5E8A5620A90D7100FE8960 /* ChangePartyHostViewController.swift in Sources */,
 				AA5E89E920A13C0C00FE8960 /* PartyDetailsKey.swift in Sources */,
 				AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */,
 				AA2A87B9209C1166009C55BF /* PartyPeople.swift in Sources */,
@@ -1032,7 +1032,7 @@
 				AA2A87BB209D825D009C55BF /* WannabePeople.swift in Sources */,
 				AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */,
 				AA5E8A1420A15F8500FE8960 /* WannabeDetailsDataSource.swift in Sources */,
-				AA5E8A5420A90D6800FE8960 /* ChangeHostView.swift in Sources */,
+				AA5E8A5420A90D6800FE8960 /* ChangePartyHostView.swift in Sources */,
 				AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */,
 				AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */,
 				AAF812AD2092A7020010FFB1 /* StartPartyView.swift in Sources */,
@@ -1043,7 +1043,7 @@
 				AAF81297209241550010FFB1 /* AlertView.swift in Sources */,
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
 				AA5E89EB20A13C3A00FE8960 /* PartyDetailsNotification.swift in Sources */,
-				AA5E8A5C20A912E900FE8960 /* ChangeHostViewDelegate.swift in Sources */,
+				AA5E8A5C20A912E900FE8960 /* ChangePartyHostViewDelegate.swift in Sources */,
 				AAF812A52092552D0010FFB1 /* TriangleView.swift in Sources */,
 				AA5E8A4C20A8CF2E00FE8960 /* ManagePartyViewController.swift in Sources */,
 				AA5E8A3220A7E2E600FE8960 /* StartPartyViewDelegate.swift in Sources */,
@@ -1083,7 +1083,7 @@
 				AA5E8A5020A9010500FE8960 /* ManagePartyViewDataSource.swift in Sources */,
 				AA1CEE9A20BBD074008AE617 /* ChangeGameView.swift in Sources */,
 				AA5E8A4920A8CF2500FE8960 /* ManagePartyView.swift in Sources */,
-				AA5E8A5E20A9130E00FE8960 /* ChangeHostViewCellRow.swift in Sources */,
+				AA5E8A5E20A9130E00FE8960 /* ChangePartyHostViewCellRow.swift in Sources */,
 				AAF812992092415C0010FFB1 /* AlertViewController.swift in Sources */,
 				AA6706C31F89D9F5000BF5F5 /* Party.swift in Sources */,
 				AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */,
@@ -1104,7 +1104,7 @@
 				AA2A87B2209A9B7E009C55BF /* GameTableViewCell.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
 				AA5E8A1620A1615500FE8960 /* WannabePeopleKey.swift in Sources */,
-				AA5E8A5A20A9121100FE8960 /* ChangeHostViewControllerDelegate.swift in Sources */,
+				AA5E8A5A20A9121100FE8960 /* ChangePartyHostViewControllerDelegate.swift in Sources */,
 				AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */,
 				AA5E8A3B20A80EB400FE8960 /* GameTableViewCellDelegate.swift in Sources */,
 				AA69F9C420AD089100A91E3E /* Partybox.swift in Sources */,
@@ -1114,7 +1114,7 @@
 				AA5E8A6620A9172C00FE8960 /* SelectableTableViewCell.swift in Sources */,
 				AA5E8A6A20A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift in Sources */,
 				AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */,
-				AA5E8A6020A9159800FE8960 /* ChangeHostViewDataSource.swift in Sources */,
+				AA5E8A6020A9159800FE8960 /* ChangePartyHostViewDataSource.swift in Sources */,
 				AA1CEEC620C0D7C8008AE617 /* SelectWannabeRoundsViewControllerDelegate.swift in Sources */,
 				AA5E8A4020A8150B00FE8960 /* PartyViewControllerDelegate.swift in Sources */,
 				AA5E89F420A13F9700FE8960 /* PartyPeopleNotification.swift in Sources */,

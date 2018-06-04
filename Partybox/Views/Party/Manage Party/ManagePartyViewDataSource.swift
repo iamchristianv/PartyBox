@@ -10,8 +10,8 @@ import Foundation
 
 protocol ManagePartyViewDataSource {
 
-    func managePartyViewName() -> String
+    func managePartyViewPartyName() -> String
 
-    func managePartyViewHostName() -> String
+    func managePartyViewPartyHostName() -> String
 
 }

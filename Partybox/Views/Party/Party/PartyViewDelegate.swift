@@ -14,6 +14,6 @@ protocol PartyViewDelegate {
 
     func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
 
-    func partyView(_ partyView: PartyView, kickButtonPressed personName: String)
+    func partyView(_ partyView: PartyView, kickButtonPressed partyPersonName: String)
 
 }

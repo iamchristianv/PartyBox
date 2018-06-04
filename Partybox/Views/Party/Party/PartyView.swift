@@ -70,17 +70,17 @@ class PartyView: UIView {
 extension PartyView: UITableViewDelegate {
 
     internal func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if self.dataSource.partyViewUserName() != self.dataSource.partyViewHostName() {
+        if self.dataSource.partyViewUserName() != self.dataSource.partyViewPartyHostName() {
             return []
         }
         
         let index = indexPath.row - PartyViewCellRow.personCells.rawValue
         
-        guard let person = self.dataSource.partyViewPerson(index: index) else {
+        guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
             return []
         }
         
-        if person.name == self.dataSource.partyViewHostName() {
+        if person.name == self.dataSource.partyViewPartyHostName() {
             return []
         }
         
@@ -104,7 +104,7 @@ extension PartyView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyViewCellRow.personCells.rawValue + self.dataSource.partyViewPeopleCount()
+        return PartyViewCellRow.personCells.rawValue + self.dataSource.partyViewPartyPeopleCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,8 +129,8 @@ extension PartyView: UITableViewDataSource {
             let gameCell = tableViewCell as! GameTableViewCell
             let name = self.dataSource.partyViewGameName()
             let summary = self.dataSource.partyViewGameSummary()
-            let isHostEnabled = self.dataSource.partyViewUserName() == self.dataSource.partyViewHostName()
-            gameCell.configure(name: name, summary: summary, isHostEnabled: isHostEnabled, delegate: self)
+            let hasHostActions = self.dataSource.partyViewUserName() == self.dataSource.partyViewPartyHostName()
+            gameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
             return gameCell
         }
         
@@ -145,7 +145,7 @@ extension PartyView: UITableViewDataSource {
         if indexPath.row >= PartyViewCellRow.personCells.rawValue {
             let index = indexPath.row - PartyViewCellRow.personCells.rawValue
             
-            guard let person = self.dataSource.partyViewPerson(index: index) else {
+            guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
                 return UITableViewCell()
             }
             
@@ -153,7 +153,7 @@ extension PartyView: UITableViewDataSource {
             let personCell = tableViewCell as! PersonTableViewCell
             let name = person.name
             let isMe = person.name == self.dataSource.partyViewUserName()
-            let isHost = person.name == self.dataSource.partyViewHostName()
+            let isHost = person.name == self.dataSource.partyViewPartyHostName()
             let emoji = person.emoji
             let points = person.points
             personCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)

@@ -72,16 +72,16 @@ class GameTableViewCell: UITableViewCell {
         return promptLabel
     }()
 
-    private var isHostEnabled: Bool = false
+    private var hasHostActions: Bool = false
 
     private var delegate: GameTableViewCellDelegate!
 
     // MARK: - Configuration Functions
 
-    func configure(name: String, summary: String, isHostEnabled: Bool, delegate: GameTableViewCellDelegate) {
+    func configure(name: String, summary: String, hasHostActions: Bool, delegate: GameTableViewCellDelegate) {
         self.nameLabel.text = name
         self.summaryLabel.text = summary
-        self.isHostEnabled = isHostEnabled
+        self.hasHostActions = hasHostActions
         self.delegate = delegate
         self.setupView()
     }
@@ -119,7 +119,7 @@ class GameTableViewCell: UITableViewCell {
             make.top.equalTo(self.nameLabel.snp.bottom).offset(8)
         })
 
-        if self.isHostEnabled {
+        if self.hasHostActions {
             self.containerView.removeFromSuperview()
 
             self.addSubview(self.playButton)

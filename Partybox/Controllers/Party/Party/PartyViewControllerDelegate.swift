@@ -10,6 +10,6 @@ import Foundation
 
 protocol PartyViewControllerDelegate {
 
-    func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool)
+    func partyViewController(_ controller: PartyViewController, userKicked: Bool)
 
 }

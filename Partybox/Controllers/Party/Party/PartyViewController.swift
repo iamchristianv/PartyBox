@@ -91,8 +91,8 @@ class PartyViewController: UIViewController {
         self.showAlert(subject: subject, message: message, action: action, handler: {
             if self.session.party.people.persons.count > 1 {
                 if self.session.user.name == self.session.party.details.hostName {
-                    let changeHostViewController = ChangeHostViewController.construct(session: self.session, delegate: self)
-                    let navigationController = UINavigationController(rootViewController: changeHostViewController)
+                    let changePartyHostViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
+                    let navigationController = UINavigationController(rootViewController: changePartyHostViewController)
                     self.present(navigationController, animated: true, completion: nil)
                 } else {
                     self.dismiss(animated: true, completion: {
@@ -121,7 +121,7 @@ class PartyViewController: UIViewController {
 
     @objc private func partyDetailsStatusChanged(notification: Notification) {
         if self.session.party.details.status == PartyDetailsStatus.playing.rawValue {
-            //self.showSetupWannabeViewController()
+            //self.showStartWannabeViewController()
         }
     }
 
@@ -168,8 +168,6 @@ extension PartyViewController: PartyViewDelegate {
 
     internal func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
         if self.session.party.details.gameId == self.session.wannabe.details.id {
-            
-
             let setupWannabeViewController = SetupWannabeViewController.construct(session: self.session)
             let navigationController = UINavigationController(rootViewController: setupWannabeViewController)
             self.present(navigationController, animated: true, completion: nil)
@@ -182,12 +180,12 @@ extension PartyViewController: PartyViewDelegate {
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func partyView(_ partyView: PartyView, kickButtonPressed personName: String) {
+    internal func partyView(_ partyView: PartyView, kickButtonPressed partyPersonName: String) {
         let subject = "Woah there"
         let message = "Are you sure you want to kick this person?"
         let action = "Kick"
         self.showAlert(subject: subject, message: message, action: action, handler: {
-            let values = [personName: Partybox.values.null]
+            let values = [partyPersonName: Partybox.values.null]
 
             self.session.party.people.update(values: values, callback: {
                 (error) in
@@ -214,15 +212,15 @@ extension PartyViewController: PartyViewDataSource {
         return self.session.party.details.id
     }
 
-    internal func partyViewHostName() -> String {
+    internal func partyViewPartyHostName() -> String {
         return self.session.party.details.hostName
     }
 
-    internal func partyViewPeopleCount() -> Int {
+    internal func partyViewPartyPeopleCount() -> Int {
         return self.session.party.people.persons.count
     }
 
-    internal func partyViewPerson(index: Int) -> PartyPerson? {
+    internal func partyViewPartyPerson(index: Int) -> PartyPerson? {
         return self.session.party.people.persons.fetch(index: index)
     }
 
@@ -244,10 +242,10 @@ extension PartyViewController: ManagePartyViewControllerDelegate {
 
 }
 
-extension PartyViewController: ChangeHostViewControllerDelegate {
+extension PartyViewController: ChangePartyHostViewControllerDelegate {
 
-    internal func changeHostViewController(_ changeHostViewController: ChangeHostViewController, hostNameChanged hostName: String) {
-        let values = [PartyDetailsKey.hostName.rawValue: hostName]
+    internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String) {
+        let values = [PartyDetailsKey.hostName.rawValue: partyHostName]
 
         self.session.party.details.update(values: values, callback: {
             (error) in

@@ -1,5 +1,5 @@
 //
-//  ChangeHostView.swift
+//  ChangePartyHostView.swift
 //  Partybox
 //
 //  Created by Christian Villa on 2/17/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangeHostView: UIView {
+class ChangePartyHostView: UIView {
     
     // MARK: - Instance Properties
     
@@ -39,15 +39,15 @@ class ChangeHostView: UIView {
 
     private var selectedHostName: String!
     
-    private var delegate: ChangeHostViewDelegate!
+    private var delegate: ChangePartyHostViewDelegate!
 
-    private var dataSource: ChangeHostViewDataSource!
+    private var dataSource: ChangePartyHostViewDataSource!
 
     // MARK: - Construction Functions
 
-    static func construct(delegate: ChangeHostViewDelegate, dataSource: ChangeHostViewDataSource) -> ChangeHostView {
-        let view = ChangeHostView()
-        view.selectedHostName = dataSource.changeHostViewHostName()
+    static func construct(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) -> ChangePartyHostView {
+        let view = ChangePartyHostView()
+        view.selectedHostName = dataSource.changePartyHostViewHostName()
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -85,7 +85,7 @@ class ChangeHostView: UIView {
     // MARK: - Action Functions
     
     @objc private func saveButtonPressed() {
-        self.delegate.changeHostView(self, saveButtonPressed: true)
+        self.delegate.changePartyHostView(self, saveButtonPressed: true)
     }
     
     // MARK: - View Functions
@@ -94,17 +94,17 @@ class ChangeHostView: UIView {
         self.tableView.reloadData()
     }
 
-    func setHostName(_ hostName: String) {
-        self.selectedHostName = hostName
+    func setPartyHostName(_ partyHostName: String) {
+        self.selectedHostName = partyHostName
     }
     
-    func hostName() -> String {
+    func partyHostName() -> String {
         return self.selectedHostName
     }
 
 }
 
-extension ChangeHostView: UITableViewDelegate {
+extension ChangePartyHostView: UITableViewDelegate {
 
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
@@ -115,18 +115,18 @@ extension ChangeHostView: UITableViewDelegate {
     
 }
 
-extension ChangeHostView: UITableViewDataSource {
+extension ChangePartyHostView: UITableViewDataSource {
         
     internal func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangeHostViewCellRow.personCells.rawValue + self.dataSource.changeHostViewPeopleCount()
+        return ChangePartyHostViewCellRow.personCells.rawValue + self.dataSource.changePartyHostViewPeopleCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == ChangeHostViewCellRow.promptCell.rawValue {
+        if indexPath.row == ChangePartyHostViewCellRow.promptCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
             let promptCell = tableViewCell as! PromptTableViewCell
             let prompt = "Who should be the host?"
@@ -134,7 +134,7 @@ extension ChangeHostView: UITableViewDataSource {
             return promptCell
         }
         
-        if indexPath.row == ChangeHostViewCellRow.peopleHeaderCell.rawValue {
+        if indexPath.row == ChangePartyHostViewCellRow.peopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let headerCell = tableViewCell as! HeaderTableViewCell
             let header = "PEOPLE"
@@ -142,10 +142,10 @@ extension ChangeHostView: UITableViewDataSource {
             return headerCell
         }
         
-        if indexPath.row >= ChangeHostViewCellRow.personCells.rawValue {
-            let index = indexPath.row - ChangeHostViewCellRow.personCells.rawValue
+        if indexPath.row >= ChangePartyHostViewCellRow.personCells.rawValue {
+            let index = indexPath.row - ChangePartyHostViewCellRow.personCells.rawValue
             
-            guard let person = self.dataSource.changeHostViewPerson(index: index) else {
+            guard let person = self.dataSource.changePartyHostViewPerson(index: index) else {
                 return UITableViewCell()
             }
             
