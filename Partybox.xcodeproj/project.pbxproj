@@ -24,6 +24,20 @@
 		AA1CEEB020BE4E46008AE617 /* SetupWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEAF20BE4E46008AE617 /* SetupWannabeViewController.swift */; };
 		AA1CEEB220BE4E55008AE617 /* SetupWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEB120BE4E55008AE617 /* SetupWannabeView.swift */; };
 		AA1CEEB420BE50BA008AE617 /* SetupWannabeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEB320BE50BA008AE617 /* SetupWannabeDelegate.swift */; };
+		AA1CEEB820BF930B008AE617 /* SelectWannabeRoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEB720BF930B008AE617 /* SelectWannabeRoundsView.swift */; };
+		AA1CEEBA20BF9322008AE617 /* SelectWannabeRoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEB920BF9322008AE617 /* SelectWannabeRoundsViewController.swift */; };
+		AA1CEEC020C0D2BE008AE617 /* SelectWannabeRoundsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEBF20C0D2BE008AE617 /* SelectWannabeRoundsViewDelegate.swift */; };
+		AA1CEEC220C0D2D5008AE617 /* SelectWannabeRoundsViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEC120C0D2D5008AE617 /* SelectWannabeRoundsViewDataSource.swift */; };
+		AA1CEEC420C0D47D008AE617 /* SelectWannabeRoundsViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEC320C0D47D008AE617 /* SelectWannabeRoundsViewCellRow.swift */; };
+		AA1CEEC620C0D7C8008AE617 /* SelectWannabeRoundsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEC520C0D7C8008AE617 /* SelectWannabeRoundsViewControllerDelegate.swift */; };
+		AA1CEEC920C0DE52008AE617 /* SelectWannabePackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEC820C0DE52008AE617 /* SelectWannabePackViewController.swift */; };
+		AA1CEECB20C0DE5E008AE617 /* SelectWannabePackViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEECA20C0DE5E008AE617 /* SelectWannabePackViewControllerDelegate.swift */; };
+		AA1CEECE20C0DEF8008AE617 /* SelectWannabePackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEECD20C0DEF8008AE617 /* SelectWannabePackView.swift */; };
+		AA1CEED020C0DF08008AE617 /* SelectWannabePackViewCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEECF20C0DF08008AE617 /* SelectWannabePackViewCellRow.swift */; };
+		AA1CEED220C0DF12008AE617 /* SelectWannabePackViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEED120C0DF12008AE617 /* SelectWannabePackViewDelegate.swift */; };
+		AA1CEED420C0DF1B008AE617 /* SelectWannabePackViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEED320C0DF1B008AE617 /* SelectWannabePackViewDataSource.swift */; };
+		AA1CEEE120C49C6F008AE617 /* WannabePackDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEDF20C49C6E008AE617 /* WannabePackDetails.swift */; };
+		AA1CEEE220C49C6F008AE617 /* WannabePackDetailsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEEE020C49C6E008AE617 /* WannabePackDetailsKey.swift */; };
 		AA2A87A120969FC1009C55BF /* PartyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87A020969FC1009C55BF /* PartyDetails.swift */; };
 		AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87A8209A95A2009C55BF /* PartyView.swift */; };
 		AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87AA209A95AD009C55BF /* PartyViewController.swift */; };
@@ -48,7 +62,6 @@
 		AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */; };
 		AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */; };
 		AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */; };
-		AA5E8A1220A15E5F00FE8960 /* WannabeDetailsRounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */; };
 		AA5E8A1420A15F8500FE8960 /* WannabeDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */; };
 		AA5E8A1620A1615500FE8960 /* WannabePeopleKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1520A1615500FE8960 /* WannabePeopleKey.swift */; };
 		AA5E8A1820A1617500FE8960 /* WannabePeopleNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1720A1617500FE8960 /* WannabePeopleNotification.swift */; };
@@ -57,7 +70,6 @@
 		AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */; };
 		AA5E8A2120A5347D00FE8960 /* WannabeCardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */; };
 		AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */; };
-		AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */; };
 		AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */; };
 		AA5E8A3220A7E2E600FE8960 /* StartPartyViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A3120A7E2E600FE8960 /* StartPartyViewDelegate.swift */; };
 		AA5E8A3420A7E3BC00FE8960 /* JoinPartyViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A3320A7E3BC00FE8960 /* JoinPartyViewDelegate.swift */; };
@@ -129,6 +141,20 @@
 		AA1CEEAF20BE4E46008AE617 /* SetupWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeViewController.swift; sourceTree = "<group>"; };
 		AA1CEEB120BE4E55008AE617 /* SetupWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeView.swift; sourceTree = "<group>"; };
 		AA1CEEB320BE50BA008AE617 /* SetupWannabeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWannabeDelegate.swift; sourceTree = "<group>"; };
+		AA1CEEB720BF930B008AE617 /* SelectWannabeRoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabeRoundsView.swift; sourceTree = "<group>"; };
+		AA1CEEB920BF9322008AE617 /* SelectWannabeRoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabeRoundsViewController.swift; sourceTree = "<group>"; };
+		AA1CEEBF20C0D2BE008AE617 /* SelectWannabeRoundsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabeRoundsViewDelegate.swift; sourceTree = "<group>"; };
+		AA1CEEC120C0D2D5008AE617 /* SelectWannabeRoundsViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabeRoundsViewDataSource.swift; sourceTree = "<group>"; };
+		AA1CEEC320C0D47D008AE617 /* SelectWannabeRoundsViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabeRoundsViewCellRow.swift; sourceTree = "<group>"; };
+		AA1CEEC520C0D7C8008AE617 /* SelectWannabeRoundsViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabeRoundsViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AA1CEEC820C0DE52008AE617 /* SelectWannabePackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabePackViewController.swift; sourceTree = "<group>"; };
+		AA1CEECA20C0DE5E008AE617 /* SelectWannabePackViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabePackViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AA1CEECD20C0DEF8008AE617 /* SelectWannabePackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabePackView.swift; sourceTree = "<group>"; };
+		AA1CEECF20C0DF08008AE617 /* SelectWannabePackViewCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabePackViewCellRow.swift; sourceTree = "<group>"; };
+		AA1CEED120C0DF12008AE617 /* SelectWannabePackViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabePackViewDelegate.swift; sourceTree = "<group>"; };
+		AA1CEED320C0DF1B008AE617 /* SelectWannabePackViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWannabePackViewDataSource.swift; sourceTree = "<group>"; };
+		AA1CEEDF20C49C6E008AE617 /* WannabePackDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WannabePackDetails.swift; sourceTree = "<group>"; };
+		AA1CEEE020C49C6E008AE617 /* WannabePackDetailsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WannabePackDetailsKey.swift; sourceTree = "<group>"; };
 		AA2A87A020969FC1009C55BF /* PartyDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyDetails.swift; sourceTree = "<group>"; };
 		AA2A87A8209A95A2009C55BF /* PartyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyView.swift; sourceTree = "<group>"; };
 		AA2A87AA209A95AD009C55BF /* PartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +179,6 @@
 		AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsKey.swift; sourceTree = "<group>"; };
 		AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsNotification.swift; sourceTree = "<group>"; };
 		AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsStatus.swift; sourceTree = "<group>"; };
-		AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsRounds.swift; sourceTree = "<group>"; };
 		AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeDetailsDataSource.swift; sourceTree = "<group>"; };
 		AA5E8A1520A1615500FE8960 /* WannabePeopleKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeopleKey.swift; sourceTree = "<group>"; };
 		AA5E8A1720A1617500FE8960 /* WannabePeopleNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePeopleNotification.swift; sourceTree = "<group>"; };
@@ -162,7 +187,6 @@
 		AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePersonKey.swift; sourceTree = "<group>"; };
 		AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCardKey.swift; sourceTree = "<group>"; };
 		AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackKey.swift; sourceTree = "<group>"; };
-		AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackDataSource.swift; sourceTree = "<group>"; };
 		AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewDelegate.swift; sourceTree = "<group>"; };
 		AA5E8A3120A7E2E600FE8960 /* StartPartyViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPartyViewDelegate.swift; sourceTree = "<group>"; };
 		AA5E8A3320A7E3BC00FE8960 /* JoinPartyViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPartyViewDelegate.swift; sourceTree = "<group>"; };
@@ -242,7 +266,9 @@
 		AA1CEE8320BB43A9008AE617 /* Party */ = {
 			isa = PBXGroup;
 			children = (
-				AAF6D7FF1FDC965900014CA0 /* Party */,
+				AA6706C21F89D9F5000BF5F5 /* Party.swift */,
+				AA5E89EE20A13D3800FE8960 /* PartyKey.swift */,
+				AA1CEE8A20BB4B17008AE617 /* PartyDataSource.swift */,
 				AA5E89E620A13B8B00FE8960 /* Party Details */,
 				AA5E89E720A13B9F00FE8960 /* Party People */,
 				AA5E89F020A13D4A00FE8960 /* Party Person */,
@@ -253,8 +279,10 @@
 		AA1CEE8420BB43D6008AE617 /* Wannabe */ = {
 			isa = PBXGroup;
 			children = (
-				AAF6D8001FDC966300014CA0 /* Wannabe */,
-				AA1CEE8C20BB5497008AE617 /* WannabeManual */,
+				AA590FF91FC26FBB008988E9 /* Wannabe.swift */,
+				AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */,
+				AA1CEE9120BB59BB008AE617 /* WannabeDataSource.swift */,
+				AA1CEE8C20BB5497008AE617 /* Wannabe Manual */,
 				AA5E89F920A1466200FE8960 /* Wannabe Details */,
 				AA5E89FA20A1466900FE8960 /* Wannabe People */,
 				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
@@ -269,18 +297,21 @@
 			children = (
 				AA1CEE8620BB4416008AE617 /* Session.swift */,
 				AA1CEE8820BB4820008AE617 /* SessionKey.swift */,
+				AAFFBDDB203898A200269AB4 /* User */,
+				AA1CEE8320BB43A9008AE617 /* Party */,
+				AA1CEE8420BB43D6008AE617 /* Wannabe */,
 			);
 			name = Session;
 			path = Session/Session;
 			sourceTree = "<group>";
 		};
-		AA1CEE8C20BB5497008AE617 /* WannabeManual */ = {
+		AA1CEE8C20BB5497008AE617 /* Wannabe Manual */ = {
 			isa = PBXGroup;
 			children = (
 				AA1CEE8D20BB54A5008AE617 /* WannabeManual.swift */,
 				AA1CEE8F20BB54FC008AE617 /* WannabeManualKey.swift */,
 			);
-			path = WannabeManual;
+			path = "Wannabe Manual";
 			sourceTree = "<group>";
 		};
 		AA1CEE9620BBAF3C008AE617 /* Resources */ = {
@@ -327,6 +358,103 @@
 				AA1CEEAF20BE4E46008AE617 /* SetupWannabeViewController.swift */,
 			);
 			path = "Setup Wannabe";
+			sourceTree = "<group>";
+		};
+		AA1CEEB520BF9299008AE617 /* Select Rounds */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEEB920BF9322008AE617 /* SelectWannabeRoundsViewController.swift */,
+				AA1CEEC520C0D7C8008AE617 /* SelectWannabeRoundsViewControllerDelegate.swift */,
+			);
+			path = "Select Rounds";
+			sourceTree = "<group>";
+		};
+		AA1CEEB620BF92D9008AE617 /* Select Rounds */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEEB720BF930B008AE617 /* SelectWannabeRoundsView.swift */,
+				AA1CEEC320C0D47D008AE617 /* SelectWannabeRoundsViewCellRow.swift */,
+				AA1CEEBF20C0D2BE008AE617 /* SelectWannabeRoundsViewDelegate.swift */,
+				AA1CEEC120C0D2D5008AE617 /* SelectWannabeRoundsViewDataSource.swift */,
+			);
+			path = "Select Rounds";
+			sourceTree = "<group>";
+		};
+		AA1CEEBB20BF940B008AE617 /* Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8128520923CCE0010FFB1 /* Menu */,
+				AAF812A72092A6C80010FFB1 /* Start Party */,
+				AAF812AF2092B1660010FFB1 /* Join Party */,
+				AAF812BA2094426F0010FFB1 /* Party */,
+				AA5E8A4620A8CF0300FE8960 /* Manage Party */,
+				AA5E8A5220A90D4600FE8960 /* Change Host */,
+				AA1CEE9820BBD00E008AE617 /* Change Game */,
+			);
+			path = Party;
+			sourceTree = "<group>";
+		};
+		AA1CEEBC20BF9436008AE617 /* Wannabe */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEEAD20BE4D83008AE617 /* Setup Wannabe */,
+				AA1CEEB620BF92D9008AE617 /* Select Rounds */,
+				AA1CEECC20C0DEEA008AE617 /* Select Pack */,
+			);
+			path = Wannabe;
+			sourceTree = "<group>";
+		};
+		AA1CEEBD20BF9449008AE617 /* Party */ = {
+			isa = PBXGroup;
+			children = (
+				AAF8128620923CD20010FFB1 /* Menu */,
+				AAF812A82092A6DA0010FFB1 /* Start Party */,
+				AAF812B02092B1730010FFB1 /* Join Party */,
+				AAF812BB209442790010FFB1 /* Party */,
+				AA5E8A4520A8CEEF00FE8960 /* Manage Party */,
+				AA5E8A5120A90D3500FE8960 /* Change Host */,
+				AA1CEE9720BBCFF8008AE617 /* Change Game */,
+			);
+			path = Party;
+			sourceTree = "<group>";
+		};
+		AA1CEEBE20BF9467008AE617 /* Wannabe */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEEAE20BE4D8D008AE617 /* Setup Wannabe */,
+				AA1CEEB520BF9299008AE617 /* Select Rounds */,
+				AA1CEEC720C0DE3D008AE617 /* Select Pack */,
+			);
+			path = Wannabe;
+			sourceTree = "<group>";
+		};
+		AA1CEEC720C0DE3D008AE617 /* Select Pack */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEEC820C0DE52008AE617 /* SelectWannabePackViewController.swift */,
+				AA1CEECA20C0DE5E008AE617 /* SelectWannabePackViewControllerDelegate.swift */,
+			);
+			path = "Select Pack";
+			sourceTree = "<group>";
+		};
+		AA1CEECC20C0DEEA008AE617 /* Select Pack */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEECD20C0DEF8008AE617 /* SelectWannabePackView.swift */,
+				AA1CEECF20C0DF08008AE617 /* SelectWannabePackViewCellRow.swift */,
+				AA1CEED120C0DF12008AE617 /* SelectWannabePackViewDelegate.swift */,
+				AA1CEED320C0DF1B008AE617 /* SelectWannabePackViewDataSource.swift */,
+			);
+			path = "Select Pack";
+			sourceTree = "<group>";
+		};
+		AA1CEEE420C49CD6008AE617 /* Wannabe Pack Details */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CEEDF20C49C6E008AE617 /* WannabePackDetails.swift */,
+				AA1CEEE020C49C6E008AE617 /* WannabePackDetailsKey.swift */,
+			);
+			path = "Wannabe Pack Details";
 			sourceTree = "<group>";
 		};
 		AA2A87AC209A9742009C55BF /* Cells */ = {
@@ -380,7 +508,6 @@
 				AAF6D8061FDCD7E700014CA0 /* WannabeDetails.swift */,
 				AA5E8A0B20A15E0700FE8960 /* WannabeDetailsKey.swift */,
 				AA5E8A0F20A15E5400FE8960 /* WannabeDetailsStatus.swift */,
-				AA5E8A1120A15E5F00FE8960 /* WannabeDetailsRounds.swift */,
 				AA5E8A0D20A15E2900FE8960 /* WannabeDetailsNotification.swift */,
 				AA5E8A1320A15F8500FE8960 /* WannabeDetailsDataSource.swift */,
 			);
@@ -403,7 +530,7 @@
 			children = (
 				AA2A87BC209D8781009C55BF /* WannabePack.swift */,
 				AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */,
-				AA5E8A2B20A53BB400FE8960 /* WannabePackDataSource.swift */,
+				AA1CEEE420C49CD6008AE617 /* Wannabe Pack Details */,
 			);
 			path = "Wannabe Pack";
 			sourceTree = "<group>";
@@ -577,33 +704,10 @@
 			isa = PBXGroup;
 			children = (
 				AA1CEE8520BB440E008AE617 /* Session */,
-				AAFFBDDB203898A200269AB4 /* User */,
-				AA1CEE8320BB43A9008AE617 /* Party */,
-				AA1CEE8420BB43D6008AE617 /* Wannabe */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
 				AA1CEE9620BBAF3C008AE617 /* Resources */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		AAF6D7FF1FDC965900014CA0 /* Party */ = {
-			isa = PBXGroup;
-			children = (
-				AA6706C21F89D9F5000BF5F5 /* Party.swift */,
-				AA5E89EE20A13D3800FE8960 /* PartyKey.swift */,
-				AA1CEE8A20BB4B17008AE617 /* PartyDataSource.swift */,
-			);
-			path = Party;
-			sourceTree = "<group>";
-		};
-		AAF6D8001FDC966300014CA0 /* Wannabe */ = {
-			isa = PBXGroup;
-			children = (
-				AA590FF91FC26FBB008988E9 /* Wannabe.swift */,
-				AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */,
-				AA1CEE9120BB59BB008AE617 /* WannabeDataSource.swift */,
-			);
-			path = Wannabe;
 			sourceTree = "<group>";
 		};
 		AAF81281208BD03B0010FFB1 /* Countdown */ = {
@@ -617,14 +721,8 @@
 		AAF8128320923CAE0010FFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAF8128520923CCE0010FFB1 /* Menu */,
-				AAF812A72092A6C80010FFB1 /* Start Party */,
-				AAF812AF2092B1660010FFB1 /* Join Party */,
-				AAF812BA2094426F0010FFB1 /* Party */,
-				AA5E8A4620A8CF0300FE8960 /* Manage Party */,
-				AA5E8A5220A90D4600FE8960 /* Change Host */,
-				AA1CEE9820BBD00E008AE617 /* Change Game */,
-				AA1CEEAD20BE4D83008AE617 /* Setup Wannabe */,
+				AA1CEEBB20BF940B008AE617 /* Party */,
+				AA1CEEBC20BF9436008AE617 /* Wannabe */,
 				AAF812952092413D0010FFB1 /* Alert */,
 				AAF8129A20924E8B0010FFB1 /* Resources */,
 			);
@@ -634,14 +732,8 @@
 		AAF8128420923CB90010FFB1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AAF8128620923CD20010FFB1 /* Menu */,
-				AAF812A82092A6DA0010FFB1 /* Start Party */,
-				AAF812B02092B1730010FFB1 /* Join Party */,
-				AAF812BB209442790010FFB1 /* Party */,
-				AA5E8A4520A8CEEF00FE8960 /* Manage Party */,
-				AA5E8A5120A90D3500FE8960 /* Change Host */,
-				AA1CEE9720BBCFF8008AE617 /* Change Game */,
-				AA1CEEAE20BE4D8D008AE617 /* Setup Wannabe */,
+				AA1CEEBD20BF9449008AE617 /* Party */,
+				AA1CEEBE20BF9467008AE617 /* Wannabe */,
 				AAF81294209241340010FFB1 /* Alert */,
 				AAF812B72092D1550010FFB1 /* Resources */,
 			);
@@ -957,11 +1049,15 @@
 				AA5E8A3220A7E2E600FE8960 /* StartPartyViewDelegate.swift in Sources */,
 				AAF812A42092552D0010FFB1 /* CircleView.swift in Sources */,
 				AA5E8A6820A9177200FE8960 /* SelectableView.swift in Sources */,
+				AA1CEECE20C0DEF8008AE617 /* SelectWannabePackView.swift in Sources */,
 				AA5E8A1020A15E5400FE8960 /* WannabeDetailsStatus.swift in Sources */,
+				AA1CEED420C0DF1B008AE617 /* SelectWannabePackViewDataSource.swift in Sources */,
 				AA5E8A4220A8BE4700FE8960 /* PartyDetailsStatus.swift in Sources */,
+				AA1CEED220C0DF12008AE617 /* SelectWannabePackViewDelegate.swift in Sources */,
 				AAF812AA2092A6F70010FFB1 /* StartPartyViewController.swift in Sources */,
 				AAF812A62092552D0010FFB1 /* SquareView.swift in Sources */,
 				AA5E89ED20A13C5B00FE8960 /* PartyDetailsDataSource.swift in Sources */,
+				AA1CEEE120C49C6F008AE617 /* WannabePackDetails.swift in Sources */,
 				AA5E8A3820A7ED0C00FE8960 /* PartyViewDataSource.swift in Sources */,
 				AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */,
 				AAF8129D20924EB80010FFB1 /* ActivityIndicatorButton.swift in Sources */,
@@ -974,7 +1070,6 @@
 				AAF812B52092B1930010FFB1 /* JoinPartyView.swift in Sources */,
 				AA1CEEB020BE4E46008AE617 /* SetupWannabeViewController.swift in Sources */,
 				AA5E89F220A13F7300FE8960 /* PartyPeopleKey.swift in Sources */,
-				AA5E8A1220A15E5F00FE8960 /* WannabeDetailsRounds.swift in Sources */,
 				AACD97451FE6F8D1000275CB /* WannabeCard.swift in Sources */,
 				AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */,
 				AA1CEEA420BBD578008AE617 /* ChangeGameViewControllerDelegate.swift in Sources */,
@@ -994,13 +1089,18 @@
 				AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */,
 				AA5E89F620A1401000FE8960 /* PartyPeopleDataSource.swift in Sources */,
 				AA5E8A3620A7EC2000FE8960 /* PartyViewDelegate.swift in Sources */,
+				AA1CEEC020C0D2BE008AE617 /* SelectWannabeRoundsViewDelegate.swift in Sources */,
 				AAF6D8071FDCD7E700014CA0 /* WannabeDetails.swift in Sources */,
+				AA1CEECB20C0DE5E008AE617 /* SelectWannabePackViewControllerDelegate.swift in Sources */,
 				AA5E8A3420A7E3BC00FE8960 /* JoinPartyViewDelegate.swift in Sources */,
 				AA1CEE8720BB4416008AE617 /* Session.swift in Sources */,
 				AA2A87B4209AB52C009C55BF /* PersonTableViewCell.swift in Sources */,
 				AA5E8A4420A8C6B000FE8960 /* PartyViewCellRow.swift in Sources */,
+				AA1CEEB820BF930B008AE617 /* SelectWannabeRoundsView.swift in Sources */,
 				AAF812B22092B18B0010FFB1 /* JoinPartyViewController.swift in Sources */,
 				AAF8128A20923CF90010FFB1 /* MenuViewController.swift in Sources */,
+				AA1CEEBA20BF9322008AE617 /* SelectWannabeRoundsViewController.swift in Sources */,
+				AA1CEEC420C0D47D008AE617 /* SelectWannabeRoundsViewCellRow.swift in Sources */,
 				AA2A87B2209A9B7E009C55BF /* GameTableViewCell.swift in Sources */,
 				AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */,
 				AA5E8A1620A1615500FE8960 /* WannabePeopleKey.swift in Sources */,
@@ -1008,12 +1108,14 @@
 				AA2A87AE209A9766009C55BF /* InviteCodeTableViewCell.swift in Sources */,
 				AA5E8A3B20A80EB400FE8960 /* GameTableViewCellDelegate.swift in Sources */,
 				AA69F9C420AD089100A91E3E /* Partybox.swift in Sources */,
-				AA5E8A2C20A53BB400FE8960 /* WannabePackDataSource.swift in Sources */,
+				AA1CEEC220C0D2D5008AE617 /* SelectWannabeRoundsViewDataSource.swift in Sources */,
 				AAFFBDDA2038989D00269AB4 /* User.swift in Sources */,
+				AA1CEED020C0DF08008AE617 /* SelectWannabePackViewCellRow.swift in Sources */,
 				AA5E8A6620A9172C00FE8960 /* SelectableTableViewCell.swift in Sources */,
 				AA5E8A6A20A91D0D00FE8960 /* ManagePartyViewControllerDelegate.swift in Sources */,
 				AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */,
 				AA5E8A6020A9159800FE8960 /* ChangeHostViewDataSource.swift in Sources */,
+				AA1CEEC620C0D7C8008AE617 /* SelectWannabeRoundsViewControllerDelegate.swift in Sources */,
 				AA5E8A4020A8150B00FE8960 /* PartyViewControllerDelegate.swift in Sources */,
 				AA5E89F420A13F9700FE8960 /* PartyPeopleNotification.swift in Sources */,
 				AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */,
@@ -1021,6 +1123,8 @@
 				AAF812932092406E0010FFB1 /* UIButton+Extension.swift in Sources */,
 				AA1CEEB220BE4E55008AE617 /* SetupWannabeView.swift in Sources */,
 				AA5E8A0C20A15E0700FE8960 /* WannabeDetailsKey.swift in Sources */,
+				AA1CEEC920C0DE52008AE617 /* SelectWannabePackViewController.swift in Sources */,
+				AA1CEEE220C49C6F008AE617 /* WannabePackDetailsKey.swift in Sources */,
 				AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */,
 				AA5E8A0E20A15E2900FE8960 /* WannabeDetailsNotification.swift in Sources */,
 				AA5E8A2120A5347D00FE8960 /* WannabeCardKey.swift in Sources */,

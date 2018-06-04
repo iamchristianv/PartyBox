@@ -12,15 +12,15 @@ import UIKit
 
 enum DatabaseKey: String {
 
-    // MARK: - Property Keys
+    case sessions
 
-    case parties
+    case party
 
-    case games
-
-    case setups
+    case game
 
     case packs
+
+    case details
 
     case cards
 
