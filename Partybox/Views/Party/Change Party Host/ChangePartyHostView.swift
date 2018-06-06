@@ -37,7 +37,14 @@ class ChangePartyHostView: UIView {
         return saveButton
     }()
 
-    private var selectedHostName: String!
+    var partyHostName: String {
+        set {
+            self.partyHostName = newValue
+        }
+        get {
+            return self.partyHostName
+        }
+    }
     
     private var delegate: ChangePartyHostViewDelegate!
 
@@ -47,7 +54,7 @@ class ChangePartyHostView: UIView {
 
     static func construct(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) -> ChangePartyHostView {
         let view = ChangePartyHostView()
-        view.selectedHostName = dataSource.changePartyHostViewHostName()
+        view.partyHostName = dataSource.changePartyHostViewPartyHostName()
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -94,14 +101,6 @@ class ChangePartyHostView: UIView {
         self.tableView.reloadData()
     }
 
-    func setPartyHostName(_ partyHostName: String) {
-        self.selectedHostName = partyHostName
-    }
-    
-    func partyHostName() -> String {
-        return self.selectedHostName
-    }
-
 }
 
 extension ChangePartyHostView: UITableViewDelegate {
@@ -109,7 +108,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedHostName = selectableCell.id()
+        self.partyHostName = selectableCell.id()
         self.tableView.reloadData()
     }
     
@@ -122,7 +121,7 @@ extension ChangePartyHostView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangePartyHostViewCellRow.personCells.rawValue + self.dataSource.changePartyHostViewPeopleCount()
+        return ChangePartyHostViewCellRow.partyPersonCells.rawValue + self.dataSource.changePartyHostViewPartyPeopleCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,18 +133,18 @@ extension ChangePartyHostView: UITableViewDataSource {
             return promptCell
         }
         
-        if indexPath.row == ChangePartyHostViewCellRow.peopleHeaderCell.rawValue {
+        if indexPath.row == ChangePartyHostViewCellRow.partyPeopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let headerCell = tableViewCell as! HeaderTableViewCell
+            let partyPeopleHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PEOPLE"
-            headerCell.configure(header: header)
-            return headerCell
+            partyPeopleHeaderCell.configure(header: header)
+            return partyPeopleHeaderCell
         }
         
-        if indexPath.row >= ChangePartyHostViewCellRow.personCells.rawValue {
-            let index = indexPath.row - ChangePartyHostViewCellRow.personCells.rawValue
+        if indexPath.row >= ChangePartyHostViewCellRow.partyPersonCells.rawValue {
+            let index = indexPath.row - ChangePartyHostViewCellRow.partyPersonCells.rawValue
             
-            guard let person = self.dataSource.changePartyHostViewPerson(index: index) else {
+            guard let person = self.dataSource.changePartyHostViewPartyPerson(index: index) else {
                 return UITableViewCell()
             }
             
@@ -153,7 +152,7 @@ extension ChangePartyHostView: UITableViewDataSource {
             let selectableCell = tableViewCell as! SelectableTableViewCell
             let id = person.name
             let content = person.name
-            let selected = person.name == self.selectedHostName
+            let selected = person.name == self.partyHostName
             selectableCell.configure(id: id, content: content, selected: selected)
             return selectableCell
         }

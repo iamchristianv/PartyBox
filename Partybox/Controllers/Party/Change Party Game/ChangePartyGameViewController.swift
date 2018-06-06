@@ -1,5 +1,5 @@
 //
-//  ChangeGameViewController.swift
+//  ChangePartyGameViewController.swift
 //  Partybox
 //
 //  Created by Christian Villa on 2/17/18.
@@ -8,22 +8,22 @@
 
 import UIKit
 
-class ChangeGameViewController: UIViewController {
+class ChangePartyGameViewController: UIViewController {
 
     // MARK: - Instance Properties
 
     private var session: Session!
     
-    private var contentView: ChangeGameView!
+    private var contentView: ChangePartyGameView!
 
-    private var delegate: ChangeGameViewControllerDelegate!
+    private var delegate: ChangePartyGameViewControllerDelegate!
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session, delegate: ChangeGameViewControllerDelegate) -> ChangeGameViewController {
-        let controller = ChangeGameViewController()
+    static func construct(session: Session, delegate: ChangePartyGameViewControllerDelegate) -> ChangePartyGameViewController {
+        let controller = ChangePartyGameViewController()
         controller.session = session
-        controller.contentView = ChangeGameView.construct(delegate: controller, dataSource: controller)
+        controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
     }
@@ -58,10 +58,10 @@ class ChangeGameViewController: UIViewController {
     
 }
 
-extension ChangeGameViewController: ChangeGameViewDelegate {
+extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
-    func changeGameView(_ changeGameView: ChangeGameView, saveButtonPressed: Bool) {
-        if self.contentView.gameId() == self.session.party.details.gameId {
+    func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool) {
+        if self.contentView.partyGameId == self.session.party.details.gameId {
             let subject = "Woah there"
             let message = "Please select a new game"
             let action = "Okay"
@@ -69,7 +69,7 @@ extension ChangeGameViewController: ChangeGameViewDelegate {
         } else {
             self.contentView.startAnimatingSaveButton()
 
-            let values = [PartyDetailsKey.gameId.rawValue: self.contentView.gameId()]
+            let values = [PartyDetailsKey.gameId.rawValue: self.contentView.partyGameId]
 
             self.session.party.details.update(values: values, callback: {
                 (error) in
@@ -82,7 +82,7 @@ extension ChangeGameViewController: ChangeGameViewDelegate {
                     let action = "Okay"
                     self.showAlert(subject: subject, message: message, action: action, handler: nil)
                 } else {
-                    self.delegate.changeGameViewController(self, gameChanged: true)
+                    self.delegate.changePartyGameViewController(self, partyGameChanged: true)
                     self.dismiss(animated: true, completion: nil)
                 }
             })
@@ -91,17 +91,17 @@ extension ChangeGameViewController: ChangeGameViewDelegate {
     
 }
 
-extension ChangeGameViewController: ChangeGameViewDataSource {
+extension ChangePartyGameViewController: ChangePartyGameViewDataSource {
 
-    func changeGameViewGameId() -> String {
+    func changePartyGameViewPartyGameId() -> String {
         return self.session.party.details.gameId
     }
 
-    func changeGameViewGameCount() -> Int {
+    func changePartyGameViewPartyGameCount() -> Int {
         return self.session.games.count
     }
 
-    func changeGameViewGameId(index: Int) -> String {
+    func changePartyGameViewPartyGameId(index: Int) -> String {
         let game = self.session.games[index]
 
         if game is Wannabe {
@@ -111,7 +111,7 @@ extension ChangeGameViewController: ChangeGameViewDataSource {
         return Partybox.values.none
     }
 
-    func changeGameViewGameName(index: Int) -> String {
+    func changePartyGameViewPartyGameName(index: Int) -> String {
         let game = self.session.games[index]
 
         if game is Wannabe {

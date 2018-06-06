@@ -10,6 +10,6 @@ import Foundation
 
 protocol StartPartyViewDelegate {
 
-    func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool)
+    func startPartyView(_ view: StartPartyView, startButtonPressed: Bool)
 
 }

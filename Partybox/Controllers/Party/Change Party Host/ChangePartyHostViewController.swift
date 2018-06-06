@@ -82,8 +82,8 @@ class ChangePartyHostViewController: UIViewController {
     @objc private func partyPeoplePersonRemoved(notification: Notification) {
         self.contentView.reloadTable()
 
-        if !self.session.party.people.persons.contains(key: self.contentView.partyHostName()) {
-            self.contentView.setPartyHostName(self.session.party.details.hostName)
+        if !self.session.party.people.persons.contains(key: self.contentView.partyHostName) {
+            self.contentView.partyHostName = self.session.party.details.hostName
             self.contentView.reloadTable()
         }
     }
@@ -93,13 +93,13 @@ class ChangePartyHostViewController: UIViewController {
 extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
         
     func changePartyHostView(_ view: ChangePartyHostView, saveButtonPressed: Bool) {
-        if self.contentView.partyHostName() == self.session.party.details.hostName {
+        if self.contentView.partyHostName == self.session.party.details.hostName {
             let subject = "Woah there"
             let message = "Please select a new person to be the host"
             let action = "Okay"
             self.showAlert(subject: subject, message: message, action: action, handler: nil)
         } else {
-            self.delegate.changePartyHostViewController(self, partyHostChanged: self.contentView.partyHostName())
+            self.delegate.changePartyHostViewController(self, partyHostChanged: self.contentView.partyHostName)
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -108,15 +108,15 @@ extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 
 extension ChangePartyHostViewController: ChangePartyHostViewDataSource {
 
-    func changePartyHostViewHostName() -> String {
+    func changePartyHostViewPartyHostName() -> String {
         return self.session.party.details.hostName
     }
 
-    func changePartyHostViewPeopleCount() -> Int {
+    func changePartyHostViewPartyPeopleCount() -> Int {
         return self.session.party.people.persons.count
     }
 
-    func changePartyHostViewPerson(index: Int) -> PartyPerson? {
+    func changePartyHostViewPartyPerson(index: Int) -> PartyPerson? {
         return self.session.party.people.persons.fetch(index: index)
     }
 

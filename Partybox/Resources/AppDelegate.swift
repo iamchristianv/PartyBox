@@ -42,9 +42,8 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
 
-        let rootViewController = MenuViewController.construct()
-        
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        let rootViewController = MenuViewController.construct()
         self.window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         self.window?.makeKeyAndVisible()
         

@@ -1,5 +1,5 @@
 //
-//  GameTableViewCell.swift
+//  PartyGameTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 11/6/17.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class GameTableViewCell: UITableViewCell {
+class PartyGameTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: GameTableViewCell.self)
+    static let identifier: String = String(describing: PartyGameTableViewCell.self)
     
     // MARK: - Instance Properties
 
@@ -74,11 +74,11 @@ class GameTableViewCell: UITableViewCell {
 
     private var hasHostActions: Bool = false
 
-    private var delegate: GameTableViewCellDelegate!
+    private var delegate: PartyGameTableViewCellDelegate!
 
     // MARK: - Configuration Functions
 
-    func configure(name: String, summary: String, hasHostActions: Bool, delegate: GameTableViewCellDelegate) {
+    func configure(name: String, summary: String, hasHostActions: Bool, delegate: PartyGameTableViewCellDelegate) {
         self.nameLabel.text = name
         self.summaryLabel.text = summary
         self.hasHostActions = hasHostActions
@@ -180,11 +180,11 @@ class GameTableViewCell: UITableViewCell {
     // MARK: - Action Functions
 
     @objc private func playButtonPressed() {
-        self.delegate.gameTableViewCell(self, playButtonPressed: true)
+        self.delegate.partyGameTableViewCell(self, playButtonPressed: true)
     }
 
     @objc private func changeButtonPressed() {
-        self.delegate.gameTableViewCell(self, changeButtonPressed: true)
+        self.delegate.partyGameTableViewCell(self, changeButtonPressed: true)
     }
 
 }

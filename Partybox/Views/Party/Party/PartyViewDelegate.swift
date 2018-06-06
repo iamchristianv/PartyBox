@@ -10,10 +10,10 @@ import Foundation
 
 protocol PartyViewDelegate {
 
-    func partyView(_ partyView: PartyView, playButtonPressed: Bool)
+    func partyView(_ view: PartyView, playButtonPressed: Bool)
 
-    func partyView(_ partyView: PartyView, changeButtonPressed: Bool)
+    func partyView(_ view: PartyView, changeButtonPressed: Bool)
 
-    func partyView(_ partyView: PartyView, kickButtonPressed partyPersonName: String)
+    func partyView(_ view: PartyView, kickButtonPressed partyPersonName: String)
 
 }

@@ -128,23 +128,23 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: MenuViewDelegate {
         
-    internal func menuView(_ menuView: MenuView, startPartyButtonPressed: Bool) {
-        let startPartyViewController = StartPartyViewController.construct()
-        let navigationController = UINavigationController(rootViewController: startPartyViewController)
+    internal func menuView(_ view: MenuView, startPartyButtonPressed: Bool) {
+        let rootViewController = StartPartyViewController.construct()
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func menuView(_ menuView: MenuView, joinPartyButtonPressed: Bool) {
-        let joinPartyViewController = JoinPartyViewController.construct()
-        let navigationController = UINavigationController(rootViewController: joinPartyViewController)
+    internal func menuView(_ view: MenuView, joinPartyButtonPressed: Bool) {
+        let rootViewController = JoinPartyViewController.construct()
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
 
-    internal func menuView(_ menuView: MenuView, findPartyButtonPressed: Bool) {
+    internal func menuView(_ view: MenuView, findPartyButtonPressed: Bool) {
 
     }
 
-    internal func menuView(_ menuView: MenuView, visitStoreButtonPressed: Bool) {
+    internal func menuView(_ view: MenuView, visitStoreButtonPressed: Bool) {
 
     }
     

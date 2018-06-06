@@ -12,12 +12,12 @@ enum PartyViewCellRow: Int {
 
     case inviteCodeCell = 0
 
-    case gameHeaderCell
+    case partyGameHeaderCell
 
-    case gameCell
+    case partyGameCell
 
-    case peopleHeaderCell
+    case partyPeopleHeaderCell
 
-    case personCells
+    case partyPersonCells
 
 }

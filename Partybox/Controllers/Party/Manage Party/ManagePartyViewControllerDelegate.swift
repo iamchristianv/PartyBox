@@ -10,6 +10,6 @@ import Foundation
 
 protocol ManagePartyViewControllerDelegate {
 
-    func managePartyViewController(_ managePartyViewController: ManagePartyViewController, partyManaged: Bool)
+    func managePartyViewController(_ controller: ManagePartyViewController, partyManaged: Bool)
 
 }

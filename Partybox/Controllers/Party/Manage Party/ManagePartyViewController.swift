@@ -60,17 +60,17 @@ class ManagePartyViewController: UIViewController {
 
 extension ManagePartyViewController: ManagePartyViewDelegate {
 
-    internal func managePartyView(_ managePartyView: ManagePartyView, partyHostNameTextFieldPressed: Bool) {
-        let changePartyHostViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
-        let navigationController = UINavigationController(rootViewController: changePartyHostViewController)
+    internal func managePartyView(_ view: ManagePartyView, partyHostNameTextFieldPressed: Bool) {
+        let rootViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func managePartyView(_ managePartyView: ManagePartyView, saveButtonPressed: Bool) {
+    internal func managePartyView(_ view: ManagePartyView, saveButtonPressed: Bool) {
         self.contentView.startAnimatingSaveButton()
         
-        let values = [PartyDetailsKey.name.rawValue: self.contentView.partyName(),
-                      PartyDetailsKey.hostName.rawValue: self.contentView.partyHostName()]
+        let values = [PartyDetailsKey.name.rawValue: self.contentView.partyName,
+                      PartyDetailsKey.hostName.rawValue: self.contentView.partyHostName]
         
         self.session.party.details.update(values: values, callback: {
             (error) in
@@ -106,7 +106,7 @@ extension ManagePartyViewController: ManagePartyViewDataSource {
 extension ManagePartyViewController: ChangePartyHostViewControllerDelegate {
 
     internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String) {
-        self.contentView.setPartyHostName(partyHostName)
+        self.contentView.partyHostName = partyHostName
     }
 
 }

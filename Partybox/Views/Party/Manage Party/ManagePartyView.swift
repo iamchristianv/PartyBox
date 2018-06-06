@@ -91,6 +91,24 @@ class ManagePartyView: UIView {
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return saveButton
     }()
+
+    var partyName: String {
+        set {
+            self.partyNameTextField.text = newValue
+        }
+        get {
+            return self.partyNameTextField.text!
+        }
+    }
+
+    var partyHostName: String {
+        set {
+            self.partyHostNameTextField.text = newValue
+        }
+        get {
+            return self.partyHostNameTextField.text!
+        }
+    }
     
     private var delegate: ManagePartyViewDelegate!
 
@@ -230,31 +248,17 @@ class ManagePartyView: UIView {
     // MARK: - View Functions
 
     private func partyNameHasErrors() -> Bool {
-        let partyName = self.partyNameTextField.text!
-
-        if partyName.trimmingCharacters(in: .whitespaces).isEmpty {
+        if self.partyNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.partyNameStatusLabel.text = "Required"
             self.partyNameStatusLabel.isHidden = false
             return true
-        } else {
-            self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.black
-            self.partyNameStatusLabel.text = " "
-            self.partyNameStatusLabel.isHidden = true
-            return false
         }
-    }
 
-    func partyName() -> String {
-        return self.partyNameTextField.text!
-    }
-
-    func setPartyHostName(_ partyHostName: String) {
-        self.partyHostNameTextField.text = partyHostName
-    }
-
-    func partyHostName() -> String {
-        return self.partyHostNameTextField.text!
+        self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        self.partyNameStatusLabel.text = " "
+        self.partyNameStatusLabel.isHidden = true
+        return false
     }
 
 }

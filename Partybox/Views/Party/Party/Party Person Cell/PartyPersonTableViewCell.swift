@@ -1,5 +1,5 @@
 //
-//  PersonTableViewCell.swift
+//  PartyPersonTableViewCell.swift
 //  Partybox
 //
 //  Created by Christian Villa on 11/7/17.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PersonTableViewCell: UITableViewCell {
+class PartyPersonTableViewCell: UITableViewCell {
 
     // MARK: - Class Properties
     
-    static let identifier: String = String(describing: PersonTableViewCell.self)
+    static let identifier: String = String(describing: PartyPersonTableViewCell.self)
     
     // MARK: - Instance Properties
     

@@ -54,10 +54,10 @@ class JoinPartyViewController: UIViewController {
 
 extension JoinPartyViewController: JoinPartyViewDelegate {
 
-    internal func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool) {
+    internal func joinPartyView(_ view: JoinPartyView, joinButtonPressed: Bool) {
         self.contentView.startAnimatingJoinButton()
 
-        let session = Session.construct(userName: self.contentView.userName(), partyId: self.contentView.partyId())
+        let session = Session.construct(userName: self.contentView.userName, partyId: self.contentView.partyId)
 
         session.party.join(callback: {
             (error) in
@@ -81,7 +81,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
 
 extension JoinPartyViewController: PartyViewControllerDelegate {
 
-    internal func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
+    internal func partyViewController(_ controller: PartyViewController, userKicked: Bool) {
         let subject = "Oh no"
         let message = "You were kicked from the party"
         let action = "Okay"

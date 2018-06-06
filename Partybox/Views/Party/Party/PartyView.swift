@@ -22,8 +22,8 @@ class PartyView: UIView {
         tableView.estimatedRowHeight = 50
         tableView.register(InviteCodeTableViewCell.self, forCellReuseIdentifier: InviteCodeTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
-        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.identifier)
-        tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: PersonTableViewCell.identifier)
+        tableView.register(PartyGameTableViewCell.self, forCellReuseIdentifier: PartyGameTableViewCell.identifier)
+        tableView.register(PartyPersonTableViewCell.self, forCellReuseIdentifier: PartyPersonTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
@@ -74,7 +74,7 @@ extension PartyView: UITableViewDelegate {
             return []
         }
         
-        let index = indexPath.row - PartyViewCellRow.personCells.rawValue
+        let index = indexPath.row - PartyViewCellRow.partyPersonCells.rawValue
         
         guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
             return []
@@ -104,7 +104,7 @@ extension PartyView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyViewCellRow.personCells.rawValue + self.dataSource.partyViewPartyPeopleCount()
+        return PartyViewCellRow.partyPersonCells.rawValue + self.dataSource.partyViewPartyPeopleCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,48 +116,48 @@ extension PartyView: UITableViewDataSource {
             return inviteCodeCell
         }
         
-        if indexPath.row == PartyViewCellRow.gameHeaderCell.rawValue {
+        if indexPath.row == PartyViewCellRow.partyGameHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let gameHeaderCell = tableViewCell as! HeaderTableViewCell
+            let partyGameHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "GAME"
-            gameHeaderCell.configure(header: header)
-            return gameHeaderCell
+            partyGameHeaderCell.configure(header: header)
+            return partyGameHeaderCell
         }
         
-        if indexPath.row == PartyViewCellRow.gameCell.rawValue {
-            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.identifier)
-            let gameCell = tableViewCell as! GameTableViewCell
-            let name = self.dataSource.partyViewGameName()
-            let summary = self.dataSource.partyViewGameSummary()
+        if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
+            let partyGameCell = tableViewCell as! PartyGameTableViewCell
+            let name = self.dataSource.partyViewPartyGameName()
+            let summary = self.dataSource.partyViewPartyGameSummary()
             let hasHostActions = self.dataSource.partyViewUserName() == self.dataSource.partyViewPartyHostName()
-            gameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
-            return gameCell
+            partyGameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
+            return partyGameCell
         }
         
-        if indexPath.row == PartyViewCellRow.peopleHeaderCell.rawValue {
+        if indexPath.row == PartyViewCellRow.partyPeopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let peopleHeaderCell = tableViewCell as! HeaderTableViewCell
+            let partyPeopleHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PEOPLE"
-            peopleHeaderCell.configure(header: header)
-            return peopleHeaderCell
+            partyPeopleHeaderCell.configure(header: header)
+            return partyPeopleHeaderCell
         }
             
-        if indexPath.row >= PartyViewCellRow.personCells.rawValue {
-            let index = indexPath.row - PartyViewCellRow.personCells.rawValue
+        if indexPath.row >= PartyViewCellRow.partyPersonCells.rawValue {
+            let index = indexPath.row - PartyViewCellRow.partyPersonCells.rawValue
             
             guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
                 return UITableViewCell()
             }
             
-            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier)
-            let personCell = tableViewCell as! PersonTableViewCell
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyPersonTableViewCell.identifier)
+            let partyPersonCell = tableViewCell as! PartyPersonTableViewCell
             let name = person.name
             let isMe = person.name == self.dataSource.partyViewUserName()
             let isHost = person.name == self.dataSource.partyViewPartyHostName()
             let emoji = person.emoji
             let points = person.points
-            personCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)
-            return personCell
+            partyPersonCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)
+            return partyPersonCell
         }
         
         return UITableViewCell()
@@ -165,13 +165,13 @@ extension PartyView: UITableViewDataSource {
     
 }
 
-extension PartyView: GameTableViewCellDelegate {
+extension PartyView: PartyGameTableViewCellDelegate {
     
-    internal func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, playButtonPressed: Bool) {
+    internal func partyGameTableViewCell(_ cell: PartyGameTableViewCell, playButtonPressed: Bool) {
         self.delegate.partyView(self, playButtonPressed: true)
     }
 
-    internal func gameTableViewCell(_ gameTableViewCell: GameTableViewCell, changeButtonPressed: Bool) {
+    internal func partyGameTableViewCell(_ cell: PartyGameTableViewCell, changeButtonPressed: Bool) {
         self.delegate.partyView(self, changeButtonPressed: true)
     }
     

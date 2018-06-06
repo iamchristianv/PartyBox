@@ -20,8 +20,8 @@ protocol PartyViewDataSource {
 
     func partyViewPartyPerson(index: Int) -> PartyPerson?
 
-    func partyViewGameName() -> String
+    func partyViewPartyGameName() -> String
 
-    func partyViewGameSummary() -> String
+    func partyViewPartyGameSummary() -> String
 
 }

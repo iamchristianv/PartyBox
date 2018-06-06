@@ -54,10 +54,10 @@ class StartPartyViewController: UIViewController {
 
 extension StartPartyViewController: StartPartyViewDelegate {
 
-    internal func startPartyView(_ startPartyView: StartPartyView, startButtonPressed: Bool) {
+    internal func startPartyView(_ view: StartPartyView, startButtonPressed: Bool) {
         self.contentView.startAnimatingStartButton()
         
-        let session = Session.construct(userName: self.contentView.userName(), partyName: self.contentView.partyName())
+        let session = Session.construct(userName: self.contentView.userName, partyName: self.contentView.partyName)
 
         session.party.start(callback: {
             (error) in
@@ -70,8 +70,8 @@ extension StartPartyViewController: StartPartyViewDelegate {
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
             } else {
-                let partyViewController = PartyViewController.construct(session: session, delegate: self)
-                let navigationController = UINavigationController(rootViewController: partyViewController)
+                let rootViewController = PartyViewController.construct(session: session, delegate: self)
+                let navigationController = UINavigationController(rootViewController: rootViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
         })
@@ -81,7 +81,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
 
 extension StartPartyViewController: PartyViewControllerDelegate {
 
-    internal func partyViewController(_ partyViewController: PartyViewController, userKicked: Bool) {
+    internal func partyViewController(_ controller: PartyViewController, userKicked: Bool) {
         let subject = "Oh no"
         let message = "You were kicked from the party"
         let action = "Okay"

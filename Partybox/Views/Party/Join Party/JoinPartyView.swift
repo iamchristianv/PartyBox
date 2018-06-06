@@ -114,6 +114,24 @@ class JoinPartyView: UIView {
         return joinButton
     }()
 
+    var partyId: String {
+        set {
+            self.partyIdTextField.text = newValue
+        }
+        get {
+            return self.partyIdTextField.text!
+        }
+    }
+
+    var userName: String {
+        set {
+            self.userNameTextField.text = newValue
+        }
+        get {
+            return self.userNameTextField.text!
+        }
+    }
+
     private var delegate: JoinPartyViewDelegate!
 
     // MARK: - Construction Functions
@@ -270,53 +288,45 @@ class JoinPartyView: UIView {
     // MARK: - View Functions
     
     private func partyIdHasErrors() -> Bool {
-        let partyId = self.partyIdTextField.text!
-
-        if partyId.trimmingCharacters(in: .whitespaces).isEmpty {
+        if self.partyIdTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.partyIdUnderlineLabel.backgroundColor = Partybox.colors.red
             self.partyIdStatusLabel.text = "Required"
             self.partyIdStatusLabel.isHidden = false
             return true
-        } else if !partyId.trimmingCharacters(in: .alphanumerics).isEmpty {
+        }
+
+        if !self.partyIdTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.partyIdUnderlineLabel.backgroundColor = Partybox.colors.red
             self.partyIdStatusLabel.text = "No spaces or special characters"
             self.partyIdStatusLabel.isHidden = false
             return true
-        } else {
-            self.partyIdUnderlineLabel.backgroundColor = Partybox.colors.black
-            self.partyIdStatusLabel.text = " "
-            self.partyIdStatusLabel.isHidden = true
-            return false
         }
-    }
 
-    func partyId() -> String {
-        return self.partyIdTextField.text!
+        self.partyIdUnderlineLabel.backgroundColor = Partybox.colors.black
+        self.partyIdStatusLabel.text = " "
+        self.partyIdStatusLabel.isHidden = true
+        return false
     }
 
     private func userNameHasErrors() -> Bool {
-        let userName = self.userNameTextField.text!
-
-        if userName.trimmingCharacters(in: .whitespaces).isEmpty {
+        if self.userNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.userNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.userNameStatusLabel.text = "Required"
             self.userNameStatusLabel.isHidden = false
             return true
-        } else if !userName.trimmingCharacters(in: .alphanumerics).isEmpty {
+        }
+
+        if !self.userNameTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.userNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.userNameStatusLabel.text = "No spaces or special characters"
             self.userNameStatusLabel.isHidden = false
             return true
-        } else {
-            self.userNameUnderlineLabel.backgroundColor = Partybox.colors.black
-            self.userNameStatusLabel.text = " "
-            self.userNameStatusLabel.isHidden = true
-            return false
         }
-    }
 
-    func userName() -> String {
-        return self.userNameTextField.text!
+        self.userNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        self.userNameStatusLabel.text = " "
+        self.userNameStatusLabel.isHidden = true
+        return false
     }
     
 }

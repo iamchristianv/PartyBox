@@ -10,6 +10,6 @@ import Foundation
 
 protocol JoinPartyViewDelegate {
 
-    func joinPartyView(_ joinPartyView: JoinPartyView, joinButtonPressed: Bool)
+    func joinPartyView(_ view: JoinPartyView, joinButtonPressed: Bool)
 
 }

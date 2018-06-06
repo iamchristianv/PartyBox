@@ -91,8 +91,8 @@ class PartyViewController: UIViewController {
         self.showAlert(subject: subject, message: message, action: action, handler: {
             if self.session.party.people.persons.count > 1 {
                 if self.session.user.name == self.session.party.details.hostName {
-                    let changePartyHostViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
-                    let navigationController = UINavigationController(rootViewController: changePartyHostViewController)
+                    let rootViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
+                    let navigationController = UINavigationController(rootViewController: rootViewController)
                     self.present(navigationController, animated: true, completion: nil)
                 } else {
                     self.dismiss(animated: true, completion: {
@@ -108,8 +108,8 @@ class PartyViewController: UIViewController {
     }
     
     @objc private func manageButtonPressed() {
-        let managePartyViewController = ManagePartyViewController.construct(session: self.session, delegate: self)
-        let navigationController = UINavigationController(rootViewController: managePartyViewController)
+        let rootViewController = ManagePartyViewController.construct(session: self.session, delegate: self)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
@@ -166,21 +166,21 @@ class PartyViewController: UIViewController {
 
 extension PartyViewController: PartyViewDelegate {
 
-    internal func partyView(_ partyView: PartyView, playButtonPressed: Bool) {
+    internal func partyView(_ view: PartyView, playButtonPressed: Bool) {
         if self.session.party.details.gameId == self.session.wannabe.details.id {
-            let setupWannabeViewController = SetupWannabeViewController.construct(session: self.session)
-            let navigationController = UINavigationController(rootViewController: setupWannabeViewController)
+            let rootViewController = SetupWannabeViewController.construct(session: self.session)
+            let navigationController = UINavigationController(rootViewController: rootViewController)
             self.present(navigationController, animated: true, completion: nil)
         }
     }
     
-    internal func partyView(_ partyView: PartyView, changeButtonPressed: Bool) {
-        let changeGameViewController = ChangeGameViewController.construct(session: self.session, delegate: self)
-        let navigationController = UINavigationController(rootViewController: changeGameViewController)
+    internal func partyView(_ view: PartyView, changeButtonPressed: Bool) {
+        let rootViewController = ChangePartyGameViewController.construct(session: self.session, delegate: self)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func partyView(_ partyView: PartyView, kickButtonPressed partyPersonName: String) {
+    internal func partyView(_ view: PartyView, kickButtonPressed partyPersonName: String) {
         let subject = "Woah there"
         let message = "Are you sure you want to kick this person?"
         let action = "Kick"
@@ -224,11 +224,11 @@ extension PartyViewController: PartyViewDataSource {
         return self.session.party.people.persons.fetch(index: index)
     }
 
-    internal func partyViewGameName() -> String {
+    internal func partyViewPartyGameName() -> String {
         return self.session.wannabe.details.name
     }
 
-    internal func partyViewGameSummary() -> String {
+    internal func partyViewPartyGameSummary() -> String {
         return self.session.wannabe.manual.summary
     }
 
@@ -236,7 +236,7 @@ extension PartyViewController: PartyViewDataSource {
 
 extension PartyViewController: ManagePartyViewControllerDelegate {
 
-    internal func managePartyViewController(_ managePartyViewController: ManagePartyViewController, partyManaged: Bool) {
+    internal func managePartyViewController(_ controller: ManagePartyViewController, partyManaged: Bool) {
         self.contentView.reloadTable()
     }
 
@@ -265,9 +265,9 @@ extension PartyViewController: ChangePartyHostViewControllerDelegate {
 
 }
 
-extension PartyViewController: ChangeGameViewControllerDelegate {
+extension PartyViewController: ChangePartyGameViewControllerDelegate {
 
-    internal func changeGameViewController(_ changeGameViewController: ChangeGameViewController, gameChanged: Bool) {
+    internal func changePartyGameViewController(_ controller: ChangePartyGameViewController, partyGameChanged: Bool) {
         self.contentView.reloadTable()
     }
 

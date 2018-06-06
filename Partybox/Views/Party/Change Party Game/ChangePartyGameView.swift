@@ -1,5 +1,5 @@
 //
-//  ChangeGameView.swift
+//  ChangePartyGameView.swift
 //  Partybox
 //
 //  Created by Christian Villa on 2/17/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangeGameView: UIView {
+class ChangePartyGameView: UIView {
     
     // MARK: - Instance Properties
     
@@ -37,17 +37,24 @@ class ChangeGameView: UIView {
         return saveButton
     }()
 
-    private var selectedGameId: String!
+    var partyGameId: String {
+        set {
+            self.partyGameId = newValue
+        }
+        get {
+            return self.partyGameId
+        }
+    }
     
-    private var delegate: ChangeGameViewDelegate!
+    private var delegate: ChangePartyGameViewDelegate!
 
-    private var dataSource: ChangeGameViewDataSource!
+    private var dataSource: ChangePartyGameViewDataSource!
 
     // MARK: - Construction Functions
 
-    static func construct(delegate: ChangeGameViewDelegate, dataSource: ChangeGameViewDataSource) -> ChangeGameView {
-        let view = ChangeGameView()
-        view.selectedGameId = dataSource.changeGameViewGameId()
+    static func construct(delegate: ChangePartyGameViewDelegate, dataSource: ChangePartyGameViewDataSource) -> ChangePartyGameView {
+        let view = ChangePartyGameView()
+        view.partyGameId = dataSource.changePartyGameViewPartyGameId()
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -85,7 +92,7 @@ class ChangeGameView: UIView {
     // MARK: - Action Functions
 
     @objc private func saveButtonPressed() {
-        self.delegate.changeGameView(self, saveButtonPressed: true)
+        self.delegate.changePartyGameView(self, saveButtonPressed: true)
     }
 
     // MARK: - Animation Functions
@@ -104,35 +111,31 @@ class ChangeGameView: UIView {
         self.tableView.reloadData()
     }
 
-    func gameId() -> String {
-        return self.selectedGameId
-    }
-
 }
 
-extension ChangeGameView: UITableViewDelegate {
+extension ChangePartyGameView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedGameId = selectableCell.id()
+        self.partyGameId = selectableCell.id()
         self.tableView.reloadData()
     }
     
 }
 
-extension ChangeGameView: UITableViewDataSource {
+extension ChangePartyGameView: UITableViewDataSource {
         
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangeGameViewCellRow.gameCells.rawValue + self.dataSource.changeGameViewGameCount()
+        return ChangePartyGameViewCellRow.partyGameCells.rawValue + self.dataSource.changePartyGameViewPartyGameCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == ChangeGameViewCellRow.promptCell.rawValue {
+        if indexPath.row == ChangePartyGameViewCellRow.promptCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PromptTableViewCell.identifier)
             let promptCell = tableViewCell as! PromptTableViewCell
             let prompt = "Which game do you want to play?"
@@ -140,22 +143,22 @@ extension ChangeGameView: UITableViewDataSource {
             return promptCell
         }
         
-        if indexPath.row == ChangeGameViewCellRow.gameHeaderCell.rawValue {
+        if indexPath.row == ChangePartyGameViewCellRow.partyGameHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let headerCell = tableViewCell as! HeaderTableViewCell
+            let partyGameHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "GAMES"
-            headerCell.configure(header: header)
-            return headerCell
+            partyGameHeaderCell.configure(header: header)
+            return partyGameHeaderCell
         }
         
-        if indexPath.row >= ChangeGameViewCellRow.gameCells.rawValue {
-            let index = indexPath.row - ChangeGameViewCellRow.gameCells.rawValue
+        if indexPath.row >= ChangePartyGameViewCellRow.partyGameCells.rawValue {
+            let index = indexPath.row - ChangePartyGameViewCellRow.partyGameCells.rawValue
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let id = self.dataSource.changeGameViewGameId(index: index)
-            let content = self.dataSource.changeGameViewGameName(index: index)
-            let selected = self.dataSource.changeGameViewGameId(index: index) == self.selectedGameId
+            let id = self.dataSource.changePartyGameViewPartyGameId(index: index)
+            let content = self.dataSource.changePartyGameViewPartyGameName(index: index)
+            let selected = self.dataSource.changePartyGameViewPartyGameId(index: index) == self.partyGameId
             selectableCell.configure(id: id, content: content, selected: selected)
             return selectableCell
         }
