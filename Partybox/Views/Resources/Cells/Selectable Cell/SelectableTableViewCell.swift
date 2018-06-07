@@ -34,14 +34,23 @@ class SelectableTableViewCell: UITableViewCell {
         return underlineLabel
     }()
 
-    private var contentId: String!
+    var content: String {
+        set {
+            self.contentLabel.text = newValue
+        }
+        get {
+            return self.contentLabel.text!
+        }
+    }
+
+    var value: Any!
 
     // MARK: - Configuration Functions
 
-    func configure(id: String, content: String, selected: Bool) {
+    func configure(content: String, selected: Bool, value: Any) {
         self.contentLabel.text = content
         self.selectableView = SelectableView.construct(selected: selected)
-        self.contentId = id
+        self.value = value
         self.setupView()
     }
 
@@ -81,16 +90,6 @@ class SelectableTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.snp.trailing)
             make.bottom.equalTo(self.snp.bottom)
         })
-    }
-
-    // MARK: - View Functions
-
-    func id() -> String {
-        return self.contentId
-    }
-
-    func content() -> String {
-        return self.contentLabel.text!
     }
     
 }

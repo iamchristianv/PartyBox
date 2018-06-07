@@ -10,10 +10,10 @@ import Foundation
 
 protocol SetupWannabeViewDelegate {
 
-    func setupWannabeView(_ setupWannabeView: SetupWannabeView, roundsTextFieldPressed: Bool)
+    func setupWannabeView(_ view: SetupWannabeView, roundsNameTextFieldPressed: Bool)
 
-    func setupWannabeView(_ setupWannabeView: SetupWannabeView, packNameTextFieldPressed: Bool)
+    func setupWannabeView(_ view: SetupWannabeView, packNameTextFieldPressed: Bool)
 
-    func setupWannabeView(_ setupWannabeView: SetupWannabeView, startButtonPressed: Bool)
+    func setupWannabeView(_ view: SetupWannabeView, playButtonPressed: Bool)
 
 }

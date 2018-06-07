@@ -10,6 +10,6 @@ import Foundation
 
 protocol SelectWannabeRoundsViewControllerDelegate {
 
-    func selectWannabeRoundsViewController(_ selectWannabeRoundsViewController: SelectWannabeRoundsViewController, roundsSelected rounds: Int)
+    func selectWannabeRoundsViewController(_ controller: SelectWannabeRoundsViewController, roundsSelected rounds: Int)
 
 }

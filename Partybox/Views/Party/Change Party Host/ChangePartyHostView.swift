@@ -37,14 +37,7 @@ class ChangePartyHostView: UIView {
         return saveButton
     }()
 
-    var partyHostName: String {
-        set {
-            self.partyHostName = newValue
-        }
-        get {
-            return self.partyHostName
-        }
-    }
+    var partyHostName: String!
     
     private var delegate: ChangePartyHostViewDelegate!
 
@@ -108,7 +101,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.partyHostName = selectableCell.id()
+        self.partyHostName = selectableCell.value as! String
         self.tableView.reloadData()
     }
     
@@ -150,10 +143,10 @@ extension ChangePartyHostView: UITableViewDataSource {
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let id = person.name
             let content = person.name
             let selected = person.name == self.partyHostName
-            selectableCell.configure(id: id, content: content, selected: selected)
+            let value = person.name
+            selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }
         

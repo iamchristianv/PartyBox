@@ -57,17 +57,19 @@ class SetupWannabeViewController: UIViewController {
 
 extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
-    internal func setupWannabeView(_ setupWannabeView: SetupWannabeView, roundsTextFieldPressed: Bool) {
-        let selectWannabeRoundsViewController = SelectWannabeRoundsViewController.construct(session: self.session, delegate: self)
-        let navigationController = UINavigationController(rootViewController: selectWannabeRoundsViewController)
+    internal func setupWannabeView(_ view: SetupWannabeView, roundsNameTextFieldPressed: Bool) {
+        let rootViewController = SelectWannabeRoundsViewController.construct(session: self.session, delegate: self)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
 
-    internal func setupWannabeView(_ setupWannabeView: SetupWannabeView, packNameTextFieldPressed: Bool) {
-
+    internal func setupWannabeView(_ view: SetupWannabeView, packNameTextFieldPressed: Bool) {
+        let rootViewController = SelectWannabePackViewController.construct(session: self.session, delegate: self)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        self.present(navigationController, animated: true, completion: nil)
     }
 
-    internal func setupWannabeView(_ setupWannabeView: SetupWannabeView, startButtonPressed: Bool) {
+    internal func setupWannabeView(_ view: SetupWannabeView, playButtonPressed: Bool) {
         
     }
 
@@ -75,8 +77,16 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
 extension SetupWannabeViewController: SelectWannabeRoundsViewControllerDelegate {
 
-    func selectWannabeRoundsViewController(_ selectWannabeRoundsViewController: SelectWannabeRoundsViewController, roundsSelected rounds: Int) {
-        self.contentView.setRounds("\(rounds) Rounds")
+    func selectWannabeRoundsViewController(_ controller: SelectWannabeRoundsViewController, roundsSelected rounds: Int) {
+        self.contentView.roundsName = "\(rounds) Rounds"
+    }
+
+}
+
+extension SetupWannabeViewController: SelectWannabePackViewControllerDelegate {
+
+    func selectWannabePackViewController(_ controller: SelectWannabePackViewController, packSelected pack: WannabePack) {
+        self.contentView.packName = pack.details.name
     }
 
 }

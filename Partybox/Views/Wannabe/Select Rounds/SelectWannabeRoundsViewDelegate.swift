@@ -10,6 +10,6 @@ import Foundation
 
 protocol SelectWannabeRoundsViewDelegate {
 
-    func selectWannabeRoundsView(_ selectWannabeRoundsView: SelectWannabeRoundsView, saveButtonPressed: Bool)
+    func selectWannabeRoundsView(_ view: SelectWannabeRoundsView, saveButtonPressed: Bool)
 
 }

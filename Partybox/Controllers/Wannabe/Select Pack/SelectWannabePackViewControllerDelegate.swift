@@ -10,6 +10,6 @@ import Foundation
 
 protocol SelectWannabePackViewControllerDelegate {
 
-    func selectWannabePackViewController(_ selectWannabePackViewController: SelectWannabePackViewController, packSelected packId: String)
+    func selectWannabePackViewController(_ controller: SelectWannabePackViewController, packSelected pack: WannabePack)
 
 }

@@ -61,7 +61,8 @@ class SelectWannabePackViewController: UIViewController {
 extension SelectWannabePackViewController: SelectWannabePackViewDelegate {
 
     func selectWannabePackView(_ selectWannabePackView: SelectWannabePackView, saveButtonPressed: Bool) {
-
+        self.delegate.selectWannabePackViewController(self, packSelected: self.contentView.pack)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
@@ -69,11 +70,11 @@ extension SelectWannabePackViewController: SelectWannabePackViewDelegate {
 extension SelectWannabePackViewController: SelectWannabePackViewDataSource {
 
     func selectWannabePackViewPacksCount() -> Int {
-        return 0
+        return self.session.wannabePacks.count
     }
 
     func selectWannabePackViewPack(index: Int) -> WannabePack? {
-        return nil
+        return self.session.wannabePacks.fetch(index: index)
     }
 
 }

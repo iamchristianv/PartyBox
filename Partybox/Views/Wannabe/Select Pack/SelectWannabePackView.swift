@@ -37,9 +37,7 @@ class SelectWannabePackView: UIView {
         return saveButton
     }()
 
-    private var selectedPackId: String!
-
-    private var selectedPackName: String!
+    var pack: WannabePack!
 
     private var delegate: SelectWannabePackViewDelegate!
 
@@ -49,8 +47,7 @@ class SelectWannabePackView: UIView {
 
     static func construct(delegate: SelectWannabePackViewDelegate, dataSource: SelectWannabePackViewDataSource) -> SelectWannabePackView {
         let view = SelectWannabePackView()
-        view.selectedPackId = dataSource.selectWannabePackViewPack(index: 0)?.details.id
-        view.selectedPackName = dataSource.selectWannabePackViewPack(index: 0)?.details.name
+        view.pack = dataSource.selectWannabePackViewPack(index: 0)
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -97,14 +94,6 @@ class SelectWannabePackView: UIView {
         self.tableView.reloadData()
     }
 
-    func packId() -> String {
-        return self.selectedPackId
-    }
-
-    func packName() -> String {
-        return self.selectedPackName
-    }
-
 }
 
 extension SelectWannabePackView: UITableViewDelegate {
@@ -112,7 +101,7 @@ extension SelectWannabePackView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedPackId = selectableCell.id()
+        self.pack = selectableCell.value as! WannabePack
         self.tableView.reloadData()
     }
 
@@ -139,10 +128,10 @@ extension SelectWannabePackView: UITableViewDataSource {
 
         if indexPath.row == SelectWannabePackViewCellRow.packsHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let headerCell = tableViewCell as! HeaderTableViewCell
+            let packsHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PACKS"
-            headerCell.configure(header: header)
-            return headerCell
+            packsHeaderCell.configure(header: header)
+            return packsHeaderCell
         }
 
         if indexPath.row >= SelectWannabePackViewCellRow.packCells.rawValue {
@@ -154,10 +143,10 @@ extension SelectWannabePackView: UITableViewDataSource {
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let id = pack.details.id
             let content = pack.details.name
-            let selected = pack.details.id == self.selectedPackId
-            selectableCell.configure(id: id, content: content, selected: selected)
+            let selected = pack.details.id == self.pack.details.id
+            let value = pack
+            selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }
 

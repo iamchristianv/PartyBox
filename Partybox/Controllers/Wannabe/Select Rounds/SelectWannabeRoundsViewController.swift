@@ -61,7 +61,7 @@ class SelectWannabeRoundsViewController: UIViewController {
 extension SelectWannabeRoundsViewController: SelectWannabeRoundsViewDelegate {
 
     internal func selectWannabeRoundsView(_ selectWannabeRoundsView: SelectWannabeRoundsView, saveButtonPressed: Bool) {
-        self.delegate.selectWannabeRoundsViewController(self, roundsSelected: self.contentView.rounds())
+        self.delegate.selectWannabeRoundsViewController(self, roundsSelected: self.contentView.rounds)
         self.dismiss(animated: true, completion: nil)
     }
 

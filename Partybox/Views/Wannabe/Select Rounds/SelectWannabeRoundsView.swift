@@ -37,7 +37,7 @@ class SelectWannabeRoundsView: UIView {
         return saveButton
     }()
 
-    private var selectedRounds: Int!
+    var rounds: Int!
 
     private var delegate: SelectWannabeRoundsViewDelegate!
 
@@ -47,7 +47,7 @@ class SelectWannabeRoundsView: UIView {
 
     static func construct(delegate: SelectWannabeRoundsViewDelegate, dataSource: SelectWannabeRoundsViewDataSource) -> SelectWannabeRoundsView {
         let view = SelectWannabeRoundsView()
-        view.selectedRounds = dataSource.selectWannabeRoundsViewRounds(index: 0)
+        view.rounds = dataSource.selectWannabeRoundsViewRounds(index: 0)
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -94,10 +94,6 @@ class SelectWannabeRoundsView: UIView {
         self.tableView.reloadData()
     }
 
-    func rounds() -> Int {
-        return self.selectedRounds
-    }
-
 }
 
 extension SelectWannabeRoundsView: UITableViewDelegate {
@@ -105,7 +101,7 @@ extension SelectWannabeRoundsView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedRounds = Int(selectableCell.id())
+        self.rounds = selectableCell.value as! Int
         self.tableView.reloadData()
     }
 
@@ -132,10 +128,10 @@ extension SelectWannabeRoundsView: UITableViewDataSource {
 
         if indexPath.row == SelectWannabeRoundsViewCellRow.roundsHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let headerCell = tableViewCell as! HeaderTableViewCell
+            let roundsHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "ROUNDS"
-            headerCell.configure(header: header)
-            return headerCell
+            roundsHeaderCell.configure(header: header)
+            return roundsHeaderCell
         }
 
         if indexPath.row >= SelectWannabeRoundsViewCellRow.roundsCells.rawValue {
@@ -145,10 +141,10 @@ extension SelectWannabeRoundsView: UITableViewDataSource {
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let id = "\(rounds)"
             let content = "\(rounds) Rounds"
-            let selected = rounds == self.selectedRounds
-            selectableCell.configure(id: id, content: content, selected: selected)
+            let selected = rounds == self.rounds
+            let value = rounds
+            selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }
 

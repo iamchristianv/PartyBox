@@ -167,11 +167,20 @@ class PartyViewController: UIViewController {
 extension PartyViewController: PartyViewDelegate {
 
     internal func partyView(_ view: PartyView, playButtonPressed: Bool) {
-        if self.session.party.details.gameId == self.session.wannabe.details.id {
-            let rootViewController = SetupWannabeViewController.construct(session: self.session)
-            let navigationController = UINavigationController(rootViewController: rootViewController)
-            self.present(navigationController, animated: true, completion: nil)
-        }
+        self.session.fetchPacks(callback: {
+            (error) in
+
+            if let error = error {
+                let subject = "Oh no"
+                let message = error
+                let action = "Okay"
+                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+            } else if self.session.party.details.gameId == self.session.wannabe.details.id {
+                let rootViewController = SetupWannabeViewController.construct(session: self.session)
+                let navigationController = UINavigationController(rootViewController: rootViewController)
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        })
     }
     
     internal func partyView(_ view: PartyView, changeButtonPressed: Bool) {

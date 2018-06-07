@@ -10,6 +10,6 @@ import Foundation
 
 protocol SelectWannabePackViewDelegate {
 
-    func selectWannabePackView(_ selectWannabePackView: SelectWannabePackView, saveButtonPressed: Bool)
+    func selectWannabePackView(_ view: SelectWannabePackView, saveButtonPressed: Bool)
 
 }

@@ -12,36 +12,36 @@ class SetupWannabeView: UIView {
 
     // MARK: - Instance Properties
 
-    private lazy var roundsLabel: UILabel = {
-        let roundsLabel = UILabel()
-        roundsLabel.text = "Duration"
-        roundsLabel.font = Partybox.fonts.avenirNextRegular(size: 20)
-        roundsLabel.textColor = Partybox.colors.black
-        return roundsLabel
+    private lazy var roundsNameLabel: UILabel = {
+        let roundsNameLabel = UILabel()
+        roundsNameLabel.text = "Duration"
+        roundsNameLabel.font = Partybox.fonts.avenirNextRegular(size: 20)
+        roundsNameLabel.textColor = Partybox.colors.black
+        return roundsNameLabel
     }()
 
-    private lazy var roundsTextField: UITextField = {
-        let roundsTextField = UITextField()
-        roundsTextField.delegate = self
-        roundsTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
-        roundsTextField.textColor = Partybox.colors.black
-        roundsTextField.borderStyle = .none
-        return roundsTextField
+    private lazy var roundsNameTextField: UITextField = {
+        let roundsNameTextField = UITextField()
+        roundsNameTextField.delegate = self
+        roundsNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
+        roundsNameTextField.textColor = Partybox.colors.black
+        roundsNameTextField.borderStyle = .none
+        return roundsNameTextField
     }()
 
-    private lazy var roundsUnderlineLabel: UILabel = {
-        let roundsUnderlineLabel = UILabel()
-        roundsUnderlineLabel.backgroundColor = Partybox.colors.black
-        return roundsUnderlineLabel
+    private lazy var roundsNameUnderlineLabel: UILabel = {
+        let roundsNameUnderlineLabel = UILabel()
+        roundsNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        return roundsNameUnderlineLabel
     }()
 
-    private lazy var roundsStatusLabel: UILabel = {
-        let roundsStatusLabel = UILabel()
-        roundsStatusLabel.text = " "
-        roundsStatusLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
-        roundsStatusLabel.textColor = Partybox.colors.red
-        roundsStatusLabel.isHidden = true
-        return roundsStatusLabel
+    private lazy var roundsNameStatusLabel: UILabel = {
+        let roundsNameStatusLabel = UILabel()
+        roundsNameStatusLabel.text = " "
+        roundsNameStatusLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
+        roundsNameStatusLabel.textColor = Partybox.colors.red
+        roundsNameStatusLabel.isHidden = true
+        return roundsNameStatusLabel
     }()
 
     private lazy var packNameLabel: UILabel = {
@@ -76,17 +76,27 @@ class SetupWannabeView: UIView {
         return packNameStatusLabel
     }()
 
-    private lazy var startButton: ActivityIndicatorButton = {
-        let startButton = ActivityIndicatorButton()
-        startButton.setTitle("Start", for: .normal)
-        startButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        startButton.setTitleColor(Partybox.colors.white, for: .normal)
-        startButton.setBackgroundColor(Partybox.colors.green)
-        startButton.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
-        return startButton
+    private lazy var playButton: ActivityIndicatorButton = {
+        let playButton = ActivityIndicatorButton()
+        playButton.setTitle("Play", for: .normal)
+        playButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
+        playButton.setTitleColor(Partybox.colors.white, for: .normal)
+        playButton.setBackgroundColor(Partybox.colors.green)
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        return playButton
     }()
 
-    private var selectedPackId: String = Partybox.values.none
+    var roundsName: String! {
+        willSet {
+            self.roundsNameTextField.text = newValue
+        }
+    }
+
+    var packName: String! {
+        willSet {
+            self.packNameTextField.text = newValue
+        }
+    }
 
     private var delegate: SetupWannabeViewDelegate!
 
@@ -94,7 +104,6 @@ class SetupWannabeView: UIView {
 
     static func construct(delegate: SetupWannabeViewDelegate) -> SetupWannabeView {
         let view = SetupWannabeView()
-        view.selectedPackId = Partybox.values.none
         view.delegate = delegate
         view.setupView()
         return view
@@ -105,17 +114,17 @@ class SetupWannabeView: UIView {
     private func setupView() {
         self.backgroundColor = .white
 
-        self.addSubview(self.roundsLabel)
-        self.addSubview(self.roundsTextField)
-        self.addSubview(self.roundsUnderlineLabel)
-        self.addSubview(self.roundsStatusLabel)
+        self.addSubview(self.roundsNameLabel)
+        self.addSubview(self.roundsNameTextField)
+        self.addSubview(self.roundsNameUnderlineLabel)
+        self.addSubview(self.roundsNameStatusLabel)
         self.addSubview(self.packNameLabel)
         self.addSubview(self.packNameTextField)
         self.addSubview(self.packNameUnderlineLabel)
         self.addSubview(self.packNameStatusLabel)
-        self.addSubview(self.startButton)
+        self.addSubview(self.playButton)
 
-        self.roundsLabel.snp.remakeConstraints({
+        self.roundsNameLabel.snp.remakeConstraints({
             (make) in
 
             make.leading.equalTo(self.snp.leading).offset(32)
@@ -123,30 +132,30 @@ class SetupWannabeView: UIView {
             make.top.equalTo(self.snp.top).offset(32)
         })
 
-        self.roundsTextField.snp.remakeConstraints({
+        self.roundsNameTextField.snp.remakeConstraints({
             (make) in
 
             make.height.equalTo(50)
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.roundsLabel.snp.bottom)
+            make.top.equalTo(self.roundsNameLabel.snp.bottom)
         })
 
-        self.roundsUnderlineLabel.snp.remakeConstraints({
+        self.roundsNameUnderlineLabel.snp.remakeConstraints({
             (make) in
 
             make.height.equalTo(1)
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.roundsTextField.snp.bottom)
+            make.top.equalTo(self.roundsNameTextField.snp.bottom)
         })
 
-        self.roundsStatusLabel.snp.remakeConstraints({
+        self.roundsNameStatusLabel.snp.remakeConstraints({
             (make) in
 
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.roundsUnderlineLabel.snp.bottom).offset(8)
+            make.top.equalTo(self.roundsNameUnderlineLabel.snp.bottom).offset(8)
         })
 
         self.packNameLabel.snp.remakeConstraints({
@@ -154,7 +163,7 @@ class SetupWannabeView: UIView {
 
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.roundsStatusLabel.snp.bottom).offset(40)
+            make.top.equalTo(self.roundsNameStatusLabel.snp.bottom).offset(40)
         })
 
         self.packNameTextField.snp.remakeConstraints({
@@ -183,7 +192,7 @@ class SetupWannabeView: UIView {
             make.top.equalTo(self.packNameUnderlineLabel.snp.bottom).offset(8)
         })
 
-        self.startButton.snp.remakeConstraints({
+        self.playButton.snp.remakeConstraints({
             (make) in
 
             make.width.equalTo(220)
@@ -195,83 +204,55 @@ class SetupWannabeView: UIView {
 
     // MARK: - Action Functions
 
-    @objc private func startButtonPressed() {
-        let roundsHasErrors = self.roundsHasErrors()
+    @objc private func playButtonPressed() {
+        let roundsNameHasErrors = self.roundsNameHasErrors()
         let packNameHasErrors = self.packNameHasErrors()
 
-        if roundsHasErrors || packNameHasErrors {
+        if roundsNameHasErrors || packNameHasErrors {
             return
         }
 
-        self.delegate.setupWannabeView(self, startButtonPressed: true)
+        self.delegate.setupWannabeView(self, playButtonPressed: true)
     }
 
     // MARK: - Animation Functions
 
-    func startAnimatingStartButton() {
-        self.startButton.startAnimating()
+    func startAnimatingPlayButton() {
+        self.playButton.startAnimating()
     }
 
-    func stopAnimatingStartButton() {
-        self.startButton.stopAnimating()
+    func stopAnimatingPlayButton() {
+        self.playButton.stopAnimating()
     }
 
     // MARK: - View Functions
 
-    private func roundsHasErrors() -> Bool {
-        let rounds = self.roundsTextField.text!
-
-        if rounds.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.roundsUnderlineLabel.backgroundColor = Partybox.colors.red
-            self.roundsStatusLabel.text = "Required"
-            self.roundsStatusLabel.isHidden = false
+    private func roundsNameHasErrors() -> Bool {
+        if self.roundsNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.roundsNameUnderlineLabel.backgroundColor = Partybox.colors.red
+            self.roundsNameStatusLabel.text = "Required"
+            self.roundsNameStatusLabel.isHidden = false
             return true
-        } else {
-            self.roundsUnderlineLabel.backgroundColor = Partybox.colors.black
-            self.roundsStatusLabel.text = " "
-            self.roundsStatusLabel.isHidden = true
-            return false
         }
-    }
 
-    func setRounds(_ rounds: String) {
-        self.roundsTextField.text = rounds
-    }
-
-    func rounds() -> String {
-        return self.roundsTextField.text!
-    }
-
-    func setPackId(_ packId: String) {
-        self.selectedPackId = packId
-    }
-
-    func packId() -> String {
-        return self.selectedPackId
+        self.roundsNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        self.roundsNameStatusLabel.text = " "
+        self.roundsNameStatusLabel.isHidden = true
+        return false
     }
 
     private func packNameHasErrors() -> Bool {
-        let packName = self.packNameTextField.text!
-
-        if packName.trimmingCharacters(in: .whitespaces).isEmpty {
+        if self.packNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.packNameUnderlineLabel.backgroundColor = Partybox.colors.red
             self.packNameStatusLabel.text = "Required"
             self.packNameStatusLabel.isHidden = false
             return true
-        } else {
-            self.packNameUnderlineLabel.backgroundColor = Partybox.colors.black
-            self.packNameStatusLabel.text = " "
-            self.packNameStatusLabel.isHidden = true
-            return false
         }
-    }
 
-    func setPackName(_ packName: String) {
-        self.packNameTextField.text = packName
-    }
-
-    func packName() -> String {
-        return self.packNameTextField.text!
+        self.packNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        self.packNameStatusLabel.text = " "
+        self.packNameStatusLabel.isHidden = true
+        return false
     }
 
 }
@@ -279,10 +260,12 @@ class SetupWannabeView: UIView {
 extension SetupWannabeView: UITextFieldDelegate {
 
     internal func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == self.roundsTextField {
-            self.delegate.setupWannabeView(self, roundsTextFieldPressed: true)
+        if textField == self.roundsNameTextField {
+            self.delegate.setupWannabeView(self, roundsNameTextFieldPressed: true)
             return false
-        } else if textField == self.packNameTextField {
+        }
+
+        if textField == self.packNameTextField {
             self.delegate.setupWannabeView(self, packNameTextFieldPressed: true)
             return false
         }

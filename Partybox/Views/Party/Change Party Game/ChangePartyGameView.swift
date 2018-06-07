@@ -37,14 +37,7 @@ class ChangePartyGameView: UIView {
         return saveButton
     }()
 
-    var partyGameId: String {
-        set {
-            self.partyGameId = newValue
-        }
-        get {
-            return self.partyGameId
-        }
-    }
+    var partyGameId: String!
     
     private var delegate: ChangePartyGameViewDelegate!
 
@@ -118,7 +111,7 @@ extension ChangePartyGameView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.partyGameId = selectableCell.id()
+        self.partyGameId = selectableCell.value as! String
         self.tableView.reloadData()
     }
     
@@ -156,10 +149,10 @@ extension ChangePartyGameView: UITableViewDataSource {
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let id = self.dataSource.changePartyGameViewPartyGameId(index: index)
             let content = self.dataSource.changePartyGameViewPartyGameName(index: index)
             let selected = self.dataSource.changePartyGameViewPartyGameId(index: index) == self.partyGameId
-            selectableCell.configure(id: id, content: content, selected: selected)
+            let value = self.dataSource.changePartyGameViewPartyGameId(index: index)
+            selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }
         

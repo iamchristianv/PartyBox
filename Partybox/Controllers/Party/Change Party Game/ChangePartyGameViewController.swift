@@ -69,7 +69,7 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
         } else {
             self.contentView.startAnimatingSaveButton()
 
-            let values = [PartyDetailsKey.gameId.rawValue: self.contentView.partyGameId]
+            let values = [PartyDetailsKey.gameId.rawValue: self.contentView.partyGameId!]
 
             self.session.party.details.update(values: values, callback: {
                 (error) in
