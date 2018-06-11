@@ -90,7 +90,7 @@ class Session {
         Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
-            guard let data = snapshot.value as? [String: Any] else {
+            guard let data = snapshot.value as? [[String: Any]] else {
                 callback("We ran into a problem while preparing your game\n\nPlease try again")
                 return
             }

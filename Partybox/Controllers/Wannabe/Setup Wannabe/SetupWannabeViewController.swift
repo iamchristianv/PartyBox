@@ -2,7 +2,7 @@
 //  SetupWannabeViewController.swift
 //  Partybox
 //
-//  Created by Christian Villa on 5/29/18.
+//  Created by Christian Villa on 5/31/18.
 //  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ class SetupWannabeViewController: UIViewController {
     static func construct(session: Session) -> SetupWannabeViewController {
         let controller = SetupWannabeViewController()
         controller.session = session
-        controller.contentView = SetupWannabeView.construct(delegate: controller)
+        controller.contentView = SetupWannabeView.construct(delegate: controller, dataSource: controller)
         return controller
     }
 
@@ -42,12 +42,12 @@ class SetupWannabeViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
         self.showNavigationBar()
-        self.setNavigationBarTitle("Setup Wannabe")
+        self.setNavigationBarTitle("Select Pack")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
         self.setNavigationBarBackgroundColor(Partybox.colors.green)
     }
 
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
 
     @objc private func cancelButtonPressed() {
         self.dismiss(animated: true, completion: nil)
@@ -57,36 +57,21 @@ class SetupWannabeViewController: UIViewController {
 
 extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
-    internal func setupWannabeView(_ view: SetupWannabeView, roundsNameTextFieldPressed: Bool) {
-        let rootViewController = SelectWannabeRoundsViewController.construct(session: self.session, delegate: self)
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        self.present(navigationController, animated: true, completion: nil)
-    }
-
-    internal func setupWannabeView(_ view: SetupWannabeView, packNameTextFieldPressed: Bool) {
-        let rootViewController = SelectWannabePackViewController.construct(session: self.session, delegate: self)
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        self.present(navigationController, animated: true, completion: nil)
-    }
-
-    internal func setupWannabeView(_ view: SetupWannabeView, playButtonPressed: Bool) {
-        
+    func setupWannabeView(_ view: SetupWannabeView, saveButtonPressed: Bool) {
+        let viewController = StartWannabeViewController.construct(session: self.session)
+        self.show(viewController, sender: nil)
     }
 
 }
 
-extension SetupWannabeViewController: SelectWannabeRoundsViewControllerDelegate {
+extension SetupWannabeViewController: SetupWannabeViewDataSource {
 
-    func selectWannabeRoundsViewController(_ controller: SelectWannabeRoundsViewController, roundsSelected rounds: Int) {
-        self.contentView.roundsName = "\(rounds) Rounds"
+    func setupWannabeViewGamePacksCount() -> Int {
+        return self.session.wannabePacks.count
     }
 
-}
-
-extension SetupWannabeViewController: SelectWannabePackViewControllerDelegate {
-
-    func selectWannabePackViewController(_ controller: SelectWannabePackViewController, packSelected pack: WannabePack) {
-        self.contentView.packName = pack.details.name
+    func setupWannabeViewGamePack(index: Int) -> WannabePack? {
+        return self.session.wannabePacks.fetch(index: index)
     }
 
 }

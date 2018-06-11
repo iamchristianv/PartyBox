@@ -189,7 +189,7 @@ extension PartyViewController: PartyViewDelegate {
         self.present(navigationController, animated: true, completion: nil)
     }
     
-    internal func partyView(_ view: PartyView, kickButtonPressed partyPersonName: String) {
+    internal func partyView(_ view: PartyView, partyPersonKicked partyPersonName: String) {
         let subject = "Woah there"
         let message = "Are you sure you want to kick this person?"
         let action = "Kick"

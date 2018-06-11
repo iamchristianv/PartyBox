@@ -87,7 +87,7 @@ extension PartyView: UITableViewDelegate {
         let kickButton = UITableViewRowAction(style: .normal, title: "KICK", handler: {
             (rowAction, indexPath) in
             
-            self.delegate.partyView(self, kickButtonPressed: person.name)
+            self.delegate.partyView(self, partyPersonKicked: person.name)
         })
         
         kickButton.backgroundColor = Partybox.colors.red

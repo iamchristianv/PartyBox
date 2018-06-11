@@ -1,5 +1,5 @@
 //
-//  SelectWannabePackViewCellRow.swift
+//  SetupWannabeViewCellRow.swift
 //  Partybox
 //
 //  Created by Christian Villa on 5/31/18.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum SelectWannabePackViewCellRow: Int {
+enum SetupWannabeViewCellRow: Int {
 
     case promptCell = 0
 
-    case packsHeaderCell
+    case gamePacksHeaderCell
 
-    case packCells
+    case gamePackCells
 
 }
