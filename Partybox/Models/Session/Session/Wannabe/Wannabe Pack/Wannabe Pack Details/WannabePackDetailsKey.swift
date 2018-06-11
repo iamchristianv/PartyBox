@@ -14,10 +14,4 @@ enum WannabePackDetailsKey: String {
 
     case name
 
-    case plays
-
-    case reviews
-
-    case rating
-
 }

@@ -55,9 +55,9 @@ class StartPartyViewController: UIViewController {
 extension StartPartyViewController: StartPartyViewDelegate {
 
     internal func startPartyView(_ view: StartPartyView, startButtonPressed: Bool) {
-        self.contentView.startAnimatingStartButton()
-        
         let session = Session.construct(userName: self.contentView.userName, partyName: self.contentView.partyName)
+
+        self.contentView.startAnimatingStartButton()
 
         session.party.start(callback: {
             (error) in

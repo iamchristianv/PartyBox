@@ -42,7 +42,7 @@ class StartWannabeViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
         self.showNavigationBar()
-        self.setNavigationBarTitle("Start Wannabe")
+        self.setNavigationBarTitle("How to Play")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
         self.setNavigationBarBackgroundColor(Partybox.colors.green)
     }

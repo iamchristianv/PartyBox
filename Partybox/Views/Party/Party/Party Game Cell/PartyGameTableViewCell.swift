@@ -31,7 +31,7 @@ class PartyGameTableViewCell: UITableViewCell {
         return summaryLabel
     }()
 
-    private lazy var playButton: ActivityIndicatorButton = {
+    lazy var playButton: ActivityIndicatorButton = {
         let playButton = ActivityIndicatorButton()
         playButton.setTitle("Play", for: .normal)
         playButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)

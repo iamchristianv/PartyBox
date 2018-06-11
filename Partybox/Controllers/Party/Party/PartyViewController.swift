@@ -167,8 +167,12 @@ class PartyViewController: UIViewController {
 extension PartyViewController: PartyViewDelegate {
 
     internal func partyView(_ view: PartyView, playButtonPressed: Bool) {
+        self.contentView.startAnimatingPlayButton()
+
         self.session.fetchPacks(callback: {
             (error) in
+
+            self.contentView.stopAnimatingPlayButton()
 
             if let error = error {
                 let subject = "Oh no"

@@ -55,9 +55,9 @@ class JoinPartyViewController: UIViewController {
 extension JoinPartyViewController: JoinPartyViewDelegate {
 
     internal func joinPartyView(_ view: JoinPartyView, joinButtonPressed: Bool) {
-        self.contentView.startAnimatingJoinButton()
-
         let session = Session.construct(userName: self.contentView.userName, partyId: self.contentView.partyId)
+
+        self.contentView.startAnimatingJoinButton()
 
         session.party.join(callback: {
             (error) in
