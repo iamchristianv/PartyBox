@@ -10,11 +10,9 @@ import Foundation
 
 protocol ChangePartyGameViewDataSource {
 
-    func changePartyGameViewPartyGameId() -> String
+    func changePartyGameViewPartyGameName() -> String
 
     func changePartyGameViewPartyGameCount() -> Int
-
-    func changePartyGameViewPartyGameId(index: Int) -> String
 
     func changePartyGameViewPartyGameName(index: Int) -> String
 

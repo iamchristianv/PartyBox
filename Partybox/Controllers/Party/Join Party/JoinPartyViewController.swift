@@ -11,13 +11,19 @@ import UIKit
 class JoinPartyViewController: UIViewController {
 
     // MARK: - Instance Properties
+
+    private var store: Store!
+
+    private var party: Party!
     
     private var contentView: JoinPartyView!
 
     // MARK: - Construction Functions
 
-    static func construct() -> JoinPartyViewController {
+    static func construct(store: Store) -> JoinPartyViewController {
         let controller = JoinPartyViewController()
+        controller.store = store
+        controller.party = nil
         controller.contentView = JoinPartyView.construct(delegate: controller)
         return controller
     }
@@ -41,7 +47,7 @@ class JoinPartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Join Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.blue)
+        self.setNavigationBarBackgroundColor(Partybox.color.blue)
     }
     
     // MARK: - Navigation Bar Functions
@@ -55,11 +61,18 @@ class JoinPartyViewController: UIViewController {
 extension JoinPartyViewController: JoinPartyViewDelegate {
 
     internal func joinPartyView(_ view: JoinPartyView, joinButtonPressed: Bool) {
-        let session = Session.construct(userName: self.contentView.userName, partyId: self.contentView.partyId)
+        let partyIdHasErrors = self.contentView.partyIdHasErrors()
+        let userNameHasErrors = self.contentView.userNameHasErrors()
+
+        if partyIdHasErrors || userNameHasErrors {
+            return
+        }
+
+        self.party = Party.construct(partyId: self.contentView.partyId(), userName: self.contentView.userName())
 
         self.contentView.startAnimatingJoinButton()
 
-        session.party.join(callback: {
+        self.party.enter(callback: {
             (error) in
 
             self.contentView.stopAnimatingJoinButton()
@@ -69,11 +82,12 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
                 let message = error
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            } else {
-                let partyViewController = PartyViewController.construct(session: session, delegate: self)
-                let navigationController = UINavigationController(rootViewController: partyViewController)
-                self.present(navigationController, animated: true, completion: nil)
+                return
             }
+
+            let rootViewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
+            let navigationController = UINavigationController(rootViewController: rootViewController)
+            self.present(navigationController, animated: true, completion: nil)
         })
     }
     

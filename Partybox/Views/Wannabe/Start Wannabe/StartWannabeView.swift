@@ -15,8 +15,8 @@ class StartWannabeView: UIView {
     private lazy var gameNameLabel: UILabel = {
         let gameNameLabel = UILabel()
         gameNameLabel.text = self.dataSource.startWannabeViewGameName()
-        gameNameLabel.font = Partybox.fonts.avenirNextRegular(size: 28)
-        gameNameLabel.textColor = Partybox.colors.black
+        gameNameLabel.font = Partybox.font.avenirNextRegular(size: 28)
+        gameNameLabel.textColor = Partybox.color.black
         gameNameLabel.textAlignment = .center
         return gameNameLabel
     }()
@@ -24,8 +24,8 @@ class StartWannabeView: UIView {
     private lazy var gameInstructionsLabel: UILabel = {
         let gameInstructionsLabel = UILabel()
         gameInstructionsLabel.text = self.dataSource.startWannabeViewGameInstructions()
-        gameInstructionsLabel.font = Partybox.fonts.avenirNextRegular(size: 22)
-        gameInstructionsLabel.textColor = Partybox.colors.black
+        gameInstructionsLabel.font = Partybox.font.avenirNextRegular(size: 20)
+        gameInstructionsLabel.textColor = Partybox.color.black
         gameInstructionsLabel.textAlignment = .center
         gameInstructionsLabel.numberOfLines = 0
         return gameInstructionsLabel
@@ -34,8 +34,8 @@ class StartWannabeView: UIView {
     private lazy var waitingLabel: UILabel = {
         let waitingLabel = UILabel()
         waitingLabel.text = "Waiting for Everyone to be Ready"
-        waitingLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
-        waitingLabel.textColor = Partybox.colors.black
+        waitingLabel.font = Partybox.font.avenirNextRegular(size: 18)
+        waitingLabel.textColor = Partybox.color.black
         waitingLabel.textAlignment = .center
         waitingLabel.isHidden = true
         return waitingLabel
@@ -44,9 +44,9 @@ class StartWannabeView: UIView {
     private lazy var readyButton: ActivityIndicatorButton = {
         let readyButton = ActivityIndicatorButton()
         readyButton.setTitle("Ready", for: .normal)
-        readyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        readyButton.setTitleColor(Partybox.colors.white, for: .normal)
-        readyButton.setBackgroundColor(Partybox.colors.green)
+        readyButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        readyButton.setTitleColor(Partybox.color.white, for: .normal)
+        readyButton.setBackgroundColor(Partybox.color.green)
         readyButton.addTarget(self, action: #selector(readyButtonPressed), for: .touchUpInside)
         return readyButton
     }()
@@ -89,7 +89,7 @@ class StartWannabeView: UIView {
             make.height.equalTo(100)
             make.leading.equalTo(self.snp.leading).offset(32)
             make.trailing.equalTo(self.snp.trailing).offset(-32)
-            make.top.equalTo(self.gameNameLabel.snp.bottom).offset(20)
+            make.top.equalTo(self.gameNameLabel.snp.bottom).offset(10)
         })
 
         self.waitingLabel.snp.remakeConstraints({

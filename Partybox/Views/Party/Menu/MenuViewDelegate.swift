@@ -14,8 +14,6 @@ protocol MenuViewDelegate {
 
     func menuView(_ view: MenuView, joinPartyButtonPressed: Bool)
 
-    func menuView(_ view: MenuView, findPartyButtonPressed: Bool)
-
-    func menuView(_ view: MenuView, visitStoreButtonPressed: Bool)
+    func menuView(_ view: MenuView, removeAdsButtonPressed: Bool)
 
 }

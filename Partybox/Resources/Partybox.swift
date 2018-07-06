@@ -6,13 +6,22 @@
 //  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import UIKit
+
+typealias ErrorCallback = (String?) -> Void
 
 struct Partybox {
 
-    struct values {
+    struct firebase {
 
-        // MARK: - Default Values
+        static let authenticator: Auth = Auth.auth()
+
+        static let database: DatabaseReference = Database.database().reference()
+
+    }
+
+    struct value {
 
         static let none: String = "none"
 
@@ -20,45 +29,9 @@ struct Partybox {
 
         static let zero: Int = 0
 
-        static func randomPartyId() -> String {
-            var randomId = ""
-
-            let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-                           "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-
-            let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-            for _ in 1...5 {
-                let randomIndex = Int(arc4random())
-                let randomLetter = letters[randomIndex % letters.count]
-                let randomNumber = String(numbers[randomIndex % numbers.count])
-
-                randomId += (randomIndex % 2 == 0 ? randomLetter : randomNumber)
-            }
-
-            return randomId
-        }
-
-        static func randomPersonEmoji() -> String {
-            let emojis = ["😊"]
-
-            let randomIndex = Int(arc4random()) % emojis.count
-            let randomEmoji = emojis[randomIndex]
-
-            return randomEmoji
-        }
-
-        static func randomGameId() -> String {
-            let randomId = "C2D4V"
-
-            return randomId
-        }
-
     }
 
-    struct colors {
-
-        // MARK: - Color Values
+    struct color {
 
         static var white: UIColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 
@@ -78,22 +51,38 @@ struct Partybox {
 
     }
 
-    struct fonts {
-
-        // MARK: - Font Values
+    struct font {
 
         static let avenirNextRegularName: String = "AvenirNext-Regular"
 
         static let avenirNextMediumName: String = "AvenirNext-Medium"
 
         static func avenirNextRegular(size: CGFloat) -> UIFont {
-            return UIFont(name: Partybox.fonts.avenirNextRegularName, size: size)!
+            return UIFont(name: Partybox.font.avenirNextRegularName, size: size)!
         }
 
         static func avenirNextMedium(size: CGFloat) -> UIFont {
-            return UIFont(name: Partybox.fonts.avenirNextMediumName, size: size)!
+            return UIFont(name: Partybox.font.avenirNextMediumName, size: size)!
         }
 
     }
+
+}
+
+enum DatabaseKey: String {
+
+    case cards
+
+    case titles
+
+    case packs
+
+    case parties
+
+    case guests
+
+    case wannabe
+
+    case players
 
 }

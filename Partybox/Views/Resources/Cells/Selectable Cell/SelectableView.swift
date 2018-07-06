@@ -13,12 +13,12 @@ class SelectableView: UIView {
     // MARK: - Instance Properties
     
     private lazy var outerView: CircleView = {
-        let outerView = CircleView(frame: .zero, color: Partybox.colors.lightGray)
+        let outerView = CircleView(frame: .zero, color: Partybox.color.lightGray)
         return outerView
     }()
     
     private lazy var innerView: CircleView = {
-        let innerView = CircleView(frame: .zero, color: Partybox.colors.white)
+        let innerView = CircleView(frame: .zero, color: Partybox.color.white)
         return innerView
     }()
 
@@ -26,7 +26,7 @@ class SelectableView: UIView {
 
     static func construct(selected: Bool) -> SelectableView {
         let view = SelectableView()
-        view.innerView.color = selected ? Partybox.colors.green : Partybox.colors.white
+        view.innerView.color = selected ? Partybox.color.green : Partybox.color.white
         view.innerView.setNeedsDisplay()
         view.setupView()
         return view

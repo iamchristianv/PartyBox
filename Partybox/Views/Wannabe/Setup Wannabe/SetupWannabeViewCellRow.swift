@@ -12,8 +12,8 @@ enum SetupWannabeViewCellRow: Int {
 
     case promptCell = 0
 
-    case gamePacksHeaderCell
+    case wannabePacksHeaderCell
 
-    case gamePackCells
+    case wannabePackCells
 
 }

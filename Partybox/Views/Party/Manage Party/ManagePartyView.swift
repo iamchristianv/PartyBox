@@ -15,8 +15,8 @@ class ManagePartyView: UIView {
     private lazy var partyNameLabel: UILabel = {
         let partyNameLabel = UILabel()
         partyNameLabel.text = "Party Name"
-        partyNameLabel.font = Partybox.fonts.avenirNextRegular(size: 20)
-        partyNameLabel.textColor = Partybox.colors.black
+        partyNameLabel.font = Partybox.font.avenirNextRegular(size: 20)
+        partyNameLabel.textColor = Partybox.color.black
         return partyNameLabel
     }()
 
@@ -24,9 +24,9 @@ class ManagePartyView: UIView {
         let partyNameTextField = UITextField()
         partyNameTextField.delegate = self
         partyNameTextField.text = self.dataSource.managePartyViewPartyName()
-        partyNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
-        partyNameTextField.textColor = Partybox.colors.black
-        partyNameTextField.tintColor = Partybox.colors.green
+        partyNameTextField.font = Partybox.font.avenirNextRegular(size: 28)
+        partyNameTextField.textColor = Partybox.color.black
+        partyNameTextField.tintColor = Partybox.color.green
         partyNameTextField.borderStyle = .none
         partyNameTextField.autocapitalizationType = .words
         partyNameTextField.clearButtonMode = .whileEditing
@@ -35,15 +35,15 @@ class ManagePartyView: UIView {
 
     private lazy var partyNameUnderlineLabel: UILabel = {
         let partyNameUnderlineLabel = UILabel()
-        partyNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        partyNameUnderlineLabel.backgroundColor = Partybox.color.black
         return partyNameUnderlineLabel
     }()
 
     private lazy var partyNameStatusLabel: UILabel = {
         let partyNameStatusLabel = UILabel()
         partyNameStatusLabel.text = " "
-        partyNameStatusLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
-        partyNameStatusLabel.textColor = Partybox.colors.red
+        partyNameStatusLabel.font = Partybox.font.avenirNextRegular(size: 16)
+        partyNameStatusLabel.textColor = Partybox.color.red
         partyNameStatusLabel.isHidden = true
         return partyNameStatusLabel
     }()
@@ -53,7 +53,7 @@ class ManagePartyView: UIView {
     private lazy var partyNameCharacterCountLabel: UILabel = {
         let partyNameCharacterCountLabel = UILabel()
         partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - self.dataSource.managePartyViewPartyHostName().count)"
-        partyNameCharacterCountLabel.font = Partybox.fonts.avenirNextRegular(size: 16)
+        partyNameCharacterCountLabel.font = Partybox.font.avenirNextRegular(size: 16)
         partyNameCharacterCountLabel.textColor = UIColor.lightGray
         return partyNameCharacterCountLabel
     }()
@@ -61,8 +61,8 @@ class ManagePartyView: UIView {
     private lazy var partyHostNameLabel: UILabel = {
         let partyHostNameLabel = UILabel()
         partyHostNameLabel.text = "Party Host"
-        partyHostNameLabel.font = Partybox.fonts.avenirNextRegular(size: 20)
-        partyHostNameLabel.textColor = Partybox.colors.black
+        partyHostNameLabel.font = Partybox.font.avenirNextRegular(size: 20)
+        partyHostNameLabel.textColor = Partybox.color.black
         return partyHostNameLabel
     }()
     
@@ -70,45 +70,27 @@ class ManagePartyView: UIView {
         let partyHostNameTextField = UITextField()
         partyHostNameTextField.delegate = self
         partyHostNameTextField.text = self.dataSource.managePartyViewPartyHostName()
-        partyHostNameTextField.font = Partybox.fonts.avenirNextRegular(size: 28)
-        partyHostNameTextField.textColor = Partybox.colors.black
+        partyHostNameTextField.font = Partybox.font.avenirNextRegular(size: 28)
+        partyHostNameTextField.textColor = Partybox.color.black
         partyHostNameTextField.borderStyle = .none
         return partyHostNameTextField
     }()
 
     private lazy var partyHostNameUnderlineLabel: UILabel = {
         let partyHostNameUnderlineLabel = UILabel()
-        partyHostNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        partyHostNameUnderlineLabel.backgroundColor = Partybox.color.black
         return partyHostNameUnderlineLabel
     }()
     
     private lazy var saveButton: ActivityIndicatorButton = {
         let saveButton = ActivityIndicatorButton()
         saveButton.setTitle("Save", for: .normal)
-        saveButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        saveButton.setTitleColor(Partybox.colors.white, for: .normal)
-        saveButton.setBackgroundColor(Partybox.colors.green)
+        saveButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        saveButton.setTitleColor(Partybox.color.white, for: .normal)
+        saveButton.setBackgroundColor(Partybox.color.green)
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return saveButton
     }()
-
-    var partyName: String {
-        set {
-            self.partyNameTextField.text = newValue
-        }
-        get {
-            return self.partyNameTextField.text!
-        }
-    }
-
-    var partyHostName: String {
-        set {
-            self.partyHostNameTextField.text = newValue
-        }
-        get {
-            return self.partyHostNameTextField.text!
-        }
-    }
     
     private var delegate: ManagePartyViewDelegate!
 
@@ -129,6 +111,7 @@ class ManagePartyView: UIView {
     private func setupView() {
         self.backgroundColor = .white
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        self.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(hideKeyboard)))
 
         self.addSubview(self.partyNameLabel)
         self.addSubview(self.partyNameTextField)
@@ -215,7 +198,7 @@ class ManagePartyView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.bottom.equalTo(self.snp.bottom).offset(-32)
+            make.bottom.equalTo(self.snp.bottom).offset(-40)
         })
     }
     
@@ -226,12 +209,6 @@ class ManagePartyView: UIView {
     }
     
     @objc private func saveButtonPressed() {
-        let partyNameHasErrors = self.partyNameHasErrors()
-
-        if partyNameHasErrors {
-            return
-        }
-
         self.delegate.managePartyView(self, saveButtonPressed: true)
     }
 
@@ -247,18 +224,34 @@ class ManagePartyView: UIView {
     
     // MARK: - View Functions
 
-    private func partyNameHasErrors() -> Bool {
+    func partyNameHasErrors() -> Bool {
         if self.partyNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.red
+            self.partyNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.partyNameStatusLabel.text = "Required"
             self.partyNameStatusLabel.isHidden = false
             return true
         }
 
-        self.partyNameUnderlineLabel.backgroundColor = Partybox.colors.black
+        self.partyNameUnderlineLabel.backgroundColor = Partybox.color.black
         self.partyNameStatusLabel.text = " "
         self.partyNameStatusLabel.isHidden = true
         return false
+    }
+
+    func setPartyName(_ partyName: String) {
+        self.partyNameTextField.text = partyName
+    }
+
+    func partyName() -> String {
+        return self.partyNameTextField.text!
+    }
+
+    func setPartyHostName(_ partyHostName: String) {
+        self.partyHostNameTextField.text = partyHostName
+    }
+
+    func partyHostName() -> String {
+        return self.partyHostNameTextField.text!
     }
 
 }

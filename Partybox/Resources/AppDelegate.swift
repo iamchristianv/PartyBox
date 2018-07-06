@@ -10,22 +10,6 @@ import Firebase
 import SnapKit
 import UIKit
 
-enum DatabaseKey: String {
-
-    case sessions
-
-    case party
-
-    case game
-
-    case packs
-
-    case details
-
-    case cards
-
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder {
     

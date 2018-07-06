@@ -12,15 +12,18 @@ class SetupWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var session: Session!
+    private var store: Store!
+
+    private var party: Party!
 
     private var contentView: SetupWannabeView!
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session) -> SetupWannabeViewController {
+    static func construct(store: Store, party: Party) -> SetupWannabeViewController {
         let controller = SetupWannabeViewController()
-        controller.session = session
+        controller.store = store
+        controller.party = party
         controller.contentView = SetupWannabeView.construct(delegate: controller, dataSource: controller)
         return controller
     }
@@ -44,7 +47,7 @@ class SetupWannabeViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Select Pack")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.green)
+        self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
 
     // MARK: - Navigation Bar Functions
@@ -58,7 +61,7 @@ class SetupWannabeViewController: UIViewController {
 extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
     func setupWannabeView(_ view: SetupWannabeView, saveButtonPressed: Bool) {
-        let viewController = StartWannabeViewController.construct(session: self.session)
+        let viewController = StartWannabeViewController.construct(store: self.store, party: self.party)
         self.show(viewController, sender: nil)
     }
 
@@ -67,11 +70,11 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
 extension SetupWannabeViewController: SetupWannabeViewDataSource {
 
     func setupWannabeViewGamePacksCount() -> Int {
-        return self.session.wannabePacks.count
+        return self.store.wannabePacks.count
     }
 
     func setupWannabeViewGamePack(index: Int) -> WannabePack? {
-        return self.session.wannabePacks.fetch(index: index)
+        return self.store.wannabePacks.fetch(index: index)
     }
 
 }

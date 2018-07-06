@@ -30,14 +30,14 @@ class SetupWannabeView: UIView {
     private lazy var saveButton: ActivityIndicatorButton = {
         let saveButton = ActivityIndicatorButton()
         saveButton.setTitle("Save", for: .normal)
-        saveButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        saveButton.setTitleColor(Partybox.colors.white, for: .normal)
-        saveButton.setBackgroundColor(Partybox.colors.green)
+        saveButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        saveButton.setTitleColor(Partybox.color.white, for: .normal)
+        saveButton.setBackgroundColor(Partybox.color.green)
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return saveButton
     }()
 
-    var gamePack: WannabePack!
+    private var selectedWannabePackName: String!
 
     private var delegate: SetupWannabeViewDelegate!
 
@@ -47,7 +47,7 @@ class SetupWannabeView: UIView {
 
     static func construct(delegate: SetupWannabeViewDelegate, dataSource: SetupWannabeViewDataSource) -> SetupWannabeView {
         let view = SetupWannabeView()
-        view.gamePack = dataSource.setupWannabeViewGamePack(index: 0)
+        view.selectedWannabePackName = dataSource.setupWannabeViewGamePack(index: 0)?.name
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -94,6 +94,10 @@ class SetupWannabeView: UIView {
         self.tableView.reloadData()
     }
 
+    func wannabePackName() -> String {
+        return self.selectedWannabePackName
+    }
+
 }
 
 extension SetupWannabeView: UITableViewDelegate {
@@ -101,7 +105,7 @@ extension SetupWannabeView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.gamePack = selectableCell.value as! WannabePack
+        self.selectedWannabePackName = selectableCell.value as! String
         self.tableView.reloadData()
     }
 
@@ -114,7 +118,7 @@ extension SetupWannabeView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SetupWannabeViewCellRow.gamePackCells.rawValue + self.dataSource.setupWannabeViewGamePacksCount()
+        return SetupWannabeViewCellRow.wannabePackCells.rawValue + self.dataSource.setupWannabeViewGamePacksCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,28 +128,24 @@ extension SetupWannabeView: UITableViewDataSource {
             let prompt = "Which pack do you want to play with?"
             promptCell.configure(prompt: prompt)
             return promptCell
-        }
-
-        if indexPath.row == SetupWannabeViewCellRow.gamePacksHeaderCell.rawValue {
+        } else if indexPath.row == SetupWannabeViewCellRow.wannabePacksHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let packsHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PACKS"
             packsHeaderCell.configure(header: header)
             return packsHeaderCell
-        }
+        } else if indexPath.row >= SetupWannabeViewCellRow.wannabePackCells.rawValue {
+            let index = indexPath.row - SetupWannabeViewCellRow.wannabePackCells.rawValue
 
-        if indexPath.row >= SetupWannabeViewCellRow.gamePackCells.rawValue {
-            let index = indexPath.row - SetupWannabeViewCellRow.gamePackCells.rawValue
-
-            guard let gamePack = self.dataSource.setupWannabeViewGamePack(index: index) else {
+            guard let wannabePack = self.dataSource.setupWannabeViewGamePack(index: index) else {
                 return UITableViewCell()
             }
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let content = gamePack.details.name
-            let selected = gamePack.details.id == self.gamePack.details.id
-            let value = gamePack
+            let content = wannabePack.name
+            let selected = wannabePack.name == self.selectedWannabePackName
+            let value = wannabePack.name
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }

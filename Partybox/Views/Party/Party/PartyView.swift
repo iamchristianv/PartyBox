@@ -77,6 +77,17 @@ class PartyView: UIView {
     func reloadTable() {
         self.tableView.reloadData()
     }
+
+    // MARK: - Utility Functions
+
+    private static func randomPersonEmoji() -> String {
+        let emojis = ["😊"]
+
+        let randomIndex = Int(arc4random()) % emojis.count
+        let randomEmoji = emojis[randomIndex]
+
+        return randomEmoji
+    }
     
 }
 
@@ -103,7 +114,7 @@ extension PartyView: UITableViewDelegate {
             self.delegate.partyView(self, partyPersonKicked: person.name)
         })
         
-        kickButton.backgroundColor = Partybox.colors.red
+        kickButton.backgroundColor = Partybox.color.red
         
         return [kickButton]
     }
@@ -127,17 +138,13 @@ extension PartyView: UITableViewDataSource {
             let inviteCode = self.dataSource.partyViewPartyId()
             inviteCodeCell.configure(inviteCode: inviteCode)
             return inviteCodeCell
-        }
-        
-        if indexPath.row == PartyViewCellRow.partyGameHeaderCell.rawValue {
+        } else if indexPath.row == PartyViewCellRow.partyGameHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let partyGameHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "GAME"
             partyGameHeaderCell.configure(header: header)
             return partyGameHeaderCell
-        }
-        
-        if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
+        } else if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
             let partyGameCell = tableViewCell as! PartyGameTableViewCell
             let name = self.dataSource.partyViewPartyGameName()
@@ -146,17 +153,13 @@ extension PartyView: UITableViewDataSource {
             partyGameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
             self.playButton = partyGameCell.playButton
             return partyGameCell
-        }
-        
-        if indexPath.row == PartyViewCellRow.partyPeopleHeaderCell.rawValue {
+        } else if indexPath.row == PartyViewCellRow.partyPeopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let partyPeopleHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PEOPLE"
             partyPeopleHeaderCell.configure(header: header)
             return partyPeopleHeaderCell
-        }
-            
-        if indexPath.row >= PartyViewCellRow.partyPersonCells.rawValue {
+        } else if indexPath.row >= PartyViewCellRow.partyPersonCells.rawValue {
             let index = indexPath.row - PartyViewCellRow.partyPersonCells.rawValue
             
             guard let person = self.dataSource.partyViewPartyPerson(index: index) else {

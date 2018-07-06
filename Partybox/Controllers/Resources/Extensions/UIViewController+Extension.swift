@@ -28,24 +28,24 @@ extension UIViewController {
     
     func setNavigationBarLeftButton(title: String?, target: Any?, action: Selector?) {
         let leftButton = UIBarButtonItem(title: title, style: .plain, target: target, action: action)
-        let titleTextAttributes = [NSAttributedStringKey.font: Partybox.fonts.avenirNextRegular(size: 18),
-                                   NSAttributedStringKey.foregroundColor: Partybox.colors.white] as [NSAttributedStringKey : Any]
+        let titleTextAttributes = [NSAttributedStringKey.font: Partybox.font.avenirNextRegular(size: 18),
+                                   NSAttributedStringKey.foregroundColor: Partybox.color.white] as [NSAttributedStringKey : Any]
         leftButton.setTitleTextAttributes(titleTextAttributes, for: .normal)
         self.navigationItem.setLeftBarButton(leftButton, animated: true)
     }
     
     func setNavigationBarRightButton(title: String?, target: Any?, action: Selector?) {
         let rightButton = UIBarButtonItem(title: title, style: .plain, target: target, action: action)
-        let titleTextAttributes = [NSAttributedStringKey.font: Partybox.fonts.avenirNextRegular(size: 18),
-                                   NSAttributedStringKey.foregroundColor: Partybox.colors.white] as [NSAttributedStringKey : Any]
+        let titleTextAttributes = [NSAttributedStringKey.font: Partybox.font.avenirNextRegular(size: 18),
+                                   NSAttributedStringKey.foregroundColor: Partybox.color.white] as [NSAttributedStringKey : Any]
         rightButton.setTitleTextAttributes(titleTextAttributes, for: .normal)
         self.navigationItem.setRightBarButton(rightButton, animated: true)
     }
     
     func setNavigationBarBackgroundColor(_ color: UIColor) {
         self.navigationController?.navigationBar.barTintColor = color
-        let titleTextAttributes = [NSAttributedStringKey.font: Partybox.fonts.avenirNextMedium(size: 19),
-                                   NSAttributedStringKey.foregroundColor: Partybox.colors.white] as [NSAttributedStringKey : Any]
+        let titleTextAttributes = [NSAttributedStringKey.font: Partybox.font.avenirNextMedium(size: 19),
+                                   NSAttributedStringKey.foregroundColor: Partybox.color.white] as [NSAttributedStringKey : Any]
         self.navigationController?.navigationBar.titleTextAttributes = titleTextAttributes
     }
     

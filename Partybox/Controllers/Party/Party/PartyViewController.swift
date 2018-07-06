@@ -12,7 +12,9 @@ class PartyViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var session: Session!
+    private var store: Store!
+
+    private var party: Party!
     
     private var contentView: PartyView!
 
@@ -20,9 +22,10 @@ class PartyViewController: UIViewController {
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session, delegate: PartyViewControllerDelegate) -> PartyViewController {
+    static func construct(store: Store, party: Party, delegate: PartyViewControllerDelegate) -> PartyViewController {
         let controller = PartyViewController()
-        controller.session = session
+        controller.store = store
+        controller.party = party
         controller.contentView = PartyView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
@@ -37,31 +40,31 @@ class PartyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.startObservingNotification(name: PartyDetailsNotification.nameChanged.rawValue,
-                                        selector: #selector(partyDetailsNameChanged))
-        self.startObservingNotification(name: PartyDetailsNotification.statusChanged.rawValue,
-                                        selector: #selector(partyDetailsStatusChanged))
-        self.startObservingNotification(name: PartyDetailsNotification.gameIdChanged.rawValue,
-                                        selector: #selector(partyDetailsGameIdChanged))
-        self.startObservingNotification(name: PartyDetailsNotification.hostNameChanged.rawValue,
-                                        selector: #selector(partyDetailsHostNameChanged))
-        self.startObservingNotification(name: PartyPeopleNotification.personAdded.rawValue,
-                                        selector: #selector(partyPeoplePersonAdded))
-        self.startObservingNotification(name: PartyPeopleNotification.personChanged.rawValue,
-                                        selector: #selector(partyPeoplePersonChanged))
-        self.startObservingNotification(name: PartyPeopleNotification.personRemoved.rawValue,
-                                        selector: #selector(partyPeoplePersonRemoved))
+        self.startObservingNotification(name: PartyNotification.nameChanged.rawValue,
+                                        selector: #selector(partyNameChanged))
+        self.startObservingNotification(name: PartyNotification.statusChanged.rawValue,
+                                        selector: #selector(partyStatusChanged))
+        self.startObservingNotification(name: PartyNotification.gameNameChanged.rawValue,
+                                        selector: #selector(partyGameNameChanged))
+        self.startObservingNotification(name: PartyNotification.hostNameChanged.rawValue,
+                                        selector: #selector(partyHostNameChanged))
+        self.startObservingNotification(name: PartyNotification.personAdded.rawValue,
+                                        selector: #selector(partyPersonAdded))
+        self.startObservingNotification(name: PartyNotification.personChanged.rawValue,
+                                        selector: #selector(partyPersonChanged))
+        self.startObservingNotification(name: PartyNotification.personRemoved.rawValue,
+                                        selector: #selector(partyPersonRemoved))
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingNotification(name: PartyDetailsNotification.nameChanged.rawValue)
-        self.stopObservingNotification(name: PartyDetailsNotification.statusChanged.rawValue)
-        self.stopObservingNotification(name: PartyDetailsNotification.gameIdChanged.rawValue)
-        self.stopObservingNotification(name: PartyDetailsNotification.hostNameChanged.rawValue)
-        self.stopObservingNotification(name: PartyPeopleNotification.personAdded.rawValue)
-        self.stopObservingNotification(name: PartyPeopleNotification.personChanged.rawValue)
-        self.stopObservingNotification(name: PartyPeopleNotification.personRemoved.rawValue)
+        self.stopObservingNotification(name: PartyNotification.nameChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.statusChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.gameNameChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.hostNameChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personAdded.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personRemoved.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -70,16 +73,16 @@ class PartyViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
         self.showNavigationBar()
-        self.setNavigationBarTitle(self.session.party.details.name)
+        self.setNavigationBarTitle(self.party.name)
         self.setNavigationBarLeftButton(title: "leave", target: self, action: #selector(leaveButtonPressed))
         
-        if self.session.user.name == self.session.party.details.hostName {
+        if self.party.userName == self.party.hostName {
             self.setNavigationBarRightButton(title: "manage", target: self, action: #selector(manageButtonPressed))
         } else {
             self.setNavigationBarRightButton(title: nil, target: nil, action: nil)
         }
         
-        self.setNavigationBarBackgroundColor(Partybox.colors.green)
+        self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
     
     // MARK: - Navigation Bar Functions
@@ -89,54 +92,47 @@ class PartyViewController: UIViewController {
         let message = "Are you sure you want to leave?"
         let action = "Leave"
         self.showAlert(subject: subject, message: message, action: action, handler: {
-            if self.session.party.people.persons.count > 1 {
-                if self.session.user.name == self.session.party.details.hostName {
-                    let rootViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
-                    let navigationController = UINavigationController(rootViewController: rootViewController)
-                    self.present(navigationController, animated: true, completion: nil)
-                } else {
-                    self.dismiss(animated: true, completion: {
-                        self.session.party.leave()
-                    })
-                }
+            if self.party.userName == self.party.hostName {
+                let rootViewController = ChangePartyHostViewController.construct(store: self.store, party: self.party, delegate: self)
+                let navigationController = UINavigationController(rootViewController: rootViewController)
+                self.present(navigationController, animated: true, completion: nil)
             } else {
                 self.dismiss(animated: true, completion: {
-                    self.session.party.end()
+                    self.party.leave()
                 })
             }
         })
     }
     
     @objc private func manageButtonPressed() {
-        let rootViewController = ManagePartyViewController.construct(session: self.session, delegate: self)
+        let rootViewController = ManagePartyViewController.construct(store: self.store, party: self.party, delegate: self)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: - Notification Functions
 
-    @objc private func partyDetailsNameChanged(notification: Notification) {
-        self.setNavigationBarTitle(self.session.party.details.name)
+    @objc private func partyNameChanged() {
+        self.setNavigationBarTitle(self.party.name)
     }
 
-    @objc private func partyDetailsStatusChanged(notification: Notification) {
-        if self.session.party.details.status == PartyDetailsStatus.playing.rawValue {
+    @objc private func partyStatusChanged() {
+        if self.party.status == PartyStatus.starting.rawValue {
             //self.showStartWannabeViewController()
         }
     }
 
-    @objc private func partyDetailsGameIdChanged(notification: Notification) {
+    @objc private func partyGameNameChanged() {
         self.contentView.reloadTable()
     }
 
-    @objc private func partyDetailsHostNameChanged(notification: Notification) {
-        if self.session.user.name == self.session.party.details.hostName {
-            self.setNavigationBarRightButton(title: "manage", target: self, action: #selector(manageButtonPressed))
-
+    @objc private func partyHostNameChanged() {
+        if self.party.userName == self.party.hostName {
             let subject = "Woah there"
             let message = "You are the new host of the party\n\nInvite people to join with the invite code"
             let action = "Okay"
             self.showAlert(subject: subject, message: message, action: action, handler: nil)
+            self.setNavigationBarRightButton(title: "manage", target: self, action: #selector(manageButtonPressed))
         } else {
             self.setNavigationBarRightButton(title: nil, target: nil, action: nil)
         }
@@ -144,18 +140,18 @@ class PartyViewController: UIViewController {
         self.contentView.reloadTable()
     }
 
-    @objc private func partyPeoplePersonAdded(notification: Notification) {
+    @objc private func partyPersonAdded() {
         self.contentView.reloadTable()
     }
 
-    @objc private func partyPeoplePersonChanged(notification: Notification) {
+    @objc private func partyPersonChanged() {
         self.contentView.reloadTable()
     }
 
-    @objc private func partyPeoplePersonRemoved(notification: Notification) {
+    @objc private func partyPersonRemoved() {
         self.contentView.reloadTable()
 
-        if !self.session.party.people.persons.contains(key: self.session.user.name) {
+        if !self.party.people.contains(key: self.party.userName) {
             self.dismiss(animated: true, completion: {
                 self.delegate.partyViewController(self, userKicked: true)
             })
@@ -169,7 +165,7 @@ extension PartyViewController: PartyViewDelegate {
     internal func partyView(_ view: PartyView, playButtonPressed: Bool) {
         self.contentView.startAnimatingPlayButton()
 
-        self.session.fetchPacks(callback: {
+        self.store.fetchPacks(gameName: self.party.gameName, callback: {
             (error) in
 
             self.contentView.stopAnimatingPlayButton()
@@ -179,8 +175,11 @@ extension PartyViewController: PartyViewDelegate {
                 let message = error
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            } else if self.session.party.details.gameId == self.session.wannabe.details.id {
-                let rootViewController = SetupWannabeViewController.construct(session: self.session)
+                return
+            }
+
+            if self.party.gameName == self.party.wannabe.name {
+                let rootViewController = SetupWannabeViewController.construct(store: self.store, party: self.party)
                 let navigationController = UINavigationController(rootViewController: rootViewController)
                 self.present(navigationController, animated: true, completion: nil)
             }
@@ -188,7 +187,7 @@ extension PartyViewController: PartyViewDelegate {
     }
     
     internal func partyView(_ view: PartyView, changeButtonPressed: Bool) {
-        let rootViewController = ChangePartyGameViewController.construct(session: self.session, delegate: self)
+        let rootViewController = ChangePartyGameViewController.construct(store: self.store, party: self.party, delegate: self)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
@@ -198,18 +197,7 @@ extension PartyViewController: PartyViewDelegate {
         let message = "Are you sure you want to kick this person?"
         let action = "Kick"
         self.showAlert(subject: subject, message: message, action: action, handler: {
-            let values = [partyPersonName: Partybox.values.null]
-
-            self.session.party.people.update(values: values, callback: {
-                (error) in
-
-                if let error = error {
-                    let subject = "Oh no"
-                    let message = error
-                    let action = "Okay"
-                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
-                }
-            })
+            self.party.remove(personName: partyPersonName)
         })
     }
     
@@ -218,31 +206,31 @@ extension PartyViewController: PartyViewDelegate {
 extension PartyViewController: PartyViewDataSource {
 
     internal func partyViewUserName() -> String {
-        return self.session.user.name
+        return self.party.userName
     }
 
     internal func partyViewPartyId() -> String {
-        return self.session.party.details.id
+        return self.party.id
     }
 
     internal func partyViewPartyHostName() -> String {
-        return self.session.party.details.hostName
+        return self.party.hostName
     }
 
     internal func partyViewPartyPeopleCount() -> Int {
-        return self.session.party.people.persons.count
+        return self.party.people.count
     }
 
     internal func partyViewPartyPerson(index: Int) -> PartyPerson? {
-        return self.session.party.people.persons.fetch(index: index)
+        return self.party.people.fetch(index: index)
     }
 
     internal func partyViewPartyGameName() -> String {
-        return self.session.wannabe.details.name
+        return self.party.wannabe.name
     }
 
     internal func partyViewPartyGameSummary() -> String {
-        return self.session.wannabe.manual.summary
+        return "Summary"
     }
 
 }
@@ -258,9 +246,7 @@ extension PartyViewController: ManagePartyViewControllerDelegate {
 extension PartyViewController: ChangePartyHostViewControllerDelegate {
 
     internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String) {
-        let values = [PartyDetailsKey.hostName.rawValue: partyHostName]
-
-        self.session.party.details.update(values: values, callback: {
+        self.party.change(hostName: partyHostName, callback: {
             (error) in
 
             if let error = error {
@@ -268,11 +254,12 @@ extension PartyViewController: ChangePartyHostViewControllerDelegate {
                 let message = error
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            } else {
-                self.dismiss(animated: true, completion: {
-                    self.session.party.leave()
-                })
+                return
             }
+
+            self.dismiss(animated: true, completion: {
+                self.party.leave()
+            })
         })
     }
 

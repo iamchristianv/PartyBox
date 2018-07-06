@@ -43,7 +43,7 @@ class OrderedSet<Object: Hashable> {
         }
     }
 
-    func fetch(index: Int) -> Object? {
+    func object(index: Int) -> Object? {
         if index < 0 || index >= self.objects.count {
             return nil
         } else {
@@ -51,8 +51,8 @@ class OrderedSet<Object: Hashable> {
         }
     }
 
-    func fetch(key: String) -> Object? {
-        if let index = self.hashValuesToIndexes[key.hashValue] {
+    func object(id: String) -> Object? {
+        if let index = self.hashValuesToIndexes[id.hashValue] {
             return self.objects[index]
         } else {
             return nil
@@ -67,8 +67,8 @@ class OrderedSet<Object: Hashable> {
         }
     }
 
-    func contains(key: String) -> Bool {
-        if self.hashValuesToIndexes[key.hashValue] != nil {
+    func contains(id: String) -> Bool {
+        if self.hashValuesToIndexes[id.hashValue] != nil {
             return true
         } else {
             return false

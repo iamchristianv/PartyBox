@@ -30,15 +30,15 @@ class ChangePartyHostView: UIView {
     private lazy var saveButton: ActivityIndicatorButton = {
         let saveButton = ActivityIndicatorButton()
         saveButton.setTitle("Save", for: .normal)
-        saveButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        saveButton.setTitleColor(Partybox.colors.white, for: .normal)
-        saveButton.setBackgroundColor(Partybox.colors.green)
+        saveButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        saveButton.setTitleColor(Partybox.color.white, for: .normal)
+        saveButton.setBackgroundColor(Partybox.color.green)
         saveButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return saveButton
     }()
 
-    var partyHostName: String!
-    
+    private var selectedPartyHostName: String!
+
     private var delegate: ChangePartyHostViewDelegate!
 
     private var dataSource: ChangePartyHostViewDataSource!
@@ -47,7 +47,7 @@ class ChangePartyHostView: UIView {
 
     static func construct(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) -> ChangePartyHostView {
         let view = ChangePartyHostView()
-        view.partyHostName = dataSource.changePartyHostViewPartyHostName()
+        view.selectedPartyHostName = dataSource.changePartyHostViewPartyHostName()
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -78,7 +78,7 @@ class ChangePartyHostView: UIView {
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalTo(self.tableView.snp.bottom).offset(32)
-            make.bottom.equalTo(self.snp.bottom).offset(-32)
+            make.bottom.equalTo(self.snp.bottom).offset(-40)
         })
     }
     
@@ -94,6 +94,14 @@ class ChangePartyHostView: UIView {
         self.tableView.reloadData()
     }
 
+    func setPartyHostName(_ partyHostName: String) {
+        self.selectedPartyHostName = partyHostName
+    }
+
+    func partyHostName() -> String {
+        return self.selectedPartyHostName
+    }
+
 }
 
 extension ChangePartyHostView: UITableViewDelegate {
@@ -101,7 +109,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.partyHostName = selectableCell.value as! String
+        self.selectedPartyHostName = selectableCell.value as! String
         self.tableView.reloadData()
     }
     
@@ -124,17 +132,13 @@ extension ChangePartyHostView: UITableViewDataSource {
             let prompt = "Who should be the host?"
             promptCell.configure(prompt: prompt)
             return promptCell
-        }
-        
-        if indexPath.row == ChangePartyHostViewCellRow.partyPeopleHeaderCell.rawValue {
+        } else if indexPath.row == ChangePartyHostViewCellRow.partyPeopleHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let partyPeopleHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PEOPLE"
             partyPeopleHeaderCell.configure(header: header)
             return partyPeopleHeaderCell
-        }
-        
-        if indexPath.row >= ChangePartyHostViewCellRow.partyPersonCells.rawValue {
+        } else if indexPath.row >= ChangePartyHostViewCellRow.partyPersonCells.rawValue {
             let index = indexPath.row - ChangePartyHostViewCellRow.partyPersonCells.rawValue
             
             guard let person = self.dataSource.changePartyHostViewPartyPerson(index: index) else {
@@ -144,7 +148,7 @@ extension ChangePartyHostView: UITableViewDataSource {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
             let content = person.name
-            let selected = person.name == self.partyHostName
+            let selected = person.name == self.selectedPartyHostName
             let value = person.name
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell

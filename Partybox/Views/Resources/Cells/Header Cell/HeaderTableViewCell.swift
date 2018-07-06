@@ -18,8 +18,8 @@ class HeaderTableViewCell: UITableViewCell {
     
     private lazy var headerLabel: UILabel = {
         let headerLabel = UILabel()
-        headerLabel.font = Partybox.fonts.avenirNextMedium(size: 14)
-        headerLabel.textColor = Partybox.colors.white
+        headerLabel.font = Partybox.font.avenirNextMedium(size: 14)
+        headerLabel.textColor = Partybox.color.white
         return headerLabel
     }()
 
@@ -33,7 +33,7 @@ class HeaderTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = Partybox.colors.green
+        self.backgroundColor = Partybox.color.green
         self.isUserInteractionEnabled = false
         self.selectionStyle = .none
 

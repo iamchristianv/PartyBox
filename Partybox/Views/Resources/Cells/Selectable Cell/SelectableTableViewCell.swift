@@ -18,8 +18,8 @@ class SelectableTableViewCell: UITableViewCell {
     
     private lazy var contentLabel: UILabel = {
         let contentLabel = UILabel()
-        contentLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
-        contentLabel.textColor = Partybox.colors.black
+        contentLabel.font = Partybox.font.avenirNextRegular(size: 18)
+        contentLabel.textColor = Partybox.color.black
         return contentLabel
     }()
     
@@ -30,7 +30,7 @@ class SelectableTableViewCell: UITableViewCell {
     
     private lazy var underlineLabel: UILabel = {
         let underlineLabel = UILabel()
-        underlineLabel.backgroundColor = Partybox.colors.lightGray
+        underlineLabel.backgroundColor = Partybox.color.lightGray
         return underlineLabel
     }()
 
@@ -57,7 +57,7 @@ class SelectableTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = Partybox.colors.white
+        self.backgroundColor = Partybox.color.white
         self.isUserInteractionEnabled = true
         self.selectionStyle = .none
 

@@ -12,7 +12,9 @@ class ChangePartyGameViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var session: Session!
+    private var store: Store!
+
+    private var party: Party!
     
     private var contentView: ChangePartyGameView!
 
@@ -20,9 +22,10 @@ class ChangePartyGameViewController: UIViewController {
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session, delegate: ChangePartyGameViewControllerDelegate) -> ChangePartyGameViewController {
+    static func construct(store: Store, party: Party, delegate: ChangePartyGameViewControllerDelegate) -> ChangePartyGameViewController {
         let controller = ChangePartyGameViewController()
-        controller.session = session
+        controller.store = store
+        controller.party = party
         controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
@@ -47,7 +50,7 @@ class ChangePartyGameViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Change Game")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.green)
+        self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
     
     // MARK: - Action Functions
@@ -61,64 +64,48 @@ class ChangePartyGameViewController: UIViewController {
 extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
     func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool) {
-        if self.contentView.partyGameId == self.session.party.details.gameId {
+        if self.contentView.partyGameName() == self.party.gameName {
             let subject = "Woah there"
             let message = "Please select a new game"
             let action = "Okay"
             self.showAlert(subject: subject, message: message, action: action, handler: nil)
-        } else {
-            self.contentView.startAnimatingSaveButton()
-
-            let values = [PartyDetailsKey.gameId.rawValue: self.contentView.partyGameId!]
-
-            self.session.party.details.update(values: values, callback: {
-                (error) in
-
-                self.contentView.stopAnimatingSaveButton()
-
-                if let error = error {
-                    let subject = "Oh no"
-                    let message = error
-                    let action = "Okay"
-                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
-                } else {
-                    self.delegate.changePartyGameViewController(self, partyGameChanged: true)
-                    self.dismiss(animated: true, completion: nil)
-                }
-            })
+            return
         }
+
+        self.contentView.startAnimatingSaveButton()
+
+        self.party.change(gameName: self.contentView.partyGameName(), callback: {
+            (error) in
+
+            self.contentView.stopAnimatingSaveButton()
+
+            if let error = error {
+                let subject = "Oh no"
+                let message = error
+                let action = "Okay"
+                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                return
+            }
+
+            self.delegate.changePartyGameViewController(self, partyGameChanged: true)
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
 }
 
 extension ChangePartyGameViewController: ChangePartyGameViewDataSource {
 
-    func changePartyGameViewPartyGameId() -> String {
-        return self.session.party.details.gameId
+    func changePartyGameViewPartyGameName() -> String {
+        return self.party.gameName
     }
 
     func changePartyGameViewPartyGameCount() -> Int {
-        return self.session.games.count
-    }
-
-    func changePartyGameViewPartyGameId(index: Int) -> String {
-        let game = self.session.games[index]
-
-        if game is Wannabe {
-            return self.session.wannabe.details.id
-        }
-
-        return Partybox.values.none
+        return 1
     }
 
     func changePartyGameViewPartyGameName(index: Int) -> String {
-        let game = self.session.games[index]
-
-        if game is Wannabe {
-            return self.session.wannabe.details.name
-        }
-
-        return Partybox.values.none
+        return "Wannabe"
     }
 
 }

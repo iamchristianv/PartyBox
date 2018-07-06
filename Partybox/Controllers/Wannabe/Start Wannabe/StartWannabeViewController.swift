@@ -12,15 +12,18 @@ class StartWannabeViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var session: Session!
+    private var store: Store!
+
+    private var party: Party!
 
     private var contentView: StartWannabeView!
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session) -> StartWannabeViewController {
+    static func construct(store: Store, party: Party) -> StartWannabeViewController {
         let controller = StartWannabeViewController()
-        controller.session = session
+        controller.store = store
+        controller.party = party
         controller.contentView = StartWannabeView.construct(delegate: controller, dataSource: controller)
         return controller
     }
@@ -44,7 +47,7 @@ class StartWannabeViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("How to Play")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.green)
+        self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
 
     // MARK: - Action Functions
@@ -66,11 +69,11 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
 extension StartWannabeViewController: StartWannabeViewDataSource {
 
     func startWannabeViewGameName() -> String {
-        return self.session.wannabe.details.name
+        return self.party.wannabe.name
     }
 
     func startWannabeViewGameInstructions() -> String {
-        return self.session.wannabe.manual.instructions
+        return "Instructions"
     }
 
 }

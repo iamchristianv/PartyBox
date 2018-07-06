@@ -21,9 +21,9 @@ class MenuView: UIView {
     private lazy var startPartyButton: ActivityIndicatorButton = {
         let startPartyButton = ActivityIndicatorButton()
         startPartyButton.setTitle("Start Party", for: .normal)
-        startPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        startPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
-        startPartyButton.setBackgroundColor(Partybox.colors.red)
+        startPartyButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        startPartyButton.setTitleColor(Partybox.color.white, for: .normal)
+        startPartyButton.setBackgroundColor(Partybox.color.red)
         startPartyButton.addTarget(self, action: #selector(startPartyButtonPressed), for: .touchUpInside)
         return startPartyButton
     }()
@@ -31,31 +31,21 @@ class MenuView: UIView {
     private lazy var joinPartyButton: ActivityIndicatorButton = {
         let joinPartyButton = ActivityIndicatorButton()
         joinPartyButton.setTitle("Join Party", for: .normal)
-        joinPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        joinPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
-        joinPartyButton.setBackgroundColor(Partybox.colors.blue)
+        joinPartyButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        joinPartyButton.setTitleColor(Partybox.color.white, for: .normal)
+        joinPartyButton.setBackgroundColor(Partybox.color.blue)
         joinPartyButton.addTarget(self, action: #selector(joinPartyButtonPressed), for: .touchUpInside)
         return joinPartyButton
     }()
 
-    private lazy var findPartyButton: ActivityIndicatorButton = {
-        let findPartyButton = ActivityIndicatorButton()
-        findPartyButton.setTitle("Find Party", for: .normal)
-        findPartyButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        findPartyButton.setTitleColor(Partybox.colors.white, for: .normal)
-        findPartyButton.setBackgroundColor(Partybox.colors.purple)
-        findPartyButton.addTarget(self, action: #selector(findPartyButtonPressed), for: .touchUpInside)
-        return findPartyButton
-    }()
-
-    private lazy var visitStoreButton: ActivityIndicatorButton = {
-        let visitStoreButton = ActivityIndicatorButton()
-        visitStoreButton.setTitle("Visit Store", for: .normal)
-        visitStoreButton.setTitleFont(Partybox.fonts.avenirNextMediumName, size: 22)
-        visitStoreButton.setTitleColor(Partybox.colors.white, for: .normal)
-        visitStoreButton.setBackgroundColor(Partybox.colors.green)
-        visitStoreButton.addTarget(self, action: #selector(visitStoreButtonPressed), for: .touchUpInside)
-        return visitStoreButton
+    private lazy var removeAdsButton: ActivityIndicatorButton = {
+        let removeAdsButton = ActivityIndicatorButton()
+        removeAdsButton.setTitle("Remove Ads", for: .normal)
+        removeAdsButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        removeAdsButton.setTitleColor(Partybox.color.white, for: .normal)
+        removeAdsButton.setBackgroundColor(Partybox.color.green)
+        removeAdsButton.addTarget(self, action: #selector(removeAdsButtonPressed), for: .touchUpInside)
+        return removeAdsButton
     }()
     
     private lazy var animator: UIDynamicAnimator = {
@@ -128,8 +118,7 @@ class MenuView: UIView {
         self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
-        self.addSubview(self.findPartyButton)
-        self.addSubview(self.visitStoreButton)
+        self.addSubview(self.removeAdsButton)
         
         self.partyboxImageView.snp.remakeConstraints({
             (make) in
@@ -156,22 +145,13 @@ class MenuView: UIView {
             make.top.equalTo(self.startPartyButton.snp.bottom).offset(20)
         })
 
-        self.findPartyButton.snp.remakeConstraints({
+        self.removeAdsButton.snp.remakeConstraints({
             (make) in
 
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.joinPartyButton.snp.bottom).offset(20)
-        })
-
-        self.visitStoreButton.snp.remakeConstraints({
-            (make) in
-
-            make.width.equalTo(220)
-            make.height.equalTo(55)
-            make.centerX.equalTo(self.snp.centerX)
-            make.bottom.equalTo(self.snp.bottom).offset(-32)
+            make.bottom.equalTo(self.snp.bottom).offset(-40)
         })
     }
     
@@ -185,12 +165,8 @@ class MenuView: UIView {
         self.delegate.menuView(self, joinPartyButtonPressed: true)
     }
 
-    @objc private func findPartyButtonPressed() {
-        self.delegate.menuView(self, findPartyButtonPressed: true)
-    }
-
-    @objc private func visitStoreButtonPressed() {
-        self.delegate.menuView(self, visitStoreButtonPressed: true)
+    @objc private func removeAdsButtonPressed() {
+        self.delegate.menuView(self, removeAdsButtonPressed: true)
     }
     
     // MARK: - Animation Functions
@@ -211,20 +187,12 @@ class MenuView: UIView {
         self.joinPartyButton.stopAnimating()
     }
 
-    func startAnimatingFindPartyButton() {
-        self.findPartyButton.startAnimating()
+    func startAnimatingRemoveAdsButton() {
+        self.removeAdsButton.startAnimating()
     }
 
-    func stopAnimatingFindPartyButton() {
-        self.findPartyButton.stopAnimating()
-    }
-
-    func startAnimatingVisitStoreButton() {
-        self.visitStoreButton.startAnimating()
-    }
-
-    func stopAnimatingVisitStoreButton() {
-        self.visitStoreButton.stopAnimating()
+    func stopAnimatingRemoveAdsButton() {
+        self.removeAdsButton.stopAnimating()
     }
 
     func setConfettiGravityDirection(_ direction: CGVector) {
@@ -243,7 +211,7 @@ class MenuView: UIView {
                                  width: randomSize,
                                  height: randomSize)
         
-        let colors = [Partybox.colors.red, Partybox.colors.blue, Partybox.colors.green, Partybox.colors.purple]
+        let colors = [Partybox.color.red, Partybox.color.blue, Partybox.color.green, Partybox.color.purple]
         let randomColor = colors[Int(arc4random()) % colors.count]
         
         if randomShape == SquareView.self {

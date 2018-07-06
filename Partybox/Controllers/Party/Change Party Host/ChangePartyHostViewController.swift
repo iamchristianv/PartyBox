@@ -12,7 +12,9 @@ class ChangePartyHostViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var session: Session!
+    private var store: Store!
+
+    private var party: Party!
     
     private var contentView: ChangePartyHostView!
     
@@ -20,9 +22,10 @@ class ChangePartyHostViewController: UIViewController {
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session, delegate: ChangePartyHostViewControllerDelegate) -> ChangePartyHostViewController {
+    static func construct(store: Store, party: Party, delegate: ChangePartyHostViewControllerDelegate) -> ChangePartyHostViewController {
         let controller = ChangePartyHostViewController()
-        controller.session = session
+        controller.store = store
+        controller.party = party
         controller.contentView = ChangePartyHostView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
@@ -37,19 +40,19 @@ class ChangePartyHostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.startObservingNotification(name: PartyPeopleNotification.personAdded.rawValue,
-                                        selector: #selector(partyPeoplePersonAdded))
-        self.startObservingNotification(name: PartyPeopleNotification.personChanged.rawValue,
-                                        selector: #selector(partyPeoplePersonChanged))
-        self.startObservingNotification(name: PartyPeopleNotification.personRemoved.rawValue,
-                                        selector: #selector(partyPeoplePersonRemoved))
+        self.startObservingNotification(name: PartyNotification.personAdded.rawValue,
+                                        selector: #selector(partyPersonAdded))
+        self.startObservingNotification(name: PartyNotification.personChanged.rawValue,
+                                        selector: #selector(partyPersonChanged))
+        self.startObservingNotification(name: PartyNotification.personRemoved.rawValue,
+                                        selector: #selector(partyPersonRemoved))
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingNotification(name: PartyPeopleNotification.personAdded.rawValue)
-        self.stopObservingNotification(name: PartyPeopleNotification.personChanged.rawValue)
-        self.stopObservingNotification(name: PartyPeopleNotification.personRemoved.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personAdded.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personRemoved.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -60,7 +63,7 @@ class ChangePartyHostViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Change Host")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.green)
+        self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
     
     // MARK: - Navigation Bar Functions
@@ -71,19 +74,19 @@ class ChangePartyHostViewController: UIViewController {
     
     // MARK: - Notification Functions
     
-    @objc private func partyPeoplePersonAdded(notification: Notification) {
+    @objc private func partyPersonAdded(notification: Notification) {
         self.contentView.reloadTable()
     }
 
-    @objc private func partyPeoplePersonChanged(notification: Notification) {
+    @objc private func partyPersonChanged(notification: Notification) {
         self.contentView.reloadTable()
     }
 
-    @objc private func partyPeoplePersonRemoved(notification: Notification) {
+    @objc private func partyPersonRemoved(notification: Notification) {
         self.contentView.reloadTable()
 
-        if !self.session.party.people.persons.contains(key: self.contentView.partyHostName) {
-            self.contentView.partyHostName = self.session.party.details.hostName
+        if !self.party.people.contains(key: self.contentView.partyHostName()) {
+            self.contentView.setPartyHostName(self.party.hostName)
             self.contentView.reloadTable()
         }
     }
@@ -93,15 +96,16 @@ class ChangePartyHostViewController: UIViewController {
 extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
         
     func changePartyHostView(_ view: ChangePartyHostView, saveButtonPressed: Bool) {
-        if self.contentView.partyHostName == self.session.party.details.hostName {
+        if self.contentView.partyHostName() == self.party.hostName {
             let subject = "Woah there"
             let message = "Please select a new person to be the host"
             let action = "Okay"
             self.showAlert(subject: subject, message: message, action: action, handler: nil)
-        } else {
-            self.delegate.changePartyHostViewController(self, partyHostChanged: self.contentView.partyHostName)
-            self.dismiss(animated: true, completion: nil)
+            return
         }
+
+        self.delegate.changePartyHostViewController(self, partyHostChanged: self.contentView.partyHostName())
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
@@ -109,15 +113,15 @@ extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 extension ChangePartyHostViewController: ChangePartyHostViewDataSource {
 
     func changePartyHostViewPartyHostName() -> String {
-        return self.session.party.details.hostName
+        return self.party.hostName
     }
 
     func changePartyHostViewPartyPeopleCount() -> Int {
-        return self.session.party.people.persons.count
+        return self.party.people.count
     }
 
     func changePartyHostViewPartyPerson(index: Int) -> PartyPerson? {
-        return self.session.party.people.persons.fetch(index: index)
+        return self.party.people.fetch(index: index)
     }
 
 }

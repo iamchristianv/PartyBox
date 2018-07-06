@@ -13,6 +13,8 @@ import UIKit
 class MenuViewController: UIViewController {
     
     // MARK: - Instance Properties
+
+    private var store: Store!
     
     private var contentView: MenuView!
 
@@ -26,6 +28,7 @@ class MenuViewController: UIViewController {
 
     static func construct() -> MenuViewController {
         let controller = MenuViewController()
+        controller.store = Store.construct()
         controller.contentView = MenuView.construct(delegate: controller)
         controller.authenticationHandle = nil
         controller.motionManager = CMMotionManager()
@@ -49,7 +52,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        Auth.auth().signInAnonymously(completion: nil)
+        Partybox.firebase.authenticator.signInAnonymously(completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -70,25 +73,23 @@ class MenuViewController: UIViewController {
     // MARK: - Authentication Functions
     
     private func startObservingAuthenticationChanges() {
-        self.authenticationHandle = Auth.auth().addStateDidChangeListener({
+        self.authenticationHandle = Partybox.firebase.authenticator.addStateDidChangeListener({
             (auth, user) in
             
             if user == nil {
                 self.contentView.startAnimatingStartPartyButton()
                 self.contentView.startAnimatingJoinPartyButton()
-                self.contentView.startAnimatingFindPartyButton()
-                self.contentView.startAnimatingVisitStoreButton()
+                self.contentView.startAnimatingRemoveAdsButton()
             } else {
                 self.contentView.stopAnimatingStartPartyButton()
                 self.contentView.stopAnimatingJoinPartyButton()
-                self.contentView.stopAnimatingFindPartyButton()
-                self.contentView.stopAnimatingVisitStoreButton()
+                self.contentView.stopAnimatingRemoveAdsButton()
             }
         })
     }
     
     private func stopObservingAuthenticationChanges() {
-        Auth.auth().removeStateDidChangeListener(self.authenticationHandle)
+        Partybox.firebase.authenticator.removeStateDidChangeListener(self.authenticationHandle)
     }
     
     // MARK: - Motion Functions
@@ -129,23 +130,22 @@ class MenuViewController: UIViewController {
 extension MenuViewController: MenuViewDelegate {
         
     internal func menuView(_ view: MenuView, startPartyButtonPressed: Bool) {
-        let rootViewController = StartPartyViewController.construct()
+        let rootViewController = StartPartyViewController.construct(store: self.store)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
     internal func menuView(_ view: MenuView, joinPartyButtonPressed: Bool) {
-        let rootViewController = JoinPartyViewController.construct()
+        let rootViewController = JoinPartyViewController.construct(store: self.store)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
 
-    internal func menuView(_ view: MenuView, findPartyButtonPressed: Bool) {
-
-    }
-
-    internal func menuView(_ view: MenuView, visitStoreButtonPressed: Bool) {
-
+    internal func menuView(_ view: MenuView, removeAdsButtonPressed: Bool) {
+        let subject = "Remove Ads $1.99"
+        let message = "Have fun with everyone in your party without ads!"
+        let action = "Purchase"
+        self.showAlert(subject: subject, message: message, action: action, handler: nil)
     }
     
 }

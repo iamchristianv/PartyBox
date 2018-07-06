@@ -19,16 +19,16 @@ class InviteCodeTableViewCell: UITableViewCell {
     private lazy var inviteCodeTitleLabel: UILabel = {
         let inviteCodeTitleLabel = UILabel()
         inviteCodeTitleLabel.text = "INVITE CODE"
-        inviteCodeTitleLabel.font = Partybox.fonts.avenirNextRegular(size: 14)
-        inviteCodeTitleLabel.textColor = Partybox.colors.black
+        inviteCodeTitleLabel.font = Partybox.font.avenirNextRegular(size: 14)
+        inviteCodeTitleLabel.textColor = Partybox.color.black
         inviteCodeTitleLabel.textAlignment = .center
         return inviteCodeTitleLabel
     }()
     
     private lazy var inviteCodeLabel: UILabel = {
         let inviteCodeLabel = UILabel()
-        inviteCodeLabel.font = Partybox.fonts.avenirNextMedium(size: 24)
-        inviteCodeLabel.textColor = Partybox.colors.black
+        inviteCodeLabel.font = Partybox.font.avenirNextMedium(size: 24)
+        inviteCodeLabel.textColor = Partybox.color.black
         inviteCodeLabel.textAlignment = .center
         return inviteCodeLabel
     }()
@@ -43,7 +43,7 @@ class InviteCodeTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = Partybox.colors.white
+        self.backgroundColor = Partybox.color.white
         self.isUserInteractionEnabled = false
         self.selectionStyle = .none
 

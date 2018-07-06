@@ -11,13 +11,19 @@ import UIKit
 class StartPartyViewController: UIViewController {
     
     // MARK: - Instance Properties
+
+    private var store: Store!
+
+    private var party: Party!
     
     private var contentView: StartPartyView!
 
     // MARK: - Construction Functions
 
-    static func construct() -> StartPartyViewController {
+    static func construct(store: Store) -> StartPartyViewController {
         let controller = StartPartyViewController()
+        controller.store = store
+        controller.party = nil
         controller.contentView = StartPartyView.construct(delegate: controller)
         return controller
     }
@@ -41,7 +47,7 @@ class StartPartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Start Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.red)
+        self.setNavigationBarBackgroundColor(Partybox.color.red)
     }
     
     // MARK: - Navigation Bar Functions
@@ -55,25 +61,43 @@ class StartPartyViewController: UIViewController {
 extension StartPartyViewController: StartPartyViewDelegate {
 
     internal func startPartyView(_ view: StartPartyView, startButtonPressed: Bool) {
-        let session = Session.construct(userName: self.contentView.userName, partyName: self.contentView.partyName)
+        let partyNameHasErrors = self.contentView.partyNameHasErrors()
+        let userNameHasErrors = self.contentView.userNameHasErrors()
+
+        if partyNameHasErrors || userNameHasErrors {
+            return
+        }
+
+        self.party = Party.construct(partyName: self.contentView.partyName(), userName: self.contentView.userName())
 
         self.contentView.startAnimatingStartButton()
 
-        session.party.start(callback: {
+        self.party.initialize(callback: {
             (error) in
-
-            self.contentView.stopAnimatingStartButton()
 
             if let error = error {
                 let subject = "Uh oh"
                 let message = error
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            } else {
-                let rootViewController = PartyViewController.construct(session: session, delegate: self)
+                return
+            }
+
+            self.party.enter(callback: {
+                (error) in
+
+                if let error = error {
+                    let subject = "Uh oh"
+                    let message = error
+                    let action = "Okay"
+                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                    return
+                }
+
+                let rootViewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
                 let navigationController = UINavigationController(rootViewController: rootViewController)
                 self.present(navigationController, animated: true, completion: nil)
-            }
+            })
         })
     }
 

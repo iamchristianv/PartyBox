@@ -18,35 +18,35 @@ class PartyPersonTableViewCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
-        nameLabel.textColor = Partybox.colors.black
+        nameLabel.font = Partybox.font.avenirNextRegular(size: 18)
+        nameLabel.textColor = Partybox.color.black
         return nameLabel
     }()
     
     private lazy var flairLabel: UILabel = {
         let flairLabel = UILabel()
-        flairLabel.font = Partybox.fonts.avenirNextMedium(size: 14)
-        flairLabel.textColor = Partybox.colors.black
+        flairLabel.font = Partybox.font.avenirNextMedium(size: 14)
+        flairLabel.textColor = Partybox.color.black
         return flairLabel
     }()
     
     private lazy var emojiLabel: UILabel = {
         let emojiLabel = UILabel()
-        emojiLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
-        emojiLabel.textColor = Partybox.colors.black
+        emojiLabel.font = Partybox.font.avenirNextRegular(size: 18)
+        emojiLabel.textColor = Partybox.color.black
         return emojiLabel
     }()
     
     private lazy var pointsLabel: UILabel = {
         let pointsLabel = UILabel()
-        pointsLabel.font = Partybox.fonts.avenirNextRegular(size: 18)
-        pointsLabel.textColor = Partybox.colors.black
+        pointsLabel.font = Partybox.font.avenirNextRegular(size: 18)
+        pointsLabel.textColor = Partybox.color.black
         return pointsLabel
     }()
     
     private lazy var underlineLabel: UILabel = {
         let underlineLabel = UILabel()
-        underlineLabel.backgroundColor = Partybox.colors.lightGray
+        underlineLabel.backgroundColor = Partybox.color.lightGray
         return underlineLabel
     }()
 
@@ -78,7 +78,7 @@ class PartyPersonTableViewCell: UITableViewCell {
     // MARK: - Setup Functions
     
     private func setupView() {
-        self.backgroundColor = Partybox.colors.white
+        self.backgroundColor = Partybox.color.white
         self.isUserInteractionEnabled = true
         self.selectionStyle = .none
 

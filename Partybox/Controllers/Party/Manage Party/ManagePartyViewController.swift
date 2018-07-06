@@ -12,7 +12,9 @@ class ManagePartyViewController: UIViewController {
 
     // MARK: - Instance Properties
 
-    private var session: Session!
+    private var store: Store!
+
+    private var party: Party!
     
     private var contentView: ManagePartyView!
 
@@ -20,9 +22,10 @@ class ManagePartyViewController: UIViewController {
 
     // MARK: - Construction Functions
 
-    static func construct(session: Session, delegate: ManagePartyViewControllerDelegate) -> ManagePartyViewController {
+    static func construct(store: Store, party: Party, delegate: ManagePartyViewControllerDelegate) -> ManagePartyViewController {
         let controller = ManagePartyViewController()
-        controller.session = session
+        controller.store = store
+        controller.party = party
         controller.contentView = ManagePartyView.construct(delegate: controller, dataSource: controller)
         controller.delegate = delegate
         return controller
@@ -47,7 +50,7 @@ class ManagePartyViewController: UIViewController {
         self.showNavigationBar()
         self.setNavigationBarTitle("Manage Party")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
-        self.setNavigationBarBackgroundColor(Partybox.colors.green)
+        self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
 
     // MARK: - Action Functions
@@ -61,31 +64,33 @@ class ManagePartyViewController: UIViewController {
 extension ManagePartyViewController: ManagePartyViewDelegate {
 
     internal func managePartyView(_ view: ManagePartyView, partyHostNameTextFieldPressed: Bool) {
-        let rootViewController = ChangePartyHostViewController.construct(session: self.session, delegate: self)
+        let rootViewController = ChangePartyHostViewController.construct(store: self.store, party: self.party, delegate: self)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
     internal func managePartyView(_ view: ManagePartyView, saveButtonPressed: Bool) {
+        let partyNameHasErrors = self.contentView.partyNameHasErrors()
+
+        if partyNameHasErrors {
+            return
+        }
+
         self.contentView.startAnimatingSaveButton()
-        
-        let values = [PartyDetailsKey.name.rawValue: self.contentView.partyName,
-                      PartyDetailsKey.hostName.rawValue: self.contentView.partyHostName]
-        
-        self.session.party.details.update(values: values, callback: {
+
+        self.party.change(name: self.contentView.partyName(), hostName: self.contentView.partyHostName(), callback: {
             (error) in
-            
-            self.contentView.stopAnimatingSaveButton()
-            
+
             if let error = error {
                 let subject = "Oh no"
                 let message = error
                 let action = "Okay"
                 self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            } else {
-                self.delegate.managePartyViewController(self, partyManaged: true)
-                self.dismiss(animated: true, completion: nil)
+                return
             }
+
+            self.delegate.managePartyViewController(self, partyManaged: true)
+            self.dismiss(animated: true, completion: nil)
         })
     }
     
@@ -94,11 +99,11 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 extension ManagePartyViewController: ManagePartyViewDataSource {
 
     internal func managePartyViewPartyName() -> String {
-        return self.session.party.details.name
+        return self.party.name
     }
 
     internal func managePartyViewPartyHostName() -> String {
-        return self.session.party.details.hostName
+        return self.party.hostName
     }
 
 }
@@ -106,7 +111,7 @@ extension ManagePartyViewController: ManagePartyViewDataSource {
 extension ManagePartyViewController: ChangePartyHostViewControllerDelegate {
 
     internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String) {
-        self.contentView.partyHostName = partyHostName
+        self.contentView.setPartyHostName(partyHostName)
     }
 
 }
