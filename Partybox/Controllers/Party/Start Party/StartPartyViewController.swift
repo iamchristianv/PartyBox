@@ -96,7 +96,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
 
                 let rootViewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
                 let navigationController = UINavigationController(rootViewController: rootViewController)
-                self.present(navigationController, animated: true, completion: nil)
+                self.show(navigationController, sender: nil)
             })
         })
     }

@@ -10,21 +10,27 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-class Party {
+class Party: Identifiable {
 
-    // MARK: - Instance Properties
+    // MARK: - Remote Properties
 
     var id: String = Partybox.value.none
 
     var name: String = Partybox.value.none
 
-    var host: String = Partybox.value.none
+    var hostId: String = Partybox.value.none
 
-    var date: Int = Partybox.value.zero
+    var timestamp: Int = Partybox.value.zero
 
     var guests: OrderedSet<PartyGuest> = OrderedSet<PartyGuest>()
 
     var wannabe: Wannabe = Wannabe()
+
+    // MARK: - Local Properties
+
+    var userId: String = Partybox.value.none
+
+    var games: OrderedSet<PartyGame> = OrderedSet<PartyGame>()
 
     // MARK: - Construction Functions
 
@@ -32,10 +38,13 @@ class Party {
         let party = Party()
         party.id = Party.randomPartyId()
         party.name = name
-        party.host = Partybox.value.none
-        party.date = Partybox.value.zero
+        party.hostId = Partybox.value.none
+        party.timestamp = Partybox.value.zero
         party.guests = OrderedSet<PartyGuest>()
-        party.wannabe = Wannabe()
+        party.wannabe = Wannabe.construct(partyId: party.id)
+        party.userId = Partybox.value.none
+        party.games = OrderedSet<PartyGame>()
+        party.games.add(party.wannabe)
         return party
     }
 
@@ -43,10 +52,13 @@ class Party {
         let party = Party()
         party.id = id
         party.name = Partybox.value.none
-        party.host = Partybox.value.none
-        party.date = Partybox.value.zero
+        party.hostId = Partybox.value.none
+        party.timestamp = Partybox.value.zero
         party.guests = OrderedSet<PartyGuest>()
-        party.wannabe = Wannabe()
+        party.wannabe = Wannabe.construct(partyId: party.id)
+        party.userId = Partybox.value.none
+        party.games = OrderedSet<PartyGame>()
+        party.games.add(party.wannabe)
         return party
     }
 
@@ -62,12 +74,12 @@ class Party {
                 self.name = value.stringValue
             }
 
-            if key == PartyKey.host.rawValue {
-                self.host = value.stringValue
+            if key == PartyKey.hostId.rawValue {
+                self.hostId = value.stringValue
             }
 
-            if key == PartyKey.date.rawValue {
-                self.date = value.intValue
+            if key == PartyKey.timestamp.rawValue {
+                self.timestamp = value.intValue
             }
 
             if key == PartyKey.guests.rawValue {
@@ -78,15 +90,15 @@ class Party {
             }
 
             if key == PartyKey.wannabe.rawValue {
-                self.wannabe = Wannabe.construct(dataSource: self)
+                self.wannabe = Wannabe.construct(partyId: self.id)
             }
         }
     }
 
     // MARK: - Party Functions
 
-    func start(callback: @escaping ErrorCallback) {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.id)"
+    func start(callback: @escaping (_ error: String?) -> Void) {
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -99,11 +111,11 @@ class Party {
             let values = [
                 PartyKey.id.rawValue: self.id,
                 PartyKey.name.rawValue: self.name,
-                PartyKey.host.rawValue: self.host,
-                PartyKey.date.rawValue: ServerValue.timestamp()
+                PartyKey.hostId.rawValue: self.hostId,
+                PartyKey.timestamp.rawValue: ServerValue.timestamp()
             ] as [String: Any]
 
-            path = "\(DatabaseKey.parties.rawValue)/\(self.id)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
             Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
@@ -118,10 +130,8 @@ class Party {
         })
     }
 
-    func end(callback: @escaping ErrorCallback) {
-        self.stopObservingChanges()
-
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.id)"
+    func end(callback: @escaping (_ error: String?) -> Void) {
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
         Partybox.firebase.database.child(path).removeValue(completionBlock: {
             (error, reference) in
@@ -130,8 +140,8 @@ class Party {
         })
     }
 
-    func enter(name: String, callback: @escaping ErrorCallback) {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.id)"
+    func enter(name: String, callback: @escaping (_ error: String?) -> Void) {
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -141,9 +151,11 @@ class Party {
                 return
             }
 
-            path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
             let id = Partybox.firebase.database.child(path).childByAutoId().key
+
+            self.userId = id
 
             let guest = PartyGuest.construct(id: id, name: name)
 
@@ -155,7 +167,7 @@ class Party {
                 ]
             ] as [String: Any]
 
-            path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
             Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
@@ -165,7 +177,7 @@ class Party {
                     return
                 }
 
-                path = "\(DatabaseKey.parties.rawValue)/\(self.id)"
+                path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
                 Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
                     (snapshot) in
@@ -192,10 +204,10 @@ class Party {
         })
     }
 
-    func leave(id: String, callback: @escaping ErrorCallback) {
+    func exit(callback: @escaping (_ error: String?) -> Void) {
         self.stopObservingChanges()
 
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)/\(id)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)/\(self.userId)"
 
         Partybox.firebase.database.child(path).removeValue(completionBlock: {
             (error, reference) in
@@ -206,34 +218,34 @@ class Party {
 
     // MARK: - Database Functions
 
-    func kick(id: String, callback: @escaping ErrorCallback) {
-        let value = Partybox.value.null
+    func remove(guestId: String, callback: @escaping (_ error: String?) -> Void) {
+        let values = [guestId: Partybox.value.null]
 
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)/\(id)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
-        Partybox.firebase.database.child(path).setValue(value, withCompletionBlock: {
+        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
         })
     }
 
-    func change(host: String, callback: @escaping ErrorCallback) {
-        let value = host
+    func change(hostId: String, callback: @escaping (_ error: String?) -> Void) {
+        let values = [PartyKey.hostId.rawValue: hostId]
 
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.host.rawValue)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-        Partybox.firebase.database.child(path).setValue(value, withCompletionBlock: {
+        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
         })
     }
 
-    func change(name: String, host: String, callback: @escaping ErrorCallback) {
-        let values = [PartyKey.name.rawValue: name, PartyKey.host.rawValue: host]
+    func change(name: String, hostId: String, callback: @escaping (_ error: String?) -> Void) {
+        let values = [PartyKey.name.rawValue: name, PartyKey.hostId.rawValue: hostId]
 
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.id)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
         Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
             (error, reference) in
@@ -245,7 +257,7 @@ class Party {
     // MARK: - Notification Functions
 
     private func startObservingChanges() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.value, with: {
             (snapshot) in
@@ -260,7 +272,7 @@ class Party {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.host.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.hostId.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.value, with: {
             (snapshot) in
@@ -269,13 +281,13 @@ class Party {
                 return
             }
 
-            self.host = data
+            self.hostId = data
 
-            let name = Notification.Name(PartyNotification.hostChanged.rawValue)
+            let name = Notification.Name(PartyNotification.hostIdChanged.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childAdded, with: {
             (snapshot) in
@@ -294,8 +306,7 @@ class Party {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
-
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childChanged, with: {
             (snapshot) in
@@ -314,8 +325,7 @@ class Party {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
-
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childRemoved, with: {
             (snapshot) in
@@ -336,15 +346,15 @@ class Party {
     }
 
     private func stopObservingChanges() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(PartyKey.host.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.hostId.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.id)/\(DatabaseKey.guests.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
     }
@@ -371,10 +381,14 @@ class Party {
     
 }
 
-extension Party: WannabeDataSource {
+extension Party: Hashable {
 
-    internal func wannabePartyId() -> String {
-        return self.id
+    var hashValue: Int {
+        return self.id.hashValue
+    }
+
+    static func ==(lhs: Party, rhs: Party) -> Bool {
+        return lhs.id == rhs.id
     }
 
 }

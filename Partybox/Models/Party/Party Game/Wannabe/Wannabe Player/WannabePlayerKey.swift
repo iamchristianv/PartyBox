@@ -14,8 +14,8 @@ enum WannabePlayerKey: String {
 
     case name
 
-    case points
+    case voteId
 
-    case vote
+    case points
 
 }

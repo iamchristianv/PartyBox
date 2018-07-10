@@ -10,6 +10,8 @@ import Foundation
 
 enum WannabePackKey: String {
 
+    case id
+
     case name
 
     case cards

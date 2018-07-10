@@ -10,35 +10,43 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-class Wannabe {
+class Wannabe: PartyGame {
     
-    // MARK: - Instance Properties
-
-    var id: String = Partybox.value.none
+    // MARK: - Remote Properties
 
     var name: String = Partybox.value.none
 
-    var action: String = Partybox.value.none
+    var actionId: String = Partybox.value.none
 
-    var wannabe: String = Partybox.value.none
+    var wannabeId: String = Partybox.value.none
 
     var players: OrderedSet<WannabePlayer> = OrderedSet<WannabePlayer>()
 
     var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
 
-    private var dataSource: WannabeDataSource!
+    // MARK: - Local Properties
+
+    var partyId: String = Partybox.value.none
+
+    var userId: String = Partybox.value.none
+
+    var summary: String = Partybox.value.none
+
+    var instructions: String = Partybox.value.none
 
     // MARK: - Construction Functions
 
-    static func construct(dataSource: WannabeDataSource) -> Wannabe {
+    static func construct(partyId: String) -> Wannabe {
         let wannabe = Wannabe()
-        wannabe.id = "C2D4V"
+        wannabe.id = PartyGame.wannabeId
         wannabe.name = "Wannabe"
-        wannabe.action = Partybox.value.none
-        wannabe.wannabe = Partybox.value.none
+        wannabe.actionId = Partybox.value.none
+        wannabe.wannabeId = Partybox.value.none
         wannabe.players = OrderedSet<WannabePlayer>()
         wannabe.cards = OrderedSet<WannabeCard>()
-        wannabe.dataSource = dataSource
+        wannabe.partyId = partyId
+        wannabe.summary = "Wannabe Summary"
+        wannabe.instructions = "Wannabe Instructions"
         return wannabe
     }
 
@@ -54,12 +62,12 @@ class Wannabe {
                 self.name = value.stringValue
             }
 
-            if key == WannabeKey.action.rawValue {
-                self.action = value.stringValue
+            if key == WannabeKey.actionId.rawValue {
+                self.actionId = value.stringValue
             }
 
-            if key == WannabeKey.wannabe.rawValue {
-                self.wannabe = value.stringValue
+            if key == WannabeKey.wannabeId.rawValue {
+                self.wannabeId = value.stringValue
             }
 
             if key == WannabeKey.players.rawValue {
@@ -80,8 +88,8 @@ class Wannabe {
     
     // MARK: - Wannabe Functions
 
-    func start(callback: @escaping ErrorCallback) {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)"
+    func start(callback: @escaping (_ error: String?) -> Void) {
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -94,11 +102,11 @@ class Wannabe {
             let values = [
                 WannabeKey.id.rawValue: self.id,
                 WannabeKey.name.rawValue: self.name,
-                WannabeKey.action.rawValue: self.action,
-                WannabeKey.wannabe.rawValue: self.wannabe
+                WannabeKey.actionId.rawValue: self.actionId,
+                WannabeKey.wannabeId.rawValue: self.wannabeId
             ] as [String: Any]
 
-            path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
             Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
@@ -113,10 +121,8 @@ class Wannabe {
         })
     }
 
-    func end(callback: @escaping ErrorCallback) {
-        self.stopObservingChanges()
-
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)"
+    func end(callback: @escaping (_ error: String?) -> Void) {
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
         Partybox.firebase.database.child(path).removeValue(completionBlock: {
             (error, reference) in
@@ -125,8 +131,8 @@ class Wannabe {
         })
     }
 
-    func enter(name: String, callback: @escaping ErrorCallback) {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)"
+    func enter(name: String, callback: @escaping (_ error: String?) -> Void) {
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -136,9 +142,11 @@ class Wannabe {
                 return
             }
 
-            path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
 
             let id = Partybox.firebase.database.child(path).childByAutoId().key
+
+            self.userId = id
 
             let player = WannabePlayer.construct(id: id, name: name)
 
@@ -146,12 +154,12 @@ class Wannabe {
                 player.id: [
                     WannabePlayerKey.id.rawValue: player.id,
                     WannabePlayerKey.name.rawValue: player.name,
-                    WannabePlayerKey.vote.rawValue: player.vote,
+                    WannabePlayerKey.voteId.rawValue: player.voteId,
                     WannabePlayerKey.points.rawValue: player.points
                 ]
             ] as [String: Any]
 
-            path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
 
             Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
@@ -161,7 +169,7 @@ class Wannabe {
                     return
                 }
 
-                path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)"
+                path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
                 Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
                     (snapshot) in
@@ -188,10 +196,10 @@ class Wannabe {
         })
     }
 
-    func exit(id: String, callback: @escaping ErrorCallback) {
+    func exit(callback: @escaping (_ error: String?) -> Void) {
         self.stopObservingChanges()
 
-        let path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)/\(id)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)/\(self.userId)"
 
         Partybox.firebase.database.child(path).removeValue(completionBlock: {
             (error, reference) in
@@ -202,7 +210,7 @@ class Wannabe {
 
     // MARK: - Database Functions
 
-    func update(path: String, value: [String: Any], callback: @escaping (String?) -> Void) {
+    func update(path: String, value: [String: Any], callback: @escaping (_ error: String?) -> Void) {
         Partybox.firebase.database.child(path).updateChildValues(value, withCompletionBlock: {
             (error, reference) in
 
@@ -213,7 +221,7 @@ class Wannabe {
     // MARK: - Notification Functions
 
     private func startObservingChanges() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.action.rawValue)"
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.actionId.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.value, with: {
             (snapshot) in
@@ -222,13 +230,13 @@ class Wannabe {
                 return
             }
 
-            self.action = data
+            self.actionId = data
 
-            let name = Notification.Name(WannabeNotification.actionChanged.rawValue)
+            let name = Notification.Name(WannabeNotification.actionIdChanged.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childAdded, with: {
             (snapshot) in
@@ -247,7 +255,7 @@ class Wannabe {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childChanged, with: {
             (snapshot) in
@@ -266,7 +274,7 @@ class Wannabe {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childRemoved, with: {
             (snapshot) in
@@ -287,11 +295,11 @@ class Wannabe {
     }
 
     private func stopObservingChanges() {
-        var path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.action.rawValue)"
+        var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.actionId.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
 
-        path = "\(DatabaseKey.parties.rawValue)/\(self.dataSource.wannabePartyId())/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
     }

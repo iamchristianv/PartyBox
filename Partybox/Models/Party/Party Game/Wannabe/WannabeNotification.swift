@@ -10,7 +10,7 @@ import Foundation
 
 enum WannabeNotification: String {
 
-    case actionChanged = "WannabeNotification/actionChanged"
+    case actionIdChanged = "WannabeNotification/actionIdChanged"
 
     case playerAdded = "WannabeNotification/playerAdded"
 

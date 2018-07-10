@@ -8,13 +8,13 @@
 
 import Foundation
 
-class OrderedSet<Object: Hashable> {
+class OrderedSet<Object: Identifiable> {
 
-    // MARK: - Initialization Functions
+    // MARK: - Local Properties
 
-    var objects: [Object] = []
+    private var objects: [Object] = []
 
-    private var hashValuesToIndexes: [Int: Int] = [:]
+    private var indexes: [Object: Int] = [:]
 
     var count: Int {
         return self.objects.count
@@ -23,55 +23,23 @@ class OrderedSet<Object: Hashable> {
     // MARK: - Ordered Set Functions
 
     func add(_ object: Object) {
-        if let index = self.hashValuesToIndexes[object.hashValue] {
+        if let index = self.indexes[object] {
             self.objects[index] = object
         } else {
             self.objects.append(object)
-            self.hashValuesToIndexes[object.hashValue] = self.objects.count - 1
+            self.indexes[object] = self.objects.count - 1
         }
     }
 
     func remove(_ object: Object) {
-        if let index = self.hashValuesToIndexes[object.hashValue] {
+        if let index = self.indexes[object] {
             self.objects.remove(at: index)
-            self.hashValuesToIndexes.removeValue(forKey: object.hashValue)
+            self.indexes.removeValue(forKey: object)
 
             for i in index ..< self.objects.count {
                 let obj = self.objects[i]
-                self.hashValuesToIndexes[obj.hashValue] = i
+                self.indexes[obj] = i
             }
-        }
-    }
-
-    func object(index: Int) -> Object? {
-        if index < 0 || index >= self.objects.count {
-            return nil
-        } else {
-            return self.objects[index]
-        }
-    }
-
-    func object(id: String) -> Object? {
-        if let index = self.hashValuesToIndexes[id.hashValue] {
-            return self.objects[index]
-        } else {
-            return nil
-        }
-    }
-
-    func contains(index: Int) -> Bool {
-        if index < 0 || index >= self.objects.count {
-            return false
-        } else {
-            return true
-        }
-    }
-
-    func contains(id: String) -> Bool {
-        if self.hashValuesToIndexes[id.hashValue] != nil {
-            return true
-        } else {
-            return false
         }
     }
 
@@ -84,6 +52,32 @@ class OrderedSet<Object: Hashable> {
         let randomObject = self.objects[randomIndex]
 
         return randomObject
+    }
+
+    subscript(index: Int) -> Object? {
+        if index < 0 || index >= self.objects.count {
+            return nil
+        } else {
+            return self.objects[index]
+        }
+    }
+
+    subscript(id: String) -> Object? {
+        for object in self.objects {
+            if object.id == id {
+                return object
+            }
+        }
+
+        return nil
+    }
+
+}
+
+extension OrderedSet: Sequence {
+
+    func makeIterator() -> Array<Object>.Iterator {
+        return self.objects.makeIterator()
     }
 
 }

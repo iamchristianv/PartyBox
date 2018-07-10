@@ -14,9 +14,9 @@ enum PartyKey: String {
 
     case name
 
-    case host
+    case hostId
 
-    case date
+    case timestamp
 
     case guests
 

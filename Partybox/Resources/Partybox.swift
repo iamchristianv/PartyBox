@@ -9,7 +9,15 @@
 import Firebase
 import UIKit
 
-typealias ErrorCallback = (String?) -> Void
+enum PartyboxKey: String {
+
+    case version
+
+    case parties
+
+    case store
+
+}
 
 struct Partybox {
 
@@ -66,23 +74,5 @@ struct Partybox {
         }
 
     }
-
-}
-
-enum DatabaseKey: String {
-
-    case cards
-
-    case titles
-
-    case packs
-
-    case parties
-
-    case guests
-
-    case wannabe
-
-    case players
 
 }

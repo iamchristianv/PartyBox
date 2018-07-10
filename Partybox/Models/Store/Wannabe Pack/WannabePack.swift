@@ -10,9 +10,11 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-class WannabePack {
+class WannabePack: Identifiable {
 
-    // MARK: - Instance Properties
+    // MARK: - Remote Properties
+
+    var id: String = Partybox.value.none
 
     var name: String = Partybox.value.none
 
@@ -22,6 +24,7 @@ class WannabePack {
 
     static func construct() -> WannabePack {
         let pack = WannabePack()
+        pack.id = Partybox.value.none
         pack.name = Partybox.value.none
         pack.cards = OrderedSet<WannabeCard>()
         return pack
@@ -29,6 +32,7 @@ class WannabePack {
 
     static func construct(json: JSON) -> WannabePack {
         let pack = WannabePack()
+        pack.id = json[WannabePackKey.id.rawValue].stringValue
         pack.name = json[WannabePackKey.name.rawValue].stringValue
         pack.cards = OrderedSet<WannabeCard>()
         return pack
@@ -39,11 +43,11 @@ class WannabePack {
 extension WannabePack: Hashable {
 
     var hashValue: Int {
-        return self.name.hashValue
+        return self.id.hashValue
     }
 
     static func ==(lhs: WannabePack, rhs: WannabePack) -> Bool {
-        return lhs.name == rhs.name
+        return lhs.id == rhs.id
     }
 
 }

@@ -11,9 +11,9 @@ import SwiftyJSON
 
 class Store {
 
-    // MARK: - Instance Properties
+    // MARK: - Local Properties
 
-    var id: String = Partybox.value.none
+    var purchasedIds: Set<String> = Set<String>()
 
     var wannabePacks: OrderedSet<WannabePack> = OrderedSet<WannabePack>()
 
@@ -21,41 +21,42 @@ class Store {
 
     static func construct() -> Store {
         let store = Store()
-        store.id = Partybox.value.none
+        store.purchasedIds = Set<String>()
         store.wannabePacks = OrderedSet<WannabePack>()
         return store
     }
 
     // MARK: - Store Functions
 
-    func open(callback: @escaping ErrorCallback) {
-        // load purchases
+    func loadPurchases() {
+        // access user defaults
     }
 
-    func close(callback: @escaping ErrorCallback) {
-        // save purchases
+    func restorePurchases() {
+        // access apple api
     }
 
     // MARK: - Pack Functions
 
-    func fetchPacks(gameName: String, callback: @escaping (String?) -> Void) {
-        if gameName == "Wannabe" && self.wannabePacks.count != 0 {
+    func fetchNames(gameId: String, callback: @escaping (_ error: String?) -> Void) {
+        if gameId == PartyGame.wannabeId && self.wannabePacks.count != 0 {
             callback(nil)
         }
 
-        let path = "\(DatabaseKey.packs.rawValue)/\(gameName)/\(DatabaseKey.details.rawValue)"
+        let path = "\(PartyboxKey.store.rawValue)/\(gameId)/\(StoreKey.names.rawValue)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
-            guard let value = snapshot.value as? [String: Any] else {
+            guard let data = snapshot.value as? [String: Any] else {
                 callback("We ran into a problem while preparing your game\n\nPlease try again")
                 return
             }
 
-            for (_, json) in JSON(value) {
-                if gameName == "Wannabe" {
-                    self.wannabePacks.add(WannabePack.construct(json: json))
+            for (_, json) in JSON(data) {
+                if gameId == PartyGame.wannabeId {
+                    let pack = WannabePack.construct(json: json)
+                    self.wannabePacks.add(pack)
                 }
             }
 
@@ -63,24 +64,25 @@ class Store {
         })
     }
 
-    func fetchCards(gameName: String, packName: String, callback: @escaping (String?) -> Void) {
-        if gameName == "Wannabe" && self.wannabePacks.fetch(key: packName)?.cards.count != 0 {
+    func fetchCards(gameId: String, packId: String, callback: @escaping (_ error: String?) -> Void) {
+        if gameId == PartyGame.wannabeId && self.wannabePacks[packId]?.cards.count != 0 {
             callback(nil)
         }
 
-        let path = "\(DatabaseKey.packs.rawValue)/\(gameName)/\(DatabaseKey.cards.rawValue)/\(packName)"
+        let path = "\(PartyboxKey.store.rawValue)/\(gameId)/\(StoreKey.cards.rawValue)/\(packId)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
-            guard let value = snapshot.value as? [[String: Any]] else {
+            guard let data = snapshot.value as? [[String: Any]] else {
                 callback("We ran into a problem while preparing your game\n\nPlease try again")
                 return
             }
 
-            for (_, json) in JSON(value) {
-                if gameName == "Wannabe" {
-                    self.wannabePacks.fetch(key: packName)?.cards.add(WannabeCard.construct(json: json))
+            for (_, json) in JSON(data) {
+                if gameId == PartyGame.wannabeId {
+                    let card = WannabeCard.construct(json: json)
+                    self.wannabePacks[packId]?.cards.add(card)
                 }
             }
 

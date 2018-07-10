@@ -9,15 +9,15 @@
 import Foundation
 import SwiftyJSON
 
-class WannabePlayer {
+class WannabePlayer: Identifiable {
     
-    // MARK: - Instance Properties
+    // MARK: - Remote Properties
 
     var id: String = Partybox.value.none
 
     var name: String = Partybox.value.none
 
-    var vote: String = Partybox.value.none
+    var voteId: String = Partybox.value.none
 
     var points: Int = Partybox.value.zero
 
@@ -27,7 +27,7 @@ class WannabePlayer {
         let player = WannabePlayer()
         player.id = id
         player.name = name
-        player.vote = Partybox.value.none
+        player.voteId = Partybox.value.none
         player.points = Partybox.value.zero
         return player
     }
@@ -36,7 +36,7 @@ class WannabePlayer {
         let player = WannabePlayer()
         player.id = json[WannabePlayerKey.id.rawValue].stringValue
         player.name = json[WannabePlayerKey.name.rawValue].stringValue
-        player.vote = json[WannabePlayerKey.vote.rawValue].stringValue
+        player.voteId = json[WannabePlayerKey.voteId.rawValue].stringValue
         player.points = json[WannabePlayerKey.points.rawValue].intValue
         return player
     }

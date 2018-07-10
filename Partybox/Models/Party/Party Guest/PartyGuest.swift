@@ -9,9 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-class PartyGuest {
+class PartyGuest: Identifiable {
 
-    // MARK: - Instance Properties
+    // MARK: - Remote Properties
 
     var id: String = Partybox.value.none
 

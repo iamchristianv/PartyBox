@@ -14,9 +14,9 @@ enum WannabeKey: String {
 
     case name
 
-    case action
+    case actionId
 
-    case wannabe
+    case wannabeId
 
     case players
 
