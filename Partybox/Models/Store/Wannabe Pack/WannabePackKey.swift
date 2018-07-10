@@ -14,6 +14,8 @@ enum WannabePackKey: String {
 
     case name
 
+    case summary
+
     case cards
 
 }

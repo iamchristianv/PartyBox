@@ -18,6 +18,8 @@ class WannabePack: Identifiable {
 
     var name: String = Partybox.value.none
 
+    var summary: String = Partybox.value.none
+
     var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
 
     // MARK: - Construction Functions
@@ -26,6 +28,7 @@ class WannabePack: Identifiable {
         let pack = WannabePack()
         pack.id = Partybox.value.none
         pack.name = Partybox.value.none
+        pack.summary = Partybox.value.none
         pack.cards = OrderedSet<WannabeCard>()
         return pack
     }
@@ -34,6 +37,7 @@ class WannabePack: Identifiable {
         let pack = WannabePack()
         pack.id = json[WannabePackKey.id.rawValue].stringValue
         pack.name = json[WannabePackKey.name.rawValue].stringValue
+        pack.summary = json[WannabePackKey.summary.rawValue].stringValue
         pack.cards = OrderedSet<WannabeCard>()
         return pack
     }
