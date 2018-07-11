@@ -14,8 +14,6 @@ class Party: Identifiable {
 
     // MARK: - Remote Properties
 
-    var id: String = Partybox.value.none
-
     var name: String = Partybox.value.none
 
     var hostId: String = Partybox.value.none
@@ -24,7 +22,7 @@ class Party: Identifiable {
 
     var guests: OrderedSet<PartyGuest> = OrderedSet<PartyGuest>()
 
-    var wannabe: Wannabe = Wannabe()
+    var game: PartyGame = PartyGame()
 
     // MARK: - Local Properties
 
@@ -41,10 +39,10 @@ class Party: Identifiable {
         party.hostId = Partybox.value.none
         party.timestamp = Partybox.value.zero
         party.guests = OrderedSet<PartyGuest>()
-        party.wannabe = Wannabe.construct(partyId: party.id)
+        party.game = Wannabe.construct(partyId: party.id)
         party.userId = Partybox.value.none
         party.games = OrderedSet<PartyGame>()
-        party.games.add(party.wannabe)
+        party.games.add(Wannabe())
         return party
     }
 
@@ -55,10 +53,10 @@ class Party: Identifiable {
         party.hostId = Partybox.value.none
         party.timestamp = Partybox.value.zero
         party.guests = OrderedSet<PartyGuest>()
-        party.wannabe = Wannabe.construct(partyId: party.id)
+        party.game = Wannabe.construct(partyId: party.id)
         party.userId = Partybox.value.none
         party.games = OrderedSet<PartyGame>()
-        party.games.add(party.wannabe)
+        party.games.add(Wannabe())
         return party
     }
 
@@ -89,8 +87,8 @@ class Party: Identifiable {
                 }
             }
 
-            if key == PartyKey.wannabe.rawValue {
-                self.wannabe = Wannabe.construct(partyId: self.id)
+            if key == PartyGame.wannabeId {
+                self.game = Wannabe.construct(partyId: self.id)
             }
         }
     }
@@ -379,16 +377,4 @@ class Party: Identifiable {
         return randomPartyId
     }
     
-}
-
-extension Party: Hashable {
-
-    var hashValue: Int {
-        return self.id.hashValue
-    }
-
-    static func ==(lhs: Party, rhs: Party) -> Bool {
-        return lhs.id == rhs.id
-    }
-
 }

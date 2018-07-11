@@ -14,8 +14,6 @@ class WannabePack: Identifiable {
 
     // MARK: - Remote Properties
 
-    var id: String = Partybox.value.none
-
     var name: String = Partybox.value.none
 
     var summary: String = Partybox.value.none
@@ -40,18 +38,6 @@ class WannabePack: Identifiable {
         pack.summary = json[WannabePackKey.summary.rawValue].stringValue
         pack.cards = OrderedSet<WannabeCard>()
         return pack
-    }
-
-}
-
-extension WannabePack: Hashable {
-
-    var hashValue: Int {
-        return self.id.hashValue
-    }
-
-    static func ==(lhs: WannabePack, rhs: WannabePack) -> Bool {
-        return lhs.id == rhs.id
     }
 
 }

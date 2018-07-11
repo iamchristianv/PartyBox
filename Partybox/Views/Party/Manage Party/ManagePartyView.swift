@@ -111,7 +111,6 @@ class ManagePartyView: UIView {
     private func setupView() {
         self.backgroundColor = .white
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        self.addGestureRecognizer(UISwipeGestureRecognizer(target: self, action: #selector(hideKeyboard)))
 
         self.addSubview(self.partyNameLabel)
         self.addSubview(self.partyNameTextField)

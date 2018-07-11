@@ -16,8 +16,8 @@ enum PartyViewCellRow: Int {
 
     case partyGameCell
 
-    case partyPeopleHeaderCell
+    case partyGuestsHeaderCell
 
-    case partyPersonCells
+    case partyGuestCells
 
 }

@@ -10,13 +10,21 @@ import UIKit
 
 class ManagePartyViewController: UIViewController {
 
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
 
     private var party: Party!
+
+    // MARK: - View Properties
     
     private var contentView: ManagePartyView!
+
+    // MARK: - Controller Properties
+
+    private var partyName: String!
+
+    private var partyHostId: String!
 
     private var delegate: ManagePartyViewControllerDelegate!
 
@@ -27,6 +35,8 @@ class ManagePartyViewController: UIViewController {
         controller.store = store
         controller.party = party
         controller.contentView = ManagePartyView.construct(delegate: controller, dataSource: controller)
+        controller.partyName = party.name
+        controller.partyHostId = party.hostId
         controller.delegate = delegate
         return controller
     }
@@ -78,7 +88,7 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 
         self.contentView.startAnimatingSaveButton()
 
-        self.party.change(name: self.contentView.partyName(), hostName: self.contentView.partyHostName(), callback: {
+        self.party.change(name: , hostId: self.contentView.partyHostName(), callback: {
             (error) in
 
             if let error = error {

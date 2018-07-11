@@ -38,14 +38,14 @@ class MenuView: UIView {
         return joinPartyButton
     }()
 
-    private lazy var removeAdsButton: ActivityIndicatorButton = {
-        let removeAdsButton = ActivityIndicatorButton()
-        removeAdsButton.setTitle("Remove Ads", for: .normal)
-        removeAdsButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
-        removeAdsButton.setTitleColor(Partybox.color.white, for: .normal)
-        removeAdsButton.setBackgroundColor(Partybox.color.green)
-        removeAdsButton.addTarget(self, action: #selector(removeAdsButtonPressed), for: .touchUpInside)
-        return removeAdsButton
+    private lazy var moreButton: ActivityIndicatorButton = {
+        let moreButton = ActivityIndicatorButton()
+        moreButton.setTitle("More", for: .normal)
+        moreButton.setTitleFont(Partybox.font.avenirNextMediumName, size: 22)
+        moreButton.setTitleColor(Partybox.color.white, for: .normal)
+        moreButton.setBackgroundColor(Partybox.color.green)
+        moreButton.addTarget(self, action: #selector(moreButtonPressed), for: .touchUpInside)
+        return moreButton
     }()
     
     private lazy var animator: UIDynamicAnimator = {
@@ -118,7 +118,7 @@ class MenuView: UIView {
         self.addSubview(self.partyboxImageView)
         self.addSubview(self.startPartyButton)
         self.addSubview(self.joinPartyButton)
-        self.addSubview(self.removeAdsButton)
+        self.addSubview(self.moreButton)
         
         self.partyboxImageView.snp.remakeConstraints({
             (make) in
@@ -145,7 +145,7 @@ class MenuView: UIView {
             make.top.equalTo(self.startPartyButton.snp.bottom).offset(20)
         })
 
-        self.removeAdsButton.snp.remakeConstraints({
+        self.moreButton.snp.remakeConstraints({
             (make) in
 
             make.width.equalTo(220)
@@ -165,8 +165,8 @@ class MenuView: UIView {
         self.delegate.menuView(self, joinPartyButtonPressed: true)
     }
 
-    @objc private func removeAdsButtonPressed() {
-        self.delegate.menuView(self, removeAdsButtonPressed: true)
+    @objc private func moreButtonPressed() {
+        self.delegate.menuView(self, moreButtonPressed: true)
     }
     
     // MARK: - Animation Functions
@@ -187,12 +187,12 @@ class MenuView: UIView {
         self.joinPartyButton.stopAnimating()
     }
 
-    func startAnimatingRemoveAdsButton() {
-        self.removeAdsButton.startAnimating()
+    func startAnimatingMoreButton() {
+        self.moreButton.startAnimating()
     }
 
-    func stopAnimatingRemoveAdsButton() {
-        self.removeAdsButton.stopAnimating()
+    func stopAnimatingMoreButton() {
+        self.moreButton.stopAnimating()
     }
 
     func setConfettiGravityDirection(_ direction: CGVector) {

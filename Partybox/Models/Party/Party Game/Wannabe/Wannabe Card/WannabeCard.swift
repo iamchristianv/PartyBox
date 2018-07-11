@@ -13,8 +13,6 @@ class WannabeCard: Identifiable {
     
     // MARK: - Remote Properties
 
-    var id: String = Partybox.value.none
-
     var clue: String = Partybox.value.none
     
     var move: String = Partybox.value.none
@@ -37,16 +35,4 @@ class WannabeCard: Identifiable {
         return card
     }
     
-}
-
-extension WannabeCard: Hashable {
-
-    var hashValue: Int {
-        return self.id.hashValue
-    }
-
-    static func ==(lhs: WannabeCard, rhs: WannabeCard) -> Bool {
-        return lhs.id == rhs.id
-    }
-
 }

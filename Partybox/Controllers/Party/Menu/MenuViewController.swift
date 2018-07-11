@@ -12,11 +12,15 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
+
+    // MARK: - View Properties
     
     private var contentView: MenuView!
+
+    // MARK: - Controller Properties
 
     private var authenticationHandle: AuthStateDidChangeListenerHandle!
     
@@ -79,11 +83,11 @@ class MenuViewController: UIViewController {
             if user == nil {
                 self.contentView.startAnimatingStartPartyButton()
                 self.contentView.startAnimatingJoinPartyButton()
-                self.contentView.startAnimatingRemoveAdsButton()
+                self.contentView.startAnimatingMoreButton()
             } else {
                 self.contentView.stopAnimatingStartPartyButton()
                 self.contentView.stopAnimatingJoinPartyButton()
-                self.contentView.stopAnimatingRemoveAdsButton()
+                self.contentView.stopAnimatingMoreButton()
             }
         })
     }
@@ -141,11 +145,8 @@ extension MenuViewController: MenuViewDelegate {
         self.present(navigationController, animated: true, completion: nil)
     }
 
-    internal func menuView(_ view: MenuView, removeAdsButtonPressed: Bool) {
-        let subject = "Remove Ads $1.99"
-        let message = "Have fun with everyone in your party without ads!"
-        let action = "Purchase"
-        self.showAlert(subject: subject, message: message, action: action, handler: nil)
+    internal func menuView(_ view: MenuView, moreButtonPressed: Bool) {
+
     }
     
 }

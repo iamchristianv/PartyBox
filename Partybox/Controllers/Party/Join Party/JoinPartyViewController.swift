@@ -10,11 +10,13 @@ import UIKit
 
 class JoinPartyViewController: UIViewController {
 
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
 
     private var party: Party!
+
+    // MARK: - View Properties
     
     private var contentView: JoinPartyView!
 
@@ -68,11 +70,11 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
             return
         }
 
-        self.party = Party.construct(partyId: self.contentView.partyId(), userName: self.contentView.userName())
+        self.party = Party.construct(id: self.contentView.partyId())
 
         self.contentView.startAnimatingJoinButton()
 
-        self.party.enter(callback: {
+        self.party.enter(name: self.contentView.userName(), callback: {
             (error) in
 
             self.contentView.stopAnimatingJoinButton()

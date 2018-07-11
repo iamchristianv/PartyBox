@@ -10,18 +10,18 @@ import Foundation
 
 protocol PartyViewDataSource {
 
-    func partyViewUserName() -> String
-
     func partyViewPartyId() -> String
 
-    func partyViewPartyHostName() -> String
+    func partyViewPartyHostId() -> String
 
-    func partyViewPartyPeopleCount() -> Int
+    func partyViewPartyGuestsCount() -> Int
 
-    func partyViewPartyPerson(index: Int) -> PartyPerson?
+    func partyViewPartyGuest(index: Int) -> PartyGuest?
 
     func partyViewPartyGameName() -> String
 
     func partyViewPartyGameSummary() -> String
+
+    func partyViewPartyUserId() -> String
 
 }

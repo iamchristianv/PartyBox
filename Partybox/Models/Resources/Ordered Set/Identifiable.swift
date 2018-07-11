@@ -8,8 +8,22 @@
 
 import Foundation
 
-protocol Identifiable: Hashable {
+class Identifiable {
 
-    var id: String { get set }
+    // MARK: - Remote Properties
+
+    var id: String = Partybox.value.none
+
+}
+
+extension Identifiable: Hashable {
+
+    var hashValue: Int {
+        return self.id.hashValue
+    }
+
+    static func ==(lhs: Identifiable, rhs: Identifiable) -> Bool {
+        return lhs.id == rhs.id
+    }
 
 }

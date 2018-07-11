@@ -23,7 +23,7 @@ class PartyView: UIView {
         tableView.register(InviteCodeTableViewCell.self, forCellReuseIdentifier: InviteCodeTableViewCell.identifier)
         tableView.register(HeaderTableViewCell.self, forCellReuseIdentifier: HeaderTableViewCell.identifier)
         tableView.register(PartyGameTableViewCell.self, forCellReuseIdentifier: PartyGameTableViewCell.identifier)
-        tableView.register(PartyPersonTableViewCell.self, forCellReuseIdentifier: PartyPersonTableViewCell.identifier)
+        tableView.register(PartyGuestTableViewCell.self, forCellReuseIdentifier: PartyGuestTableViewCell.identifier)
         tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
@@ -94,24 +94,24 @@ class PartyView: UIView {
 extension PartyView: UITableViewDelegate {
 
     internal func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if self.dataSource.partyViewUserName() != self.dataSource.partyViewPartyHostName() {
+        if self.dataSource.partyViewPartyUserId() != self.dataSource.partyViewPartyHostId() {
             return []
         }
         
-        let index = indexPath.row - PartyViewCellRow.partyPersonCells.rawValue
+        let index = indexPath.row - PartyViewCellRow.partyGuestCells.rawValue
         
-        guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
+        guard let guest = self.dataSource.partyViewPartyGuest(index: index) else {
             return []
         }
         
-        if person.name == self.dataSource.partyViewPartyHostName() {
+        if guest.id == self.dataSource.partyViewPartyHostId() {
             return []
         }
         
         let kickButton = UITableViewRowAction(style: .normal, title: "KICK", handler: {
             (rowAction, indexPath) in
             
-            self.delegate.partyView(self, partyPersonKicked: person.name)
+            self.delegate.partyView(self, guestKicked: guest.id)
         })
         
         kickButton.backgroundColor = Partybox.color.red
@@ -128,7 +128,7 @@ extension PartyView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyViewCellRow.partyPersonCells.rawValue + self.dataSource.partyViewPartyPeopleCount()
+        return PartyViewCellRow.partyGuestCells.rawValue + self.dataSource.partyViewPartyGuestsCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,43 +138,51 @@ extension PartyView: UITableViewDataSource {
             let inviteCode = self.dataSource.partyViewPartyId()
             inviteCodeCell.configure(inviteCode: inviteCode)
             return inviteCodeCell
-        } else if indexPath.row == PartyViewCellRow.partyGameHeaderCell.rawValue {
+        }
+
+        if indexPath.row == PartyViewCellRow.partyGameHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let partyGameHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "GAME"
             partyGameHeaderCell.configure(header: header)
             return partyGameHeaderCell
-        } else if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
+        }
+
+        if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
             let partyGameCell = tableViewCell as! PartyGameTableViewCell
             let name = self.dataSource.partyViewPartyGameName()
             let summary = self.dataSource.partyViewPartyGameSummary()
-            let hasHostActions = self.dataSource.partyViewUserName() == self.dataSource.partyViewPartyHostName()
+            let hasHostActions = self.dataSource.partyViewPartyUserId() == self.dataSource.partyViewPartyHostId()
             partyGameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
             self.playButton = partyGameCell.playButton
             return partyGameCell
-        } else if indexPath.row == PartyViewCellRow.partyPeopleHeaderCell.rawValue {
+        }
+
+        if indexPath.row == PartyViewCellRow.partyGuestsHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
-            let partyPeopleHeaderCell = tableViewCell as! HeaderTableViewCell
-            let header = "PEOPLE"
-            partyPeopleHeaderCell.configure(header: header)
-            return partyPeopleHeaderCell
-        } else if indexPath.row >= PartyViewCellRow.partyPersonCells.rawValue {
-            let index = indexPath.row - PartyViewCellRow.partyPersonCells.rawValue
+            let partyGuestsHeaderCell = tableViewCell as! HeaderTableViewCell
+            let header = "GUESTS"
+            partyGuestsHeaderCell.configure(header: header)
+            return partyGuestsHeaderCell
+        }
+
+        if indexPath.row >= PartyViewCellRow.partyGuestCells.rawValue {
+            let index = indexPath.row - PartyViewCellRow.partyGuestCells.rawValue
             
-            guard let person = self.dataSource.partyViewPartyPerson(index: index) else {
+            guard let guest = self.dataSource.partyViewPartyGuest(index: index) else {
                 return UITableViewCell()
             }
             
-            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyPersonTableViewCell.identifier)
-            let partyPersonCell = tableViewCell as! PartyPersonTableViewCell
-            let name = person.name
-            let isMe = person.name == self.dataSource.partyViewUserName()
-            let isHost = person.name == self.dataSource.partyViewPartyHostName()
-            let emoji = person.emoji
-            let points = person.points
-            partyPersonCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)
-            return partyPersonCell
+            let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGuestTableViewCell.identifier)
+            let partyGuestCell = tableViewCell as! PartyGuestTableViewCell
+            let name = guest.name
+            let isMe = guest.id == self.dataSource.partyViewPartyUserId()
+            let isHost = guest.id == self.dataSource.partyViewPartyHostId()
+            let emoji = PartyView.randomPersonEmoji()
+            let points = guest.points
+            partyGuestCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)
+            return partyGuestCell
         }
         
         return UITableViewCell()

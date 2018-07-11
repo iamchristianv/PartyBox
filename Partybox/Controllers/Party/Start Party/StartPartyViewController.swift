@@ -10,11 +10,13 @@ import UIKit
 
 class StartPartyViewController: UIViewController {
     
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
 
     private var party: Party!
+
+    // MARK: - View Properties
     
     private var contentView: StartPartyView!
 
@@ -68,12 +70,14 @@ extension StartPartyViewController: StartPartyViewDelegate {
             return
         }
 
-        self.party = Party.construct(partyName: self.contentView.partyName(), userName: self.contentView.userName())
+        self.party = Party.construct(name: self.contentView.partyName())
 
         self.contentView.startAnimatingStartButton()
 
-        self.party.initialize(callback: {
+        self.party.start(callback: {
             (error) in
+
+            self.contentView.stopAnimatingStartButton()
 
             if let error = error {
                 let subject = "Uh oh"
@@ -83,8 +87,12 @@ extension StartPartyViewController: StartPartyViewDelegate {
                 return
             }
 
-            self.party.enter(callback: {
+            self.contentView.startAnimatingStartButton()
+
+            self.party.enter(name: self.contentView.userName(), callback: {
                 (error) in
+
+                self.contentView.stopAnimatingStartButton()
 
                 if let error = error {
                     let subject = "Uh oh"

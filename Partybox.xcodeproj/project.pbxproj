@@ -480,12 +480,12 @@
 			path = "Invite Code Cell";
 			sourceTree = "<group>";
 		};
-		AA5E8A3E20A8125400FE8960 /* Party Person Cell */ = {
+		AA5E8A3E20A8125400FE8960 /* Party Guest Cell */ = {
 			isa = PBXGroup;
 			children = (
 				AA2A87B3209AB52C009C55BF /* PartyPersonTableViewCell.swift */,
 			);
-			path = "Party Person Cell";
+			path = "Party Guest Cell";
 			sourceTree = "<group>";
 		};
 		AA5E8A4520A8CEEF00FE8960 /* Manage Party */ = {
@@ -775,7 +775,7 @@
 				AA5E8A3720A7ED0C00FE8960 /* PartyViewDataSource.swift */,
 				AA5E8A3D20A8120700FE8960 /* Invite Code Cell */,
 				AA5E8A3920A80E9D00FE8960 /* Party Game Cell */,
-				AA5E8A3E20A8125400FE8960 /* Party Person Cell */,
+				AA5E8A3E20A8125400FE8960 /* Party Guest Cell */,
 			);
 			path = Party;
 			sourceTree = "<group>";

@@ -45,6 +45,7 @@ class Wannabe: PartyGame {
         wannabe.players = OrderedSet<WannabePlayer>()
         wannabe.cards = OrderedSet<WannabeCard>()
         wannabe.partyId = partyId
+        wannabe.userId = Partybox.value.none
         wannabe.summary = "Wannabe Summary"
         wannabe.instructions = "Wannabe Instructions"
         return wannabe
