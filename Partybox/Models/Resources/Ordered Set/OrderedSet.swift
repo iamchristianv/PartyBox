@@ -43,16 +43,6 @@ class OrderedSet<Object: Identifiable> {
         }
     }
 
-    func contains(id: String) -> Bool {
-        for object in self.objects {
-            if object.id == id {
-                return true
-            }
-        }
-
-        return false
-    }
-
     func random() -> Object? {
         if self.objects.count == 0 {
             return nil

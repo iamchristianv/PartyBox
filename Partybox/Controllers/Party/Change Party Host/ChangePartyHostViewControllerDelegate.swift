@@ -10,6 +10,6 @@ import Foundation
 
 protocol ChangePartyHostViewControllerDelegate {
 
-    func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String)
+    func changePartyHostViewController(_ controller: ChangePartyHostViewController, hostChanged hostId: String)
 
 }

@@ -37,8 +37,6 @@ class ChangePartyHostView: UIView {
         return saveButton
     }()
 
-    private var selectedPartyHostName: String!
-
     private var delegate: ChangePartyHostViewDelegate!
 
     private var dataSource: ChangePartyHostViewDataSource!
@@ -47,7 +45,6 @@ class ChangePartyHostView: UIView {
 
     static func construct(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) -> ChangePartyHostView {
         let view = ChangePartyHostView()
-        view.selectedPartyHostName = dataSource.changePartyHostViewPartyHostName()
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -94,14 +91,6 @@ class ChangePartyHostView: UIView {
         self.tableView.reloadData()
     }
 
-    func setPartyHostName(_ partyHostName: String) {
-        self.selectedPartyHostName = partyHostName
-    }
-
-    func partyHostName() -> String {
-        return self.selectedPartyHostName
-    }
-
 }
 
 extension ChangePartyHostView: UITableViewDelegate {
@@ -109,8 +98,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedPartyHostName = selectableCell.value as! String
-        self.tableView.reloadData()
+        self.delegate.changePartyHostView(self, guestSelected: selectableCell.value as! String)
     }
     
 }
@@ -122,7 +110,7 @@ extension ChangePartyHostView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangePartyHostViewCellRow.partyPersonCells.rawValue + self.dataSource.changePartyHostViewPartyPeopleCount()
+        return ChangePartyHostViewCellRow.partyGuestCells.rawValue + self.dataSource.changePartyHostViewPartyGuestsCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,24 +120,28 @@ extension ChangePartyHostView: UITableViewDataSource {
             let prompt = "Who should be the host?"
             promptCell.configure(prompt: prompt)
             return promptCell
-        } else if indexPath.row == ChangePartyHostViewCellRow.partyPeopleHeaderCell.rawValue {
+        }
+
+        if indexPath.row == ChangePartyHostViewCellRow.partyGuestsHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let partyPeopleHeaderCell = tableViewCell as! HeaderTableViewCell
-            let header = "PEOPLE"
+            let header = "GUESTS"
             partyPeopleHeaderCell.configure(header: header)
             return partyPeopleHeaderCell
-        } else if indexPath.row >= ChangePartyHostViewCellRow.partyPersonCells.rawValue {
-            let index = indexPath.row - ChangePartyHostViewCellRow.partyPersonCells.rawValue
+        }
+
+        if indexPath.row >= ChangePartyHostViewCellRow.partyGuestCells.rawValue {
+            let index = indexPath.row - ChangePartyHostViewCellRow.partyGuestCells.rawValue
             
-            guard let person = self.dataSource.changePartyHostViewPartyPerson(index: index) else {
+            guard let guest = self.dataSource.changePartyHostViewPartyGuest(index: index) else {
                 return UITableViewCell()
             }
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let content = person.name
-            let selected = person.name == self.selectedPartyHostName
-            let value = person.name
+            let content = guest.name
+            let selected = guest.id == self.dataSource.changePartyHostViewPartyHostId()
+            let value = guest.id
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }

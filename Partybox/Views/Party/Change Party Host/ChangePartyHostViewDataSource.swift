@@ -10,10 +10,10 @@ import Foundation
 
 protocol ChangePartyHostViewDataSource {
 
-    func changePartyHostViewPartyHostName() -> String
+    func changePartyHostViewPartyHostId() -> String
 
-    func changePartyHostViewPartyPeopleCount() -> Int
+    func changePartyHostViewPartyGuestsCount() -> Int
 
-    func changePartyHostViewPartyPerson(index: Int) -> PartyPerson?
+    func changePartyHostViewPartyGuest(index: Int) -> PartyGuest?
 
 }

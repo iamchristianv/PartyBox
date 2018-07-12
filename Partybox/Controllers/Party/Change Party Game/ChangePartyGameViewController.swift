@@ -10,13 +10,19 @@ import UIKit
 
 class ChangePartyGameViewController: UIViewController {
 
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
 
     private var party: Party!
+
+    // MARK: - View Properties
     
     private var contentView: ChangePartyGameView!
+
+    // MARK: - Controller Properties
+
+    private var partyGame: PartyGame!
 
     private var delegate: ChangePartyGameViewControllerDelegate!
 
@@ -27,6 +33,7 @@ class ChangePartyGameViewController: UIViewController {
         controller.store = store
         controller.party = party
         controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
+        controller.partyGame = party.game
         controller.delegate = delegate
         return controller
     }
@@ -63,8 +70,13 @@ class ChangePartyGameViewController: UIViewController {
 
 extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
+    func changePartyGameView(_ view: ChangePartyGameView, gameChanged game: PartyGame) {
+        self.party.game = game
+        self.contentView.reloadTable()
+    }
+
     func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool) {
-        if self.contentView.partyGameName() == self.party.gameName {
+        if self.partyGame == self.party.game {
             let subject = "Woah there"
             let message = "Please select a new game"
             let action = "Okay"
@@ -74,38 +86,40 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
         self.contentView.startAnimatingSaveButton()
 
-        self.party.change(gameName: self.contentView.partyGameName(), callback: {
-            (error) in
+        if let wannabe = self.partyGame as? Wannabe {
+            wannabe.start(callback: {
+                (error) in
 
-            self.contentView.stopAnimatingSaveButton()
+                self.contentView.stopAnimatingSaveButton()
 
-            if let error = error {
-                let subject = "Oh no"
-                let message = error
-                let action = "Okay"
-                self.showAlert(subject: subject, message: message, action: action, handler: nil)
-                return
-            }
+                if let error = error {
+                    let subject = "Oh no"
+                    let message = error
+                    let action = "Okay"
+                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                    return
+                }
 
-            self.delegate.changePartyGameViewController(self, partyGameChanged: true)
-            self.dismiss(animated: true, completion: nil)
-        })
+                self.delegate.changePartyGameViewController(self, gameChanged: true)
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
     }
     
 }
 
 extension ChangePartyGameViewController: ChangePartyGameViewDataSource {
 
-    func changePartyGameViewPartyGameName() -> String {
-        return self.party.gameName
+    func changePartyGameViewPartyGame() -> PartyGame {
+        return self.partyGame
     }
 
-    func changePartyGameViewPartyGameCount() -> Int {
-        return 1
+    func changePartyGameViewPartyGamesCount() -> Int {
+        return self.party.games.count
     }
 
-    func changePartyGameViewPartyGameName(index: Int) -> String {
-        return "Wannabe"
+    func changePartyGameViewPartyGame(index: Int) -> PartyGame? {
+        return self.party.games[index]
     }
 
 }

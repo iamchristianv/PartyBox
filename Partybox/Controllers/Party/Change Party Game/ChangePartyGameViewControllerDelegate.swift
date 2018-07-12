@@ -10,6 +10,6 @@ import Foundation
 
 protocol ChangePartyGameViewControllerDelegate {
 
-    func changePartyGameViewController(_ controller: ChangePartyGameViewController, partyGameChanged: Bool)
+    func changePartyGameViewController(_ controller: ChangePartyGameViewController, gameChanged: Bool)
 
 }

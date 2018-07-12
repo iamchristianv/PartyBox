@@ -168,7 +168,7 @@ class PartyViewController: UIViewController {
     @objc private func partyGuestRemoved() {
         self.contentView.reloadTable()
 
-        if !self.party.guests.contains(id: self.party.userId) {
+        if self.party.guests[self.party.userId] == nil {
             self.dismiss(animated: true, completion: {
                 self.delegate.partyViewController(self, userKicked: true)
             })
@@ -252,6 +252,8 @@ extension PartyViewController: PartyViewDataSource {
             let wannabe = self.party.game as! Wannabe
             return wannabe.name
         }
+
+        return Partybox.value.none
     }
 
     internal func partyViewPartyGameSummary() -> String {
@@ -259,6 +261,8 @@ extension PartyViewController: PartyViewDataSource {
             let wannabe = self.party.game as! Wannabe
             return wannabe.summary
         }
+
+        return Partybox.value.none
     }
 
     internal func partyViewPartyUserId() -> String {
@@ -277,8 +281,8 @@ extension PartyViewController: ManagePartyViewControllerDelegate {
 
 extension PartyViewController: ChangePartyHostViewControllerDelegate {
 
-    internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String) {
-        self.party.change(hostId: partyHostName, callback: {
+    internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, hostChanged hostId: String) {
+        self.party.change(hostId: hostId, callback: {
             (error) in
 
             if let error = error {
@@ -308,7 +312,7 @@ extension PartyViewController: ChangePartyHostViewControllerDelegate {
 
 extension PartyViewController: ChangePartyGameViewControllerDelegate {
 
-    internal func changePartyGameViewController(_ controller: ChangePartyGameViewController, partyGameChanged: Bool) {
+    internal func changePartyGameViewController(_ controller: ChangePartyGameViewController, gameChanged: Bool) {
         self.contentView.reloadTable()
     }
 

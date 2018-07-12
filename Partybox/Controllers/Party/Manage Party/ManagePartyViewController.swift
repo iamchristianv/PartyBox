@@ -86,10 +86,14 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
             return
         }
 
+        self.partyName = self.contentView.partyName()
+
         self.contentView.startAnimatingSaveButton()
 
-        self.party.change(name: , hostId: self.contentView.partyHostName(), callback: {
+        self.party.change(name: self.partyName, hostId: self.partyHostId, callback: {
             (error) in
+
+            self.contentView.stopAnimatingSaveButton()
 
             if let error = error {
                 let subject = "Oh no"
@@ -109,19 +113,28 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 extension ManagePartyViewController: ManagePartyViewDataSource {
 
     internal func managePartyViewPartyName() -> String {
-        return self.party.name
+        return self.partyName
     }
 
     internal func managePartyViewPartyHostName() -> String {
-        return self.party.hostName
+        guard let guest = self.party.guests[self.partyHostId] else {
+            return Partybox.value.none
+        }
+
+        return guest.name
     }
 
 }
 
 extension ManagePartyViewController: ChangePartyHostViewControllerDelegate {
 
-    internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, partyHostChanged partyHostName: String) {
-        self.contentView.setPartyHostName(partyHostName)
+    internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, hostChanged hostId: String) {
+        guard let guest = self.party.guests[hostId] else {
+            return
+        }
+
+        self.partyHostId = hostId
+        self.contentView.setPartyHostName(guest.name)
     }
 
 }

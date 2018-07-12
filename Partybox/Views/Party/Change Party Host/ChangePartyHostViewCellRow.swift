@@ -12,8 +12,8 @@ enum ChangePartyHostViewCellRow: Int {
 
     case promptCell = 0
 
-    case partyPeopleHeaderCell
+    case partyGuestsHeaderCell
 
-    case partyPersonCells
+    case partyGuestCells
 
 }

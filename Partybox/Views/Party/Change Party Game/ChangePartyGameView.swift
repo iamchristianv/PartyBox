@@ -37,8 +37,6 @@ class ChangePartyGameView: UIView {
         return saveButton
     }()
 
-    private var selectedPartyGameName: String!
-    
     private var delegate: ChangePartyGameViewDelegate!
 
     private var dataSource: ChangePartyGameViewDataSource!
@@ -47,7 +45,6 @@ class ChangePartyGameView: UIView {
 
     static func construct(delegate: ChangePartyGameViewDelegate, dataSource: ChangePartyGameViewDataSource) -> ChangePartyGameView {
         let view = ChangePartyGameView()
-        view.selectedPartyGameName = dataSource.changePartyGameViewPartyGameName()
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -104,10 +101,6 @@ class ChangePartyGameView: UIView {
         self.tableView.reloadData()
     }
 
-    func partyGameName() -> String {
-        return self.selectedPartyGameName
-    }
-
 }
 
 extension ChangePartyGameView: UITableViewDelegate {
@@ -115,8 +108,7 @@ extension ChangePartyGameView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedPartyGameName = selectableCell.value as! String
-        self.tableView.reloadData()
+        self.delegate.changePartyGameView(self, gameChanged: selectableCell.value as! PartyGame)
     }
     
 }
@@ -128,7 +120,7 @@ extension ChangePartyGameView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangePartyGameViewCellRow.partyGameCells.rawValue + self.dataSource.changePartyGameViewPartyGameCount()
+        return ChangePartyGameViewCellRow.partyGameCells.rawValue + self.dataSource.changePartyGameViewPartyGamesCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,20 +130,35 @@ extension ChangePartyGameView: UITableViewDataSource {
             let prompt = "Which game do you want to play?"
             promptCell.configure(prompt: prompt)
             return promptCell
-        } else if indexPath.row == ChangePartyGameViewCellRow.partyGameHeaderCell.rawValue {
+        }
+
+        if indexPath.row == ChangePartyGameViewCellRow.partyGameHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let partyGameHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "GAMES"
             partyGameHeaderCell.configure(header: header)
             return partyGameHeaderCell
-        } else if indexPath.row >= ChangePartyGameViewCellRow.partyGameCells.rawValue {
+        }
+
+        if indexPath.row >= ChangePartyGameViewCellRow.partyGameCells.rawValue {
             let index = indexPath.row - ChangePartyGameViewCellRow.partyGameCells.rawValue
+
+            guard let game = self.dataSource.changePartyGameViewPartyGame(index: index) else {
+                return UITableViewCell()
+            }
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let content = self.dataSource.changePartyGameViewPartyGameName(index: index)
-            let selected = self.dataSource.changePartyGameViewPartyGameName(index: index) == self.selectedPartyGameName
-            let value = self.dataSource.changePartyGameViewPartyGameName(index: index)
+            var content: String = ""
+            var selected: Bool = false
+            var value: Any = ""
+
+            if let wannabe = game as? Wannabe {
+                content = wannabe.name
+                selected = wannabe.id == self.dataSource.changePartyGameViewPartyGame().id
+                value = wannabe
+            }
+
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }

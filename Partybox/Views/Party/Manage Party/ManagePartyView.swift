@@ -249,10 +249,6 @@ class ManagePartyView: UIView {
         self.partyHostNameTextField.text = partyHostName
     }
 
-    func partyHostName() -> String {
-        return self.partyHostNameTextField.text!
-    }
-
 }
 
 extension ManagePartyView: UITextFieldDelegate {
