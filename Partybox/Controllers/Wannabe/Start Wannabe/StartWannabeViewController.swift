@@ -10,11 +10,13 @@ import UIKit
 
 class StartWannabeViewController: UIViewController {
 
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
 
     private var party: Party!
+
+    // MARK: - View Properties
 
     private var contentView: StartWannabeView!
 
@@ -69,11 +71,13 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
 extension StartWannabeViewController: StartWannabeViewDataSource {
 
     func startWannabeViewGameName() -> String {
-        return self.party.wannabe.name
+        let wannabe = self.party.game as! Wannabe
+        return wannabe.name
     }
 
     func startWannabeViewGameInstructions() -> String {
-        return "Instructions"
+        let wannabe = self.party.game as! Wannabe
+        return wannabe.instructions
     }
 
 }

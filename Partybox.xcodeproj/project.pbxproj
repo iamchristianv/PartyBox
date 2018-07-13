@@ -274,7 +274,6 @@
 				AA5E89EE20A13D3800FE8960 /* PartyKey.swift */,
 				AA5E89EA20A13C3A00FE8960 /* PartyNotification.swift */,
 				AA5E89F020A13D4A00FE8960 /* Party Guest */,
-				AA2FF6BD20F4556900833D2B /* Party Game */,
 			);
 			path = Party;
 			sourceTree = "<group>";
@@ -401,13 +400,13 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		AA2FF6BD20F4556900833D2B /* Party Game */ = {
+		AA2FF6BD20F4556900833D2B /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				AA2FF6BE20F4558000833D2B /* PartyGame.swift */,
 				AA1CEE8420BB43D6008AE617 /* Wannabe */,
 			);
-			path = "Party Game";
+			path = Game;
 			sourceTree = "<group>";
 		};
 		AA5E89F020A13D4A00FE8960 /* Party Guest */ = {
@@ -608,6 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1CEE8320BB43A9008AE617 /* Party */,
+				AA2FF6BD20F4556900833D2B /* Game */,
 				AAB2CEB220D5BEB800BFC4ED /* Store */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
 				AA1CEE9620BBAF3C008AE617 /* Resources */,

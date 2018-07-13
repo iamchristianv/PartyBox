@@ -37,8 +37,6 @@ class SetupWannabeView: UIView {
         return saveButton
     }()
 
-    private var selectedWannabePackName: String!
-
     private var delegate: SetupWannabeViewDelegate!
 
     private var dataSource: SetupWannabeViewDataSource!
@@ -47,7 +45,6 @@ class SetupWannabeView: UIView {
 
     static func construct(delegate: SetupWannabeViewDelegate, dataSource: SetupWannabeViewDataSource) -> SetupWannabeView {
         let view = SetupWannabeView()
-        view.selectedWannabePackName = dataSource.setupWannabeViewGamePack(index: 0)?.name
         view.delegate = delegate
         view.dataSource = dataSource
         view.setupView()
@@ -94,10 +91,6 @@ class SetupWannabeView: UIView {
         self.tableView.reloadData()
     }
 
-    func wannabePackName() -> String {
-        return self.selectedWannabePackName
-    }
-
 }
 
 extension SetupWannabeView: UITableViewDelegate {
@@ -105,8 +98,7 @@ extension SetupWannabeView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.selectedWannabePackName = selectableCell.value as! String
-        self.tableView.reloadData()
+        self.delegate.setupWannabeView(self, packSelected: selectableCell.value as! String)
     }
 
 }
@@ -128,24 +120,28 @@ extension SetupWannabeView: UITableViewDataSource {
             let prompt = "Which pack do you want to play with?"
             promptCell.configure(prompt: prompt)
             return promptCell
-        } else if indexPath.row == SetupWannabeViewCellRow.wannabePacksHeaderCell.rawValue {
+        }
+
+        if indexPath.row == SetupWannabeViewCellRow.wannabePacksHeaderCell.rawValue {
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier)
             let packsHeaderCell = tableViewCell as! HeaderTableViewCell
             let header = "PACKS"
             packsHeaderCell.configure(header: header)
             return packsHeaderCell
-        } else if indexPath.row >= SetupWannabeViewCellRow.wannabePackCells.rawValue {
+        }
+
+        if indexPath.row >= SetupWannabeViewCellRow.wannabePackCells.rawValue {
             let index = indexPath.row - SetupWannabeViewCellRow.wannabePackCells.rawValue
 
-            guard let wannabePack = self.dataSource.setupWannabeViewGamePack(index: index) else {
+            guard let pack = self.dataSource.setupWannabeViewGamePack(index: index) else {
                 return UITableViewCell()
             }
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let content = wannabePack.name
-            let selected = wannabePack.name == self.selectedWannabePackName
-            let value = wannabePack.name
+            let content = pack.name
+            let selected = pack.id == self.dataSource.setupWannabeViewGamePackId()
+            let value = pack.id
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }

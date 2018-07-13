@@ -10,13 +10,19 @@ import UIKit
 
 class SetupWannabeViewController: UIViewController {
 
-    // MARK: - Instance Properties
+    // MARK: - Model Properties
 
     private var store: Store!
 
     private var party: Party!
 
+    // MARK: - View Properties
+
     private var contentView: SetupWannabeView!
+
+    // MARK: - Controller Properties
+
+    var gamePackId: String!
 
     // MARK: - Construction Functions
 
@@ -25,6 +31,7 @@ class SetupWannabeViewController: UIViewController {
         controller.store = store
         controller.party = party
         controller.contentView = SetupWannabeView.construct(delegate: controller, dataSource: controller)
+        controller.gamePackId = store.wannabePacks[0]?.id
         return controller
     }
 
@@ -45,7 +52,7 @@ class SetupWannabeViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         self.edgesForExtendedLayout = []
         self.showNavigationBar()
-        self.setNavigationBarTitle("Select Pack")
+        self.setNavigationBarTitle("Choose Pack")
         self.setNavigationBarLeftButton(title: "cancel", target: self, action: #selector(cancelButtonPressed))
         self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
@@ -60,6 +67,11 @@ class SetupWannabeViewController: UIViewController {
 
 extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
+    func setupWannabeView(_ view: SetupWannabeView, packSelected packId: String) {
+        self.gamePackId = packId
+        self.contentView.reloadTable()
+    }
+
     func setupWannabeView(_ view: SetupWannabeView, saveButtonPressed: Bool) {
         let viewController = StartWannabeViewController.construct(store: self.store, party: self.party)
         self.show(viewController, sender: nil)
@@ -69,12 +81,16 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
 extension SetupWannabeViewController: SetupWannabeViewDataSource {
 
+    func setupWannabeViewGamePackId() -> String {
+        return self.gamePackId
+    }
+
     func setupWannabeViewGamePacksCount() -> Int {
         return self.store.wannabePacks.count
     }
 
     func setupWannabeViewGamePack(index: Int) -> WannabePack? {
-        return self.store.wannabePacks.fetch(index: index)
+        return self.store.wannabePacks[index]
     }
 
 }

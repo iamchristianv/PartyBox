@@ -10,6 +10,8 @@ import Foundation
 
 protocol SetupWannabeViewDataSource {
 
+    func setupWannabeViewGamePackId() -> String
+
     func setupWannabeViewGamePacksCount() -> Int
 
     func setupWannabeViewGamePack(index: Int) -> WannabePack?

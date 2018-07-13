@@ -10,6 +10,8 @@ import Foundation
 
 protocol SetupWannabeViewDelegate {
 
+    func setupWannabeView(_ view: SetupWannabeView, packSelected packId: String)
+
     func setupWannabeView(_ view: SetupWannabeView, saveButtonPressed: Bool)
 
 }
