@@ -74,7 +74,7 @@ extension StartPartyViewController: StartPartyViewDelegate {
 
         self.contentView.startAnimatingStartButton()
 
-        self.party.start(callback: {
+        self.party.start(name: self.contentView.userName(), callback: {
             (error) in
 
             self.contentView.stopAnimatingStartButton()
@@ -87,25 +87,8 @@ extension StartPartyViewController: StartPartyViewDelegate {
                 return
             }
 
-            self.contentView.startAnimatingStartButton()
-
-            self.party.enter(name: self.contentView.userName(), callback: {
-                (error) in
-
-                self.contentView.stopAnimatingStartButton()
-
-                if let error = error {
-                    let subject = "Uh oh"
-                    let message = error
-                    let action = "Okay"
-                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
-                    return
-                }
-
-                let rootViewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
-                let navigationController = UINavigationController(rootViewController: rootViewController)
-                self.show(navigationController, sender: nil)
-            })
+            let viewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
+            self.show(viewController, sender: nil)
         })
     }
 

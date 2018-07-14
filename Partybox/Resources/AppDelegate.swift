@@ -30,6 +30,8 @@ extension AppDelegate: UIApplicationDelegate {
         let rootViewController = MenuViewController.construct()
         self.window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         self.window?.makeKeyAndVisible()
+
+        Partybox.collection.games.add(Wannabe.construct(partyId: Partybox.value.none))
         
         return true
     }

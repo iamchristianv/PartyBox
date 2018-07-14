@@ -90,30 +90,26 @@ class PartyViewController: UIViewController {
         let message = "Are you sure you want to leave?"
         let action = "Leave"
         self.showAlert(subject: subject, message: message, action: action, handler: {
-            if self.party.userId == self.party.hostId {
-                let rootViewController = ChangePartyHostViewController.construct(store: self.store, party: self.party, delegate: self)
-                let navigationController = UINavigationController(rootViewController: rootViewController)
-                self.present(navigationController, animated: true, completion: nil)
-                return
-            }
-
             if self.party.guests.count > 1 {
-                self.dismiss(animated: true, completion: {
-                    self.party.exit(callback: {
-                        (error) in
+                if self.party.userId == self.party.hostId {
+                    let rootViewController = ChangePartyHostViewController.construct(store: self.store, party: self.party, delegate: self)
+                    let navigationController = UINavigationController(rootViewController: rootViewController)
+                    self.present(navigationController, animated: true, completion: nil)
+                } else {
+                    self.dismiss(animated: true, completion: {
+                        self.party.exit(callback: {
+                            (error) in
 
-                        if let error = error {
-                            let subject = "Oh no"
-                            let message = error
-                            let action = "Okay"
-                            self.showAlert(subject: subject, message: message, action: action, handler: nil)
-                        }
+                            if let error = error {
+                                let subject = "Oh no"
+                                let message = error
+                                let action = "Okay"
+                                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                            }
+                        })
                     })
-                })
-                return
-            }
-
-            if self.party.guests.count == 1 {
+                }
+            } else {
                 self.dismiss(animated: true, completion: {
                     self.party.end(callback: {
                         (error) in
@@ -126,7 +122,6 @@ class PartyViewController: UIViewController {
                         }
                     })
                 })
-                return
             }
         })
     }
@@ -248,18 +243,16 @@ extension PartyViewController: PartyViewDataSource {
     }
 
     internal func partyViewPartyGameName() -> String {
-        if self.party.game.id == PartyGame.wannabeId {
-            let wannabe = self.party.game as! Wannabe
-            return wannabe.name
+        if let game = Partybox.collection.games[self.party.gameId] {
+            return game.name
         }
 
         return Partybox.value.none
     }
 
     internal func partyViewPartyGameSummary() -> String {
-        if self.party.game.id == PartyGame.wannabeId {
-            let wannabe = self.party.game as! Wannabe
-            return wannabe.summary
+        if let game = Partybox.collection.games[self.party.gameId] {
+            return game.summary
         }
 
         return Partybox.value.none

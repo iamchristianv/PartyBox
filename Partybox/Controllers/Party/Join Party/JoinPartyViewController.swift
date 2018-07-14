@@ -87,9 +87,8 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
                 return
             }
 
-            let rootViewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
-            let navigationController = UINavigationController(rootViewController: rootViewController)
-            self.show(navigationController, sender: nil)
+            let viewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
+            self.show(viewController, sender: nil)
         })
     }
     

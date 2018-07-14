@@ -22,7 +22,7 @@ class ChangePartyGameViewController: UIViewController {
 
     // MARK: - Controller Properties
 
-    private var partyGame: PartyGame!
+    private var partyGameId: String!
 
     private var delegate: ChangePartyGameViewControllerDelegate!
 
@@ -33,7 +33,7 @@ class ChangePartyGameViewController: UIViewController {
         controller.store = store
         controller.party = party
         controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
-        controller.partyGame = party.game
+        controller.partyGameId = party.gameId
         controller.delegate = delegate
         return controller
     }
@@ -70,13 +70,13 @@ class ChangePartyGameViewController: UIViewController {
 
 extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
-    func changePartyGameView(_ view: ChangePartyGameView, gameChanged game: PartyGame) {
-        self.party.game = game
+    func changePartyGameView(_ view: ChangePartyGameView, gameChanged gameId: String) {
+        self.party.gameId = gameId
         self.contentView.reloadTable()
     }
 
     func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool) {
-        if self.partyGame == self.party.game {
+        if self.partyGameId == self.party.gameId {
             let subject = "Woah there"
             let message = "Please select a new game"
             let action = "Okay"
@@ -86,7 +86,9 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
         self.contentView.startAnimatingSaveButton()
 
-        if let wannabe = self.partyGame as? Wannabe {
+        if self.partyGameId == PartyGame.wannabeId {
+            let wannabe = Wannabe.construct(partyId: self.party.id)
+
             wannabe.start(callback: {
                 (error) in
 
@@ -110,16 +112,16 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
 extension ChangePartyGameViewController: ChangePartyGameViewDataSource {
 
-    func changePartyGameViewPartyGame() -> PartyGame {
-        return self.partyGame
+    func changePartyGameViewPartyGameId() -> String {
+        return self.partyGameId
     }
 
     func changePartyGameViewPartyGamesCount() -> Int {
-        return self.party.games.count
+        return Partybox.collection.games.count
     }
 
     func changePartyGameViewPartyGame(index: Int) -> PartyGame? {
-        return self.party.games[index]
+        return Partybox.collection.games[self.partyGameId]
     }
 
 }

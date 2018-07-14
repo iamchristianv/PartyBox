@@ -75,4 +75,10 @@ struct Partybox {
 
     }
 
+    struct collection {
+
+        static let games: OrderedSet<PartyGame> = OrderedSet<PartyGame>()
+
+    }
+
 }

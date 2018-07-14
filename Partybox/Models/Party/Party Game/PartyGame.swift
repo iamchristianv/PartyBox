@@ -8,10 +8,18 @@
 
 import Foundation
 
-class PartyGame: Identifiable {
+class PartyGame: Event {
 
     // MARK: - Static Properties
 
     static var wannabeId: String = "C2D4V"
+
+    // MARK: - Local Properties
+
+    var partyId: String = Partybox.value.none
+
+    var summary: String = Partybox.value.none
+
+    var instructions: String = Partybox.value.none
 
 }

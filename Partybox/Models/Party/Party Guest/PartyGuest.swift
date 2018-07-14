@@ -9,13 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class PartyGuest: Identifiable {
-
-    // MARK: - Remote Properties
-
-    var name: String = Partybox.value.none
-
-    var points: Int = Partybox.value.zero
+class PartyGuest: Person {
 
     // MARK: - Construction Functions
 

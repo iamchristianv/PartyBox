@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OrderedSet<Object: Identifiable> {
+class OrderedSet<Object: Identifiable>: Sequence {
 
     // MARK: - Local Properties
 
@@ -43,17 +43,6 @@ class OrderedSet<Object: Identifiable> {
         }
     }
 
-    func random() -> Object? {
-        if self.objects.count == 0 {
-            return nil
-        }
-
-        let randomIndex = Int(arc4random()) % self.objects.count
-        let randomObject = self.objects[randomIndex]
-
-        return randomObject
-    }
-
     subscript(index: Int) -> Object? {
         if index < 0 || index >= self.objects.count {
             return nil
@@ -72,9 +61,18 @@ class OrderedSet<Object: Identifiable> {
         return nil
     }
 
-}
+    func random() -> Object? {
+        if self.objects.count == 0 {
+            return nil
+        }
 
-extension OrderedSet: Sequence {
+        let randomIndex = Int(arc4random()) % self.objects.count
+        let randomObject = self.objects[randomIndex]
+
+        return randomObject
+    }
+
+    // MARK: - Sequence Functions
 
     func makeIterator() -> Array<Object>.Iterator {
         return self.objects.makeIterator()

@@ -14,8 +14,6 @@ class Wannabe: PartyGame {
     
     // MARK: - Remote Properties
 
-    var name: String = Partybox.value.none
-
     var actionId: String = Partybox.value.none
 
     var wannabeId: String = Partybox.value.none
@@ -23,16 +21,6 @@ class Wannabe: PartyGame {
     var players: OrderedSet<WannabePlayer> = OrderedSet<WannabePlayer>()
 
     var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
-
-    // MARK: - Local Properties
-
-    var partyId: String = Partybox.value.none
-
-    var userId: String = Partybox.value.none
-
-    var summary: String = Partybox.value.none
-
-    var instructions: String = Partybox.value.none
 
     // MARK: - Construction Functions
 

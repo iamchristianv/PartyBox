@@ -108,7 +108,7 @@ extension ChangePartyGameView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.delegate.changePartyGameView(self, gameChanged: selectableCell.value as! PartyGame)
+        self.delegate.changePartyGameView(self, gameChanged: selectableCell.value as! String)
     }
     
 }
@@ -155,8 +155,8 @@ extension ChangePartyGameView: UITableViewDataSource {
 
             if let wannabe = game as? Wannabe {
                 content = wannabe.name
-                selected = wannabe.id == self.dataSource.changePartyGameViewPartyGame().id
-                value = wannabe
+                selected = wannabe.id == self.dataSource.changePartyGameViewPartyGameId()
+                value = wannabe.id
             }
 
             selectableCell.configure(content: content, selected: selected, value: value)
