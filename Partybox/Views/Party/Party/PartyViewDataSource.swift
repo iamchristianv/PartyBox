@@ -14,13 +14,11 @@ protocol PartyViewDataSource {
 
     func partyViewPartyHostId() -> String
 
+    func partyViewPartyGame() -> PartyGame
+
     func partyViewPartyGuestsCount() -> Int
 
-    func partyViewPartyGuest(index: Int) -> PartyGuest?
-
-    func partyViewPartyGameName() -> String
-
-    func partyViewPartyGameSummary() -> String
+    func partyViewPartyGuest(index: Int) -> PartyGuest
 
     func partyViewPartyUserId() -> String
 

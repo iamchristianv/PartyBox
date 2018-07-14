@@ -398,6 +398,17 @@ class Party: Event {
             let name = Notification.Name(PartyNotification.guestRemoved.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
+
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyGame.wannabeId)"
+
+        Partybox.firebase.database.child(path).observe(.childAdded, with: {
+            (snapshot) in
+
+            self.game = Wannabe.construct(partyId: self.id)
+
+            let name = Notification.Name(PartyNotification.wannabeStarted.rawValue)
+            NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
+        })
     }
 
     private func stopObservingChanges() {
@@ -414,6 +425,10 @@ class Party: Event {
         Partybox.firebase.database.child(path).removeAllObservers()
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+
+        Partybox.firebase.database.child(path).removeAllObservers()
+
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyGame.wannabeId)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
     }

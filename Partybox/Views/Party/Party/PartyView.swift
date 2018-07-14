@@ -100,9 +100,7 @@ extension PartyView: UITableViewDelegate {
         
         let index = indexPath.row - PartyViewCellRow.partyGuestCells.rawValue
         
-        guard let guest = self.dataSource.partyViewPartyGuest(index: index) else {
-            return []
-        }
+        let guest = self.dataSource.partyViewPartyGuest(index: index)
         
         if guest.id == self.dataSource.partyViewPartyHostId() {
             return []
@@ -149,10 +147,12 @@ extension PartyView: UITableViewDataSource {
         }
 
         if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
+            let game = self.dataSource.partyViewPartyGame()
+
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
             let partyGameCell = tableViewCell as! PartyGameTableViewCell
-            let name = self.dataSource.partyViewPartyGameName()
-            let summary = self.dataSource.partyViewPartyGameSummary()
+            let name = game.name
+            let summary = game.summary
             let hasHostActions = self.dataSource.partyViewPartyUserId() == self.dataSource.partyViewPartyHostId()
             partyGameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
             self.playButton = partyGameCell.playButton
@@ -170,9 +170,7 @@ extension PartyView: UITableViewDataSource {
         if indexPath.row >= PartyViewCellRow.partyGuestCells.rawValue {
             let index = indexPath.row - PartyViewCellRow.partyGuestCells.rawValue
             
-            guard let guest = self.dataSource.partyViewPartyGuest(index: index) else {
-                return UITableViewCell()
-            }
+            let guest = self.dataSource.partyViewPartyGuest(index: index)
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGuestTableViewCell.identifier)
             let partyGuestCell = tableViewCell as! PartyGuestTableViewCell

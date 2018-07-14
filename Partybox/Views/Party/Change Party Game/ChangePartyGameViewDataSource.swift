@@ -14,6 +14,6 @@ protocol ChangePartyGameViewDataSource {
 
     func changePartyGameViewPartyGamesCount() -> Int
 
-    func changePartyGameViewPartyGame(index: Int) -> PartyGame?
+    func changePartyGameViewPartyGame(index: Int) -> PartyGame
 
 }

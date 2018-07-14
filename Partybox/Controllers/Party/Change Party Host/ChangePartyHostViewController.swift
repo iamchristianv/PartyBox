@@ -16,25 +16,28 @@ class ChangePartyHostViewController: UIViewController {
 
     private var party: Party!
 
-    // MARK: - View Properties
-    
-    private var contentView: ChangePartyHostView!
-
     // MARK: - Controller Properties
 
     private var partyHostId: String!
-    
+
     private var delegate: ChangePartyHostViewControllerDelegate!
+
+    // MARK: - View Properties
+    
+    private var contentView: ChangePartyHostView!
 
     // MARK: - Construction Functions
 
     static func construct(store: Store, party: Party, delegate: ChangePartyHostViewControllerDelegate) -> ChangePartyHostViewController {
         let controller = ChangePartyHostViewController()
+        // Model Properties
         controller.store = store
         controller.party = party
-        controller.contentView = ChangePartyHostView.construct(delegate: controller, dataSource: controller)
+        // Controller Properties
         controller.partyHostId = party.hostId
         controller.delegate = delegate
+        // View Properties
+        controller.contentView = ChangePartyHostView.construct(delegate: controller, dataSource: controller)
         return controller
     }
     
@@ -101,7 +104,7 @@ class ChangePartyHostViewController: UIViewController {
 
 extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 
-    func changePartyHostView(_ view: ChangePartyHostView, guestSelected guestId: String) {
+    func changePartyHostView(_ view: ChangePartyHostView, guestChanged guestId: String) {
         self.partyHostId = guestId
         self.contentView.reloadTable()
     }
@@ -124,15 +127,23 @@ extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 extension ChangePartyHostViewController: ChangePartyHostViewDataSource {
 
     func changePartyHostViewPartyHostId() -> String {
-        return self.partyHostId
+        guard let partyHostId = self.partyHostId else {
+            return Partybox.value.none
+        }
+
+        return partyHostId
     }
 
     func changePartyHostViewPartyGuestsCount() -> Int {
         return self.party.guests.count
     }
 
-    func changePartyHostViewPartyGuest(index: Int) -> PartyGuest? {
-        return self.party.guests[index]
+    func changePartyHostViewPartyGuest(index: Int) -> PartyGuest {
+        guard let guest = self.party.guests[index] else {
+            return PartyGuest()
+        }
+
+        return guest
     }
 
 }

@@ -262,7 +262,8 @@ class StartPartyView: UIView {
     
     // MARK: - View Functions
 
-    func partyNameHasErrors() -> Bool {
+    func needsUserInput() -> Bool {
+        // check party name text field for missing input
         if self.partyNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.partyNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.partyNameStatusLabel.text = "Required"
@@ -273,16 +274,16 @@ class StartPartyView: UIView {
         self.partyNameUnderlineLabel.backgroundColor = Partybox.color.black
         self.partyNameStatusLabel.text = " "
         self.partyNameStatusLabel.isHidden = true
-        return false
-    }
 
-    func userNameHasErrors() -> Bool {
+        // check user name text field for missing input
         if self.userNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.userNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.userNameStatusLabel.text = "Required"
             self.userNameStatusLabel.isHidden = false
             return true
-        } else if !self.userNameTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
+        }
+
+        if !self.userNameTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.userNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.userNameStatusLabel.text = "No spaces or special characters"
             self.userNameStatusLabel.isHidden = false
@@ -292,6 +293,7 @@ class StartPartyView: UIView {
         self.userNameUnderlineLabel.backgroundColor = Partybox.color.black
         self.userNameStatusLabel.text = " "
         self.userNameStatusLabel.isHidden = true
+
         return false
     }
 
@@ -313,7 +315,9 @@ extension StartPartyView: UITextFieldDelegate {
         if textField == self.partyNameTextField && characterCount <= self.partyNameMaxCharacterCount {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount - characterCount)"
             return true
-        } else if textField == self.userNameTextField && characterCount <= self.userNameMaxCharacterCount {
+        }
+
+        if textField == self.userNameTextField && characterCount <= self.userNameMaxCharacterCount {
             self.userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount - characterCount)"
             return true
         }
@@ -324,7 +328,9 @@ extension StartPartyView: UITextFieldDelegate {
     internal func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.partyNameTextField {
             self.partyNameCharacterCountLabel.text = "\(self.partyNameMaxCharacterCount)"
-        } else if textField == self.userNameTextField {
+        }
+
+        if textField == self.userNameTextField {
             self.userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
         }
 

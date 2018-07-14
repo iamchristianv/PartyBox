@@ -142,7 +142,7 @@ class MenuView: UIView {
             make.width.equalTo(220)
             make.height.equalTo(55)
             make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self.startPartyButton.snp.bottom).offset(20)
+            make.top.equalTo(self.startPartyButton.snp.bottom).offset(30)
         })
 
         self.moreButton.snp.remakeConstraints({

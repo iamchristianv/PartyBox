@@ -143,9 +143,7 @@ extension ChangePartyGameView: UITableViewDataSource {
         if indexPath.row >= ChangePartyGameViewCellRow.partyGameCells.rawValue {
             let index = indexPath.row - ChangePartyGameViewCellRow.partyGameCells.rawValue
 
-            guard let game = self.dataSource.changePartyGameViewPartyGame(index: index) else {
-                return UITableViewCell()
-            }
+            let game = self.dataSource.changePartyGameViewPartyGame(index: index)
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell

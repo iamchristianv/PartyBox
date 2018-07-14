@@ -16,10 +16,6 @@ class ManagePartyViewController: UIViewController {
 
     private var party: Party!
 
-    // MARK: - View Properties
-    
-    private var contentView: ManagePartyView!
-
     // MARK: - Controller Properties
 
     private var partyName: String!
@@ -28,16 +24,23 @@ class ManagePartyViewController: UIViewController {
 
     private var delegate: ManagePartyViewControllerDelegate!
 
+    // MARK: - View Properties
+    
+    private var contentView: ManagePartyView!
+
     // MARK: - Construction Functions
 
     static func construct(store: Store, party: Party, delegate: ManagePartyViewControllerDelegate) -> ManagePartyViewController {
         let controller = ManagePartyViewController()
+        // Model Properties
         controller.store = store
         controller.party = party
-        controller.contentView = ManagePartyView.construct(delegate: controller, dataSource: controller)
+        // Controller Properties
         controller.partyName = party.name
         controller.partyHostId = party.hostId
         controller.delegate = delegate
+        // View Properties
+        controller.contentView = ManagePartyView.construct(delegate: controller, dataSource: controller)
         return controller
     }
     
@@ -63,7 +66,7 @@ class ManagePartyViewController: UIViewController {
         self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
 
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
     
     @objc private func cancelButtonPressed() {
         self.dismiss(animated: true, completion: nil)
@@ -80,9 +83,7 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
     }
     
     internal func managePartyView(_ view: ManagePartyView, saveButtonPressed: Bool) {
-        let partyNameHasErrors = self.contentView.partyNameHasErrors()
-
-        if partyNameHasErrors {
+        if self.contentView.needsUserInput() {
             return
         }
 
@@ -113,11 +114,15 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 extension ManagePartyViewController: ManagePartyViewDataSource {
 
     internal func managePartyViewPartyName() -> String {
-        return self.partyName
+        guard let partyName = self.partyName else {
+            return Partybox.value.none
+        }
+
+        return partyName
     }
 
     internal func managePartyViewPartyHostName() -> String {
-        guard let guest = self.party.guests[self.partyHostId] else {
+        guard let partyHostId = self.partyHostId, let guest = self.party.guests[partyHostId] else {
             return Partybox.value.none
         }
 

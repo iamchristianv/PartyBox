@@ -24,8 +24,10 @@ class StartPartyViewController: UIViewController {
 
     static func construct(store: Store) -> StartPartyViewController {
         let controller = StartPartyViewController()
+        // Model Properties
         controller.store = store
         controller.party = nil
+        // View Properties
         controller.contentView = StartPartyView.construct(delegate: controller)
         return controller
     }
@@ -63,10 +65,7 @@ class StartPartyViewController: UIViewController {
 extension StartPartyViewController: StartPartyViewDelegate {
 
     internal func startPartyView(_ view: StartPartyView, startButtonPressed: Bool) {
-        let partyNameHasErrors = self.contentView.partyNameHasErrors()
-        let userNameHasErrors = self.contentView.userNameHasErrors()
-
-        if partyNameHasErrors || userNameHasErrors {
+        if self.contentView.needsUserInput() {
             return
         }
 

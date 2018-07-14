@@ -24,8 +24,10 @@ class JoinPartyViewController: UIViewController {
 
     static func construct(store: Store) -> JoinPartyViewController {
         let controller = JoinPartyViewController()
+        // Model Properties
         controller.store = store
         controller.party = nil
+        // View Properties
         controller.contentView = JoinPartyView.construct(delegate: controller)
         return controller
     }
@@ -63,10 +65,7 @@ class JoinPartyViewController: UIViewController {
 extension JoinPartyViewController: JoinPartyViewDelegate {
 
     internal func joinPartyView(_ view: JoinPartyView, joinButtonPressed: Bool) {
-        let partyIdHasErrors = self.contentView.partyIdHasErrors()
-        let userNameHasErrors = self.contentView.userNameHasErrors()
-
-        if partyIdHasErrors || userNameHasErrors {
+        if self.contentView.needsUserInput() {
             return
         }
 

@@ -223,7 +223,8 @@ class ManagePartyView: UIView {
     
     // MARK: - View Functions
 
-    func partyNameHasErrors() -> Bool {
+    func needsUserInput() -> Bool {
+        // check party name text field for missing input
         if self.partyNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.partyNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.partyNameStatusLabel.text = "Required"
@@ -234,11 +235,8 @@ class ManagePartyView: UIView {
         self.partyNameUnderlineLabel.backgroundColor = Partybox.color.black
         self.partyNameStatusLabel.text = " "
         self.partyNameStatusLabel.isHidden = true
-        return false
-    }
 
-    func setPartyName(_ partyName: String) {
-        self.partyNameTextField.text = partyName
+        return false
     }
 
     func partyName() -> String {

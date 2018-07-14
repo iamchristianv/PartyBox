@@ -22,4 +22,6 @@ enum PartyNotification: String {
 
     case guestRemoved = "PartyNotification/guestRemoved"
 
+    case wannabeStarted = "PartyNotification/wannabeStarted"
+
 }

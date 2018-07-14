@@ -16,10 +16,6 @@ class MenuViewController: UIViewController {
 
     private var store: Store!
 
-    // MARK: - View Properties
-    
-    private var contentView: MenuView!
-
     // MARK: - Controller Properties
 
     private var authenticationHandle: AuthStateDidChangeListenerHandle!
@@ -28,15 +24,22 @@ class MenuViewController: UIViewController {
     
     private var confettiTimer: Timer!
 
+    // MARK: - View Properties
+
+    private var contentView: MenuView!
+
     // MARK: - Construction Functions
 
     static func construct() -> MenuViewController {
         let controller = MenuViewController()
+        // Model Properties
         controller.store = Store.construct()
-        controller.contentView = MenuView.construct(delegate: controller)
+        // Controller Properties
         controller.authenticationHandle = nil
         controller.motionManager = CMMotionManager()
         controller.confettiTimer = nil
+        // View Properties
+        controller.contentView = MenuView.construct(delegate: controller)
         return controller
     }
     

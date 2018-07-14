@@ -16,25 +16,28 @@ class ChangePartyGameViewController: UIViewController {
 
     private var party: Party!
 
-    // MARK: - View Properties
-    
-    private var contentView: ChangePartyGameView!
-
     // MARK: - Controller Properties
 
     private var partyGameId: String!
 
     private var delegate: ChangePartyGameViewControllerDelegate!
 
+    // MARK: - View Properties
+    
+    private var contentView: ChangePartyGameView!
+
     // MARK: - Construction Functions
 
     static func construct(store: Store, party: Party, delegate: ChangePartyGameViewControllerDelegate) -> ChangePartyGameViewController {
         let controller = ChangePartyGameViewController()
+        // Model Properties
         controller.store = store
         controller.party = party
-        controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
+        // Controller Properties
         controller.partyGameId = party.gameId
         controller.delegate = delegate
+        // View Properties
+        controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
         return controller
     }
     
@@ -60,7 +63,7 @@ class ChangePartyGameViewController: UIViewController {
         self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
     
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
     
     @objc private func cancelButtonPressed() {
         self.dismiss(animated: true, completion: nil)
@@ -76,36 +79,24 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
     }
 
     func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool) {
-        if self.partyGameId == self.party.gameId {
-            let subject = "Woah there"
-            let message = "Please select a new game"
-            let action = "Okay"
-            self.showAlert(subject: subject, message: message, action: action, handler: nil)
-            return
-        }
-
         self.contentView.startAnimatingSaveButton()
 
-        if self.partyGameId == PartyGame.wannabeId {
-            let wannabe = Wannabe.construct(partyId: self.party.id)
+        self.party.change(gameId: self.partyGameId, callback: {
+            (error) in
 
-            wannabe.start(callback: {
-                (error) in
+            self.contentView.stopAnimatingSaveButton()
 
-                self.contentView.stopAnimatingSaveButton()
+            if let error = error {
+                let subject = "Oh no"
+                let message = error
+                let action = "Okay"
+                self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                return
+            }
 
-                if let error = error {
-                    let subject = "Oh no"
-                    let message = error
-                    let action = "Okay"
-                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
-                    return
-                }
-
-                self.delegate.changePartyGameViewController(self, gameChanged: true)
-                self.dismiss(animated: true, completion: nil)
-            })
-        }
+            self.delegate.changePartyGameViewController(self, gameChanged: true)
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
 }
@@ -113,15 +104,23 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 extension ChangePartyGameViewController: ChangePartyGameViewDataSource {
 
     func changePartyGameViewPartyGameId() -> String {
-        return self.partyGameId
+        guard let partyGameId = self.partyGameId else {
+            return Partybox.value.none
+        }
+
+        return partyGameId
     }
 
     func changePartyGameViewPartyGamesCount() -> Int {
         return Partybox.collection.games.count
     }
 
-    func changePartyGameViewPartyGame(index: Int) -> PartyGame? {
-        return Partybox.collection.games[self.partyGameId]
+    func changePartyGameViewPartyGame(index: Int) -> PartyGame {
+        guard let partyGameId = self.partyGameId, let game = Partybox.collection.games[partyGameId] else {
+            return PartyGame()
+        }
+
+        return game
     }
 
 }

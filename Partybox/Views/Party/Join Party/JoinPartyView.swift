@@ -261,14 +261,17 @@ class JoinPartyView: UIView {
     }
     
     // MARK: - View Functions
-    
-    func partyIdHasErrors() -> Bool {
+
+    func needsUserInput() -> Bool {
+        // check party id text field for missing input
         if self.partyIdTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.partyIdUnderlineLabel.backgroundColor = Partybox.color.red
             self.partyIdStatusLabel.text = "Required"
             self.partyIdStatusLabel.isHidden = false
             return true
-        } else if !self.partyIdTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
+        }
+
+        if !self.partyIdTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.partyIdUnderlineLabel.backgroundColor = Partybox.color.red
             self.partyIdStatusLabel.text = "No spaces or special characters"
             self.partyIdStatusLabel.isHidden = false
@@ -278,16 +281,16 @@ class JoinPartyView: UIView {
         self.partyIdUnderlineLabel.backgroundColor = Partybox.color.black
         self.partyIdStatusLabel.text = " "
         self.partyIdStatusLabel.isHidden = true
-        return false
-    }
 
-    func userNameHasErrors() -> Bool {
+        // check user name text field for missing input
         if self.userNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty {
             self.userNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.userNameStatusLabel.text = "Required"
             self.userNameStatusLabel.isHidden = false
             return true
-        } else if !self.userNameTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
+        }
+
+        if !self.userNameTextField.text!.trimmingCharacters(in: .alphanumerics).isEmpty {
             self.userNameUnderlineLabel.backgroundColor = Partybox.color.red
             self.userNameStatusLabel.text = "No spaces or special characters"
             self.userNameStatusLabel.isHidden = false
@@ -297,6 +300,7 @@ class JoinPartyView: UIView {
         self.userNameUnderlineLabel.backgroundColor = Partybox.color.black
         self.userNameStatusLabel.text = " "
         self.userNameStatusLabel.isHidden = true
+
         return false
     }
 
@@ -318,7 +322,9 @@ extension JoinPartyView: UITextFieldDelegate {
         if textField == self.partyIdTextField && characterCount <= self.partyIdMaxCharacterCount {
             self.partyIdCharacterCountLabel.text = "\(self.partyIdMaxCharacterCount - characterCount)"
             return true
-        } else if textField == self.userNameTextField && characterCount <= self.userNameMaxCharacterCount {
+        }
+
+        if textField == self.userNameTextField && characterCount <= self.userNameMaxCharacterCount {
             self.userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount - characterCount)"
             return true
         }
@@ -329,7 +335,9 @@ extension JoinPartyView: UITextFieldDelegate {
     internal func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if textField == self.partyIdTextField {
             self.partyIdCharacterCountLabel.text = "\(self.partyIdMaxCharacterCount)"
-        } else if textField == self.userNameTextField {
+        }
+
+        if textField == self.userNameTextField {
             self.userNameCharacterCountLabel.text = "\(self.userNameMaxCharacterCount)"
         }
 

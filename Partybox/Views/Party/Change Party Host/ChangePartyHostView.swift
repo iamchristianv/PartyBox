@@ -98,7 +98,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.delegate.changePartyHostView(self, guestSelected: selectableCell.value as! String)
+        self.delegate.changePartyHostView(self, guestChanged: selectableCell.value as! String)
     }
     
 }
@@ -133,9 +133,7 @@ extension ChangePartyHostView: UITableViewDataSource {
         if indexPath.row >= ChangePartyHostViewCellRow.partyGuestCells.rawValue {
             let index = indexPath.row - ChangePartyHostViewCellRow.partyGuestCells.rawValue
             
-            guard let guest = self.dataSource.changePartyHostViewPartyGuest(index: index) else {
-                return UITableViewCell()
-            }
+            let guest = self.dataSource.changePartyHostViewPartyGuest(index: index)
             
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
