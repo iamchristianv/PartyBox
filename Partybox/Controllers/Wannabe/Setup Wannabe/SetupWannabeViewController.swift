@@ -76,7 +76,7 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
     }
 
     func setupWannabeView(_ view: SetupWannabeView, saveButtonPressed: Bool) {
-        self.store.fetchCards(gameId: self.party.gameId, packId: self.gamePackId, callback: {
+        self.store.fetchCards(gameId: PartyGame.wannabeId, packId: self.gamePackId, callback: {
             (error) in
 
             if let error = error {
@@ -89,9 +89,24 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
 
             self.party.game = Wannabe.construct(partyId: self.party.id)
 
+            guard let user = self.party.guests[self.party.userId] else {
+                return
+            }
 
-            let viewController = StartWannabeViewController.construct(store: self.store, party: self.party)
-            self.show(viewController, sender: nil)
+            self.party.wannabe.start(name: user.name, callback: {
+                (error) in
+
+                if let error = error {
+                    let subject = "Oh no"
+                    let message = error
+                    let action = "Okay"
+                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                    return
+                }
+
+                let viewController = StartWannabeViewController.construct(store: self.store, party: self.party)
+                self.show(viewController, sender: nil)
+            })
         })
     }
 

@@ -26,16 +26,21 @@ class Wannabe: PartyGame {
 
     static func construct(partyId: String) -> Wannabe {
         let wannabe = Wannabe()
+        // Identifiable Properties
         wannabe.id = PartyGame.wannabeId
+        // Event Properties
         wannabe.name = "Wannabe"
+        wannabe.timestamp = Partybox.value.zero
+        wannabe.userId = Partybox.value.none
+        // Party Game Properties
+        wannabe.partyId = partyId
+        wannabe.summary = "Wannabe Summary"
+        wannabe.instructions = "Wannabe Instructions"
+        // Wannabe Properties
         wannabe.actionId = Partybox.value.none
         wannabe.wannabeId = Partybox.value.none
         wannabe.players = OrderedSet<WannabePlayer>()
         wannabe.cards = OrderedSet<WannabeCard>()
-        wannabe.partyId = partyId
-        wannabe.userId = Partybox.value.none
-        wannabe.summary = "Wannabe Summary"
-        wannabe.instructions = "Wannabe Instructions"
         return wannabe
     }
 
@@ -49,6 +54,10 @@ class Wannabe: PartyGame {
 
             if key == WannabeKey.name.rawValue {
                 self.name = value.stringValue
+            }
+
+            if key == WannabeKey.timestamp.rawValue {
+                self.timestamp = value.intValue
             }
 
             if key == WannabeKey.actionId.rawValue {
@@ -77,7 +86,7 @@ class Wannabe: PartyGame {
     
     // MARK: - Wannabe Functions
 
-    func start(callback: @escaping (_ error: String?) -> Void) {
+    func start(name: String, callback: @escaping (_ error: String?) -> Void) {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
@@ -88,11 +97,28 @@ class Wannabe: PartyGame {
                 return
             }
 
+            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+
+            let id = Partybox.firebase.database.child(path).childByAutoId().key
+
+            self.userId = id
+
+            let player = WannabePlayer.construct(id: id, name: name)
+
             let values = [
                 WannabeKey.id.rawValue: self.id,
                 WannabeKey.name.rawValue: self.name,
+                WannabeKey.timestamp.rawValue: ServerValue.timestamp(),
                 WannabeKey.actionId.rawValue: self.actionId,
-                WannabeKey.wannabeId.rawValue: self.wannabeId
+                WannabeKey.wannabeId.rawValue: self.wannabeId,
+                WannabeKey.players.rawValue: [
+                    player.id: [
+                        WannabePlayerKey.id.rawValue: player.id,
+                        WannabePlayerKey.name.rawValue: player.name,
+                        WannabePlayerKey.voteId.rawValue: player.voteId,
+                        WannabePlayerKey.points.rawValue: player.points
+                    ]
+                ]
             ] as [String: Any]
 
             path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
@@ -105,12 +131,16 @@ class Wannabe: PartyGame {
                     return
                 }
 
+                self.startObservingChanges()
+
                 callback(nil)
             })
         })
     }
 
     func end(callback: @escaping (_ error: String?) -> Void) {
+        self.stopObservingChanges()
+
         let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
         Partybox.firebase.database.child(path).removeValue(completionBlock: {
@@ -127,7 +157,7 @@ class Wannabe: PartyGame {
             (snapshot) in
 
             if !snapshot.exists() {
-                callback("We couldn't find a game with your invite code\n\nPlease try again")
+                callback("We couldn't find the game\n\nPlease try again")
                 return
             }
 
