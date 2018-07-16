@@ -11,7 +11,6 @@
 		AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F9C9F205CBE87005EF3EB /* Countdown.swift */; };
 		AA1A8B9420CA1DEF00096B6D /* StartWannabeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A8B9320CA1DEF00096B6D /* StartWannabeView.swift */; };
 		AA1A8B9620CA1DFC00096B6D /* StartWannabeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A8B9520CA1DFC00096B6D /* StartWannabeViewController.swift */; };
-		AA1A8B9820CA21B500096B6D /* StartWannabeViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A8B9720CA21B500096B6D /* StartWannabeViewDataSource.swift */; };
 		AA1A8B9A20CA236F00096B6D /* StartWannabeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A8B9920CA236F00096B6D /* StartWannabeViewDelegate.swift */; };
 		AA1CEE9A20BBD074008AE617 /* ChangePartyGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9920BBD074008AE617 /* ChangePartyGameView.swift */; };
 		AA1CEE9C20BBD07E008AE617 /* ChangePartyGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEE9B20BBD07E008AE617 /* ChangePartyGameViewController.swift */; };
@@ -36,6 +35,7 @@
 		AA2FF6BF20F4558000833D2B /* PartyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6BE20F4558000833D2B /* PartyGame.swift */; };
 		AA2FF6C920F9C4CE00833D2B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6C820F9C4CE00833D2B /* Event.swift */; };
 		AA2FF6CB20F9C74300833D2B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6CA20F9C74300833D2B /* Person.swift */; };
+		AA2FF6CE20FC305100833D2B /* Pack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6CD20FC305100833D2B /* Pack.swift */; };
 		AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Wannabe.swift */; };
 		AA5E89EB20A13C3A00FE8960 /* PartyNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89EA20A13C3A00FE8960 /* PartyNotification.swift */; };
 		AA5E89EF20A13D3800FE8960 /* PartyKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89EE20A13D3800FE8960 /* PartyKey.swift */; };
@@ -102,7 +102,6 @@
 		AA0F9C9F205CBE87005EF3EB /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
 		AA1A8B9320CA1DEF00096B6D /* StartWannabeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeView.swift; sourceTree = "<group>"; };
 		AA1A8B9520CA1DFC00096B6D /* StartWannabeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeViewController.swift; sourceTree = "<group>"; };
-		AA1A8B9720CA21B500096B6D /* StartWannabeViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeViewDataSource.swift; sourceTree = "<group>"; };
 		AA1A8B9920CA236F00096B6D /* StartWannabeViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWannabeViewDelegate.swift; sourceTree = "<group>"; };
 		AA1CEE9920BBD074008AE617 /* ChangePartyGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePartyGameView.swift; sourceTree = "<group>"; };
 		AA1CEE9B20BBD07E008AE617 /* ChangePartyGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePartyGameViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +126,7 @@
 		AA2FF6BE20F4558000833D2B /* PartyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyGame.swift; sourceTree = "<group>"; };
 		AA2FF6C820F9C4CE00833D2B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		AA2FF6CA20F9C74300833D2B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		AA2FF6CD20FC305100833D2B /* Pack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pack.swift; sourceTree = "<group>"; };
 		AA590FF91FC26FBB008988E9 /* Wannabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wannabe.swift; sourceTree = "<group>"; };
 		AA5E89EA20A13C3A00FE8960 /* PartyNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyNotification.swift; sourceTree = "<group>"; };
 		AA5E89EE20A13D3800FE8960 /* PartyKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyKey.swift; sourceTree = "<group>"; };
@@ -224,7 +224,6 @@
 			children = (
 				AA1A8B9320CA1DEF00096B6D /* StartWannabeView.swift */,
 				AA1A8B9920CA236F00096B6D /* StartWannabeViewDelegate.swift */,
-				AA1A8B9720CA21B500096B6D /* StartWannabeViewDataSource.swift */,
 			);
 			path = "Start Wannabe";
 			sourceTree = "<group>";
@@ -300,6 +299,7 @@
 			children = (
 				AA2FF6C620F9C4BD00833D2B /* Event */,
 				AA2FF6C720F9C4C100833D2B /* Person */,
+				AA2FF6CC20FC304600833D2B /* Pack */,
 				AA5E8A1B20A2B5F400FE8960 /* Ordered Set */,
 				AAF81281208BD03B0010FFB1 /* Countdown */,
 			);
@@ -430,6 +430,14 @@
 				AA2FF6CA20F9C74300833D2B /* Person.swift */,
 			);
 			path = Person;
+			sourceTree = "<group>";
+		};
+		AA2FF6CC20FC304600833D2B /* Pack */ = {
+			isa = PBXGroup;
+			children = (
+				AA2FF6CD20FC305100833D2B /* Pack.swift */,
+			);
+			path = Pack;
 			sourceTree = "<group>";
 		};
 		AA5E89F020A13D4A00FE8960 /* Party Guest */ = {
@@ -974,6 +982,7 @@
 				AA5E8A3820A7ED0C00FE8960 /* PartyViewDataSource.swift in Sources */,
 				AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */,
 				AAF8129D20924EB80010FFB1 /* ActivityIndicatorButton.swift in Sources */,
+				AA2FF6CE20FC305100833D2B /* Pack.swift in Sources */,
 				AAF6D7F71FDC8D4700014CA0 /* PartyGuest.swift in Sources */,
 				AADD9C82205508DB00CA5AC8 /* Alert.swift in Sources */,
 				AA5E8A6320A9167A00FE8960 /* PromptTableViewCell.swift in Sources */,
@@ -1019,7 +1028,6 @@
 				AA0F9CA0205CBE87005EF3EB /* Countdown.swift in Sources */,
 				AA1CEE9C20BBD07E008AE617 /* ChangePartyGameViewController.swift in Sources */,
 				AAF812932092406E0010FFB1 /* UIButton+Extension.swift in Sources */,
-				AA1A8B9820CA21B500096B6D /* StartWannabeViewDataSource.swift in Sources */,
 				AA1CEEC920C0DE52008AE617 /* SetupWannabeViewController.swift in Sources */,
 				AA2A87A9209A95A3009C55BF /* PartyView.swift in Sources */,
 				AA5E8A0E20A15E2900FE8960 /* WannabeNotification.swift in Sources */,

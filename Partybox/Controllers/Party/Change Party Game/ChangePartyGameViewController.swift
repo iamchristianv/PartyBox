@@ -73,7 +73,7 @@ class ChangePartyGameViewController: UIViewController {
 
 extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 
-    func changePartyGameView(_ view: ChangePartyGameView, gameChanged gameId: String) {
+    func changePartyGameView(_ view: ChangePartyGameView, gameSelected gameId: String) {
         self.party.gameId = gameId
         self.contentView.reloadTable()
     }

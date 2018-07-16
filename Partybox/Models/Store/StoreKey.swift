@@ -10,7 +10,7 @@ import Foundation
 
 enum StoreKey: String {
 
-    case names
+    case titles
 
     case cards
 

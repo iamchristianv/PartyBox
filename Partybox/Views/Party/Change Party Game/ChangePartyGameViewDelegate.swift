@@ -10,7 +10,7 @@ import Foundation
 
 protocol ChangePartyGameViewDelegate {
 
-    func changePartyGameView(_ view: ChangePartyGameView, gameChanged gameId: String)
+    func changePartyGameView(_ view: ChangePartyGameView, gameSelected gameId: String)
 
     func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool)
 

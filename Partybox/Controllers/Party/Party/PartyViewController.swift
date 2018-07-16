@@ -196,7 +196,7 @@ extension PartyViewController: PartyViewDelegate {
     internal func partyView(_ view: PartyView, playButtonPressed: Bool) {
         self.contentView.startAnimatingPlayButton()
 
-        self.store.fetchNames(gameId: self.party.gameId, callback: {
+        self.store.fetchTitles(gameId: self.party.gameId, callback: {
             (error) in
 
             self.contentView.stopAnimatingPlayButton()

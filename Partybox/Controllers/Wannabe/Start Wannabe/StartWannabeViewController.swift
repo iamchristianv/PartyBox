@@ -24,9 +24,11 @@ class StartWannabeViewController: UIViewController {
 
     static func construct(store: Store, party: Party) -> StartWannabeViewController {
         let controller = StartWannabeViewController()
+        // Model Properties
         controller.store = store
         controller.party = party
-        controller.contentView = StartWannabeView.construct(delegate: controller, dataSource: controller)
+        // View Properties
+        controller.contentView = StartWannabeView.construct(delegate: controller)
         return controller
     }
 
@@ -52,7 +54,7 @@ class StartWannabeViewController: UIViewController {
         self.setNavigationBarBackgroundColor(Partybox.color.green)
     }
 
-    // MARK: - Action Functions
+    // MARK: - Navigation Bar Functions
 
     @objc private func cancelButtonPressed() {
         self.dismiss(animated: true, completion: nil)
@@ -64,20 +66,7 @@ extension StartWannabeViewController: StartWannabeViewDelegate {
 
     func startWannabeView(_ view: StartWannabeView, readyButtonPressed: Bool) {
         self.contentView.startAnimatingReadyButton()
-    }
 
-}
-
-extension StartWannabeViewController: StartWannabeViewDataSource {
-
-    func startWannabeViewGameName() -> String {
-        let wannabe = self.party.game as! Wannabe
-        return wannabe.name
-    }
-
-    func startWannabeViewGameInstructions() -> String {
-        let wannabe = self.party.game as! Wannabe
-        return wannabe.instructions
     }
 
 }

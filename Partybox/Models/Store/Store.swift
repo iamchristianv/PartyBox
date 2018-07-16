@@ -38,12 +38,12 @@ class Store {
 
     // MARK: - Pack Functions
 
-    func fetchNames(gameId: String, callback: @escaping (_ error: String?) -> Void) {
+    func fetchTitles(gameId: String, callback: @escaping (_ error: String?) -> Void) {
         if gameId == PartyGame.wannabeId && self.wannabePacks.count != 0 {
             callback(nil)
         }
 
-        let path = "\(PartyboxKey.store.rawValue)/\(gameId)/\(StoreKey.names.rawValue)"
+        let path = "\(PartyboxKey.store.rawValue)/\(gameId)/\(StoreKey.titles.rawValue)"
 
         Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in

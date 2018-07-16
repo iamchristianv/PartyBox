@@ -108,7 +108,7 @@ extension ChangePartyGameView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.delegate.changePartyGameView(self, gameChanged: selectableCell.value as! String)
+        self.delegate.changePartyGameView(self, gameSelected: selectableCell.value as! String)
     }
     
 }

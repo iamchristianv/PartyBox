@@ -98,7 +98,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.delegate.changePartyHostView(self, guestChanged: selectableCell.value as! String)
+        self.delegate.changePartyHostView(self, guestSelected: selectableCell.value as! String)
     }
     
 }

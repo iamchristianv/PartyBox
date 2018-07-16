@@ -10,13 +10,9 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-class WannabePack: Identifiable {
+class WannabePack: Pack {
 
     // MARK: - Remote Properties
-
-    var name: String = Partybox.value.none
-
-    var summary: String = Partybox.value.none
 
     var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
 

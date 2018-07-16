@@ -104,7 +104,7 @@ class ChangePartyHostViewController: UIViewController {
 
 extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 
-    func changePartyHostView(_ view: ChangePartyHostView, guestChanged guestId: String) {
+    func changePartyHostView(_ view: ChangePartyHostView, guestSelected guestId: String) {
         self.partyHostId = guestId
         self.contentView.reloadTable()
     }

@@ -14,6 +14,6 @@ protocol SetupWannabeViewDataSource {
 
     func setupWannabeViewGamePacksCount() -> Int
 
-    func setupWannabeViewGamePack(index: Int) -> WannabePack?
+    func setupWannabeViewGamePack(index: Int) -> WannabePack
 
 }

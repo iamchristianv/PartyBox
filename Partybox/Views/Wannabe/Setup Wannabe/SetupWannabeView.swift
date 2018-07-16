@@ -133,9 +133,7 @@ extension SetupWannabeView: UITableViewDataSource {
         if indexPath.row >= SetupWannabeViewCellRow.wannabePackCells.rawValue {
             let index = indexPath.row - SetupWannabeViewCellRow.wannabePackCells.rawValue
 
-            guard let pack = self.dataSource.setupWannabeViewGamePack(index: index) else {
-                return UITableViewCell()
-            }
+            let pack = self.dataSource.setupWannabeViewGamePack(index: index)
 
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell

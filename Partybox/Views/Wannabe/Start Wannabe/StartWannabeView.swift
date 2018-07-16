@@ -14,7 +14,7 @@ class StartWannabeView: UIView {
 
     private lazy var gameNameLabel: UILabel = {
         let gameNameLabel = UILabel()
-        gameNameLabel.text = self.dataSource.startWannabeViewGameName()
+        gameNameLabel.text = Wannabe.construct(partyId: Partybox.value.none).name
         gameNameLabel.font = Partybox.font.avenirNextRegular(size: 28)
         gameNameLabel.textColor = Partybox.color.black
         gameNameLabel.textAlignment = .center
@@ -23,7 +23,7 @@ class StartWannabeView: UIView {
 
     private lazy var gameInstructionsLabel: UILabel = {
         let gameInstructionsLabel = UILabel()
-        gameInstructionsLabel.text = self.dataSource.startWannabeViewGameInstructions()
+        gameInstructionsLabel.text = Wannabe.construct(partyId: Partybox.value.none).instructions
         gameInstructionsLabel.font = Partybox.font.avenirNextRegular(size: 20)
         gameInstructionsLabel.textColor = Partybox.color.black
         gameInstructionsLabel.textAlignment = .center
@@ -53,14 +53,11 @@ class StartWannabeView: UIView {
 
     private var delegate: StartWannabeViewDelegate!
 
-    private var dataSource: StartWannabeViewDataSource!
-
     // MARK: - Construction Functions
 
-    static func construct(delegate: StartWannabeViewDelegate, dataSource: StartWannabeViewDataSource) -> StartWannabeView {
+    static func construct(delegate: StartWannabeViewDelegate) -> StartWannabeView {
         let view = StartWannabeView()
         view.delegate = delegate
-        view.dataSource = dataSource
         view.setupView()
         return view
     }

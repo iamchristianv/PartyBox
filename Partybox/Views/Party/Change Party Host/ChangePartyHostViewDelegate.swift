@@ -10,7 +10,7 @@ import Foundation
 
 protocol ChangePartyHostViewDelegate {
 
-    func changePartyHostView(_ view: ChangePartyHostView, guestChanged guestId: String)
+    func changePartyHostView(_ view: ChangePartyHostView, guestSelected guestId: String)
 
     func changePartyHostView(_ view: ChangePartyHostView, saveButtonPressed: Bool)
 
