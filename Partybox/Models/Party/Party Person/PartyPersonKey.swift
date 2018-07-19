@@ -1,5 +1,5 @@
 //
-//  PartyGuestKey.swift
+//  PartyPersonKey.swift
 //  Partybox
 //
 //  Created by Christian Villa on 5/7/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PartyGuestKey: String {
+enum PartyPersonKey: String {
 
     case id
 

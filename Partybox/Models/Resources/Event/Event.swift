@@ -8,16 +8,32 @@
 
 import Foundation
 
-class Event: Identifiable {
+protocol Event: Identifiable, Nameable {
 
-    // MARK: - Remote Properties
+    // MARK: - Properties
 
-    var name: String = Partybox.value.none
+    associatedtype PersonType where PersonType: Person
 
-    var timestamp: Int = Partybox.value.zero
+    var persons: OrderedSet<PersonType> { get set }
 
-    // MARK: - Local Properties
+    var userId: String { get set }
 
-    var userId: String = Partybox.value.none
+    var timestamp: Int { get set }
+
+    // MARK: - Functions
+
+    func start(callback: @escaping (String?) -> Void)
+
+    func end(callback: @escaping (String?) -> Void)
+
+    func invite(name: String)
+
+    func enter(callback: @escaping (String?) -> Void)
+
+    func exit(callback: @escaping (String?) -> Void)
+
+    func listen()
+
+    func ignore()
 
 }

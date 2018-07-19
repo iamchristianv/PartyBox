@@ -10,57 +10,144 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-class Party: Event {
+struct Party: Event {
 
-    // MARK: - Remote Properties
+    // MARK: - Properties
 
-    var hostId: String = Partybox.value.none
+    typealias PersonType = PartyPerson
 
-    var gameId: String = Partybox.value.none
+    var id: String
 
-    var guests: OrderedSet<PartyGuest> = OrderedSet<PartyGuest>()
+    var name: String
 
-    var game: PartyGame = PartyGame()
+    var hostId: String
 
-    // MARK: - Local Properties
+    var userId: String
 
-    var wannabe: Wannabe {
-        return self.game as! Wannabe
+    var gameId: String
+
+    var persons: OrderedSet<PartyPerson>
+
+    var timestamp: Int
+
+    var wannabe: Wannabe!
+
+    // MARK: - Initialization Functions
+
+    init(name: String) {
+        self.id = Party.randomPartyId()
+        self.name = name
+        self.hostId = Partybox.value.none
+        self.userId = Partybox.value.none
+        self.gameId = Partybox.value.none
+        self.persons = OrderedSet<PartyPerson>()
+        self.timestamp = Partybox.value.zero
+        self.wannabe = nil
     }
 
-    // MARK: - Construction Functions
-
-    static func construct(name: String) -> Party {
-        let party = Party()
-        // Identifiable Properties
-        party.id = Party.randomPartyId()
-        // Event Properties
-        party.name = name
-        party.timestamp = Partybox.value.zero
-        party.userId = Partybox.value.none
-        // Party Properties
-        party.hostId = Partybox.value.none
-        party.gameId = Party.randomPartyGameId()
-        party.guests = OrderedSet<PartyGuest>()
-        party.game = PartyGame()
-        return party
+    init(id: String) {
+        self.id = id
+        self.name = Partybox.value.none
+        self.hostId = Partybox.value.none
+        self.userId = Partybox.value.none
+        self.gameId = Partybox.value.none
+        self.persons = OrderedSet<PartyPerson>()
+        self.timestamp = Partybox.value.zero
+        self.wannabe = nil
     }
 
-    static func construct(id: String) -> Party {
-        let party = Party()
-        // Identifiable Properties
-        party.id = id
-        // Event Properties
-        party.name = Partybox.value.none
-        party.timestamp = Partybox.value.zero
-        party.userId = Partybox.value.none
-        // Party Properties
-        party.hostId = Partybox.value.none
-        party.gameId = Party.randomPartyGameId()
-        party.guests = OrderedSet<PartyGuest>()
-        party.game = PartyGame()
-        return party
+    // MARK: - JSON Functions
+
+    private func merge(json: JSON) {
+        for (key, value) in json {
+            if key == PartyKey.id.rawValue {
+                self.id = value.stringValue
+            }
+
+            if key == PartyKey.name.rawValue {
+                self.name = value.stringValue
+            }
+
+            if key == PartyKey.hostId.rawValue {
+                self.hostId = value.stringValue
+            }
+
+            if key == PartyKey.gameId.rawValue {
+                self.gameId = value.stringValue
+            }
+
+            if key == PartyKey.guests.rawValue {
+                for (_, json) in value {
+                    let guest = PartyGuest.construct(json: json)
+                    self.guests.add(guest)
+                }
+            }
+
+            if key == PartyGame.wannabeId {
+                self.game = Wannabe.construct(partyId: self.id)
+            }
+        }
     }
+
+    // MARK: - Party Functions
+
+    func start(callback: @escaping (String?) -> Void) {
+
+    }
+
+    func end(callback: @escaping (String?) -> Void) {
+
+    }
+
+    func invite(name: String) {
+
+    }
+
+    func enter(callback: @escaping (String?) -> Void) {
+
+    }
+
+    func exit(callback: @escaping (String?) -> Void) {
+
+    }
+
+    // MARK: - Notification Functions
+
+    func listen() {
+
+    }
+
+    func ignore() {
+
+    }
+
+    // MARK: - Utility Functions
+
+    private static func randomPartyId() -> String {
+        var randomPartyId = ""
+
+        let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                       "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        for _ in 1...5 {
+            let randomIndex = Int(arc4random())
+            let randomLetter = letters[randomIndex % letters.count]
+            let randomNumber = String(numbers[randomIndex % numbers.count])
+
+            randomPartyId += (randomIndex % 2 == 0 ? randomLetter : randomNumber)
+        }
+
+        return randomPartyId
+    }
+
+    private static func randomPartyGameId() -> String {
+        return "C2D4V"
+    }
+
+}
+
+class Part: Event {
 
     // MARK: - JSON Functions
 

@@ -10,15 +10,13 @@ import Foundation
 
 class OrderedSet<Object: Identifiable>: Sequence {
 
-    // MARK: - Local Properties
+    // MARK: - Properties
 
     private var objects: [Object] = []
 
     private var indexes: [Object: Int] = [:]
 
-    var count: Int {
-        return self.objects.count
-    }
+    var count: Int { return self.objects.count }
 
     // MARK: - Ordered Set Functions
 

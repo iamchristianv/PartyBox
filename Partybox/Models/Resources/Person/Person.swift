@@ -8,12 +8,10 @@
 
 import Foundation
 
-class Person: Identifiable {
+protocol Person: Identifiable, Nameable {
 
-    // MARK: - Remote Properties
+    // MARK: - Properties
 
-    var name: String = Partybox.value.none
-
-    var points: Int = Partybox.value.zero
+    var points: Int { get set }
 
 }

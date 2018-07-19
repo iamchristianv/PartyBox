@@ -10,24 +10,20 @@ import Foundation
 
 enum PartyKey: String {
 
-    // Identifiable Properties
-
     case id
-
-    // Event Properties
 
     case name
 
-    case timestamp
-
-    // Party Properties
-
     case hostId
+
+    case userId
 
     case gameId
 
-    case guests
+    case persons
 
-    case game
+    case timestamp
+
+    case wannabe
 
 }
