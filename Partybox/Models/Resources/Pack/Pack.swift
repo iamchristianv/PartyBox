@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Pack: Identifiable, Nameable, Describable {
+protocol Pack: Identifiable, Nameable, Summarizable {
 
     // MARK: - Properties
 

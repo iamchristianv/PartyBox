@@ -1,5 +1,5 @@
 //
-//  WannabePlayerKey.swift
+//  WannabePersonKey.swift
 //  Partybox
 //
 //  Created by Christian Villa on 5/10/18.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum WannabePlayerKey: String {
+enum WannabePersonKey: String {
 
     case id
 
     case name
 
-    case voteId
-
     case points
+
+    case voteId
 
 }

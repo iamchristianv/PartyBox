@@ -10,7 +10,7 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-struct Party: Event {
+class Party: Event {
 
     // MARK: - Properties
 
@@ -58,7 +58,7 @@ struct Party: Event {
 
     // MARK: - JSON Functions
 
-    private func merge(json: JSON) {
+    func merge(json: JSON) {
         for (key, value) in json {
             if key == PartyKey.id.rawValue {
                 self.id = value.stringValue
@@ -76,125 +76,29 @@ struct Party: Event {
                 self.gameId = value.stringValue
             }
 
-            if key == PartyKey.guests.rawValue {
+            if key == PartyKey.persons.rawValue {
                 for (_, json) in value {
-                    let guest = PartyGuest.construct(json: json)
-                    self.guests.add(guest)
+                    let person = PartyPerson(json: json)
+                    self.persons.add(person)
                 }
-            }
-
-            if key == PartyGame.wannabeId {
-                self.game = Wannabe.construct(partyId: self.id)
-            }
-        }
-    }
-
-    // MARK: - Party Functions
-
-    func start(callback: @escaping (String?) -> Void) {
-
-    }
-
-    func end(callback: @escaping (String?) -> Void) {
-
-    }
-
-    func invite(name: String) {
-
-    }
-
-    func enter(callback: @escaping (String?) -> Void) {
-
-    }
-
-    func exit(callback: @escaping (String?) -> Void) {
-
-    }
-
-    // MARK: - Notification Functions
-
-    func listen() {
-
-    }
-
-    func ignore() {
-
-    }
-
-    // MARK: - Utility Functions
-
-    private static func randomPartyId() -> String {
-        var randomPartyId = ""
-
-        let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-                       "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-        let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-        for _ in 1...5 {
-            let randomIndex = Int(arc4random())
-            let randomLetter = letters[randomIndex % letters.count]
-            let randomNumber = String(numbers[randomIndex % numbers.count])
-
-            randomPartyId += (randomIndex % 2 == 0 ? randomLetter : randomNumber)
-        }
-
-        return randomPartyId
-    }
-
-    private static func randomPartyGameId() -> String {
-        return "C2D4V"
-    }
-
-}
-
-class Part: Event {
-
-    // MARK: - JSON Functions
-
-    private func merge(json: JSON) {
-        for (key, value) in json {
-            // Identifiable Properties
-            if key == PartyKey.id.rawValue {
-                self.id = value.stringValue
-            }
-
-            // Event Properties
-            if key == PartyKey.name.rawValue {
-                self.name = value.stringValue
             }
 
             if key == PartyKey.timestamp.rawValue {
                 self.timestamp = value.intValue
             }
 
-            // Party Properties
-            if key == PartyKey.hostId.rawValue {
-                self.hostId = value.stringValue
-            }
-
-            if key == PartyKey.gameId.rawValue {
-                self.gameId = value.stringValue
-            }
-
-            if key == PartyKey.guests.rawValue {
-                for (_, json) in value {
-                    let guest = PartyGuest.construct(json: json)
-                    self.guests.add(guest)
-                }
-            }
-
             if key == PartyGame.wannabeId {
-                self.game = Wannabe.construct(partyId: self.id)
+                self.wannabe = Wannabe.construct(partyId: self.id)
             }
         }
     }
 
     // MARK: - Party Functions
 
-    func start(name: String, callback: @escaping (_ error: String?) -> Void) {
+    func initialize(callback: @escaping (String?) -> Void) {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-        Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
             if snapshot.exists() {
@@ -202,33 +106,17 @@ class Part: Event {
                 return
             }
 
-            path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
-
-            let id = Partybox.firebase.database.child(path).childByAutoId().key
-
-            self.hostId = id
-            self.userId = id
-
-            let guest = PartyGuest.construct(id: id, name: name)
-
             let values = [
                 PartyKey.id.rawValue: self.id,
                 PartyKey.name.rawValue: self.name,
-                PartyKey.timestamp.rawValue: ServerValue.timestamp(),
                 PartyKey.hostId.rawValue: self.hostId,
                 PartyKey.gameId.rawValue: self.gameId,
-                PartyKey.guests.rawValue: [
-                    guest.id: [
-                        PartyGuestKey.id.rawValue: guest.id,
-                        PartyGuestKey.name.rawValue: guest.name,
-                        PartyGuestKey.points.rawValue: guest.points
-                    ]
-                ]
+                PartyKey.timestamp.rawValue: self.timestamp
             ] as [String: Any]
 
             path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-            Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
+            Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
 
                 if error != nil {
@@ -236,29 +124,35 @@ class Part: Event {
                     return
                 }
 
-                self.startObservingChanges()
-
                 callback(nil)
             })
         })
     }
 
-    func end(callback: @escaping (_ error: String?) -> Void) {
-        self.stopObservingChanges()
-
+    func terminate(callback: @escaping (String?) -> Void) {
         let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-        Partybox.firebase.database.child(path).removeValue(completionBlock: {
+        Database.database().reference().child(path).removeValue(completionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
         })
     }
 
-    func enter(name: String, callback: @escaping (_ error: String?) -> Void) {
+    // MARK: - Person Functions
+
+    func randomPersonId() -> String {
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
+
+        let randomPersonId = Database.database().reference().child(path).childByAutoId().key
+
+        return randomPersonId
+    }
+
+    func insert(person: PartyPerson, callback: @escaping (String?) -> Void) {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-        Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
             if !snapshot.exists() {
@@ -266,25 +160,27 @@ class Part: Event {
                 return
             }
 
-            path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+            self.userId = person.id
 
-            let id = Partybox.firebase.database.child(path).childByAutoId().key
+            var values = [:] as [String: Any]
 
-            self.userId = id
+            path = "\(PartyKey.persons.rawValue)"
 
-            let guest = PartyGuest.construct(id: id, name: name)
+            if !snapshot.hasChild(path) {
+                values[PartyKey.hostId.rawValue] = person.id
+            }
 
-            let values = [
-                guest.id: [
-                    PartyGuestKey.id.rawValue: guest.id,
-                    PartyGuestKey.name.rawValue: guest.name,
-                    PartyGuestKey.points.rawValue: guest.points
+            values[PartyKey.persons.rawValue] = [
+                person.id: [
+                    PartyPersonKey.id.rawValue: person.id,
+                    PartyPersonKey.name.rawValue: person.name,
+                    PartyPersonKey.points.rawValue: person.points
                 ]
-            ] as [String: Any]
+            ]
 
-            path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-            Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
+            Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
 
                 if error != nil {
@@ -294,7 +190,7 @@ class Part: Event {
 
                 path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
 
-                Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+                Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
                     (snapshot) in
 
                     if !snapshot.exists() {
@@ -319,62 +215,22 @@ class Part: Event {
         })
     }
 
-    func exit(callback: @escaping (_ error: String?) -> Void) {
+    func remove(person: PartyPerson, callback: @escaping (String?) -> Void) {
         self.stopObservingChanges()
 
-        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)/\(self.userId)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)/\(self.userId)"
 
-        Partybox.firebase.database.child(path).removeValue(completionBlock: {
+        Database.database().reference().child(path).removeValue(completionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
         })
     }
 
-    // MARK: - Database Functions
+    // MARK: - Action Functions
 
-    func remove(guestId: String, callback: @escaping (_ error: String?) -> Void) {
-        let values = [guestId: Partybox.value.null]
-
-        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
-
-        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
-            (error, reference) in
-
-            callback(error?.localizedDescription)
-        })
-    }
-
-    func change(hostId: String, callback: @escaping (_ error: String?) -> Void) {
-        let values = [PartyKey.hostId.rawValue: hostId]
-
-        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
-
-        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
-            (error, reference) in
-
-            callback(error?.localizedDescription)
-        })
-    }
-
-    func change(name: String, hostId: String, callback: @escaping (_ error: String?) -> Void) {
-        let values = [PartyKey.name.rawValue: name, PartyKey.hostId.rawValue: hostId]
-
-        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
-
-        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
-            (error, reference) in
-
-            callback(error?.localizedDescription)
-        })
-    }
-
-    func change(gameId: String, callback: @escaping (_ error: String?) -> Void) {
-        let values = [PartyKey.gameId.rawValue: gameId]
-
-        let path = "\(PartyboxKey.parties.rawValue)/\(self.id)"
-
-        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
+    func update(path: String, values: [String: Any], callback: @escaping (String?) -> Void) {
+        Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
@@ -383,7 +239,7 @@ class Part: Event {
 
     // MARK: - Notification Functions
 
-    private func startObservingChanges() {
+    func startObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.value, with: {
@@ -429,7 +285,7 @@ class Part: Event {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childAdded, with: {
             (snapshot) in
@@ -440,15 +296,15 @@ class Part: Event {
 
             let json = JSON(data)
 
-            let guest = PartyGuest.construct(json: json)
+            let person = PartyPerson(json: json)
 
-            self.guests.add(guest)
+            self.persons.add(person)
 
-            let name = Notification.Name(PartyNotification.guestAdded.rawValue)
+            let name = Notification.Name(PartyNotification.personAdded.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childChanged, with: {
             (snapshot) in
@@ -459,15 +315,15 @@ class Part: Event {
 
             let json = JSON(data)
 
-            let guest = PartyGuest.construct(json: json)
+            let person = PartyPerson(json: json)
 
-            self.guests.add(guest)
+            self.persons.add(person)
 
-            let name = Notification.Name(PartyNotification.guestChanged.rawValue)
+            let name = Notification.Name(PartyNotification.personChanged.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childRemoved, with: {
             (snapshot) in
@@ -478,27 +334,27 @@ class Part: Event {
 
             let json = JSON(data)
 
-            let guest = PartyGuest.construct(json: json)
+            let person = PartyPerson(json: json)
 
-            self.guests.remove(guest)
+            self.persons.remove(person)
 
-            let name = Notification.Name(PartyNotification.guestRemoved.rawValue)
+            let name = Notification.Name(PartyNotification.personRemoved.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyGame.wannabeId)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.wannabe.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.childAdded, with: {
             (snapshot) in
 
-            self.game = Wannabe.construct(partyId: self.id)
+            self.wannabe = Wannabe.construct(partyId: self.id)
 
             let name = Notification.Name(PartyNotification.wannabeStarted.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
     }
 
-    private func stopObservingChanges() {
+    func stopObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
@@ -511,18 +367,18 @@ class Part: Event {
 
         Partybox.firebase.database.child(path).removeAllObservers()
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.guests.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyGame.wannabeId)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.wannabe.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()
     }
 
     // MARK: - Utility Functions
 
-    private static func randomPartyId() -> String {
+    static func randomPartyId() -> String {
         var randomPartyId = ""
 
         let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
@@ -540,8 +396,11 @@ class Part: Event {
         return randomPartyId
     }
 
-    private static func randomPartyGameId() -> String {
-        return "C2D4V"
+    static func randomGameId() -> String {
+        let randomIndex = Int(arc4random()) % PartyKey.gameIds().count
+        let randomGameId = PartyKey.gameIds()[randomIndex]
+
+        return randomGameId
     }
-    
+
 }

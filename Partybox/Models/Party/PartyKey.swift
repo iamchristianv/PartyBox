@@ -24,6 +24,10 @@ enum PartyKey: String {
 
     case timestamp
 
-    case wannabe
+    case wannabe = "C2D4V"
+
+    static func gameIds() -> [String] {
+        return [PartyKey.wannabe.rawValue]
+    }
 
 }

@@ -10,39 +10,19 @@ import Firebase
 import Foundation
 import SwiftyJSON
 
-class Wannabe: PartyGame {
+class Wannabe: Activity {
     
-    // MARK: - Remote Properties
+    // MARK: - Properties
 
     var actionId: String = Partybox.value.none
 
     var wannabeId: String = Partybox.value.none
 
-    var players: OrderedSet<WannabePlayer> = OrderedSet<WannabePlayer>()
+    var persons: OrderedSet<WannabePlayer> = OrderedSet<WannabePlayer>()
 
     var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
 
-    // MARK: - Construction Functions
 
-    static func construct(partyId: String) -> Wannabe {
-        let wannabe = Wannabe()
-        // Identifiable Properties
-        wannabe.id = PartyGame.wannabeId
-        // Event Properties
-        wannabe.name = "Wannabe"
-        wannabe.timestamp = Partybox.value.zero
-        wannabe.userId = Partybox.value.none
-        // Party Game Properties
-        wannabe.partyId = partyId
-        wannabe.summary = "Wannabe Summary"
-        wannabe.instructions = "Wannabe Instructions"
-        // Wannabe Properties
-        wannabe.actionId = Partybox.value.none
-        wannabe.wannabeId = Partybox.value.none
-        wannabe.players = OrderedSet<WannabePlayer>()
-        wannabe.cards = OrderedSet<WannabeCard>()
-        return wannabe
-    }
 
     // MARK: - JSON Functions
 
@@ -227,10 +207,10 @@ class Wannabe: PartyGame {
         })
     }
 
-    // MARK: - Database Functions
+    // MARK: - Action Functions
 
-    func update(path: String, value: [String: Any], callback: @escaping (_ error: String?) -> Void) {
-        Partybox.firebase.database.child(path).updateChildValues(value, withCompletionBlock: {
+    func update(path: String, values: [String: Any], callback: @escaping (_ error: String?) -> Void) {
+        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
@@ -239,7 +219,7 @@ class Wannabe: PartyGame {
 
     // MARK: - Notification Functions
 
-    private func startObservingChanges() {
+    func startObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.actionId.rawValue)"
 
         Partybox.firebase.database.child(path).observe(.value, with: {
@@ -313,7 +293,7 @@ class Wannabe: PartyGame {
         })
     }
 
-    private func stopObservingChanges() {
+    func stopObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.actionId.rawValue)"
 
         Partybox.firebase.database.child(path).removeAllObservers()

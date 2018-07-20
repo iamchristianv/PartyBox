@@ -16,11 +16,11 @@ enum PartyNotification: String {
 
     case gameIdChanged = "PartyNotification/gameIdChanged"
 
-    case guestAdded = "PartyNotification/guestAdded"
+    case personAdded = "PartyNotification/personAdded"
 
-    case guestChanged = "PartyNotification/guestChanged"
+    case personChanged = "PartyNotification/personChanged"
 
-    case guestRemoved = "PartyNotification/guestRemoved"
+    case personRemoved = "PartyNotification/personRemoved"
 
     case wannabeStarted = "PartyNotification/wannabeStarted"
 

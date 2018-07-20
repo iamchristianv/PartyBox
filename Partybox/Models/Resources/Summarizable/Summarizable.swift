@@ -1,5 +1,5 @@
 //
-//  Describable.swift
+//  Summarizable.swift
 //  Partybox
 //
 //  Created by Christian Villa on 7/18/18.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-protocol Describable {
+protocol Summarizable {
 
     // MARK: - Properties
 
-    var description: String { get set }
+    var summary: String { get set }
 
 }

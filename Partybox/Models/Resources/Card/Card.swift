@@ -10,8 +10,4 @@ import Foundation
 
 protocol Card: Identifiable {
 
-    // MARK: - Properties
-
-    var type: String { get set }
-
 }

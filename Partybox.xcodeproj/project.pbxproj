@@ -32,13 +32,12 @@
 		AA2A87BD209D8781009C55BF /* WannabePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A87BC209D8781009C55BF /* WannabePack.swift */; };
 		AA2FF6B720F0172A00833D2B /* StoreKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6B620F0172A00833D2B /* StoreKey.swift */; };
 		AA2FF6B920F29FA900833D2B /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6B820F29FA900833D2B /* Identifiable.swift */; };
-		AA2FF6BF20F4558000833D2B /* PartyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6BE20F4558000833D2B /* PartyGame.swift */; };
 		AA2FF6C920F9C4CE00833D2B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6C820F9C4CE00833D2B /* Event.swift */; };
 		AA2FF6CB20F9C74300833D2B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6CA20F9C74300833D2B /* Person.swift */; };
 		AA2FF6CE20FC305100833D2B /* Pack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6CD20FC305100833D2B /* Pack.swift */; };
 		AA2FF6D821002D9C00833D2B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6D721002D9C00833D2B /* Card.swift */; };
 		AA2FF6DC2100305200833D2B /* Nameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6DB2100305200833D2B /* Nameable.swift */; };
-		AA2FF6DF2100312500833D2B /* Describable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6DE2100312500833D2B /* Describable.swift */; };
+		AA2FF6DF2100312500833D2B /* Summarizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6DE2100312500833D2B /* Summarizable.swift */; };
 		AA2FF6E22100317800833D2B /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FF6E12100317800833D2B /* Activity.swift */; };
 		AA590FFA1FC26FBB008988E9 /* Wannabe.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA590FF91FC26FBB008988E9 /* Wannabe.swift */; };
 		AA5E89EB20A13C3A00FE8960 /* PartyNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89EA20A13C3A00FE8960 /* PartyNotification.swift */; };
@@ -47,7 +46,7 @@
 		AA5E89FF20A1470D00FE8960 /* WannabeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */; };
 		AA5E8A0E20A15E2900FE8960 /* WannabeNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A0D20A15E2900FE8960 /* WannabeNotification.swift */; };
 		AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1C20A2B60A00FE8960 /* OrderedSet.swift */; };
-		AA5E8A1F20A5321300FE8960 /* WannabePlayerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1E20A5321300FE8960 /* WannabePlayerKey.swift */; };
+		AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */; };
 		AA5E8A2120A5347D00FE8960 /* WannabeCardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */; };
 		AA5E8A2A20A5395300FE8960 /* WannabePackKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */; };
 		AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */; };
@@ -82,7 +81,7 @@
 		AAE75B511F809FA9001D4E13 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B4F1F809FA9001D4E13 /* Launch.storyboard */; };
 		AAE75B631F80ACCB001D4E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */; };
 		AAF6D7F71FDC8D4700014CA0 /* PartyPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */; };
-		AAF6D7F91FDC907600014CA0 /* WannabePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F81FDC907600014CA0 /* WannabePlayer.swift */; };
+		AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */; };
 		AAF8128820923CF20010FFB1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128720923CF10010FFB1 /* MenuView.swift */; };
 		AAF8128A20923CF90010FFB1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128920923CF90010FFB1 /* MenuViewController.swift */; };
 		AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8128C20923E370010FFB1 /* UIViewController+Extension.swift */; };
@@ -127,13 +126,12 @@
 		AA2A87BC209D8781009C55BF /* WannabePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePack.swift; sourceTree = "<group>"; };
 		AA2FF6B620F0172A00833D2B /* StoreKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKey.swift; sourceTree = "<group>"; };
 		AA2FF6B820F29FA900833D2B /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
-		AA2FF6BE20F4558000833D2B /* PartyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyGame.swift; sourceTree = "<group>"; };
 		AA2FF6C820F9C4CE00833D2B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		AA2FF6CA20F9C74300833D2B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AA2FF6CD20FC305100833D2B /* Pack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pack.swift; sourceTree = "<group>"; };
 		AA2FF6D721002D9C00833D2B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		AA2FF6DB2100305200833D2B /* Nameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nameable.swift; sourceTree = "<group>"; };
-		AA2FF6DE2100312500833D2B /* Describable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Describable.swift; sourceTree = "<group>"; };
+		AA2FF6DE2100312500833D2B /* Summarizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summarizable.swift; sourceTree = "<group>"; };
 		AA2FF6E12100317800833D2B /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		AA590FF91FC26FBB008988E9 /* Wannabe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wannabe.swift; sourceTree = "<group>"; };
 		AA5E89EA20A13C3A00FE8960 /* PartyNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyNotification.swift; sourceTree = "<group>"; };
@@ -142,7 +140,7 @@
 		AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeKey.swift; sourceTree = "<group>"; };
 		AA5E8A0D20A15E2900FE8960 /* WannabeNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeNotification.swift; sourceTree = "<group>"; };
 		AA5E8A1C20A2B60A00FE8960 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
-		AA5E8A1E20A5321300FE8960 /* WannabePlayerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePlayerKey.swift; sourceTree = "<group>"; };
+		AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePersonKey.swift; sourceTree = "<group>"; };
 		AA5E8A2020A5347D00FE8960 /* WannabeCardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabeCardKey.swift; sourceTree = "<group>"; };
 		AA5E8A2920A5395300FE8960 /* WannabePackKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePackKey.swift; sourceTree = "<group>"; };
 		AA5E8A2F20A7CDC500FE8960 /* MenuViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewDelegate.swift; sourceTree = "<group>"; };
@@ -179,7 +177,7 @@
 		AAE75B521F809FA9001D4E13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE75B621F80AC76001D4E13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AAF6D7F61FDC8D4700014CA0 /* PartyPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyPerson.swift; sourceTree = "<group>"; };
-		AAF6D7F81FDC907600014CA0 /* WannabePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePlayer.swift; sourceTree = "<group>"; };
+		AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WannabePerson.swift; sourceTree = "<group>"; };
 		AAF8128720923CF10010FFB1 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AAF8128920923CF90010FFB1 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		AAF8128C20923E370010FFB1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 				AA5E89EE20A13D3800FE8960 /* PartyKey.swift */,
 				AA5E89EA20A13C3A00FE8960 /* PartyNotification.swift */,
 				AA5E89F020A13D4A00FE8960 /* Party Person */,
-				AA2FF6BD20F4556900833D2B /* Party Game */,
 			);
 			path = Party;
 			sourceTree = "<group>";
@@ -296,7 +293,7 @@
 				AA590FF91FC26FBB008988E9 /* Wannabe.swift */,
 				AA5E89FE20A1470D00FE8960 /* WannabeKey.swift */,
 				AA5E8A0D20A15E2900FE8960 /* WannabeNotification.swift */,
-				AA5E89FC20A1467400FE8960 /* Wannabe Player */,
+				AA5E89FC20A1467400FE8960 /* Wannabe Person */,
 				AA5E89FD20A1467800FE8960 /* Wannabe Card */,
 			);
 			path = Wannabe;
@@ -307,7 +304,7 @@
 			children = (
 				AA2FF6CF20FEDF7900833D2B /* Identifiable */,
 				AA2FF6DA2100304900833D2B /* Nameable */,
-				AA2FF6DD2100311600833D2B /* Describable */,
+				AA2FF6DD2100311600833D2B /* Summarizable */,
 				AA2FF6C620F9C4BD00833D2B /* Event */,
 				AA2FF6E02100313500833D2B /* Activity */,
 				AA2FF6C720F9C4C100833D2B /* Person */,
@@ -420,15 +417,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		AA2FF6BD20F4556900833D2B /* Party Game */ = {
-			isa = PBXGroup;
-			children = (
-				AA2FF6BE20F4558000833D2B /* PartyGame.swift */,
-				AA1CEE8420BB43D6008AE617 /* Wannabe */,
-			);
-			path = "Party Game";
-			sourceTree = "<group>";
-		};
 		AA2FF6C620F9C4BD00833D2B /* Event */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,12 +465,12 @@
 			path = Nameable;
 			sourceTree = "<group>";
 		};
-		AA2FF6DD2100311600833D2B /* Describable */ = {
+		AA2FF6DD2100311600833D2B /* Summarizable */ = {
 			isa = PBXGroup;
 			children = (
-				AA2FF6DE2100312500833D2B /* Describable.swift */,
+				AA2FF6DE2100312500833D2B /* Summarizable.swift */,
 			);
-			path = Describable;
+			path = Summarizable;
 			sourceTree = "<group>";
 		};
 		AA2FF6E02100313500833D2B /* Activity */ = {
@@ -511,13 +499,13 @@
 			path = "Wannabe Pack";
 			sourceTree = "<group>";
 		};
-		AA5E89FC20A1467400FE8960 /* Wannabe Player */ = {
+		AA5E89FC20A1467400FE8960 /* Wannabe Person */ = {
 			isa = PBXGroup;
 			children = (
-				AAF6D7F81FDC907600014CA0 /* WannabePlayer.swift */,
-				AA5E8A1E20A5321300FE8960 /* WannabePlayerKey.swift */,
+				AAF6D7F81FDC907600014CA0 /* WannabePerson.swift */,
+				AA5E8A1E20A5321300FE8960 /* WannabePersonKey.swift */,
 			);
-			path = "Wannabe Player";
+			path = "Wannabe Person";
 			sourceTree = "<group>";
 		};
 		AA5E89FD20A1467800FE8960 /* Wannabe Card */ = {
@@ -690,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1CEE8320BB43A9008AE617 /* Party */,
+				AA1CEE8420BB43D6008AE617 /* Wannabe */,
 				AAB2CEB220D5BEB800BFC4ED /* Store */,
 				AADD9C80205508CE00CA5AC8 /* Alert */,
 				AA1CEE9620BBAF3C008AE617 /* Resources */,
@@ -1007,8 +996,8 @@
 				AAF8128D20923E370010FFB1 /* UIViewController+Extension.swift in Sources */,
 				AA5E8A5620A90D7100FE8960 /* ChangePartyHostViewController.swift in Sources */,
 				AA1A8B9A20CA236F00096B6D /* StartWannabeViewDelegate.swift in Sources */,
-				AAF6D7F91FDC907600014CA0 /* WannabePlayer.swift in Sources */,
-				AA5E8A1F20A5321300FE8960 /* WannabePlayerKey.swift in Sources */,
+				AAF6D7F91FDC907600014CA0 /* WannabePerson.swift in Sources */,
+				AA5E8A1F20A5321300FE8960 /* WannabePersonKey.swift in Sources */,
 				AA5E8A5420A90D6800FE8960 /* ChangePartyHostView.swift in Sources */,
 				AA5E8A1D20A2B60A00FE8960 /* OrderedSet.swift in Sources */,
 				AA5E8A3020A7CDC500FE8960 /* MenuViewDelegate.swift in Sources */,
@@ -1018,7 +1007,7 @@
 				AAF81297209241550010FFB1 /* AlertView.swift in Sources */,
 				AAE75B471F809FA9001D4E13 /* AppDelegate.swift in Sources */,
 				AA5E89EB20A13C3A00FE8960 /* PartyNotification.swift in Sources */,
-				AA2FF6DF2100312500833D2B /* Describable.swift in Sources */,
+				AA2FF6DF2100312500833D2B /* Summarizable.swift in Sources */,
 				AA5E8A5C20A912E900FE8960 /* ChangePartyHostViewDelegate.swift in Sources */,
 				AAF812A52092552D0010FFB1 /* TriangleView.swift in Sources */,
 				AA5E8A4C20A8CF2E00FE8960 /* ManagePartyViewController.swift in Sources */,
@@ -1033,7 +1022,6 @@
 				AAF812AA2092A6F70010FFB1 /* StartPartyViewController.swift in Sources */,
 				AAF812A62092552D0010FFB1 /* SquareView.swift in Sources */,
 				AA2FF6D821002D9C00833D2B /* Card.swift in Sources */,
-				AA2FF6BF20F4558000833D2B /* PartyGame.swift in Sources */,
 				AA5E8A3820A7ED0C00FE8960 /* PartyViewDataSource.swift in Sources */,
 				AA2A87AB209A95AE009C55BF /* PartyViewController.swift in Sources */,
 				AAF8129D20924EB80010FFB1 /* ActivityIndicatorButton.swift in Sources */,

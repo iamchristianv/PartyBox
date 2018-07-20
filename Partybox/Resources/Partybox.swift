@@ -21,14 +21,6 @@ enum PartyboxKey: String {
 
 struct Partybox {
 
-    struct firebase {
-
-        static let authenticator: Auth = Auth.auth()
-
-        static let database: DatabaseReference = Database.database().reference()
-
-    }
-
     struct value {
 
         static let none: String = "none"
@@ -72,12 +64,6 @@ struct Partybox {
         static func avenirNextMedium(size: CGFloat) -> UIFont {
             return UIFont(name: Partybox.font.avenirNextMediumName, size: size)!
         }
-
-    }
-
-    struct collection {
-
-        static let games: OrderedSet<PartyGame> = OrderedSet<PartyGame>()
 
     }
 

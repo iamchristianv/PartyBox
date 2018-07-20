@@ -22,18 +22,18 @@ protocol Event: Identifiable, Nameable {
 
     // MARK: - Functions
 
-    func start(callback: @escaping (String?) -> Void)
+    func initialize(callback: @escaping (String?) -> Void)
 
-    func end(callback: @escaping (String?) -> Void)
+    func terminate(callback: @escaping (String?) -> Void)
 
-    func invite(name: String)
+    func randomPersonId() -> String
 
-    func enter(callback: @escaping (String?) -> Void)
+    func insert(person: PersonType, callback: @escaping (String?) -> Void)
 
-    func exit(callback: @escaping (String?) -> Void)
+    func remove(person: PersonType, callback: @escaping (String?) -> Void)
 
-    func listen()
+    func startObservingChanges()
 
-    func ignore()
+    func stopObservingChanges()
 
 }

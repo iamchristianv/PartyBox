@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SwiftyJSON
 
-protocol Activity: Event, Describable {
+protocol Activity: Event, Summarizable {
 
     // MARK: - Properties
 

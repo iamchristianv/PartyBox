@@ -12,10 +12,10 @@ enum WannabeNotification: String {
 
     case actionIdChanged = "WannabeNotification/actionIdChanged"
 
-    case playerAdded = "WannabeNotification/playerAdded"
+    case personAdded = "WannabeNotification/personAdded"
 
-    case playerChanged = "WannabeNotification/playerChanged"
+    case personChanged = "WannabeNotification/personChanged"
 
-    case playerRemoved = "WannabeNotification/playerRemoved"
+    case personRemoved = "WannabeNotification/personRemoved"
 
 }
