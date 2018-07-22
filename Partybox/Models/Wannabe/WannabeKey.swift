@@ -14,14 +14,14 @@ enum WannabeKey: String {
 
     case name
 
-    case timestamp
-
     case actionId
 
     case wannabeId
 
-    case players
+    case persons
 
     case cards
+
+    case timestamp
 
 }

@@ -16,18 +16,12 @@ enum PartyKey: String {
 
     case hostId
 
-    case userId
-
     case gameId
+
+    case packId
 
     case persons
 
     case timestamp
-
-    case wannabe = "C2D4V"
-
-    static func gameIds() -> [String] {
-        return [PartyKey.wannabe.rawValue]
-    }
 
 }

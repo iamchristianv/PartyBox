@@ -12,28 +12,23 @@ import SwiftyJSON
 
 class WannabePack: Pack {
 
-    // MARK: - Remote Properties
+    // MARK: - Properties
 
-    var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
+    var id: String
 
-    // MARK: - Construction Functions
+    var name: String
 
-    static func construct() -> WannabePack {
-        let pack = WannabePack()
-        pack.id = Partybox.value.none
-        pack.name = Partybox.value.none
-        pack.summary = Partybox.value.none
-        pack.cards = OrderedSet<WannabeCard>()
-        return pack
-    }
+    var summary: String
 
-    static func construct(json: JSON) -> WannabePack {
-        let pack = WannabePack()
-        pack.id = json[WannabePackKey.id.rawValue].stringValue
-        pack.name = json[WannabePackKey.name.rawValue].stringValue
-        pack.summary = json[WannabePackKey.summary.rawValue].stringValue
-        pack.cards = OrderedSet<WannabeCard>()
-        return pack
+    var cards: OrderedSet<WannabeCard>
+
+    // MARK: - Initialization Functions
+
+    init(json: JSON) {
+        self.id = json[WannabePackKey.id.rawValue].stringValue
+        self.name = json[WannabePackKey.name.rawValue].stringValue
+        self.summary = json[WannabePackKey.summary.rawValue].stringValue
+        self.cards = OrderedSet<WannabeCard>()
     }
 
 }

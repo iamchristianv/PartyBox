@@ -14,23 +14,21 @@ class Party: Event {
 
     // MARK: - Properties
 
-    typealias PersonType = PartyPerson
-
     var id: String
 
     var name: String
 
-    var hostId: String
-
     var userId: String
+
+    var hostId: String
 
     var gameId: String
 
-    var persons: OrderedSet<PartyPerson>
+    var packId: String
+
+    var persons: OrderedSet<PartyPerson> 
 
     var timestamp: Int
-
-    var wannabe: Wannabe!
 
     // MARK: - Initialization Functions
 
@@ -40,9 +38,9 @@ class Party: Event {
         self.hostId = Partybox.value.none
         self.userId = Partybox.value.none
         self.gameId = Partybox.value.none
+        self.packId = Partybox.value.none
         self.persons = OrderedSet<PartyPerson>()
         self.timestamp = Partybox.value.zero
-        self.wannabe = nil
     }
 
     init(id: String) {
@@ -51,9 +49,9 @@ class Party: Event {
         self.hostId = Partybox.value.none
         self.userId = Partybox.value.none
         self.gameId = Partybox.value.none
+        self.packId = Partybox.value.none
         self.persons = OrderedSet<PartyPerson>()
         self.timestamp = Partybox.value.zero
-        self.wannabe = nil
     }
 
     // MARK: - JSON Functions
@@ -76,6 +74,10 @@ class Party: Event {
                 self.gameId = value.stringValue
             }
 
+            if key == PartyKey.packId.rawValue {
+                self.packId = value.stringValue
+            }
+
             if key == PartyKey.persons.rawValue {
                 for (_, json) in value {
                     let person = PartyPerson(json: json)
@@ -85,10 +87,6 @@ class Party: Event {
 
             if key == PartyKey.timestamp.rawValue {
                 self.timestamp = value.intValue
-            }
-
-            if key == PartyGame.wannabeId {
-                self.wannabe = Wannabe.construct(partyId: self.id)
             }
         }
     }
@@ -111,6 +109,7 @@ class Party: Event {
                 PartyKey.name.rawValue: self.name,
                 PartyKey.hostId.rawValue: self.hostId,
                 PartyKey.gameId.rawValue: self.gameId,
+                PartyKey.packId.rawValue: self.packId,
                 PartyKey.timestamp.rawValue: self.timestamp
             ] as [String: Any]
 
@@ -242,7 +241,7 @@ class Party: Event {
     func startObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.value, with: {
+        Database.database().reference().child(path).observe(.value, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? String else {
@@ -257,7 +256,7 @@ class Party: Event {
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.hostId.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.value, with: {
+        Database.database().reference().child(path).observe(.value, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? String else {
@@ -272,7 +271,7 @@ class Party: Event {
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.gameId.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.value, with: {
+        Database.database().reference().child(path).observe(.value, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? String else {
@@ -285,9 +284,24 @@ class Party: Event {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.packId.rawValue)"
+
+        Database.database().reference().child(path).observe(.value, with: {
+            (snapshot) in
+
+            guard let data = snapshot.value as? String else {
+                return
+            }
+
+            self.packId = data
+
+            let name = Notification.Name(PartyNotification.packIdChanged.rawValue)
+            NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
+        })
+
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.childAdded, with: {
+        Database.database().reference().child(path).observe(.childAdded, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -306,7 +320,7 @@ class Party: Event {
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.childChanged, with: {
+        Database.database().reference().child(path).observe(.childChanged, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -325,7 +339,7 @@ class Party: Event {
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.childRemoved, with: {
+        Database.database().reference().child(path).observe(.childRemoved, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -341,39 +355,28 @@ class Party: Event {
             let name = Notification.Name(PartyNotification.personRemoved.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
-
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.wannabe.rawValue)"
-
-        Partybox.firebase.database.child(path).observe(.childAdded, with: {
-            (snapshot) in
-
-            self.wannabe = Wannabe.construct(partyId: self.id)
-
-            let name = Notification.Name(PartyNotification.wannabeStarted.rawValue)
-            NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
-        })
     }
 
     func stopObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.name.rawValue)"
 
-        Partybox.firebase.database.child(path).removeAllObservers()
+        Database.database().reference().child(path).removeAllObservers()
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.hostId.rawValue)"
 
-        Partybox.firebase.database.child(path).removeAllObservers()
+        Database.database().reference().child(path).removeAllObservers()
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.gameId.rawValue)"
 
-        Partybox.firebase.database.child(path).removeAllObservers()
+        Database.database().reference().child(path).removeAllObservers()
+
+        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.packId.rawValue)"
+
+        Database.database().reference().child(path).removeAllObservers()
 
         path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).removeAllObservers()
-
-        path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.wannabe.rawValue)"
-
-        Partybox.firebase.database.child(path).removeAllObservers()
+        Database.database().reference().child(path).removeAllObservers()
     }
 
     // MARK: - Utility Functions

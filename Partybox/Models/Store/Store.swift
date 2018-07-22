@@ -6,24 +6,28 @@
 //  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
+import Firebase
 import Foundation
 import SwiftyJSON
 
 class Store {
 
-    // MARK: - Local Properties
+    static var activityIds: [String] = []
 
-    var purchasedIds: Set<String> = Set<String>()
+    static var packIds: Set<String> = Set<String>()
 
-    var wannabePacks: OrderedSet<WannabePack> = OrderedSet<WannabePack>()
+    // MARK: - Properties
 
-    // MARK: - Construction Functions
+    var wannabe: Wannabe
 
-    static func construct() -> Store {
-        let store = Store()
-        store.purchasedIds = Set<String>()
-        store.wannabePacks = OrderedSet<WannabePack>()
-        return store
+    var wannabePacks: OrderedSet<WannabePack>
+
+    // MARK: - Initialization Functions
+
+    init() {
+        self.wannabe = Wannabe(partyId: Partybox.value.none)
+        self.wannabePacks = OrderedSet<WannabePack>()
+        Store.activityIds.append(self.wannabe.id)
     }
 
     // MARK: - Store Functions
@@ -39,13 +43,13 @@ class Store {
     // MARK: - Pack Functions
 
     func fetchTitles(gameId: String, callback: @escaping (_ error: String?) -> Void) {
-        if gameId == PartyGame.wannabeId && self.wannabePacks.count != 0 {
+        if gameId == self.wannabe.id && self.wannabePacks.count != 0 {
             callback(nil)
         }
 
         let path = "\(PartyboxKey.store.rawValue)/\(gameId)/\(StoreKey.titles.rawValue)"
 
-        Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -54,8 +58,8 @@ class Store {
             }
 
             for (_, json) in JSON(data) {
-                if gameId == PartyGame.wannabeId {
-                    let pack = WannabePack.construct(json: json)
+                if gameId == self.wannabe.id {
+                    let pack = WannabePack(json: json)
                     self.wannabePacks.add(pack)
                 }
             }
@@ -65,13 +69,13 @@ class Store {
     }
 
     func fetchCards(gameId: String, packId: String, callback: @escaping (_ error: String?) -> Void) {
-        if gameId == PartyGame.wannabeId && self.wannabePacks[packId]?.cards.count != 0 {
+        if gameId == self.wannabe.id && self.wannabePacks[packId]?.cards.count != 0 {
             callback(nil)
         }
 
         let path = "\(PartyboxKey.store.rawValue)/\(gameId)/\(StoreKey.cards.rawValue)/\(packId)"
 
-        Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [[String: Any]] else {
@@ -80,8 +84,8 @@ class Store {
             }
 
             for (_, json) in JSON(data) {
-                if gameId == PartyGame.wannabeId {
-                    let card = WannabeCard.construct(json: json)
+                if gameId == self.wannabe.id {
+                    let card = WannabeCard(json: json)
                     self.wannabePacks[packId]?.cards.add(card)
                 }
             }

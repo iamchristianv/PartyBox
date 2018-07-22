@@ -11,22 +11,50 @@ import Foundation
 import SwiftyJSON
 
 class Wannabe: Activity {
-    
+
     // MARK: - Properties
 
-    var actionId: String = Partybox.value.none
+    var id: String
 
-    var wannabeId: String = Partybox.value.none
+    var name: String
 
-    var persons: OrderedSet<WannabePlayer> = OrderedSet<WannabePlayer>()
+    var userId: String
 
-    var cards: OrderedSet<WannabeCard> = OrderedSet<WannabeCard>()
+    var partyId: String
 
+    var actionId: String
 
+    var wannabeId: String
+
+    var persons: OrderedSet<WannabePerson>
+
+    var cards: OrderedSet<WannabeCard>
+
+    var timestamp: Int
+
+    var summary: String
+
+    var instructions: String
+
+    // MARK: - Initialization Functions
+
+    init(partyId: String) {
+        self.id = "C2D4V"
+        self.name = "Wannabe"
+        self.userId = Partybox.value.none
+        self.partyId = partyId
+        self.actionId = Partybox.value.none
+        self.wannabeId = Partybox.value.none
+        self.persons = OrderedSet<WannabePerson>()
+        self.cards = OrderedSet<WannabeCard>()
+        self.timestamp = Partybox.value.zero
+        self.summary = "Wannabe Summary"
+        self.instructions = "Wannabe Instructions"
+    }
 
     // MARK: - JSON Functions
 
-    private func merge(json: JSON) {
+    func merge(json: JSON) {
         for (key, value) in json {
             if key == WannabeKey.id.rawValue {
                 self.id = value.stringValue
@@ -34,10 +62,6 @@ class Wannabe: Activity {
 
             if key == WannabeKey.name.rawValue {
                 self.name = value.stringValue
-            }
-
-            if key == WannabeKey.timestamp.rawValue {
-                self.timestamp = value.intValue
             }
 
             if key == WannabeKey.actionId.rawValue {
@@ -48,28 +72,32 @@ class Wannabe: Activity {
                 self.wannabeId = value.stringValue
             }
 
-            if key == WannabeKey.players.rawValue {
+            if key == WannabeKey.persons.rawValue {
                 for (_, json) in value {
-                    let player = WannabePlayer.construct(json: json)
-                    self.players.add(player)
+                    let person = WannabePerson(json: json)
+                    self.persons.add(person)
                 }
             }
 
             if key == WannabeKey.cards.rawValue {
                 for (_, json) in value {
-                    let card = WannabeCard.construct(json: json)
+                    let card = WannabeCard(json: json)
                     self.cards.add(card)
                 }
             }
+
+            if key == WannabeKey.timestamp.rawValue {
+                self.timestamp = value.intValue
+            }
         }
     }
-    
+
     // MARK: - Wannabe Functions
 
-    func start(name: String, callback: @escaping (_ error: String?) -> Void) {
+    func initialize(callback: @escaping (String?) -> Void) {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
-        Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
             if snapshot.exists() {
@@ -77,33 +105,17 @@ class Wannabe: Activity {
                 return
             }
 
-            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
-
-            let id = Partybox.firebase.database.child(path).childByAutoId().key
-
-            self.userId = id
-
-            let player = WannabePlayer.construct(id: id, name: name)
-
             let values = [
                 WannabeKey.id.rawValue: self.id,
                 WannabeKey.name.rawValue: self.name,
-                WannabeKey.timestamp.rawValue: ServerValue.timestamp(),
                 WannabeKey.actionId.rawValue: self.actionId,
                 WannabeKey.wannabeId.rawValue: self.wannabeId,
-                WannabeKey.players.rawValue: [
-                    player.id: [
-                        WannabePlayerKey.id.rawValue: player.id,
-                        WannabePlayerKey.name.rawValue: player.name,
-                        WannabePlayerKey.voteId.rawValue: player.voteId,
-                        WannabePlayerKey.points.rawValue: player.points
-                    ]
-                ]
+                WannabeKey.timestamp.rawValue: ServerValue.timestamp()
             ] as [String: Any]
 
             path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
-            Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
+            Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
 
                 if error != nil {
@@ -111,56 +123,58 @@ class Wannabe: Activity {
                     return
                 }
 
-                self.startObservingChanges()
-
                 callback(nil)
             })
         })
     }
 
-    func end(callback: @escaping (_ error: String?) -> Void) {
-        self.stopObservingChanges()
-
+    func terminate(callback: @escaping (String?) -> Void) {
         let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
-        Partybox.firebase.database.child(path).removeValue(completionBlock: {
+        Database.database().reference().child(path).removeValue(completionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
         })
     }
 
-    func enter(name: String, callback: @escaping (_ error: String?) -> Void) {
+    // MARK: - Person Functions
+
+    func randomPersonId() -> String {
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.persons.rawValue)"
+
+        let randomPersonId = Database.database().reference().child(path).childByAutoId().key
+
+        return randomPersonId
+    }
+
+    func insert(person: WannabePerson, callback: @escaping (String?) -> Void) {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
-        Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+        Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
             (snapshot) in
 
             if !snapshot.exists() {
-                callback("We couldn't find the game\n\nPlease try again")
+                callback("We couldn't find a game with your invite code\n\nPlease try again")
                 return
             }
 
-            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+            self.userId = person.id
 
-            let id = Partybox.firebase.database.child(path).childByAutoId().key
+            var values = [:] as [String: Any]
 
-            self.userId = id
-
-            let player = WannabePlayer.construct(id: id, name: name)
-
-            let values = [
-                player.id: [
-                    WannabePlayerKey.id.rawValue: player.id,
-                    WannabePlayerKey.name.rawValue: player.name,
-                    WannabePlayerKey.voteId.rawValue: player.voteId,
-                    WannabePlayerKey.points.rawValue: player.points
+            values[WannabeKey.persons.rawValue] = [
+                person.id: [
+                    WannabePersonKey.id.rawValue: person.id,
+                    WannabePersonKey.name.rawValue: person.name,
+                    WannabePersonKey.points.rawValue: person.points,
+                    WannabePersonKey.voteId.rawValue: person.voteId
                 ]
-            ] as [String: Any]
+            ]
 
-            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+            path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
-            Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
+            Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
                 (error, reference) in
 
                 if error != nil {
@@ -170,7 +184,7 @@ class Wannabe: Activity {
 
                 path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)"
 
-                Partybox.firebase.database.child(path).observeSingleEvent(of: .value, with: {
+                Database.database().reference().child(path).observeSingleEvent(of: .value, with: {
                     (snapshot) in
 
                     if !snapshot.exists() {
@@ -195,12 +209,12 @@ class Wannabe: Activity {
         })
     }
 
-    func exit(callback: @escaping (_ error: String?) -> Void) {
+    func remove(person: WannabePerson, callback: @escaping (String?) -> Void) {
         self.stopObservingChanges()
 
-        let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)/\(self.userId)"
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.persons.rawValue)/\(self.userId)"
 
-        Partybox.firebase.database.child(path).removeValue(completionBlock: {
+        Database.database().reference().child(path).removeValue(completionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
@@ -209,8 +223,8 @@ class Wannabe: Activity {
 
     // MARK: - Action Functions
 
-    func update(path: String, values: [String: Any], callback: @escaping (_ error: String?) -> Void) {
-        Partybox.firebase.database.child(path).updateChildValues(values, withCompletionBlock: {
+    func update(path: String, values: [String: Any], callback: @escaping (String?) -> Void) {
+        Database.database().reference().child(path).updateChildValues(values, withCompletionBlock: {
             (error, reference) in
 
             callback(error?.localizedDescription)
@@ -222,7 +236,7 @@ class Wannabe: Activity {
     func startObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.actionId.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.value, with: {
+        Database.database().reference().child(path).observe(.value, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? String else {
@@ -235,9 +249,9 @@ class Wannabe: Activity {
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.childAdded, with: {
+        Database.database().reference().child(path).observe(.childAdded, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -246,17 +260,17 @@ class Wannabe: Activity {
 
             let json = JSON(data)
 
-            let player = WannabePlayer.construct(json: json)
+            let person = WannabePerson(json: json)
 
-            self.players.add(player)
+            self.persons.add(person)
 
-            let name = Notification.Name(WannabeNotification.playerAdded.rawValue)
+            let name = Notification.Name(WannabeNotification.personAdded.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.childChanged, with: {
+        Database.database().reference().child(path).observe(.childChanged, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -265,17 +279,17 @@ class Wannabe: Activity {
 
             let json = JSON(data)
 
-            let player = WannabePlayer.construct(json: json)
+            let person = WannabePerson(json: json)
 
-            self.players.add(player)
+            self.persons.add(person)
 
-            let name = Notification.Name(WannabeNotification.playerChanged.rawValue)
+            let name = Notification.Name(WannabeNotification.personChanged.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).observe(.childRemoved, with: {
+        Database.database().reference().child(path).observe(.childRemoved, with: {
             (snapshot) in
 
             guard let data = snapshot.value as? [String: Any] else {
@@ -284,11 +298,11 @@ class Wannabe: Activity {
 
             let json = JSON(data)
 
-            let player = WannabePlayer.construct(json: json)
+            let person = WannabePerson(json: json)
 
-            self.players.remove(player)
+            self.persons.remove(person)
 
-            let name = Notification.Name(WannabeNotification.playerRemoved.rawValue)
+            let name = Notification.Name(WannabeNotification.personRemoved.rawValue)
             NotificationCenter.default.post(name: name, object: nil, userInfo: nil)
         })
     }
@@ -296,11 +310,11 @@ class Wannabe: Activity {
     func stopObservingChanges() {
         var path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.actionId.rawValue)"
 
-        Partybox.firebase.database.child(path).removeAllObservers()
+        Database.database().reference().child(path).removeAllObservers()
 
-        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.players.rawValue)"
+        path = "\(PartyboxKey.parties.rawValue)/\(self.partyId)/\(self.id)/\(WannabeKey.persons.rawValue)"
 
-        Partybox.firebase.database.child(path).removeAllObservers()
+        Database.database().reference().child(path).removeAllObservers()
     }
-    
+
 }
