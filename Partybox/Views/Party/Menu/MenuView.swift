@@ -99,11 +99,12 @@ class MenuView: UIView {
         return extraHeavyConfettiBehavior
     }()
     
-    private var delegate: MenuViewDelegate
+    private var delegate: MenuViewDelegate!
 
     // MARK: - Initialization Functions
 
     init(delegate: MenuViewDelegate) {
+        super.init(frame: .zero)
         self.delegate = delegate
         self.setupView()
     }

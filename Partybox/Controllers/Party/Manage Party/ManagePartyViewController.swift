@@ -12,21 +12,22 @@ class ManagePartyViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var store: Store
+    private var store: Store!
 
-    private var party: Party
+    private var party: Party!
 
-    private var partyName: String
+    private var partyName: String!
 
-    private var partyHostId: String
+    private var partyHostId: String!
 
-    private var delegate: ManagePartyViewControllerDelegate
+    private var delegate: ManagePartyViewControllerDelegate!
 
-    private var contentView: ManagePartyView
+    private var contentView: ManagePartyView!
 
     // MARK: - Initialization Functions
 
     init(store: Store, party: Party, delegate: ManagePartyViewControllerDelegate) {
+        super.init(nibName: nil, bundle: nil)
         self.store = store
         self.party = party
         self.partyName = party.name

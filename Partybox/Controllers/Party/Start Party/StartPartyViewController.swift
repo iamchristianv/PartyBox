@@ -12,15 +12,16 @@ class StartPartyViewController: UIViewController {
     
     // MARK: - Properties
 
-    private var store: Store
+    private var store: Store!
 
     private var party: Party!
 
-    private var contentView: StartPartyView
+    private var contentView: StartPartyView!
 
     // MARK: - Initialization Functions
 
     init(store: Store) {
+        super.init(nibName: nil, bundle: nil)
         self.store = store
         self.party = nil
         self.contentView = StartPartyView(delegate: self)

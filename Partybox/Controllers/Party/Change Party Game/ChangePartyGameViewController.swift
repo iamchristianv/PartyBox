@@ -12,19 +12,20 @@ class ChangePartyGameViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var store: Store
+    private var store: Store!
 
-    private var party: Party
+    private var party: Party!
 
-    private var partyGameId: String
+    private var partyGameId: String!
 
-    private var delegate: ChangePartyGameViewControllerDelegate
+    private var delegate: ChangePartyGameViewControllerDelegate!
 
-    private var contentView: ChangePartyGameView
+    private var contentView: ChangePartyGameView!
 
     // MARK: - Initialization Functions
 
     init(store: Store, party: Party, delegate: ChangePartyGameViewControllerDelegate) {
+        super.init(nibName: nil, bundle: nil)
         self.store = store
         self.party = party
         self.partyGameId = party.gameId

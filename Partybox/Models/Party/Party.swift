@@ -402,8 +402,8 @@ class Party: Event {
     }
 
     static func randomGameId() -> String {
-        let randomIndex = Int(arc4random()) % PartyKey.gameIds().count
-        let randomGameId = PartyKey.gameIds()[randomIndex]
+        let randomIndex = Int(arc4random()) % Store.activityIds.count
+        let randomGameId = Store.activityIds[randomIndex]
 
         return randomGameId
     }

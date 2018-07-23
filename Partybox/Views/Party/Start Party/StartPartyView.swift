@@ -114,11 +114,12 @@ class StartPartyView: UIView {
         return startButton
     }()
 
-    private var delegate: StartPartyViewDelegate
+    private var delegate: StartPartyViewDelegate!
 
     // MARK: - Initialization Functions
 
     init(delegate: StartPartyViewDelegate) {
+        super.init(frame: .zero)
         self.delegate = delegate
         self.setupView()
     }

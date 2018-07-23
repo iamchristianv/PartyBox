@@ -92,13 +92,14 @@ class ManagePartyView: UIView {
         return saveButton
     }()
     
-    private var delegate: ManagePartyViewDelegate
+    private var delegate: ManagePartyViewDelegate!
 
-    private var dataSource: ManagePartyViewDataSource
+    private var dataSource: ManagePartyViewDataSource!
     
     // MARK: - Initialization Functions
 
     init(delegate: ManagePartyViewDelegate, dataSource: ManagePartyViewDataSource) {
+        super.init(frame: .zero)
         self.delegate = delegate
         self.dataSource = dataSource
         self.setupView()

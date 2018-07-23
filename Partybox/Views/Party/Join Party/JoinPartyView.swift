@@ -114,11 +114,12 @@ class JoinPartyView: UIView {
         return joinButton
     }()
 
-    private var delegate: JoinPartyViewDelegate
+    private var delegate: JoinPartyViewDelegate!
 
     // MARK: - Initialization Functions
 
     init(delegate: JoinPartyViewDelegate) {
+        super.init(frame: .zero)
         self.delegate = delegate
         self.setupView()
     }

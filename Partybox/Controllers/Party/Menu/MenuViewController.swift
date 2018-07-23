@@ -14,19 +14,20 @@ class MenuViewController: UIViewController {
     
     // MARK: - Properties
 
-    private var store: Store
+    private var store: Store!
 
     private var authenticationHandle: AuthStateDidChangeListenerHandle!
     
-    private var motionManager: CMMotionManager
+    private var motionManager: CMMotionManager!
     
     private var confettiTimer: Timer!
 
-    private var contentView: MenuView
+    private var contentView: MenuView!
 
     // MARK: - Initialization Functions
 
     init() {
+        super.init(nibName: nil, bundle: nil)
         self.store = Store()
         self.authenticationHandle = nil
         self.motionManager = CMMotionManager()

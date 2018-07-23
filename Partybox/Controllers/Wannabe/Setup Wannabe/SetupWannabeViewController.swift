@@ -6,6 +6,7 @@
 //  Copyright © 2018 Christian Villa. All rights reserved.
 //
 
+import SwiftyJSON
 import UIKit
 
 class SetupWannabeViewController: UIViewController {
@@ -15,6 +16,8 @@ class SetupWannabeViewController: UIViewController {
     private var store: Store!
 
     private var party: Party!
+
+    private var wannabe: Wannabe!
 
     // MARK: - Controller Properties
 
@@ -31,6 +34,7 @@ class SetupWannabeViewController: UIViewController {
         // Model Properties
         controller.store = store
         controller.party = party
+        controller.wannabe = nil
         // Controller Properties
         controller.gamePackId = store.wannabePacks[0]?.id
         // View Properties
@@ -76,7 +80,7 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
     }
 
     func setupWannabeView(_ view: SetupWannabeView, saveButtonPressed: Bool) {
-        self.store.fetchCards(gameId: PartyGame.wannabeId, packId: self.gamePackId, callback: {
+        self.store.fetchCards(gameId: self.store.wannabe.id, packId: self.gamePackId, callback: {
             (error) in
 
             if let error = error {
@@ -87,13 +91,13 @@ extension SetupWannabeViewController: SetupWannabeViewDelegate {
                 return
             }
 
-            self.party.game = Wannabe.construct(partyId: self.party.id)
+            self.wannabe = Wannabe(partyId: self.party.id)
 
-            guard let user = self.party.guests[self.party.userId] else {
+            guard let user = self.party.persons[self.party.userId] else {
                 return
             }
 
-            self.party.wannabe.start(name: user.name, callback: {
+            self.wannabe.initialize(callback: {
                 (error) in
 
                 if let error = error {
@@ -128,7 +132,8 @@ extension SetupWannabeViewController: SetupWannabeViewDataSource {
 
     func setupWannabeViewGamePack(index: Int) -> WannabePack {
         guard let pack = self.store.wannabePacks[index] else {
-            return WannabePack()
+            let json = JSON(["name": "name"])
+            return WannabePack(json: json)
         }
 
         return pack

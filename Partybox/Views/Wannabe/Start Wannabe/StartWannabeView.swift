@@ -14,7 +14,7 @@ class StartWannabeView: UIView {
 
     private lazy var gameNameLabel: UILabel = {
         let gameNameLabel = UILabel()
-        gameNameLabel.text = Wannabe.construct(partyId: Partybox.value.none).name
+        gameNameLabel.text = Wannabe(partyId: Partybox.value.none).name
         gameNameLabel.font = Partybox.font.avenirNextRegular(size: 28)
         gameNameLabel.textColor = Partybox.color.black
         gameNameLabel.textAlignment = .center
@@ -23,7 +23,7 @@ class StartWannabeView: UIView {
 
     private lazy var gameInstructionsLabel: UILabel = {
         let gameInstructionsLabel = UILabel()
-        gameInstructionsLabel.text = Wannabe.construct(partyId: Partybox.value.none).instructions
+        gameInstructionsLabel.text = Wannabe(partyId: Partybox.value.none).instructions
         gameInstructionsLabel.font = Partybox.font.avenirNextRegular(size: 20)
         gameInstructionsLabel.textColor = Partybox.color.black
         gameInstructionsLabel.textAlignment = .center

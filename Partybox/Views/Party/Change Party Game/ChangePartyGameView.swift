@@ -37,13 +37,14 @@ class ChangePartyGameView: UIView {
         return saveButton
     }()
 
-    private var delegate: ChangePartyGameViewDelegate
+    private var delegate: ChangePartyGameViewDelegate!
 
-    private var dataSource: ChangePartyGameViewDataSource
+    private var dataSource: ChangePartyGameViewDataSource!
 
     // MARK: - Initialization Functions
 
     init(delegate: ChangePartyGameViewDelegate, dataSource: ChangePartyGameViewDataSource) {
+        super.init(frame: .zero)
         self.delegate = delegate
         self.dataSource = dataSource
         self.setupView()

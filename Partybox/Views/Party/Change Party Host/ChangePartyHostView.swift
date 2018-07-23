@@ -37,13 +37,14 @@ class ChangePartyHostView: UIView {
         return saveButton
     }()
 
-    private var delegate: ChangePartyHostViewDelegate
+    private var delegate: ChangePartyHostViewDelegate!
 
-    private var dataSource: ChangePartyHostViewDataSource
+    private var dataSource: ChangePartyHostViewDataSource!
 
     // MARK: - Initialization Functions
 
     init(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) {
+        super.init(frame: .zero)
         self.delegate = delegate
         self.dataSource = dataSource
         self.setupView()

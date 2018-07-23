@@ -30,13 +30,14 @@ class PartyView: UIView {
 
     private var playButton: ActivityIndicatorButton?
     
-    private var delegate: PartyViewDelegate
+    private var delegate: PartyViewDelegate!
 
-    private var dataSource: PartyViewDataSource
+    private var dataSource: PartyViewDataSource!
 
     // MARK: - Initialization Functions
 
     init(delegate: PartyViewDelegate, dataSource: PartyViewDataSource) {
+        super.init(frame: .zero)
         self.playButton = nil
         self.delegate = delegate
         self.dataSource = dataSource

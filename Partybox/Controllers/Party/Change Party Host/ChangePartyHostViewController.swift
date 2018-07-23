@@ -12,19 +12,20 @@ class ChangePartyHostViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var store: Store
+    private var store: Store!
 
-    private var party: Party
+    private var party: Party!
 
-    private var partyHostId: String
+    private var partyHostId: String!
 
-    private var delegate: ChangePartyHostViewControllerDelegate
+    private var delegate: ChangePartyHostViewControllerDelegate!
 
-    private var contentView: ChangePartyHostView
+    private var contentView: ChangePartyHostView!
 
     // MARK: - Initialization Functions
 
     init(store: Store, party: Party, delegate: ChangePartyHostViewControllerDelegate) {
+        super.init(nibName: nil, bundle: nil)
         self.store = store
         self.party = party
         self.partyHostId = party.hostId

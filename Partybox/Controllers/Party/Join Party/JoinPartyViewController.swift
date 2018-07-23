@@ -12,15 +12,16 @@ class JoinPartyViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var store: Store
+    private var store: Store!
 
     private var party: Party!
 
-    private var contentView: JoinPartyView
+    private var contentView: JoinPartyView!
 
     // MARK: - Initialization Functions
 
     init(store: Store) {
+        super.init(nibName: nil, bundle: nil)
         self.store = store
         self.party = nil
         self.contentView = JoinPartyView(delegate: self)
@@ -86,7 +87,7 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
                 return
             }
 
-            let viewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
+            let viewController = PartyViewController(store: self.store, party: self.party, delegate: self)
             self.show(viewController, sender: nil)
         })
     }
