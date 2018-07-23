@@ -10,37 +10,32 @@ import UIKit
 
 class ChangePartyHostViewController: UIViewController {
 
-    // MARK: - Model Properties
+    // MARK: - Properties
 
-    private var store: Store!
+    private var store: Store
 
-    private var party: Party!
+    private var party: Party
 
-    // MARK: - Controller Properties
+    private var partyHostId: String
 
-    private var partyHostId: String!
+    private var delegate: ChangePartyHostViewControllerDelegate
 
-    private var delegate: ChangePartyHostViewControllerDelegate!
+    private var contentView: ChangePartyHostView
 
-    // MARK: - View Properties
-    
-    private var contentView: ChangePartyHostView!
+    // MARK: - Initialization Functions
 
-    // MARK: - Construction Functions
-
-    static func construct(store: Store, party: Party, delegate: ChangePartyHostViewControllerDelegate) -> ChangePartyHostViewController {
-        let controller = ChangePartyHostViewController()
-        // Model Properties
-        controller.store = store
-        controller.party = party
-        // Controller Properties
-        controller.partyHostId = party.hostId
-        controller.delegate = delegate
-        // View Properties
-        controller.contentView = ChangePartyHostView.construct(delegate: controller, dataSource: controller)
-        return controller
+    init(store: Store, party: Party, delegate: ChangePartyHostViewControllerDelegate) {
+        self.store = store
+        self.party = party
+        self.partyHostId = party.hostId
+        self.delegate = delegate
+        self.contentView = ChangePartyHostView(delegate: self, dataSource: self)
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - View Controller Functions
     
     override func loadView() {
@@ -50,19 +45,19 @@ class ChangePartyHostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupViewController()
-        self.startObservingNotification(name: PartyNotification.guestAdded.rawValue,
+        self.startObservingNotification(name: PartyNotification.personAdded.rawValue,
                                         selector: #selector(partyGuestAdded))
-        self.startObservingNotification(name: PartyNotification.guestChanged.rawValue,
+        self.startObservingNotification(name: PartyNotification.personChanged.rawValue,
                                         selector: #selector(partyGuestChanged))
-        self.startObservingNotification(name: PartyNotification.guestRemoved.rawValue,
+        self.startObservingNotification(name: PartyNotification.personRemoved.rawValue,
                                         selector: #selector(partyGuestRemoved))
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.stopObservingNotification(name: PartyNotification.guestAdded.rawValue)
-        self.stopObservingNotification(name: PartyNotification.guestChanged.rawValue)
-        self.stopObservingNotification(name: PartyNotification.guestRemoved.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personAdded.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personChanged.rawValue)
+        self.stopObservingNotification(name: PartyNotification.personRemoved.rawValue)
     }
     
     // MARK: - Setup Functions
@@ -95,7 +90,7 @@ class ChangePartyHostViewController: UIViewController {
     @objc private func partyGuestRemoved() {
         self.contentView.reloadTable()
 
-        if self.party.guests[self.partyHostId] == nil {
+        if self.party.persons[self.partyHostId] == nil {
             self.contentView.reloadTable()
         }
     }
@@ -104,8 +99,8 @@ class ChangePartyHostViewController: UIViewController {
 
 extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 
-    func changePartyHostView(_ view: ChangePartyHostView, guestSelected guestId: String) {
-        self.partyHostId = guestId
+    func changePartyHostView(_ view: ChangePartyHostView, personSelected personId: String) {
+        self.partyHostId = personId
         self.contentView.reloadTable()
     }
 
@@ -127,23 +122,27 @@ extension ChangePartyHostViewController: ChangePartyHostViewDelegate {
 extension ChangePartyHostViewController: ChangePartyHostViewDataSource {
 
     func changePartyHostViewPartyHostId() -> String {
-        guard let partyHostId = self.partyHostId else {
+        return self.party.hostId
+    }
+
+    func changePartyHostViewPartyPersonsCount() -> Int {
+        return self.party.persons.count
+    }
+
+    func changePartyHostViewPartyPersonId(index: Int) -> String {
+        guard let person = self.party.persons[index] else {
             return Partybox.value.none
         }
 
-        return partyHostId
+        return person.id
     }
 
-    func changePartyHostViewPartyGuestsCount() -> Int {
-        return self.party.guests.count
-    }
-
-    func changePartyHostViewPartyGuest(index: Int) -> PartyGuest {
-        guard let guest = self.party.guests[index] else {
-            return PartyGuest()
+    func changePartyHostViewPartyPersonName(index: Int) -> String {
+        guard let person = self.party.persons[index] else {
+            return Partybox.value.none
         }
 
-        return guest
+        return person.name
     }
 
 }

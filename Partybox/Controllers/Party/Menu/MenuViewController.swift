@@ -12,37 +12,32 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    // MARK: - Model Properties
+    // MARK: - Properties
 
-    private var store: Store!
-
-    // MARK: - Controller Properties
+    private var store: Store
 
     private var authenticationHandle: AuthStateDidChangeListenerHandle!
     
-    private var motionManager: CMMotionManager!
+    private var motionManager: CMMotionManager
     
     private var confettiTimer: Timer!
 
-    // MARK: - View Properties
+    private var contentView: MenuView
 
-    private var contentView: MenuView!
+    // MARK: - Initialization Functions
 
-    // MARK: - Construction Functions
-
-    static func construct() -> MenuViewController {
-        let controller = MenuViewController()
-        // Model Properties
-        controller.store = Store.construct()
-        // Controller Properties
-        controller.authenticationHandle = nil
-        controller.motionManager = CMMotionManager()
-        controller.confettiTimer = nil
-        // View Properties
-        controller.contentView = MenuView.construct(delegate: controller)
-        return controller
+    init() {
+        self.store = Store()
+        self.authenticationHandle = nil
+        self.motionManager = CMMotionManager()
+        self.confettiTimer = nil
+        self.contentView = MenuView(delegate: self)
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - View Controller Functions
     
     override func loadView() {
@@ -59,7 +54,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        Partybox.firebase.authenticator.signInAnonymously(completion: nil)
+        Auth.auth().signInAnonymously(completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -80,7 +75,7 @@ class MenuViewController: UIViewController {
     // MARK: - Authentication Functions
     
     private func startObservingAuthenticationChanges() {
-        self.authenticationHandle = Partybox.firebase.authenticator.addStateDidChangeListener({
+        self.authenticationHandle = Auth.auth().addStateDidChangeListener({
             (auth, user) in
             
             if user == nil {
@@ -96,7 +91,7 @@ class MenuViewController: UIViewController {
     }
     
     private func stopObservingAuthenticationChanges() {
-        Partybox.firebase.authenticator.removeStateDidChangeListener(self.authenticationHandle)
+        Auth.auth().removeStateDidChangeListener(self.authenticationHandle)
     }
     
     // MARK: - Motion Functions
@@ -137,13 +132,13 @@ class MenuViewController: UIViewController {
 extension MenuViewController: MenuViewDelegate {
         
     internal func menuView(_ view: MenuView, startPartyButtonPressed: Bool) {
-        let rootViewController = StartPartyViewController.construct(store: self.store)
+        let rootViewController = StartPartyViewController(store: self.store)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
     
     internal func menuView(_ view: MenuView, joinPartyButtonPressed: Bool) {
-        let rootViewController = JoinPartyViewController.construct(store: self.store)
+        let rootViewController = JoinPartyViewController(store: self.store)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }

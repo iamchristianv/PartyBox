@@ -27,11 +27,9 @@ extension AppDelegate: UIApplicationDelegate {
         FirebaseApp.configure()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let rootViewController = MenuViewController.construct()
+        let rootViewController = MenuViewController()
         self.window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         self.window?.makeKeyAndVisible()
-
-        Partybox.collection.games.add(Wannabe.construct(partyId: Partybox.value.none))
         
         return true
     }

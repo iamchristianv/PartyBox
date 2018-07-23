@@ -10,7 +10,7 @@ import UIKit
 
 class ChangePartyHostView: UIView {
     
-    // MARK: - Instance Properties
+    // MARK: - Properties
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -37,20 +37,22 @@ class ChangePartyHostView: UIView {
         return saveButton
     }()
 
-    private var delegate: ChangePartyHostViewDelegate!
+    private var delegate: ChangePartyHostViewDelegate
 
-    private var dataSource: ChangePartyHostViewDataSource!
+    private var dataSource: ChangePartyHostViewDataSource
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) -> ChangePartyHostView {
-        let view = ChangePartyHostView()
-        view.delegate = delegate
-        view.dataSource = dataSource
-        view.setupView()
-        return view
+    init(delegate: ChangePartyHostViewDelegate, dataSource: ChangePartyHostViewDataSource) {
+        self.delegate = delegate
+        self.dataSource = dataSource
+        self.setupView()
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Setup Functions
     
     private func setupView() {
@@ -98,7 +100,7 @@ extension ChangePartyHostView: UITableViewDelegate {
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableViewCell = self.tableView.cellForRow(at: indexPath)
         let selectableCell = tableViewCell as! SelectableTableViewCell
-        self.delegate.changePartyHostView(self, guestSelected: selectableCell.value as! String)
+        self.delegate.changePartyHostView(self, personSelected: selectableCell.value as! String)
     }
     
 }
@@ -110,7 +112,7 @@ extension ChangePartyHostView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChangePartyHostViewCellRow.partyGuestCells.rawValue + self.dataSource.changePartyHostViewPartyGuestsCount()
+        return ChangePartyHostViewCellRow.partyGuestCells.rawValue + self.dataSource.changePartyHostViewPartyPersonsCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,14 +134,12 @@ extension ChangePartyHostView: UITableViewDataSource {
 
         if indexPath.row >= ChangePartyHostViewCellRow.partyGuestCells.rawValue {
             let index = indexPath.row - ChangePartyHostViewCellRow.partyGuestCells.rawValue
-            
-            let guest = self.dataSource.changePartyHostViewPartyGuest(index: index)
-            
+
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            let content = guest.name
-            let selected = guest.id == self.dataSource.changePartyHostViewPartyHostId()
-            let value = guest.id
+            let content = self.dataSource.changePartyHostViewPartyPersonName(index: index)
+            let selected = self.dataSource.changePartyHostViewPartyPersonId(index: index) == self.dataSource.changePartyHostViewPartyHostId()
+            let value = self.dataSource.changePartyHostViewPartyPersonId(index: index)
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }

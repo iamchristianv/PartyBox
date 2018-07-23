@@ -10,38 +10,33 @@ import UIKit
 
 class ManagePartyViewController: UIViewController {
 
-    // MARK: - Model Properties
+    // MARK: - Properties
 
-    private var store: Store!
+    private var store: Store
 
-    private var party: Party!
+    private var party: Party
 
-    // MARK: - Controller Properties
+    private var partyName: String
 
-    private var partyName: String!
+    private var partyHostId: String
 
-    private var partyHostId: String!
+    private var delegate: ManagePartyViewControllerDelegate
 
-    private var delegate: ManagePartyViewControllerDelegate!
+    private var contentView: ManagePartyView
 
-    // MARK: - View Properties
+    // MARK: - Initialization Functions
+
+    init(store: Store, party: Party, delegate: ManagePartyViewControllerDelegate) {
+        self.store = store
+        self.party = party
+        self.partyName = party.name
+        self.partyHostId = party.hostId
+        self.delegate = delegate
+        self.contentView = ManagePartyView(delegate: self, dataSource: self)
+    }
     
-    private var contentView: ManagePartyView!
-
-    // MARK: - Construction Functions
-
-    static func construct(store: Store, party: Party, delegate: ManagePartyViewControllerDelegate) -> ManagePartyViewController {
-        let controller = ManagePartyViewController()
-        // Model Properties
-        controller.store = store
-        controller.party = party
-        // Controller Properties
-        controller.partyName = party.name
-        controller.partyHostId = party.hostId
-        controller.delegate = delegate
-        // View Properties
-        controller.contentView = ManagePartyView.construct(delegate: controller, dataSource: controller)
-        return controller
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - View Controller Functions
@@ -77,7 +72,7 @@ class ManagePartyViewController: UIViewController {
 extension ManagePartyViewController: ManagePartyViewDelegate {
 
     internal func managePartyView(_ view: ManagePartyView, partyHostNameTextFieldPressed: Bool) {
-        let rootViewController = ChangePartyHostViewController.construct(store: self.store, party: self.party, delegate: self)
+        let rootViewController = ChangePartyHostViewController(store: self.store, party: self.party, delegate: self)
         let navigationController = UINavigationController(rootViewController: rootViewController)
         self.present(navigationController, animated: true, completion: nil)
     }
@@ -91,7 +86,14 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 
         self.contentView.startAnimatingSaveButton()
 
-        self.party.change(name: self.partyName, hostId: self.partyHostId, callback: {
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.party.id)"
+
+        let values = [
+            PartyKey.name.rawValue: self.partyName,
+            PartyKey.hostId.rawValue: self.partyHostId
+        ] as [String: Any]
+
+        self.party.update(path: path, values: values, callback: {
             (error) in
 
             self.contentView.stopAnimatingSaveButton()
@@ -114,19 +116,15 @@ extension ManagePartyViewController: ManagePartyViewDelegate {
 extension ManagePartyViewController: ManagePartyViewDataSource {
 
     internal func managePartyViewPartyName() -> String {
-        guard let partyName = self.partyName else {
-            return Partybox.value.none
-        }
-
-        return partyName
+        return self.partyName
     }
 
     internal func managePartyViewPartyHostName() -> String {
-        guard let partyHostId = self.partyHostId, let guest = self.party.guests[partyHostId] else {
+        guard let person = self.party.persons[self.partyHostId] else {
             return Partybox.value.none
         }
 
-        return guest.name
+        return person.name
     }
 
 }
@@ -134,12 +132,12 @@ extension ManagePartyViewController: ManagePartyViewDataSource {
 extension ManagePartyViewController: ChangePartyHostViewControllerDelegate {
 
     internal func changePartyHostViewController(_ controller: ChangePartyHostViewController, hostChanged hostId: String) {
-        guard let guest = self.party.guests[hostId] else {
+        guard let person = self.party.persons[hostId] else {
             return
         }
 
         self.partyHostId = hostId
-        self.contentView.setPartyHostName(guest.name)
+        self.contentView.setPartyHostName(person.name)
     }
 
 }

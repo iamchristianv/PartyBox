@@ -10,28 +10,26 @@ import UIKit
 
 class JoinPartyViewController: UIViewController {
 
-    // MARK: - Model Properties
+    // MARK: - Properties
 
-    private var store: Store!
+    private var store: Store
 
     private var party: Party!
 
-    // MARK: - View Properties
-    
-    private var contentView: JoinPartyView!
+    private var contentView: JoinPartyView
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(store: Store) -> JoinPartyViewController {
-        let controller = JoinPartyViewController()
-        // Model Properties
-        controller.store = store
-        controller.party = nil
-        // View Properties
-        controller.contentView = JoinPartyView.construct(delegate: controller)
-        return controller
+    init(store: Store) {
+        self.store = store
+        self.party = nil
+        self.contentView = JoinPartyView(delegate: self)
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - View Controller Functions
     
     override func loadView() {
@@ -69,11 +67,13 @@ extension JoinPartyViewController: JoinPartyViewDelegate {
             return
         }
 
-        self.party = Party.construct(id: self.contentView.partyId())
+        self.party = Party(id: self.contentView.partyId())
 
         self.contentView.startAnimatingJoinButton()
 
-        self.party.enter(name: self.contentView.userName(), callback: {
+        let person = self.party.createPerson(name: self.contentView.userName())
+
+        self.party.insert(person: person, callback: {
             (error) in
 
             self.contentView.stopAnimatingJoinButton()

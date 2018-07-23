@@ -10,7 +10,7 @@ import UIKit
 
 class ChangePartyGameView: UIView {
     
-    // MARK: - Instance Properties
+    // MARK: - Properties
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -37,18 +37,20 @@ class ChangePartyGameView: UIView {
         return saveButton
     }()
 
-    private var delegate: ChangePartyGameViewDelegate!
+    private var delegate: ChangePartyGameViewDelegate
 
-    private var dataSource: ChangePartyGameViewDataSource!
+    private var dataSource: ChangePartyGameViewDataSource
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(delegate: ChangePartyGameViewDelegate, dataSource: ChangePartyGameViewDataSource) -> ChangePartyGameView {
-        let view = ChangePartyGameView()
-        view.delegate = delegate
-        view.dataSource = dataSource
-        view.setupView()
-        return view
+    init(delegate: ChangePartyGameViewDelegate, dataSource: ChangePartyGameViewDataSource) {
+        self.delegate = delegate
+        self.dataSource = dataSource
+        self.setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Setup Functions
@@ -143,20 +145,11 @@ extension ChangePartyGameView: UITableViewDataSource {
         if indexPath.row >= ChangePartyGameViewCellRow.partyGameCells.rawValue {
             let index = indexPath.row - ChangePartyGameViewCellRow.partyGameCells.rawValue
 
-            let game = self.dataSource.changePartyGameViewPartyGame(index: index)
-
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: SelectableTableViewCell.identifier)
             let selectableCell = tableViewCell as! SelectableTableViewCell
-            var content: String = ""
-            var selected: Bool = false
-            var value: Any = ""
-
-            if let wannabe = game as? Wannabe {
-                content = wannabe.name
-                selected = wannabe.id == self.dataSource.changePartyGameViewPartyGameId()
-                value = wannabe.id
-            }
-
+            let content = self.dataSource.changePartyGameViewPartyGameName(index: index)
+            let selected = self.dataSource.changePartyGameViewPartyGameId(index: index) == self.dataSource.changePartyGameViewPartyGameId()
+            let value = self.dataSource.changePartyGameViewPartyGameId(index: index)
             selectableCell.configure(content: content, selected: selected, value: value)
             return selectableCell
         }

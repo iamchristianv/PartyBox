@@ -12,8 +12,10 @@ protocol ChangePartyHostViewDataSource {
 
     func changePartyHostViewPartyHostId() -> String
 
-    func changePartyHostViewPartyGuestsCount() -> Int
+    func changePartyHostViewPartyPersonsCount() -> Int
 
-    func changePartyHostViewPartyGuest(index: Int) -> PartyGuest
+    func changePartyHostViewPartyPersonId(index: Int) -> String
+
+    func changePartyHostViewPartyPersonName(index: Int) -> String
 
 }

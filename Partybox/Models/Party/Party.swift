@@ -140,12 +140,14 @@ class Party: Event {
 
     // MARK: - Person Functions
 
-    func randomPersonId() -> String {
+    func createPerson(name: String) -> PartyPerson {
         let path = "\(PartyboxKey.parties.rawValue)/\(self.id)/\(PartyKey.persons.rawValue)"
 
-        let randomPersonId = Database.database().reference().child(path).childByAutoId().key
+        let id = Database.database().reference().child(path).childByAutoId().key
 
-        return randomPersonId
+        let person = PartyPerson(id: id, name: name)
+
+        return person
     }
 
     func insert(person: PartyPerson, callback: @escaping (String?) -> Void) {

@@ -10,7 +10,7 @@ import UIKit
 
 class MenuView: UIView {
     
-    // MARK: - Instance Properties
+    // MARK: - Properties
     
     private lazy var partyboxImageView: UIImageView = {
         let partyboxImageView = UIImageView()
@@ -99,17 +99,19 @@ class MenuView: UIView {
         return extraHeavyConfettiBehavior
     }()
     
-    private var delegate: MenuViewDelegate!
+    private var delegate: MenuViewDelegate
 
-    // MARK: - Constructor Functions
+    // MARK: - Initialization Functions
 
-    static func construct(delegate: MenuViewDelegate) -> MenuView {
-        let view = MenuView()
-        view.delegate = delegate
-        view.setupView()
-        return view
+    init(delegate: MenuViewDelegate) {
+        self.delegate = delegate
+        self.setupView()
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Setup Functions
     
     private func setupView() {

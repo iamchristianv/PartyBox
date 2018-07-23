@@ -10,28 +10,26 @@ import UIKit
 
 class StartPartyViewController: UIViewController {
     
-    // MARK: - Model Properties
+    // MARK: - Properties
 
-    private var store: Store!
+    private var store: Store
 
     private var party: Party!
 
-    // MARK: - View Properties
-    
-    private var contentView: StartPartyView!
+    private var contentView: StartPartyView
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(store: Store) -> StartPartyViewController {
-        let controller = StartPartyViewController()
-        // Model Properties
-        controller.store = store
-        controller.party = nil
-        // View Properties
-        controller.contentView = StartPartyView.construct(delegate: controller)
-        return controller
+    init(store: Store) {
+        self.store = store
+        self.party = nil
+        self.contentView = StartPartyView(delegate: self)
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - View Controller Functions
     
     override func loadView() {
@@ -69,11 +67,11 @@ extension StartPartyViewController: StartPartyViewDelegate {
             return
         }
 
-        self.party = Party.construct(name: self.contentView.partyName())
+        self.party = Party(name: self.contentView.partyName())
 
         self.contentView.startAnimatingStartButton()
 
-        self.party.start(name: self.contentView.userName(), callback: {
+        self.party.initialize(callback: {
             (error) in
 
             self.contentView.stopAnimatingStartButton()
@@ -86,8 +84,26 @@ extension StartPartyViewController: StartPartyViewDelegate {
                 return
             }
 
-            let viewController = PartyViewController.construct(store: self.store, party: self.party, delegate: self)
-            self.show(viewController, sender: nil)
+            self.contentView.startAnimatingStartButton()
+
+            let person = self.party.createPerson(name: self.contentView.userName())
+
+            self.party.insert(person: person, callback: {
+                (error) in
+
+                self.contentView.stopAnimatingStartButton()
+
+                if let error = error {
+                    let subject = "Uh oh"
+                    let message = error
+                    let action = "Okay"
+                    self.showAlert(subject: subject, message: message, action: action, handler: nil)
+                    return
+                }
+
+                let viewController = PartyViewController(store: self.store, party: self.party, delegate: self)
+                self.show(viewController, sender: nil)
+            })
         })
     }
 

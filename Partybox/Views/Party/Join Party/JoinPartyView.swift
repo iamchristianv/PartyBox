@@ -10,7 +10,7 @@ import UIKit
 
 class JoinPartyView: UIView {
     
-    // MARK: - Instance Properties
+    // MARK: - Properties
 
     private lazy var partyIdLabel: UILabel = {
         let partyIdLabel = UILabel()
@@ -114,15 +114,17 @@ class JoinPartyView: UIView {
         return joinButton
     }()
 
-    private var delegate: JoinPartyViewDelegate!
+    private var delegate: JoinPartyViewDelegate
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(delegate: JoinPartyViewDelegate) -> JoinPartyView {
-        let view = JoinPartyView()
-        view.delegate = delegate
-        view.setupView()
-        return view
+    init(delegate: JoinPartyViewDelegate) {
+        self.delegate = delegate
+        self.setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Setup Functions

@@ -10,37 +10,32 @@ import UIKit
 
 class ChangePartyGameViewController: UIViewController {
 
-    // MARK: - Model Properties
+    // MARK: - Properties
 
-    private var store: Store!
+    private var store: Store
 
-    private var party: Party!
+    private var party: Party
 
-    // MARK: - Controller Properties
+    private var partyGameId: String
 
-    private var partyGameId: String!
+    private var delegate: ChangePartyGameViewControllerDelegate
 
-    private var delegate: ChangePartyGameViewControllerDelegate!
+    private var contentView: ChangePartyGameView
 
-    // MARK: - View Properties
-    
-    private var contentView: ChangePartyGameView!
+    // MARK: - Initialization Functions
 
-    // MARK: - Construction Functions
-
-    static func construct(store: Store, party: Party, delegate: ChangePartyGameViewControllerDelegate) -> ChangePartyGameViewController {
-        let controller = ChangePartyGameViewController()
-        // Model Properties
-        controller.store = store
-        controller.party = party
-        // Controller Properties
-        controller.partyGameId = party.gameId
-        controller.delegate = delegate
-        // View Properties
-        controller.contentView = ChangePartyGameView.construct(delegate: controller, dataSource: controller)
-        return controller
+    init(store: Store, party: Party, delegate: ChangePartyGameViewControllerDelegate) {
+        self.store = store
+        self.party = party
+        self.partyGameId = party.gameId
+        self.delegate = delegate
+        self.contentView = ChangePartyGameView(delegate: self, dataSource: self)
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - View Controller Functions
     
     override func loadView() {
@@ -81,7 +76,13 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
     func changePartyGameView(_ view: ChangePartyGameView, saveButtonPressed: Bool) {
         self.contentView.startAnimatingSaveButton()
 
-        self.party.change(gameId: self.partyGameId, callback: {
+        let path = "\(PartyboxKey.parties.rawValue)/\(self.party.id)"
+
+        let values = [
+            PartyKey.gameId.rawValue: self.partyGameId
+        ] as [String: Any]
+
+        self.party.update(path: path, values: values, callback: {
             (error) in
 
             self.contentView.stopAnimatingSaveButton()
@@ -104,23 +105,27 @@ extension ChangePartyGameViewController: ChangePartyGameViewDelegate {
 extension ChangePartyGameViewController: ChangePartyGameViewDataSource {
 
     func changePartyGameViewPartyGameId() -> String {
-        guard let partyGameId = self.partyGameId else {
-            return Partybox.value.none
-        }
-
-        return partyGameId
+        return self.party.gameId
     }
 
     func changePartyGameViewPartyGamesCount() -> Int {
-        return Partybox.collection.games.count
+        return 1
     }
 
-    func changePartyGameViewPartyGame(index: Int) -> PartyGame {
-        guard let partyGameId = self.partyGameId, let game = Partybox.collection.games[partyGameId] else {
-            return PartyGame()
+    func changePartyGameViewPartyGameId(index: Int) -> String {
+        if index == 0 {
+            return self.store.wannabe.id
         }
 
-        return game
+        return Partybox.value.none
+    }
+
+    func changePartyGameViewPartyGameName(index: Int) -> String {
+        if index == 0 {
+            return self.store.wannabe.name
+        }
+
+        return Partybox.value.none
     }
 
 }

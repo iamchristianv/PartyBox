@@ -10,7 +10,7 @@ import UIKit
 
 class StartPartyView: UIView {
 
-    // MARK: - Instance Properties
+    // MARK: - Properties
 
     private lazy var partyNameLabel: UILabel = {
         let partyNameLabel = UILabel()
@@ -114,15 +114,17 @@ class StartPartyView: UIView {
         return startButton
     }()
 
-    private var delegate: StartPartyViewDelegate!
+    private var delegate: StartPartyViewDelegate
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(delegate: StartPartyViewDelegate) -> StartPartyView {
-        let view = StartPartyView()
-        view.delegate = delegate
-        view.setupView()
-        return view
+    init(delegate: StartPartyViewDelegate) {
+        self.delegate = delegate
+        self.setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Setup Functions

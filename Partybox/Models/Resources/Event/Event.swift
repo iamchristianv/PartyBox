@@ -26,7 +26,7 @@ protocol Event: Identifiable, Nameable {
 
     func terminate(callback: @escaping (String?) -> Void)
 
-    func randomPersonId() -> String
+    func createPerson(name: String) -> PersonType
 
     func insert(person: PersonType, callback: @escaping (String?) -> Void)
 

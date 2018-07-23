@@ -10,7 +10,7 @@ import UIKit
 
 class PartyView: UIView {
 
-    // MARK: - Instance Properties
+    // MARK: - Properties
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -30,19 +30,21 @@ class PartyView: UIView {
 
     private var playButton: ActivityIndicatorButton?
     
-    private var delegate: PartyViewDelegate!
+    private var delegate: PartyViewDelegate
 
-    private var dataSource: PartyViewDataSource!
+    private var dataSource: PartyViewDataSource
 
-    // MARK: - Construction Functions
+    // MARK: - Initialization Functions
 
-    static func construct(delegate: PartyViewDelegate, dataSource: PartyViewDataSource) -> PartyView {
-        let view = PartyView()
-        view.playButton = nil
-        view.delegate = delegate
-        view.dataSource = dataSource
-        view.setupView()
-        return view
+    init(delegate: PartyViewDelegate, dataSource: PartyViewDataSource) {
+        self.playButton = nil
+        self.delegate = delegate
+        self.dataSource = dataSource
+        self.setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Setup Functions
@@ -99,17 +101,15 @@ extension PartyView: UITableViewDelegate {
         }
         
         let index = indexPath.row - PartyViewCellRow.partyGuestCells.rawValue
-        
-        let guest = self.dataSource.partyViewPartyGuest(index: index)
-        
-        if guest.id == self.dataSource.partyViewPartyHostId() {
+
+        if self.dataSource.partyViewPartyPersonId(index: index) == self.dataSource.partyViewPartyHostId() {
             return []
         }
         
         let kickButton = UITableViewRowAction(style: .normal, title: "KICK", handler: {
             (rowAction, indexPath) in
             
-            self.delegate.partyView(self, guestKicked: guest.id)
+            self.delegate.partyView(self, personKicked: self.dataSource.partyViewPartyPersonId(index: index))
         })
         
         kickButton.backgroundColor = Partybox.color.red
@@ -126,7 +126,7 @@ extension PartyView: UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PartyViewCellRow.partyGuestCells.rawValue + self.dataSource.partyViewPartyGuestsCount()
+        return PartyViewCellRow.partyGuestCells.rawValue + self.dataSource.partyViewPartyPersonsCount()
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,12 +147,10 @@ extension PartyView: UITableViewDataSource {
         }
 
         if indexPath.row == PartyViewCellRow.partyGameCell.rawValue {
-            let game = self.dataSource.partyViewPartyGame()
-
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGameTableViewCell.identifier)
             let partyGameCell = tableViewCell as! PartyGameTableViewCell
-            let name = game.name
-            let summary = game.summary
+            let name = self.dataSource.partyViewGameName()
+            let summary = self.dataSource.partyViewGameSummary()
             let hasHostActions = self.dataSource.partyViewPartyUserId() == self.dataSource.partyViewPartyHostId()
             partyGameCell.configure(name: name, summary: summary, hasHostActions: hasHostActions, delegate: self)
             self.playButton = partyGameCell.playButton
@@ -169,16 +167,14 @@ extension PartyView: UITableViewDataSource {
 
         if indexPath.row >= PartyViewCellRow.partyGuestCells.rawValue {
             let index = indexPath.row - PartyViewCellRow.partyGuestCells.rawValue
-            
-            let guest = self.dataSource.partyViewPartyGuest(index: index)
-            
+
             let tableViewCell = self.tableView.dequeueReusableCell(withIdentifier: PartyGuestTableViewCell.identifier)
             let partyGuestCell = tableViewCell as! PartyGuestTableViewCell
-            let name = guest.name
-            let isMe = guest.id == self.dataSource.partyViewPartyUserId()
-            let isHost = guest.id == self.dataSource.partyViewPartyHostId()
+            let name = self.dataSource.partyViewPartyPersonName(index: index)
+            let isMe = self.dataSource.partyViewPartyPersonId(index: index) == self.dataSource.partyViewPartyUserId()
+            let isHost = self.dataSource.partyViewPartyPersonId(index: index) == self.dataSource.partyViewPartyHostId()
             let emoji = PartyView.randomPersonEmoji()
-            let points = guest.points
+            let points = self.dataSource.partyViewPartyPersonPoints(index: index)
             partyGuestCell.configure(name: name, isMe: isMe, isHost: isHost, emoji: emoji, points: points)
             return partyGuestCell
         }
